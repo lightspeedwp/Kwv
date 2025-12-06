@@ -33,7 +33,7 @@ export const CorporateHeader: React.FC = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 transition-all duration-300 bg-white shadow-sm relative">
+    <header className="sticky top-0 z-50 transition-all duration-300 bg-[#2C1810] text-white shadow-md relative">
       {/* Mobile Search Overlay */}
       <AnimatePresence>
         {isSearchOpen && (
@@ -41,7 +41,7 @@ export const CorporateHeader: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute inset-0 bg-white z-50 flex items-center px-4 shadow-md lg:hidden"
+            className="absolute inset-0 bg-[#2C1810] z-50 flex items-center px-4 shadow-md lg:hidden"
           >
             <form onSubmit={handleSearch} className="flex-1 flex items-center gap-2">
               <Search size={20} className="text-gray-400" />
@@ -50,13 +50,13 @@ export const CorporateHeader: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search content..."
-                className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-400 h-10 text-base"
+                className="flex-1 bg-transparent outline-none text-white placeholder-gray-500 h-10 border-none focus:ring-0 text-base"
                 autoFocus
               />
               <button 
                 type="button"
                 onClick={() => setIsSearchOpen(false)}
-                className="p-2 text-gray-500 hover:text-gray-800"
+                className="p-2 text-gray-400 hover:text-white"
               >
                 <X size={24} />
               </button>
@@ -70,40 +70,41 @@ export const CorporateHeader: React.FC = () => {
           
           {/* 1. Logo (Left aligned) */}
           <Link to="/" className="flex-shrink-0 mr-auto">
-             <KWVLogo className="h-14 w-auto" />
+             <KWVLogo className="h-14 w-auto" color="white" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 mx-8">
-            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810]">
+            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               Online Shop
             </Link>
             
-            <Link to="/account" className="text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810]">
+            <Link to="/account" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               Account Login
             </Link>
 
             {/* Mega Menu for Our Company */}
             <div className="relative group">
-              <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810] py-4">
+              <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
                 Our Company <ChevronDown size={14} />
               </button>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-white shadow-lg rounded-sm p-8 hidden group-hover:grid grid-cols-3 gap-8 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none group-hover:pointer-events-auto border-t-4 border-[#8B0000]">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-white shadow-lg rounded-sm p-8 hidden group-hover:grid grid-cols-3 gap-8 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none group-hover:pointer-events-auto border-t-4 border-[#DAA520]">
                  <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#8B0000] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">About KWV</Typography>
+                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">About KWV</Typography>
                     <Link to="/about" className="block text-sm text-gray-600 hover:text-[#8B0000]">About Us</Link>
                     <Link to="/history" className="block text-sm text-gray-600 hover:text-[#8B0000]">History</Link>
                     <Link to="/brands" className="block text-sm text-gray-600 hover:text-[#8B0000]">Our Brands</Link>
+                    <Link to="/awards" className="block text-sm text-gray-600 hover:text-[#8B0000]">Awards</Link>
                     <Link to="/executive-team" className="block text-sm text-gray-600 hover:text-[#8B0000]">Executive Team</Link>
                  </div>
                  <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#8B0000] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Connect</Typography>
+                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Connect</Typography>
                     <Link to="/news" className="block text-sm text-gray-600 hover:text-[#8B0000]">News & Awards</Link>
                     <Link to="/careers" className="block text-sm text-gray-600 hover:text-[#8B0000]">Careers</Link>
                     <Link to="/contact" className="block text-sm text-gray-600 hover:text-[#8B0000]">Contact Us</Link>
                  </div>
                  <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#8B0000] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Initiatives</Typography>
+                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Initiatives</Typography>
                     <Link to="/sustainability" className="block text-sm text-gray-600 hover:text-[#8B0000]">Sustainability</Link>
                     <Link to="/wine-club" className="block text-sm text-gray-600 hover:text-[#8B0000]">Wine Club</Link>
                  </div>
@@ -118,26 +119,28 @@ export const CorporateHeader: React.FC = () => {
               </div>
             </div>
 
-            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810]">
+            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               KWV Shop
             </Link>
 
             <div className="relative group">
-               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810] py-4">
+               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
                 Visit Us <ChevronDown size={14} />
               </Link>
-               <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white shadow-lg py-2 hidden group-hover:block z-50 border-t-4 border-[#8B0000]">
-                  <Link to="/experiences" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Tastings</Link>
-                  <Link to="/experiences" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
-                  <Link to="/experiences" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
+               <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white shadow-lg py-2 hidden group-hover:block z-50 border-t-4 border-[#DAA520]">
+                  <Link to="/experiences/emporium" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
+                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
+                  <Link to="/experiences/house-of-fire" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
+                  <Link to="/experiences/events" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
+                  <Link to="/experiences/conference-facilities" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
                </div>
             </div>
 
-            <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810]">
+            <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               FAQ
             </Link>
 
-            <Link to="/contact" className="text-sm uppercase tracking-wider hover:text-opacity-80 transition-colors font-medium text-[#2C1810]">
+            <Link to="/contact" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               Contact Us
             </Link>
           </nav>
@@ -161,7 +164,7 @@ export const CorporateHeader: React.FC = () => {
                               value={searchQuery}
                               onChange={(e) => setSearchQuery(e.target.value)}
                               placeholder="Search content..."
-                              className="w-full bg-white text-[#2C1810] px-3 py-2 rounded-sm outline-none border border-gray-300 focus:border-[#8B0000]"
+                              className="w-full bg-[#3d2319] text-white px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
                               autoFocus
                           />
                       </motion.form>
@@ -173,14 +176,14 @@ export const CorporateHeader: React.FC = () => {
                   className="p-2 hover:opacity-70"
                   onClick={() => setIsSearchOpen(!isSearchOpen)}
               >
-                <Search size={20} color={COLORS.darkBrown} />
+                <Search size={20} color="white" />
               </button>
             </div>
 
             {/* Desktop Only: Join Wine Club Button */}
             <div className="hidden lg:block">
                <Link to="/wine-club">
-                 <Button size="sm" className="bg-[#8B0000] text-white hover:bg-[#600000]">
+                 <Button size="sm" className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none">
                    Join Wine Club
                  </Button>
                </Link>
@@ -194,7 +197,7 @@ export const CorporateHeader: React.FC = () => {
                      className="p-2"
                      aria-label="Open menu"
                    >
-                     <Menu size={24} color={COLORS.darkBrown} />
+                     <Menu size={24} color="white" />
                    </button>
                  </SheetTrigger>
                  <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-white text-[#2C1810] overflow-y-auto [&>button]:hidden">
@@ -203,7 +206,7 @@ export const CorporateHeader: React.FC = () => {
                           <KWVLogo className="h-10 w-auto text-[#2C1810]" />
                           <SheetClose asChild>
                             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                              <X size={24} color={COLORS.darkBrown} />
+                              <X size={24} color="#2C1810" />
                             </button>
                           </SheetClose>
                        </div>
@@ -227,6 +230,7 @@ export const CorporateHeader: React.FC = () => {
                                       <Link to="/about" onClick={closeMenu} className="block">About Us</Link>
                                       <Link to="/history" onClick={closeMenu} className="block">History</Link>
                                       <Link to="/brands" onClick={closeMenu} className="block">Our Brands</Link>
+                                      <Link to="/awards" onClick={closeMenu} className="block">Awards</Link>
                                       <Link to="/executive-team" onClick={closeMenu} className="block">Executive Team</Link>
                                       <Link to="/news" onClick={closeMenu} className="block">News & Awards</Link>
                                       <Link to="/careers" onClick={closeMenu} className="block">Careers</Link>
@@ -237,9 +241,11 @@ export const CorporateHeader: React.FC = () => {
                                 <AccordionItem value="visit" className="border-none">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Visit Us</AccordionTrigger>
                                    <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                      <Link to="/experiences" onClick={closeMenu} className="block">Tastings</Link>
-                                      <Link to="/experiences" onClick={closeMenu} className="block">Emporium</Link>
-                                      <Link to="/experiences" onClick={closeMenu} className="block">House of Fire</Link>
+                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block">Emporium</Link>
+                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block">Cathedral Cellar</Link>
+                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block">House of Fire</Link>
+                                      <Link to="/experiences/events" onClick={closeMenu} className="block">Events</Link>
+                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block">Conference Facilities</Link>
                                    </AccordionContent>
                                 </AccordionItem>
                              </Accordion>

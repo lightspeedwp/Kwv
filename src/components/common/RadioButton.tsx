@@ -13,10 +13,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({ className, ...props })
         {...props}
       />
       <div className={cn(
-        "w-5 h-5 rounded-full border flex items-center justify-center transition-all peer-checked:border-[#111111] border-gray-300",
+        "w-5 h-5 rounded-full border flex items-center justify-center transition-all peer-checked:border-[#111111] border-gray-300 bg-white peer-checked:[&>div]:opacity-100",
         className
       )}>
-         <div className="w-2.5 h-2.5 rounded-full bg-[#111111] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+         <div className="w-2.5 h-2.5 rounded-full bg-[#111111] opacity-0 transition-opacity"></div>
       </div>
       <label htmlFor={props.id} className="absolute inset-0 cursor-pointer"></label>
     </div>

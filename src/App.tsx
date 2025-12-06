@@ -15,6 +15,12 @@ import { Awards } from './pages/Awards';
 import { News } from './pages/News';
 import { NewsPost } from './pages/NewsPost';
 import { Experiences } from './pages/Experiences';
+import { Emporium } from './pages/experiences/Emporium';
+import { CathedralCellar } from './pages/experiences/CathedralCellar';
+import { HouseOfFire } from './pages/experiences/HouseOfFire';
+import { ConferenceFacilities } from './pages/experiences/ConferenceFacilities';
+import { Events } from './pages/experiences/Events';
+import { CathedralCellarKitchen } from './pages/experiences/CathedralCellarKitchen';
 import { Careers, ExecutiveTeam, Sustainability } from './pages/CompanyPages';
 import { MyAccount } from './pages/MyAccount';
 import { OrderConfirmation } from './pages/OrderConfirmation';
@@ -25,6 +31,8 @@ import { ShopFAQ } from './pages/shop/ShopFAQ';
 import { FAQ } from './pages/FAQ';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
+import { ShopHome } from './pages/ShopHome';
+
 export default function App() {
   return (
     <Router>
@@ -32,6 +40,8 @@ export default function App() {
       {/* Load Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
       `}</style>
       
       <Routes>
@@ -40,7 +50,8 @@ export default function App() {
         
         {/* Shop Routes */}
         <Route path="/shop/faq" element={<ShopFAQ />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<ShopHome />} />
+        <Route path="/shop/all" element={<Shop />} />
         <Route path="/shop/search" element={<ProductSearchResults />} />
         <Route path="/shop/brands" element={<ShopBrands />} />
         <Route path="/shop/tag/:tag" element={<Shop />} />
@@ -66,8 +77,16 @@ export default function App() {
         <Route path="/awards" element={<Awards />} />
         <Route path="/news" element={<News />} />
         <Route path="/news/:slug" element={<NewsPost />} />
+        
+        {/* Experience Routes */}
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/visit" element={<Experiences />} />
+        <Route path="/experiences/emporium" element={<Emporium />} />
+        <Route path="/experiences/cathedral-cellar" element={<CathedralCellar />} />
+        <Route path="/experiences/house-of-fire" element={<HouseOfFire />} />
+        <Route path="/experiences/conference-facilities" element={<ConferenceFacilities />} />
+        <Route path="/experiences/events" element={<Events />} />
+        <Route path="/experiences/cathedral-cellar-kitchen" element={<CathedralCellarKitchen />} />
         
         {/* Sub Pages */}
         <Route path="/careers" element={<Careers />} />

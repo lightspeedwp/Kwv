@@ -76,14 +76,15 @@ export const ExperiencesHeader: React.FC = () => {
                  Experiences <ChevronDown size={14} />
                </Link>
                <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
-                  <Link to="/experiences" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
-                  <Link to="/experiences" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
-                  <Link to="/experiences" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
-                  <Link to="/experiences" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+                  <Link to="/experiences/emporium" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
+                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
+                  <Link to="/experiences/house-of-fire" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
+                  <Link to="/experiences/conference-facilities" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+                  <Link to="/experiences/cathedral-cellar-kitchen" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Kitchen Venue</Link>
                </div>
             </div>
 
-            <Link to="/experiences" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
+            <Link to="/experiences/events" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
               Events
             </Link>
             
@@ -153,14 +154,15 @@ export const ExperiencesHeader: React.FC = () => {
                                <AccordionItem value="experiences" className="border-none">
                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Experiences</AccordionTrigger>
                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                     <Link to="/experiences" onClick={closeMenu} className="block">Emporium</Link>
-                                     <Link to="/experiences" onClick={closeMenu} className="block">Cathedral Cellar</Link>
-                                     <Link to="/experiences" onClick={closeMenu} className="block">House of Fire</Link>
+                                     <Link to="/experiences/emporium" onClick={closeMenu} className="block">Emporium</Link>
+                                     <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block">Cathedral Cellar</Link>
+                                     <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block">House of Fire</Link>
+                                     <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block">Conference Facilities</Link>
                                   </AccordionContent>
                                </AccordionItem>
                             </Accordion>
                             
-                            <Link to="/experiences" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                            <Link to="/experiences/events" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
                                <span>Events</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
                             </Link>

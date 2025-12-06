@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../components/common/Container';
-import { Typography } from '../common/Typography';
-import { Button } from '../common/Button';
+import { Typography } from '../components/common/Typography';
+import { Button } from '../components/common/Button';
 import { Layout } from '../components/layout/Layout';
 import { COLORS } from '../constants/theme';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
@@ -87,18 +87,18 @@ export const Experiences: React.FC = () => {
                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                         />
                         {/* Logo Overlay Simulation */}
-                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                           <div className="bg-white/90 backdrop-blur-sm p-6 text-center min-w-[140px] shadow-lg">
-                              <span className={`block text-[#2C1810] font-serif font-bold ${card.id === 'hof' ? 'text-4xl' : 'text-xl uppercase tracking-widest'} leading-none mb-1`}>
-                                 {card.logoText}
-                              </span>
-                              {card.subText && (
-                                 <span className="block text-[10px] uppercase tracking-widest text-[#8B0000] mt-2 border-t border-[#8B0000] pt-2">
-                                    {card.subText}
-                                 </span>
-                              )}
-                           </div>
-                        </div>
+                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                            <div className="bg-white/90 backdrop-blur-sm p-6 text-center min-w-[140px] shadow-lg">
+                               <span className={`block text-[#2C1810] font-serif font-bold ${card.id === 'hof' ? 'text-4xl' : 'text-xl uppercase tracking-widest'} leading-none mb-1`}>
+                                  {card.logoText}
+                               </span>
+                               {card.subText ? (
+                                  <span className="block text-[10px] uppercase tracking-widest text-[#8B0000] mt-2 border-t border-[#8B0000] pt-2">
+                                     {card.subText}
+                                  </span>
+                               ) : null}
+                            </div>
+                         </div>
                      </div>
                      
                      {/* Button */}

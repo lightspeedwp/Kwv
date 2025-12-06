@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '../common/Typography';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { KWVShopLogo } from '../common/Logo';
 
-export const ShopFooter: React.FC = () => {
+export const ShopInfoFooter: React.FC = () => {
   return (
-    <footer className="w-full">
+    <div className="w-full">
        <div className="flex flex-col lg:flex-row min-h-[400px]">
           {/* Column 1: Contact & Social (Black/Dark) */}
           <div className="bg-[#111] text-white p-12 lg:w-1/3 flex flex-col justify-center items-center text-center">
@@ -76,22 +76,6 @@ export const ShopFooter: React.FC = () => {
              <span className="font-bold text-blue-600 text-xl">SnapScan</span>
           </div>
        </div>
-
-       {/* Copyright Bottom Strip */}
-       <div className="bg-black py-4 text-center border-t border-gray-900">
-           <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest">
-               <div className="space-x-4 mb-2 md:mb-0">
-                   <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
-                   <span>|</span>
-                   <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                   <span>|</span>
-                   <Link to="/popi" className="hover:text-white transition-colors">POPI Policy</Link>
-               </div>
-               <div className="text-[#DAA520]">
-                   Alcohol not for sale to persons under the age of 18
-               </div>
-           </div>
-       </div>
-    </footer>
+    </div>
   );
 };

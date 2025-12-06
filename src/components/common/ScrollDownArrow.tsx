@@ -1,50 +1,36 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
-import { motion } from 'motion/react';
-import { cn } from '../ui/utils';
 
 interface ScrollDownArrowProps {
   targetId?: string;
   className?: string;
-  color?: string;
 }
 
-export const ScrollDownArrow: React.FC<ScrollDownArrowProps> = ({ 
-  targetId, 
-  className,
-  color = "white" 
-}) => {
-  const handleScroll = () => {
+export const ScrollDownArrow: React.FC<ScrollDownArrowProps> = ({ targetId, className = '' }) => {
+  const handleClick = () => {
     if (targetId) {
       const element = document.getElementById(targetId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Fallback: scroll window down by window height
-      window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+      // Fallback: scroll down by window height if no ID provided
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <motion.button
-      onClick={handleScroll}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1, duration: 0.8 }}
-      className={cn(
-        "absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity", 
-        className
-      )}
-      aria-label="Scroll Down"
+    <div 
+      className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce z-20 ${className}`}
+      onClick={handleClick}
+      aria-label="Scroll down"
     >
-      <span className={`text-xs uppercase tracking-[0.2em] mb-2 text-${color} font-medium`}>Scroll</span>
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-      >
-        <ChevronDown size={32} color={color} strokeWidth={1.5} />
-      </motion.div>
-    </motion.button>
+      <div className="rounded-full border-2 border-white p-2 bg-black/20 hover:bg-black/40 transition-colors">
+        <ChevronDown className="text-white w-6 h-6" />
+      </div>
+    </div>
   );
 };

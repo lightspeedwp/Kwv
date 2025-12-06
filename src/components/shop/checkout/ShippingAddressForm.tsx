@@ -42,6 +42,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
   const [data, setData] = useState<AddressData>(INITIAL_DATA);
   const [errors, setErrors] = useState<Partial<AddressData>>({});
   const [touched, setTouched] = useState<Partial<Record<keyof AddressData, boolean>>>({});
+  const [showApartment, setShowApartment] = useState(false);
 
   const handleChange = (field: keyof AddressData, value: string) => {
     setData(prev => ({ ...prev, [field]: value }));
@@ -124,9 +125,21 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
       </div>
 
       <div className="mb-4">
-         <div className="text-[#333333] text-lg font-light cursor-pointer hover:underline flex items-center gap-1">
-            + Add apartment, suite, etc.
-         </div>
+         {!showApartment ? (
+           <div 
+             className="text-[#333333] text-lg font-light cursor-pointer hover:underline flex items-center gap-1"
+             onClick={() => setShowApartment(true)}
+           >
+              + Add apartment, suite, etc.
+           </div>
+         ) : (
+           <CheckoutInput 
+             label="Apartment, suite, etc. (optional)" 
+             value={data.apartment}
+             onChange={(e) => handleChange('apartment', e.target.value)}
+             onBlur={() => handleBlur('apartment')}
+           />
+         )}
       </div>
       
       {/* 

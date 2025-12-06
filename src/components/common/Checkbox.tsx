@@ -20,7 +20,11 @@ export const Checkbox: React.FC<CheckboxProps> = ({ className, ...props }) => {
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </div>
-      <label htmlFor={props.id} className="absolute inset-0 cursor-pointer"></label>
+      <label htmlFor={props.id} className="absolute inset-0 cursor-pointer flex items-center justify-center peer-checked:[&>svg]:opacity-100">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 transition-opacity">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </label>
     </div>
   );
 };

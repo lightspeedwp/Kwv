@@ -42,7 +42,8 @@ export const CorporateFooter: React.FC = () => {
               <li><Link to="/history" className="hover:text-[#DAA520] transition-colors">Our History</Link></li>
               <li><Link to="/brands" className="hover:text-[#DAA520] transition-colors">Our Brands</Link></li>
               <li><Link to="/sustainability" className="hover:text-[#DAA520] transition-colors">Sustainability</Link></li>
-              <li><Link to="/news" className="hover:text-[#DAA520] transition-colors">News & Awards</Link></li>
+              <li><Link to="/news" className="hover:text-[#DAA520] transition-colors">News</Link></li>
+              <li><Link to="/awards" className="hover:text-[#DAA520] transition-colors">Awards</Link></li>
               <li><Link to="/careers" className="hover:text-[#DAA520] transition-colors">Careers</Link></li>
             </ul>
           </div>
