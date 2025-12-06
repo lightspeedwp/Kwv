@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
 import { Link } from 'react-router-dom';
 import { CheckoutInput } from './CheckoutInput';
+import { Checkbox } from '../../common/Checkbox';
 
 interface ContactInfoProps {
   isLoggedIn: boolean;
@@ -25,7 +26,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
           Logged in as <strong>John Doe</strong> (john.doe@example.com)
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
            <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">We'll use this email to send you details and updates about your order.</p>
            <div>
              <CheckoutInput
@@ -40,15 +41,15 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
              <p className="text-xs text-gray-500 mt-1 pl-1">You are currently checking out as a guest.</p>
            </div>
 
-           <div className="flex items-start gap-2 mt-2">
-             <input 
-                type="checkbox" 
-                id="create-account" 
-                checked={createAccount}
-                onChange={() => setCreateAccount(!createAccount)}
-                className="mt-1 rounded border-gray-300 accent-[#2C1810]"
-             />
-             <label htmlFor="create-account" className="text-sm text-gray-700 cursor-pointer select-none">
+           <div className="flex items-center gap-4 mt-2">
+             <div className="relative flex items-center">
+               <Checkbox 
+                  id="create-account" 
+                  checked={createAccount}
+                  onChange={() => setCreateAccount(!createAccount)}
+               />
+             </div>
+             <label htmlFor="create-account" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
                 Create an account with KWV
              </label>
            </div>

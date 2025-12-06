@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Typography } from '../common/Typography';
 import { X, Star } from 'lucide-react';
+import { Checkbox } from '../common/Checkbox';
 
 interface FilterGroupProps {
   title: string;
@@ -96,9 +97,8 @@ export const ShopSidebar = () => {
 
       <FilterGroup title="Rating">
         <div className="flex items-center gap-3 cursor-pointer group">
-          <input 
-            type="checkbox" 
-            className="w-5 h-5 bg-gray-100 border-gray-300 rounded-sm checked:bg-black checked:border-black focus:ring-0" 
+          <Checkbox 
+            className="w-5 h-5"
             onChange={(e) => handleCheckboxChange('Rating', '5 Stars', e.target.checked)}
           />
           <div className="flex items-center gap-1">
@@ -116,9 +116,8 @@ export const ShopSidebar = () => {
       <FilterGroup title="Color">
          {['Blue', 'Red', 'Green', 'Gray', 'Yellow'].map(color => (
           <label key={color} className="flex items-center gap-3 cursor-pointer group">
-            <input 
-              type="checkbox" 
-              className="w-5 h-5 bg-gray-100 border-gray-300 rounded-sm checked:bg-black checked:border-black focus:ring-0" 
+            <Checkbox 
+              className="w-5 h-5"
               checked={activeFilters.some(f => f.value === color)}
               onChange={(e) => handleCheckboxChange('Color', color, e.target.checked)}
             />
@@ -130,14 +129,11 @@ export const ShopSidebar = () => {
       <FilterGroup title="Category">
         {['Accessories', 'Tshirts', 'Hoodies', 'Music', 'Clothing', 'Decor'].map(cat => (
           <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-            <div className="relative flex items-center">
-              <input 
-                  type="checkbox" 
-                  className="peer w-5 h-5 bg-gray-100 border-gray-300 rounded-sm checked:bg-black checked:border-black focus:ring-0 focus:ring-offset-0" 
-                  checked={activeFilters.some(f => f.value === cat)}
-                  onChange={(e) => handleCheckboxChange('Category', cat, e.target.checked)}
-              />
-            </div>
+            <Checkbox 
+                className="w-5 h-5"
+                checked={activeFilters.some(f => f.value === cat)}
+                onChange={(e) => handleCheckboxChange('Category', cat, e.target.checked)}
+            />
             <span className="text-gray-600 group-hover:text-black transition-colors text-base">{cat}</span>
           </label>
         ))}
@@ -145,51 +141,17 @@ export const ShopSidebar = () => {
       
       <FilterGroup title="Status">
         <div className="px-1 mb-6">
-           {/* Slider for status? The image shows a slider under Status too. That seems odd but I will follow the image which shows a slider under Status as well. 
-           Wait, looking closely at the image, under Status there is a slider and inputs similar to Price. This might be a mistake in the mockup or a generic "Price" filter repeated.
-           However, usually Status is checkboxes. The image shows:
-           Status (Heading)
-           Slider
-           Inputs $15 - $55
-           
-           Then "Rating" again.
-           Then "color" again.
-           
-           It looks like the screenshot captured two filter blocks or duplicated content.
-           The prompt says "The Product Filters block... Status Filter - Allows filtering by stock status... You can choose the display style...".
-           Typically status is In Stock / On Sale.
-           I will stick to Checkboxes for Status as that makes more semantic sense for WooCommerce, unless the user specifically wants the slider there too. 
-           The user said "The mobile filters need to look like the following attached image".
-           The image clearly shows "Status" followed by a slider.
-           I will assume the image is showing a Price filter BUT labeled as Status or it's just a visual reference for "how filters look".
-           But wait, there is a "Price" section at the top.
-           Then "Rating".
-           Then "color".
-           Then "Category".
-           Then "Status" -> Slider -> Inputs.
-           Then "Rating" again.
-           
-           This looks like a concatenated screenshot or a long scroll.
-           I will implement Status as Checkboxes as it functions in WooCommerce, but I will make sure the styling of ALL filters matches the clean look of the image.
-           The "Status" section in the image having a slider is very likely a mistake in the mockup or it is actually a Price filter.
-           I will keep Status as checkboxes for "In stock" and "On sale" as I had, but style them to match the other checkboxes.
-           
-           Wait, looking at the previous Status implementation, it was checkboxes.
-           I'll stick to checkboxes for Status but make sure the Price filter inputs look exactly like the image.
-           */}
           <label className="flex items-center gap-3 cursor-pointer group mb-3">
-            <input 
-              type="checkbox" 
-              className="w-5 h-5 bg-gray-100 border-gray-300 rounded-sm checked:bg-black checked:border-black focus:ring-0" 
+            <Checkbox 
+              className="w-5 h-5"
               checked={activeFilters.some(f => f.value === 'In stock')}
               onChange={(e) => handleCheckboxChange('Status', 'In stock', e.target.checked)}
             />
             <span className="text-gray-600 group-hover:text-black transition-colors text-base">In stock</span>
           </label>
           <label className="flex items-center gap-3 cursor-pointer group">
-            <input 
-              type="checkbox" 
-              className="w-5 h-5 bg-gray-100 border-gray-300 rounded-sm checked:bg-black checked:border-black focus:ring-0" 
+            <Checkbox 
+              className="w-5 h-5"
               checked={activeFilters.some(f => f.value === 'On sale')}
               onChange={(e) => handleCheckboxChange('Status', 'On sale', e.target.checked)}
             />

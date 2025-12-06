@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AlertCircle } from 'lucide-react';
 
 interface CheckoutInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -16,16 +16,17 @@ export const CheckoutInput: React.FC<CheckoutInputProps> = ({
   ...props 
 }) => {
   const hasError = touched && error;
+  const inputId = id || label.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="w-full">
       <div className="relative">
         <input
-          id={id || label.toLowerCase().replace(/\s+/g, '-')}
+          id={inputId}
           className={`
-            peer w-full h-14 px-3 pt-5 pb-2 
+            peer w-full h-[58px] px-3 pt-6 pb-2 
             bg-white border rounded-sm text-[#333333] placeholder-transparent 
-            focus:outline-none focus:ring-0
+            focus:outline-none focus:ring-0 text-base
             ${hasError ? 'border-red-500' : 'border-gray-300 focus:border-[#2C1810]'}
             ${className}
           `}
@@ -33,10 +34,13 @@ export const CheckoutInput: React.FC<CheckoutInputProps> = ({
           {...props}
         />
         <label
-          htmlFor={id || label.toLowerCase().replace(/\s+/g, '-')}
+          htmlFor={inputId}
           className={`
-            absolute left-3 top-2 text-xs transition-all pointer-events-none
+            absolute left-3 transition-all duration-200 pointer-events-none truncate max-w-[calc(100%-24px)]
             ${hasError ? 'text-red-500' : 'text-gray-500 peer-focus:text-[#2C1810]'}
+            peer-placeholder-shown:top-[17px] peer-placeholder-shown:text-[17px] peer-placeholder-shown:font-light
+            peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-medium
+            ${props.value ? 'top-2 text-[11px] font-medium' : ''}
           `}
         >
           {label}

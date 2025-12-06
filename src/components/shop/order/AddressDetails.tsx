@@ -6,7 +6,7 @@ export const AddressDetails: React.FC = () => {
     <div className="mb-12">
       <Typography variant="h3" className="mb-6 !text-2xl font-normal text-[#333333]">Billing address</Typography>
       
-      <div className="border border-gray-100 p-6 rounded-sm text-[#333333] leading-relaxed">
+      <div className="border border-2 border-[#D3D3D3] p-6 rounded-sm text-[#333333] leading-relaxed">
          <p>Ash Shaw</p>
          <p>LightSpeed</p>
          <p>46 Devon Street</p>

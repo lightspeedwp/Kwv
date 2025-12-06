@@ -1,159 +1,212 @@
 import React from 'react';
 import { Container } from '../components/common/Container';
-import { Typography } from '../components/common/Typography';
-import { Button } from '../components/common/Button';
+import { Typography } from '../common/Typography';
+import { Button } from '../common/Button';
 import { Layout } from '../components/layout/Layout';
 import { COLORS } from '../constants/theme';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { MapPin, Clock, Phone, Mail } from 'lucide-react';
-import { FAQSection } from '../components/sections/FAQSection';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { KWVExperiencesLogo } from '../components/common/Logo';
 
-const EXPERIENCES = [
+const EXPERIENCE_CARDS = [
   {
-    title: 'Wine Tasting Emporium',
-    desc: 'Sample our award-winning wines, brandies, and gins in our modern tasting room. Choose from a variety of curated pairings including our famous biltong and wine pairing.',
-    image: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-    details: 'Daily: 09:00 - 16:30'
+    id: 'emporium',
+    title: 'KWV EMPORIUM',
+    cta: 'BOOK A TASTING',
+    link: '/experiences/emporium',
+    desc: "Visit the KWV Emporium for a cellar tour and experience our winemaking process. Don't forget to enjoy a wine or brandy tasting and pairing. Experience KWV!",
+    image: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    logoText: "KWV EMPORIUM"
   },
   {
-    title: 'Cathedral Cellar Tour',
-    desc: 'Step into history with a guided tour of our world-renowned Cathedral Cellar, built in 1930. Admire the vaulted ceilings and massive carved vats.',
-    image: 'https://images.unsplash.com/photo-1597843797221-e0e1f74dd7e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-    details: 'Mon - Fri: 10:00 & 14:00'
+    id: 'cellar',
+    title: 'CATHEDRAL CELLAR',
+    cta: 'BOOK A TOUR',
+    link: '/experiences/cathedral-cellar',
+    desc: "Visit our historical Cathedral Cellar. This walking tour will take you on a storytelling journey through the cellar with an opportunity to taste some of KWV's best and award-winning wines. Experience KWV!",
+    image: 'https://images.unsplash.com/photo-1597843797221-e0e1f74dd7e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    logoText: "CATHEDRAL CELLAR",
+    subText: "A Legacy Engraved"
   },
   {
-    title: 'House of Fire',
-    desc: 'An interactive brandy experience dedicated to the legend of KWV Brandy. Learn about the art of distillation and blending from our experts.',
-    image: 'https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-    details: 'By Appointment Only'
+    id: 'hof',
+    title: 'HOUSE OF FIRE',
+    cta: 'VISIT HOF',
+    link: '/experiences/house-of-fire',
+    desc: "The House of Fire celebrates the creation of brandy. We invite you to join us on a journey that will ignite the senses.",
+    image: 'https://images.unsplash.com/photo-1613325245242-1c5069a82383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    logoText: "H°F",
+    subText: "HOUSE OF FIRE BY KWV"
   },
   {
-    title: 'Art Gallery',
-    desc: 'Explore our impressive collection of South African art, featuring works by Irma Stern, Jacob Pierneef, and other masters, housed within the Sensorium.',
-    image: 'https://images.unsplash.com/photo-1561053720-76cd737463d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-    details: 'Daily: 09:00 - 16:30'
+    id: 'events',
+    title: 'KWV EVENTS',
+    cta: 'VIEW EVENTS',
+    link: '/experiences/events',
+    desc: "Visit the KWV Emporium for a cellar tour and experience our winemaking process. Don't forget to enjoy a wine or brandy tasting and pairing. Experience KWV!",
+    image: 'https://images.unsplash.com/photo-1519671482538-eb2335b9ea9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    logoText: "KWV EVENTS"
   }
+];
+
+const GALLERY_IMAGES = [
+  "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1559563362-c667ba5f5480?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1561053720-76cd737463d3?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1528823872057-9c018a7a7553?auto=format&fit=crop&w=600&q=80"
 ];
 
 export const Experiences: React.FC = () => {
   return (
     <Layout>
-      {/* Hero */}
-      <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-[#2C1810]">
-        <div className="absolute inset-0 opacity-60">
-           <ImageWithFallback
-              src="https://images.unsplash.com/photo-1536663815808-535e2280d2c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
-              alt="KWV Paarl"
-              className="w-full h-full object-cover"
-           />
-        </div>
-        <div className="relative z-10 text-center max-w-3xl px-6">
-          <Typography variant="h1" color={COLORS.white} className="mb-6">Visit Us in Paarl</Typography>
-          <Typography variant="bodyLarge" color={COLORS.beige} className="mb-8">
-            Immerse yourself in the world of KWV at our home in the heart of the Cape Winelands.
-          </Typography>
-          <Button size="lg" className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none">
-            Book a Tasting
-          </Button>
-        </div>
-      </div>
-
-      {/* Intro */}
-      <section className="py-20 bg-white">
-        <Container variant="content" className="text-center">
-           <Typography variant="h2" color={COLORS.wineRed} className="mb-6">A World Class Destination</Typography>
-           <Typography variant="body" className="text-gray-600 text-lg">
-             Whether you are a wine connoisseur, a brandy enthusiast, or simply looking for a beautiful setting to relax, the KWV Emporium offers a range of experiences to suit every palate.
-           </Typography>
-        </Container>
+      {/* Header Section */}
+      <section className="bg-white pt-16 pb-12 text-center">
+         <Container variant="content">
+            <Typography variant="h1" className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C1810] uppercase tracking-wide">
+               THE KWV EXPERIENCE
+            </Typography>
+            <Typography variant="body" className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+               KWV is situated in the heart of the Cape Winelands, in the picturesque town of Paarl, where it offers a range of products and experiences. Join us for a memorable experience!
+            </Typography>
+         </Container>
       </section>
 
       {/* Experiences Grid */}
-      <section className="py-20 bg-[#F9F9F9]">
+      <section className="bg-white pb-20">
          <Container variant="site">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-               {EXPERIENCES.map((exp, index) => (
-                  <div key={index} className="bg-white shadow-lg rounded-sm overflow-hidden flex flex-col">
-                     <div className="relative h-64">
-                        <ImageWithFallback src={exp.image} alt={exp.title} className="w-full h-full object-cover" />
-                     </div>
-                     <div className="p-8 flex flex-col flex-grow">
-                        <Typography variant="h3" color={COLORS.darkBrown} className="mb-4">{exp.title}</Typography>
-                        <div className="flex items-center gap-2 text-[#8B0000] text-sm font-bold uppercase tracking-widest mb-4">
-                           <Clock size={16} /> {exp.details}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+               {EXPERIENCE_CARDS.map((card) => (
+                  <div key={card.id} className="flex flex-col">
+                     {/* Image Card */}
+                     <div className="relative aspect-[3/5] w-full overflow-hidden mb-0 group cursor-pointer">
+                        <ImageWithFallback 
+                           src={card.image} 
+                           alt={card.title} 
+                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        />
+                        {/* Logo Overlay Simulation */}
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                           <div className="bg-white/90 backdrop-blur-sm p-6 text-center min-w-[140px] shadow-lg">
+                              <span className={`block text-[#2C1810] font-serif font-bold ${card.id === 'hof' ? 'text-4xl' : 'text-xl uppercase tracking-widest'} leading-none mb-1`}>
+                                 {card.logoText}
+                              </span>
+                              {card.subText && (
+                                 <span className="block text-[10px] uppercase tracking-widest text-[#8B0000] mt-2 border-t border-[#8B0000] pt-2">
+                                    {card.subText}
+                                 </span>
+                              )}
+                           </div>
                         </div>
-                        <Typography variant="body" className="text-gray-600 mb-8 flex-grow">
-                           {exp.desc}
-                        </Typography>
-                        <Button variant="outline" className="self-start border-[#2C1810] text-[#2C1810] hover:bg-[#2C1810] hover:text-white">
-                           More Info
-                        </Button>
                      </div>
+                     
+                     {/* Button */}
+                     <Link to={card.link} className="block">
+                        <Button 
+                           fullWidth 
+                           className="bg-[#C5A059] hover:bg-[#b08d4a] text-white font-bold uppercase tracking-widest rounded-none py-4 text-sm mb-6"
+                        >
+                           {card.cta}
+                        </Button>
+                     </Link>
+                     
+                     {/* Description */}
+                     <p className="text-center text-gray-600 text-sm leading-relaxed px-2">
+                        {card.desc}
+                     </p>
                   </div>
                ))}
             </div>
          </Container>
       </section>
 
-      {/* Visitor Info */}
-      <section className="py-20 bg-[#2C1810] text-white">
+      {/* Voucher Banner */}
+      <section className="bg-[#EBEBEB] py-16">
          <Container variant="site">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-               <div>
-                  <Typography variant="h2" color={COLORS.gold} className="mb-8">Plan Your Visit</Typography>
-                  <div className="space-y-6">
-                     <div className="flex items-start gap-4">
-                        <MapPin className="text-[#DAA520] mt-1" size={24} />
-                        <div>
-                           <Typography variant="h4" className="mb-1 text-white">Address</Typography>
-                           <p className="text-gray-300">Kohler Street, Paarl, 7646, South Africa</p>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-4">
-                        <Clock className="text-[#DAA520] mt-1" size={24} />
-                        <div>
-                           <Typography variant="h4" className="mb-1 text-white">Opening Hours</Typography>
-                           <p className="text-gray-300">Monday - Saturday: 09:00 - 16:30</p>
-                           <p className="text-gray-300">Sunday: 10:00 - 15:00</p>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-4">
-                        <Phone className="text-[#DAA520] mt-1" size={24} />
-                        <div>
-                           <Typography variant="h4" className="mb-1 text-white">Contact</Typography>
-                           <p className="text-gray-300">+27 21 807 3007</p>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-4">
-                        <Mail className="text-[#DAA520] mt-1" size={24} />
-                        <div>
-                           <Typography variant="h4" className="mb-1 text-white">Email</Typography>
-                           <p className="text-gray-300">emporium@kwv.co.za</p>
-                        </div>
-                     </div>
+            <div className="flex flex-col md:flex-row items-stretch bg-[#E5E5E5]">
+               {/* Left Image (Distillery/Copper) */}
+               <div className="w-full md:w-1/4 min-h-[200px] relative">
+                  <ImageWithFallback 
+                     src="https://images.unsplash.com/photo-1613325245242-1c5069a82383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
+                     alt="Distillery" 
+                     className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/90 p-2 shadow-lg">
+                      <div className="w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-gray-100 rounded-full">
+                          <ChevronLeft size={16} />
+                      </div>
                   </div>
                </div>
-               
-               {/* Map Placeholder */}
-               <div className="h-[400px] bg-gray-800 rounded-sm relative flex items-center justify-center">
+
+               {/* Middle Content */}
+               <div className="w-full md:w-1/2 p-8 md:p-12 text-center flex flex-col justify-center items-center bg-[#EBEBEB]">
+                  <div className="border border-[#C5A059] p-4 inline-block mb-4">
+                     <span className="block text-2xl font-bold text-[#C5A059] leading-none">H°F</span>
+                     <span className="block text-[8px] uppercase tracking-widest mt-1">HOUSE OF FIRE</span>
+                  </div>
+                  
+                  <Typography variant="h2" className="font-handwriting text-[#C5A059] text-5xl md:text-6xl mb-2 rotate-[-2deg]" style={{ fontFamily: 'cursive' }}>
+                     Gift a Voucher
+                  </Typography>
+                  
+                  <Typography variant="h3" className="uppercase tracking-widest font-bold text-[#2C1810] text-xl md:text-2xl mb-2">
+                     A BRANDY BLENDING SESSION
+                  </Typography>
+                  
+                  <p className="uppercase text-sm tracking-wider text-gray-600 mb-6">
+                     WITH OUR BRANDY EXPERT AT KWV HOUSE OF FIRE!
+                  </p>
+                  
+                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                     Blend and bottle your own KWV brandy with a <span className="underline">personalised</span> label.
+                  </p>
+                  
+                  <Button className="bg-[#A0522D] hover:bg-[#8B4513] text-white uppercase tracking-widest px-8 py-3 rounded-sm text-sm">
+                     BOOK YOUR VOUCHER
+                  </Button>
+               </div>
+
+               {/* Right Image (Brandy Glass) */}
+               <div className="w-full md:w-1/4 min-h-[200px] relative">
                   <ImageWithFallback 
-                     src="https://images.unsplash.com/photo-1524661135-423995f22d0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
-                     alt="Map" 
-                     className="w-full h-full object-cover opacity-50"
+                     src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
+                     alt="Brandy Glass" 
+                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bg-white text-[#2C1810] px-6 py-3 rounded-md shadow-lg font-bold flex items-center gap-2">
-                     <MapPin size={20} className="text-[#8B0000]" /> KWV Emporium
+                  <div className="absolute top-1/2 right-4 -translate-y-1/2 text-center">
+                       <div className="w-8 h-8 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white shadow ml-auto">
+                          <ChevronRight size={16} />
+                       </div>
+                  </div>
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+                      <KWVExperiencesLogo className="h-8 w-auto drop-shadow-md" />
                   </div>
                </div>
             </div>
          </Container>
       </section>
 
-      <FAQSection items={[
-        { question: "Do I need to book in advance?", answer: "Booking is highly recommended for tastings and tours, especially during weekends and peak season." },
-        { question: "Are children allowed?", answer: "Children are welcome at the Emporium. We offer non-alcoholic pairings and a kid-friendly menu at our deli." },
-        { question: "Is the venue wheelchair accessible?", answer: "Yes, the KWV Emporium and most of our tasting areas are wheelchair accessible." }
-      ]} />
+      {/* Image Gallery */}
+      <section className="bg-white py-20">
+         <Container variant="site">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+               {GALLERY_IMAGES.map((img, i) => (
+                  <div key={i} className="aspect-square overflow-hidden cursor-pointer group">
+                     <ImageWithFallback 
+                        src={img} 
+                        alt={`Gallery ${i}`} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     />
+                  </div>
+               ))}
+            </div>
+            <div className="flex justify-between items-center mt-8">
+                <button className="p-2 hover:bg-gray-100 rounded-full"><ChevronLeft /></button>
+                <button className="p-2 hover:bg-gray-100 rounded-full"><ChevronRight /></button>
+            </div>
+         </Container>
+      </section>
     </Layout>
   );
 };

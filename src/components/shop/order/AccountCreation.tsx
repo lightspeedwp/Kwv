@@ -10,7 +10,7 @@ interface AccountCreationProps {
 
 export const AccountCreation: React.FC<AccountCreationProps> = ({ email }) => {
   return (
-    <div className="bg-[#F9F9F9] p-8 md:p-12 mb-16 flex flex-col lg:flex-row gap-12 items-center border border-gray-100">
+    <div className="bg-white p-8 md:p-12 mb-16 flex flex-col lg:flex-row gap-12 items-center border-2 border-[#D3D3D3]">
        <div className="flex-1">
           <Typography variant="h3" className="mb-6 !text-xl font-normal text-[#333333]">Create an account with WooCommerce Website</Typography>
           <ul className="space-y-4">

@@ -90,3 +90,31 @@ export const KWVShopLogo: React.FC<LogoProps> = ({ color = COLORS.white, classNa
     </div>
   );
 };
+
+export const KWVExperiencesLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
+  return (
+    <div className={`flex flex-row items-center gap-3 ${className}`}>
+        {/* Use the main logo but slightly smaller */}
+        <KWVLogo color={color} className="h-12 w-auto" />
+        
+        {/* Vertical Divider */}
+        <div className="h-10 w-[1px] bg-white/20"></div>
+        
+        {/* EXPERIENCES Text */}
+        <div className="flex flex-col justify-center">
+            <span 
+                className="text-xl font-serif tracking-widest leading-none uppercase"
+                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
+            >
+                EXPERIENCES
+            </span>
+            <span 
+                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
+                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
+            >
+                VISIT US
+            </span>
+        </div>
+    </div>
+  );
+};

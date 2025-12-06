@@ -9,12 +9,12 @@ export const OrderDetails: React.FC = () => {
        
        <table className="w-full text-left border-collapse">
           <thead>
-             <tr className="border-b border-gray-100">
+             <tr className="border-b-2 border-[#D3D3D3]">
                 <th className="py-4 text-[#333333] font-bold text-base pl-0">Product</th>
                 <th className="py-4 text-[#333333] font-bold text-base text-right pr-0">Total</th>
              </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[#D3D3D3]">
              <tr>
                 <td className="py-4 pl-0">
                    <Link to="#" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
@@ -43,7 +43,7 @@ export const OrderDetails: React.FC = () => {
                 <td className="py-4 text-right text-[#333333] pr-0">$25.00</td>
              </tr>
           </tbody>
-          <tfoot className="border-t border-gray-100">
+          <tfoot className="border-t-2 border-[#D3D3D3]">
              <tr>
                 <td className="py-4 pl-0 text-[#333333] font-bold">Shipping:</td>
                 <td className="py-4 text-right text-[#333333] pr-0 leading-relaxed">
@@ -54,7 +54,7 @@ export const OrderDetails: React.FC = () => {
                     </div>
                 </td>
              </tr>
-             <tr className="border-t border-gray-100">
+             <tr className="border-t-2 border-[#D3D3D3]">
                 <td className="py-4 pl-0 text-[#333333] font-bold text-lg">Total:</td>
                 <td className="py-4 text-right text-[#333333] font-bold text-lg pr-0">$56.00</td>
              </tr>

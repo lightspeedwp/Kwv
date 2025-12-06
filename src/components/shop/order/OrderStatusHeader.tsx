@@ -23,26 +23,26 @@ export const OrderStatusHeader: React.FC<OrderStatusHeaderProps> = ({
          <p className="text-[#333333] text-lg">Thank you. Your order has been received.</p>
       </div>
 
-      <div className="flex flex-col md:flex-row border border-gray-200 md:border-0">
-         <div className="p-4 md:p-0 md:pr-12 md:border-r border-b md:border-b-0 border-gray-200">
+      <div className="flex flex-col md:flex-row border-2 border-dashed border-[#D3D3D3]">
+         <div className="p-4 md:p-6 md:pr-10 md:border-r-2 border-b-2 md:border-b-0 border-dashed border-[#D3D3D3]">
             <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Order #:</span>
-            <span className="block text-[#333333]">{orderNumber}</span>
+            <span className="block text-[#333333] font-bold">{orderNumber}</span>
          </div>
-         <div className="p-4 md:p-0 md:px-12 md:border-r border-b md:border-b-0 border-gray-200">
+         <div className="p-4 md:p-6 md:px-10 md:border-r-2 border-b-2 md:border-b-0 border-dashed border-[#D3D3D3]">
             <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Date:</span>
-            <span className="block text-[#333333]">{date}</span>
+            <span className="block text-[#333333] font-bold">{date}</span>
          </div>
-         <div className="p-4 md:p-0 md:px-12 md:border-r border-b md:border-b-0 border-gray-200">
+         <div className="p-4 md:p-6 md:px-10 md:border-r-2 border-b-2 md:border-b-0 border-dashed border-[#D3D3D3]">
             <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Total:</span>
-            <span className="block text-[#333333]">{total}</span>
+            <span className="block text-[#333333] font-bold">{total}</span>
          </div>
-         <div className="p-4 md:p-0 md:px-12 md:border-r border-b md:border-b-0 border-gray-200">
+         <div className="p-4 md:p-6 md:px-10 md:border-r-2 border-b-2 md:border-b-0 border-dashed border-[#D3D3D3]">
             <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Email:</span>
-            <span className="block text-[#333333]">{email}</span>
+            <span className="block text-[#333333] font-bold">{email}</span>
          </div>
-         <div className="p-4 md:p-0 md:pl-12">
+         <div className="p-4 md:p-6 md:pl-10">
             <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Payment:</span>
-            <span className="block text-[#333333]">{paymentMethod}</span>
+            <span className="block text-[#333333] font-bold">{paymentMethod}</span>
          </div>
       </div>
     </div>

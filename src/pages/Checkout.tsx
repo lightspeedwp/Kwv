@@ -10,6 +10,7 @@ import { ContactInfo } from '../components/shop/checkout/ContactInfo';
 import { DeliveryMethodSelector } from '../components/shop/checkout/DeliveryMethodSelector';
 import { PickupLocationSelect } from '../components/shop/checkout/PickupLocationSelect';
 import { ShippingAddressForm } from '../components/shop/checkout/ShippingAddressForm';
+import { BillingAddressForm } from '../components/shop/checkout/BillingAddressForm';
 import { PaymentMethods } from '../components/shop/checkout/PaymentMethods';
 import { OrderSummary } from '../components/shop/checkout/OrderSummary';
 import { CheckoutStep } from '../components/shop/checkout/CheckoutStep';
@@ -18,10 +19,12 @@ export const Checkout = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState<'ship' | 'pickup'>('ship');
+  const [useSameBilling, setUseSameBilling] = useState(true);
 
-  const handlePlaceOrder = () => {
-    navigate('/order-received');
-  };
+  // Calculate step numbers dynamically
+  const stepShipping = 3;
+  const stepBilling = useSameBilling ? null : 4;
+  const stepPayment = useSameBilling ? 4 : 5;
 
   return (
     <CheckoutLayout>
@@ -51,8 +54,14 @@ export const Checkout = () => {
                   number="1" 
                   title="Contact information"
                   headerRight={!isLoggedIn && (
-                     <div className="text-sm text-gray-600 mt-2">
-                       Already have an account? <Link to="/account" className="text-[#333333] underline">Log in</Link>
+                     <div className="mt-1">
+                       <Link 
+                          to="/account" 
+                          className="text-[#111111] underline hover:no-underline font-bold text-[17px] leading-[23px]"
+                          style={{ fontFamily: 'Manrope, sans-serif' }}
+                        >
+                          Log in
+                        </Link>
                      </div>
                   )}
                >
@@ -66,18 +75,28 @@ export const Checkout = () => {
 
                {/* Step 3: Dynamic (Shipping or Pickup) */}
                <CheckoutStep 
-                  number="3" 
+                  number={stepShipping.toString()} 
                   title={deliveryMethod === 'ship' ? "Shipping address" : "Pickup locations"}
                >
                   {deliveryMethod === 'ship' ? (
-                     <ShippingAddressForm />
+                     <ShippingAddressForm 
+                        useSameBilling={useSameBilling} 
+                        onToggleSameBilling={setUseSameBilling} 
+                     />
                   ) : (
                      <PickupLocationSelect />
                   )}
                </CheckoutStep>
 
-               {/* Step 4: Payment */}
-               <CheckoutStep number="4" title="Payment options" isLast>
+               {/* Step 4: Billing Address (Conditional) */}
+               {!useSameBilling && deliveryMethod === 'ship' && (
+                  <CheckoutStep number={stepBilling?.toString() || "4"} title="Billing address">
+                      <BillingAddressForm />
+                  </CheckoutStep>
+               )}
+
+               {/* Step 4/5: Payment */}
+               <CheckoutStep number={stepPayment.toString()} title="Payment options" isLast>
                   <PaymentMethods />
                </CheckoutStep>
             </div>

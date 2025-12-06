@@ -19,15 +19,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                  location.pathname.startsWith('/checkout') ||
                  location.pathname.startsWith('/account');
 
+  const isExperiences = location.pathname.startsWith('/experiences') ||
+                        location.pathname.startsWith('/visit');
+
+  const variant = isShop ? 'shop' : (isExperiences ? 'experiences' : 'corporate');
+
   return (
     <div className="flex flex-col min-h-screen font-sans text-[#333333]">
       <AgeVerificationModal />
       <BackToTopButton />
-      <Header variant={isShop ? 'shop' : 'corporate'} />
+      <Header variant={variant} />
       <main className="flex-grow">
         {children}
       </main>
-      <Footer variant={isShop ? 'shop' : 'corporate'} />
+      <Footer variant={variant} />
     </div>
   );
 };

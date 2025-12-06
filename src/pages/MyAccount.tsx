@@ -5,6 +5,7 @@ import { Typography } from '../components/common/Typography';
 import { Button } from '../components/common/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { User, Eye, EyeOff } from 'lucide-react';
+import { Checkbox } from '../components/common/Checkbox';
 
 export const MyAccount: React.FC = () => {
   // Mock auth state
@@ -66,7 +67,7 @@ export const MyAccount: React.FC = () => {
                       <div className="flex items-center gap-2 pt-2">
                          <Button type="submit" className="bg-[#111111] text-white hover:bg-black h-12 px-8 rounded-none font-normal text-base">Log in</Button>
                          <label className="flex items-center text-base text-[#333333] ml-2 cursor-pointer">
-                            <input type="checkbox" className="mr-2 w-4 h-4 border-gray-300 rounded-sm text-black focus:ring-0" /> Remember me
+                            <Checkbox className="mr-2 w-4 h-4" /> Remember me
                          </label>
                       </div>
                       

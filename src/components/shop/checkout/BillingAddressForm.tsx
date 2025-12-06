@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown, AlertCircle } from 'lucide-react';
-import { Button } from '../../common/Button';
+import { ChevronDown } from 'lucide-react';
 import { CheckoutInput } from './CheckoutInput';
-import { Checkbox } from '../../common/Checkbox';
-
-interface ShippingAddressFormProps {
-  useSameBilling?: boolean;
-  onToggleSameBilling?: (value: boolean) => void;
-}
 
 interface AddressData {
   firstName: string;
@@ -35,10 +28,7 @@ const INITIAL_DATA: AddressData = {
   phone: '+27845656767'
 };
 
-export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({ 
-  useSameBilling = true, 
-  onToggleSameBilling 
-}) => {
+export const BillingAddressForm: React.FC = () => {
   const [data, setData] = useState<AddressData>(INITIAL_DATA);
   const [errors, setErrors] = useState<Partial<AddressData>>({});
   const [touched, setTouched] = useState<Partial<Record<keyof AddressData, boolean>>>({});
@@ -65,7 +55,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
 
   return (
     <div>
-      <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">Enter the address where you want your order delivered.</p>
+      <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">Enter the billing address that matches your payment method.</p>
 
       <div className="mb-4">
           {/* Country Select */}
@@ -129,13 +119,6 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
          </div>
       </div>
       
-      {/* 
-        In the design, Apartment is hidden behind a link? 
-        The screenshot shows "Address" then "+ Add apartment, suite, etc." 
-        But Step 4 screenshot shows inputs for City/Province/Postal Code. 
-        I'll render the rest of the form as standard.
-      */}
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <CheckoutInput 
           label="City" 
@@ -178,23 +161,6 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           touched={touched.phone}
         />
       </div>
-
-      {onToggleSameBilling && (
-        <div className="mt-6">
-           <div className="flex items-center gap-4">
-             <div className="relative flex items-center">
-               <Checkbox 
-                  id="same-billing" 
-                  checked={useSameBilling}
-                  onChange={(e) => onToggleSameBilling(e.target.checked)}
-               />
-             </div>
-             <label htmlFor="same-billing" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
-                Use same address for billing
-             </label>
-           </div>
-        </div>
-      )}
     </div>
   );
 };

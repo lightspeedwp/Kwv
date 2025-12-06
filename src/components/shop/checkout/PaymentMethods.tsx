@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Checkbox } from '../../common/Checkbox';
+import { RadioButton } from '../../common/RadioButton';
 
 export const PaymentMethods: React.FC = () => {
   const navigate = useNavigate();
@@ -17,12 +19,9 @@ export const PaymentMethods: React.FC = () => {
     const baseClass = "relative p-6 cursor-pointer transition-all duration-200";
     
     if (isActive) {
-      // Active state: Full black border, slight radius, pops out (z-10, negative margin)
       return `${baseClass} bg-white border border-[#111111] rounded-[4px] z-10 -m-px shadow-sm`;
     }
     
-    // Inactive state: No border (handled by parent container) or bottom border
-    // We use border-b for separation, but need to handle the last item
     return `${baseClass} bg-white border-b border-gray-100 last:border-b-0`;
   };
 
@@ -34,17 +33,12 @@ export const PaymentMethods: React.FC = () => {
         <div className={getContainerClass('bank_transfer')}>
            <label className="flex items-start w-full cursor-pointer">
              <div className="relative flex items-center mt-1 mr-6">
-               <input 
-                 type="radio" 
+               <RadioButton 
                  name="payment" 
                  value="bank_transfer"
                  checked={selectedPayment === 'bank_transfer'}
                  onChange={(e) => setSelectedPayment(e.target.value)}
-                 className="sr-only"
                />
-               <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${selectedPayment === 'bank_transfer' ? 'border-[#111111]' : 'border-gray-300'}`}>
-                  {selectedPayment === 'bank_transfer' && <div className="w-3 h-3 rounded-full bg-[#111111]"></div>}
-               </div>
              </div>
              
              <div className="flex-1">
@@ -63,17 +57,12 @@ export const PaymentMethods: React.FC = () => {
         <div className={getContainerClass('check')}>
            <label className="flex items-start w-full cursor-pointer">
              <div className="relative flex items-center mt-1 mr-6">
-               <input 
-                 type="radio" 
+               <RadioButton 
                  name="payment" 
                  value="check"
                  checked={selectedPayment === 'check'}
                  onChange={(e) => setSelectedPayment(e.target.value)}
-                 className="sr-only"
                />
-               <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${selectedPayment === 'check' ? 'border-[#111111]' : 'border-gray-300'}`}>
-                  {selectedPayment === 'check' && <div className="w-3 h-3 rounded-full bg-[#111111]"></div>}
-               </div>
              </div>
              
              <div className="flex-1">
@@ -92,17 +81,12 @@ export const PaymentMethods: React.FC = () => {
         <div className={getContainerClass('cod')}>
            <label className="flex items-start w-full cursor-pointer">
              <div className="relative flex items-center mt-1 mr-6">
-               <input 
-                 type="radio" 
+               <RadioButton 
                  name="payment" 
                  value="cod"
                  checked={selectedPayment === 'cod'}
                  onChange={(e) => setSelectedPayment(e.target.value)}
-                 className="sr-only"
                />
-               <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${selectedPayment === 'cod' ? 'border-[#111111]' : 'border-gray-300'}`}>
-                  {selectedPayment === 'cod' && <div className="w-3 h-3 rounded-full bg-[#111111]"></div>}
-               </div>
              </div>
              
              <div className="flex-1">
@@ -119,22 +103,18 @@ export const PaymentMethods: React.FC = () => {
       </div>
 
       <div className="mt-8 space-y-6">
-         <label className="flex items-center gap-5 cursor-pointer select-none">
-            <div className="relative flex items-center">
-              <input 
-                  type="checkbox" 
-                  checked={showNote}
-                  onChange={() => setShowNote(!showNote)}
-                  className="peer sr-only" 
-              />
-              <div className="w-6 h-6 border border-gray-400 rounded-sm bg-white peer-checked:bg-[#111111] peer-checked:border-[#111111] transition-colors flex items-center justify-center">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 peer-checked:opacity-100">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-              </div>
-            </div>
-            <span className="text-[18px] text-[#111111] font-light">Add a note to your order</span>
-         </label>
+         <div className="flex items-center gap-4">
+           <div className="relative flex items-center">
+             <Checkbox 
+                 id="add-note"
+                 checked={showNote}
+                 onChange={() => setShowNote(!showNote)}
+             />
+           </div>
+           <label htmlFor="add-note" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
+             Add a note to your order
+           </label>
+         </div>
 
          {showNote && (
              <div className="mt-4 mb-8">

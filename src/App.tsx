@@ -10,6 +10,7 @@ import { WineClub } from './pages/WineClub';
 import { Brands } from './pages/Brands';
 import { ShopBrands } from './pages/ShopBrands';
 import { About } from './pages/About';
+import { Contact } from './pages/Contact';
 import { Awards } from './pages/Awards';
 import { News } from './pages/News';
 import { NewsPost } from './pages/NewsPost';
@@ -30,7 +31,7 @@ export default function App() {
       <ScrollToTop />
       {/* Load Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
       `}</style>
       
       <Routes>
@@ -56,6 +57,8 @@ export default function App() {
         {/* Corporate Routes */}
         <Route path="/faq" element={<FAQ />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact-us" element={<Contact />} />
         <Route path="/history" element={<History />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:id" element={<Brands />} /> {/* Placeholder for single brand if needed, or re-use grid */}

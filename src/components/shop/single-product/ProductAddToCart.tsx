@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Minus, Plus, ChevronDown } from 'lucide-react';
 import { Button } from '../../common/Button';
 import { Typography } from '../../common/Typography';
+import { Checkbox } from '../../common/Checkbox';
 
 export interface Variation {
   id: string;
@@ -113,14 +114,12 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
           onClick={() => setIsSubscription(!isSubscription)}
         >
           <div className="flex items-start gap-3">
-             <div className="mt-1 relative flex items-center justify-center w-5 h-5">
-                <input 
-                  type="checkbox" 
+             <div className="mt-1 relative flex items-center justify-center">
+                <Checkbox 
                   checked={isSubscription} 
                   onChange={() => {}} 
-                  className="appearance-none w-5 h-5 border border-gray-300 rounded-sm checked:bg-[#8B0000] checked:border-[#8B0000] transition-colors"
+                  className="w-5 h-5"
                 />
-                {isSubscription && <Minus size={12} className="absolute text-white" />}
              </div>
              <div>
                 <Typography variant="h4" className="!text-base mb-1">Subscribe & Save 15%</Typography>

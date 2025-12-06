@@ -8,8 +8,8 @@ export const DownloadsSection: React.FC = () => {
     <div className="mb-12">
       <Typography variant="h3" className="mb-6 !text-2xl font-normal text-[#333333]">Downloads</Typography>
       
-      <div className="border border-gray-200 rounded-sm overflow-hidden">
-         <div className="bg-gray-50 p-4 border-b border-gray-200 grid grid-cols-3 text-sm font-bold text-[#333333]">
+      <div className="border-2 border-[#D3D3D3] rounded-sm overflow-hidden">
+         <div className="bg-white p-4 border-b-2 border-[#D3D3D3] grid grid-cols-3 text-sm font-bold text-[#333333]">
             <div>Product</div>
             <div>Expires</div>
             <div className="text-right">Download</div>
