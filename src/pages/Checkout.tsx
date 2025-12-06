@@ -7,8 +7,9 @@ import { ArrowLeft, User, UserX } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ContactInfo } from '../components/shop/checkout/ContactInfo';
-import { ShippingMethod } from '../components/shop/checkout/ShippingMethod';
-import { BillingAddress } from '../components/shop/checkout/BillingAddress';
+import { DeliveryMethodSelector } from '../components/shop/checkout/DeliveryMethodSelector';
+import { PickupLocationSelect } from '../components/shop/checkout/PickupLocationSelect';
+import { ShippingAddressForm } from '../components/shop/checkout/ShippingAddressForm';
 import { PaymentMethods } from '../components/shop/checkout/PaymentMethods';
 import { OrderSummary } from '../components/shop/checkout/OrderSummary';
 import { CheckoutStep } from '../components/shop/checkout/CheckoutStep';
@@ -16,6 +17,7 @@ import { CheckoutStep } from '../components/shop/checkout/CheckoutStep';
 export const Checkout = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState<'ship' | 'pickup'>('ship');
 
   const handlePlaceOrder = () => {
     navigate('/order-received');
@@ -44,6 +46,7 @@ export const Checkout = () => {
             {/* Main Column */}
             <div className="flex-1">
                
+               {/* Step 1: Contact */}
                <CheckoutStep 
                   number="1" 
                   title="Contact information"
@@ -56,30 +59,27 @@ export const Checkout = () => {
                   <ContactInfo isLoggedIn={isLoggedIn} />
                </CheckoutStep>
 
-               <CheckoutStep number="2" title="Pickup locations">
-                  <ShippingMethod />
+               {/* Step 2: Delivery */}
+               <CheckoutStep number="2" title="Delivery">
+                  <DeliveryMethodSelector method={deliveryMethod} setMethod={setDeliveryMethod} />
                </CheckoutStep>
 
-               <CheckoutStep number="3" title="Billing address">
-                  <BillingAddress />
+               {/* Step 3: Dynamic (Shipping or Pickup) */}
+               <CheckoutStep 
+                  number="3" 
+                  title={deliveryMethod === 'ship' ? "Shipping address" : "Pickup locations"}
+               >
+                  {deliveryMethod === 'ship' ? (
+                     <ShippingAddressForm />
+                  ) : (
+                     <PickupLocationSelect />
+                  )}
                </CheckoutStep>
 
+               {/* Step 4: Payment */}
                <CheckoutStep number="4" title="Payment options" isLast>
                   <PaymentMethods />
                </CheckoutStep>
-
-               <div className="flex justify-between items-center pt-8 mt-4">
-                  <Link to="/cart" className="flex items-center gap-3 text-lg text-black hover:opacity-70 transition-opacity group">
-                     <ArrowLeft size={20} className="transition-transform group-hover:-translate-x-1" />
-                     <span className="font-normal">Return to Cart</span>
-                  </Link>
-                  <Button 
-                    onClick={handlePlaceOrder}
-                    className="w-1/2 bg-[#111111] text-white hover:bg-black h-14 rounded-none text-lg font-normal"
-                  >
-                     Place Order
-                  </Button>
-               </div>
             </div>
 
             {/* Sidebar Column */}

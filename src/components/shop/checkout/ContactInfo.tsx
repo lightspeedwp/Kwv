@@ -26,7 +26,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
         </div>
       ) : (
         <div className="space-y-4">
-           <p className="text-sm text-gray-500">We'll use this email to send you details and updates about your order.</p>
+           <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">We'll use this email to send you details and updates about your order.</p>
            <div>
              <CheckoutInput
                 label="Email address"
