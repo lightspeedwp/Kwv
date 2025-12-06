@@ -55,11 +55,13 @@ export const Shop = () => {
               </Typography>
               
               <div className="relative group">
-                <button className="flex items-center gap-2 border border-gray-300 px-4 py-2 bg-white hover:border-[#8B0000] transition-colors">
-                  <span className="text-sm font-medium">Sort by: Featured</span>
-                  <ChevronDown size={16} />
-                </button>
-                {/* Dropdown (Mock) */}
+                <select className="appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 text-sm font-medium hover:border-[#8B0000] focus:border-[#8B0000] outline-none cursor-pointer">
+                  <option>Sort by: Featured</option>
+                  <option>Sort by: Price Low to High</option>
+                  <option>Sort by: Price High to Low</option>
+                  <option>Sort by: Latest</option>
+                </select>
+                <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500" />
               </div>
             </div>
           </div>

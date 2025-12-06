@@ -51,7 +51,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${baseStyles} ${sizes[size]} ${widthClass} ${className}`}
+      className={`${baseStyles} ${sizes[size]} ${widthClass} ${className} whitespace-nowrap`}
       style={{
         fontFamily: FONTS.body,
         ...variants[variant],

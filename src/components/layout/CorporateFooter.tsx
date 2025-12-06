@@ -31,6 +31,7 @@ export const CorporateFooter: React.FC = () => {
               <li><Link to="/news" className="hover:text-[#DAA520] transition-colors">News & Awards</Link></li>
               <li><Link to="/careers" className="hover:text-[#DAA520] transition-colors">Careers</Link></li>
               <li><Link to="/contact" className="hover:text-[#DAA520] transition-colors">Contact</Link></li>
+              <li><Link to="/coming-soon" className="hover:text-[#DAA520] transition-colors">Coming Soon</Link></li>
             </ul>
           </div>
 

@@ -17,6 +17,11 @@ import { Experiences } from './pages/Experiences';
 import { Careers, ExecutiveTeam, Sustainability } from './pages/CompanyPages';
 import { MyAccount } from './pages/MyAccount';
 import { OrderConfirmation } from './pages/OrderConfirmation';
+import { ComingSoon } from './pages/ComingSoon';
+import { SearchResults } from './pages/SearchResults';
+import { ProductSearchResults } from './pages/shop/ProductSearchResults';
+import { ShopFAQ } from './pages/shop/ShopFAQ';
+import { FAQ } from './pages/FAQ';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
 export default function App() {
@@ -30,10 +35,14 @@ export default function App() {
       
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
         
         {/* Shop Routes */}
+        <Route path="/shop/faq" element={<ShopFAQ />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/search" element={<ProductSearchResults />} />
         <Route path="/shop/brands" element={<ShopBrands />} />
+        <Route path="/shop/tag/:tag" element={<Shop />} />
         <Route path="/shop/:category" element={<Shop />} />
         <Route path="/shop/:category/:subcategory" element={<Shop />} /> {/* Added deeper nesting support */}
         <Route path="/product/:id" element={<Product />} />
@@ -42,8 +51,10 @@ export default function App() {
         <Route path="/order-received" element={<OrderConfirmation />} />
         <Route path="/account" element={<MyAccount />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/coming-soon" element={<ComingSoon />} />
 
         {/* Corporate Routes */}
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/about" element={<About />} />
         <Route path="/history" element={<History />} />
         <Route path="/brands" element={<Brands />} />

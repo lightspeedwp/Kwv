@@ -1,64 +1,123 @@
 import React from 'react';
-import { Layout } from '../components/layout/Layout';
+import { CheckoutLayout } from '../components/layout/CheckoutLayout';
 import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 import { Button } from '../components/common/Button';
-import { CheckCircle, Download } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { FAQSection } from '../components/sections/FAQSection';
 
 export const OrderConfirmation: React.FC = () => {
+  const orderDetails = {
+    number: '123',
+    date: 'December 6, 2025',
+    total: 'R 429.00',
+    email: 'test@test.com',
+    paymentMethod: 'Credit Card'
+  };
+
   return (
-    <Layout>
-      <Container variant="content" className="py-20 text-center">
-        <div className="flex justify-center mb-6">
-           <CheckCircle size={64} className="text-green-600" />
+    <CheckoutLayout>
+      <Container variant="site" className="py-16">
+        
+        {/* Header Section */}
+        <div className="mb-12">
+           <Typography variant="h1" className="mb-4 text-[#333333] font-normal text-4xl">Order received</Typography>
+           <p className="text-[#333333] text-lg">Thank you. Your order has been received.</p>
         </div>
-        <Typography variant="h1" color={COLORS.wineRed} className="mb-4">Thank you for your order!</Typography>
-        <Typography variant="bodyLarge" className="text-gray-600 mb-8">
-           Your order #1234 has been received and is now being processed.
-        </Typography>
 
-        <div className="bg-[#F9F9F9] p-8 rounded-sm text-left max-w-2xl mx-auto border border-gray-200 mb-12">
-           <Typography variant="h3" className="mb-6 border-b border-gray-200 pb-4">Order Details</Typography>
+        {/* Order Meta Grid */}
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0 border-b border-gray-200 pb-12 mb-12">
+           <div className="md:pr-12 md:border-r border-gray-200">
+              <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Order number:</span>
+              <span className="block text-[#333333]">{orderDetails.number}</span>
+           </div>
+           <div className="md:px-12 md:border-r border-gray-200">
+              <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Date:</span>
+              <span className="block text-[#333333]">{orderDetails.date}</span>
+           </div>
+           <div className="md:px-12 md:border-r border-gray-200">
+              <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Total:</span>
+              <span className="block text-[#333333]">{orderDetails.total}</span>
+           </div>
+           <div className="md:px-12 md:border-r border-gray-200">
+              <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Email:</span>
+              <span className="block text-[#333333]">{orderDetails.email}</span>
+           </div>
+           <div className="md:pl-12">
+              <span className="block text-xs uppercase tracking-wider font-bold text-[#333333] mb-2">Payment method:</span>
+              <span className="block text-[#333333]">{orderDetails.paymentMethod}</span>
+           </div>
+        </div>
+
+        {/* Registration Prompt */}
+        <div className="bg-[#F9F9F9] p-8 md:p-12 mb-16 flex flex-col lg:flex-row gap-12 items-center">
+           <div className="flex-1">
+              <Typography variant="h3" className="mb-6 !text-2xl font-normal text-[#333333]">Create an account with KWV</Typography>
+              <ul className="space-y-4">
+                 <li className="flex items-start gap-3">
+                    <Check size={20} className="mt-0.5 text-black" strokeWidth={2.5} />
+                    <span className="text-lg text-[#333333]">Faster future purchases</span>
+                 </li>
+                 <li className="flex items-start gap-3">
+                    <Check size={20} className="mt-0.5 text-black" strokeWidth={2.5} />
+                    <span className="text-lg text-[#333333]">Securely save payment info</span>
+                 </li>
+                 <li className="flex items-start gap-3">
+                    <Check size={20} className="mt-0.5 text-black" strokeWidth={2.5} />
+                    <span className="text-lg text-[#333333]">Track orders & view shopping history</span>
+                 </li>
+              </ul>
+           </div>
+           <div className="flex-1 w-full lg:w-auto">
+              <div className="bg-transparent flex flex-col gap-4">
+                 <Link to="/account?action=register">
+                    <Button fullWidth className="bg-[#111111] hover:bg-black text-white h-14 text-base font-normal rounded-none">
+                       Create account
+                    </Button>
+                 </Link>
+                 <p className="text-xs text-gray-500 text-center leading-relaxed">
+                    Check your email at {orderDetails.email} for the link to set up an account password. 
+                    By creating an account you agree to our <Link to="/terms" className="underline">Terms</Link> and <Link to="/privacy" className="underline">Privacy Policy</Link>.
+                 </p>
+              </div>
+           </div>
+        </div>
+
+        {/* Order Details */}
+        <div>
+           <Typography variant="h3" className="mb-6 !text-2xl font-normal text-[#333333]">Order details</Typography>
            
-           <div className="grid grid-cols-2 gap-y-4 text-sm mb-6">
-              <span className="text-gray-600">Order Number:</span>
-              <span className="font-bold text-[#2C1810]">1234</span>
-              
-              <span className="text-gray-600">Date:</span>
-              <span className="font-bold text-[#2C1810]">October 25, 2024</span>
-              
-              <span className="text-gray-600">Email:</span>
-              <span className="font-bold text-[#2C1810]">user@example.com</span>
-              
-              <span className="text-gray-600">Total:</span>
-              <span className="font-bold text-[#2C1810]">R 1,450.00</span>
-              
-              <span className="text-gray-600">Payment Method:</span>
-              <span className="font-bold text-[#2C1810]">Credit Card</span>
-           </div>
-
-           <Typography variant="h4" className="mb-4">Downloads</Typography>
-           <div className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-sm mb-6">
-              <span className="text-sm font-medium">Invoice #1234</span>
-              <Button size="sm" variant="outline" className="flex items-center gap-2">
-                 <Download size={14} /> Download
-              </Button>
-           </div>
+           <table className="w-full text-left">
+              <thead>
+                 <tr className="border-b-2 border-gray-100">
+                    <th className="py-4 text-[#333333] font-bold text-base">Product</th>
+                    <th className="py-4 text-[#333333] font-bold text-base text-right">Total</th>
+                 </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 border-b border-gray-200">
+                 <tr>
+                    <td className="py-4">
+                       <span className="text-[#333333] font-medium">The Mentors Orchestra 2020</span> <strong className="text-[#333333]">× 1</strong>
+                    </td>
+                    <td className="py-4 text-right text-[#333333] font-medium">R 429.00</td>
+                 </tr>
+                 <tr>
+                    <td className="py-4 text-[#333333] font-bold">Subtotal:</td>
+                    <td className="py-4 text-right text-[#333333]">R 429.00</td>
+                 </tr>
+                 <tr>
+                    <td className="py-4 text-[#333333] font-bold">Payment method:</td>
+                    <td className="py-4 text-right text-[#333333]">Credit Card</td>
+                 </tr>
+                 <tr>
+                    <td className="py-4 text-[#333333] font-bold text-xl">Total:</td>
+                    <td className="py-4 text-right text-[#333333] font-bold text-xl">R 429.00</td>
+                 </tr>
+              </tbody>
+           </table>
         </div>
 
-        <Link to="/shop">
-           <Button size="lg" className="bg-[#2C1810] text-white hover:bg-[#8B0000]">Continue Shopping</Button>
-        </Link>
       </Container>
-      
-      <FAQSection items={[
-        { question: "When will my order arrive?", answer: "Orders are typically delivered within 3-5 working days for main centers and 5-7 working days for regional areas." },
-        { question: "Can I track my delivery?", answer: "Yes, you will receive a tracking number via email once your order has been dispatched from our warehouse." },
-        { question: "What if I received a broken bottle?", answer: "Please contact our customer support immediately with photos of the damage, and we will arrange a replacement or refund." }
-      ]} />
-    </Layout>
+    </CheckoutLayout>
   );
 };

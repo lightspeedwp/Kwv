@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from '../components/layout/Layout';
+import { CheckoutLayout } from '../components/layout/CheckoutLayout';
 import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 import { Button } from '../components/common/Button';
@@ -7,7 +7,7 @@ import { FAQSection } from '../components/sections/FAQSection';
 
 export const Checkout = () => {
   return (
-    <Layout>
+    <CheckoutLayout>
       <Container variant="content" className="py-20">
          <Typography variant="h1" className="mb-12 text-center">Checkout</Typography>
          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -45,6 +45,6 @@ export const Checkout = () => {
         { question: "Can I pay via EFT?", answer: "Yes, you can select EFT (Electronic Funds Transfer) as a payment method. Your order will be processed once proof of payment is received." },
         { question: "Do I need to create an account?", answer: "You can checkout as a guest, but creating an account allows you to track orders and save addresses for faster checkout next time." }
       ]} />
-    </Layout>
+    </CheckoutLayout>
   );
 };

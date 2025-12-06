@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Search, X, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container } from '../common/Container';
 import { COLORS } from '../../constants/theme';
 import { Typography } from '../common/Typography';
@@ -10,6 +10,18 @@ import { KWVLogo } from '../common/Logo';
 
 export const CorporateHeader: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300 bg-white shadow-sm">
@@ -101,9 +113,33 @@ export const CorporateHeader: React.FC = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
-            <button aria-label="Search" className="p-2 hover:opacity-70">
-              <Search size={20} color={COLORS.darkBrown} />
+          <div className="flex items-center gap-4 relative">
+            <AnimatePresence>
+                {isSearchOpen && (
+                    <motion.form 
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: 200, opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        onSubmit={handleSearch}
+                        className="absolute right-full mr-2 overflow-hidden"
+                    >
+                        <input 
+                            type="text" 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search content..."
+                            className="w-full bg-white text-[#2C1810] px-3 py-2 rounded-sm outline-none border border-gray-300 focus:border-[#8B0000]"
+                            autoFocus
+                        />
+                    </motion.form>
+                )}
+            </AnimatePresence>
+            <button 
+                aria-label="Search" 
+                className="p-2 hover:opacity-70"
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              {isSearchOpen ? <X size={20} color={COLORS.darkBrown} /> : <Search size={20} color={COLORS.darkBrown} />}
             </button>
             <Link to="/wine-club">
               <Button size="sm" className="hidden sm:flex bg-[#8B0000] text-white hover:bg-[#600000]">

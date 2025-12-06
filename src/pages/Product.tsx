@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout } from '../components/layout/Layout';
 import { Container } from '../components/common/Container';
-import { Typography } from '../components/common/Typography';
-import { Button } from '../components/common/Button';
-import { COLORS } from '../constants/theme';
-import { Minus, Plus, Star, Share2, Heart } from 'lucide-react';
-import { motion } from 'motion/react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { ProductCard } from '../components/shop/ProductCard';
 import { FAQSection } from '../components/sections/FAQSection';
+
+// Single Product Components
+import { ProductBreadcrumbs } from '../components/shop/single-product/ProductBreadcrumbs';
+import { StoreNotices } from '../components/shop/single-product/StoreNotices';
+import { ProductGallery } from '../components/shop/single-product/ProductGallery';
+import { ProductTitle } from '../components/shop/single-product/ProductTitle';
+import { ProductRating } from '../components/shop/single-product/ProductRating';
+import { ProductPrice } from '../components/shop/single-product/ProductPrice';
+import { ProductSummary } from '../components/shop/single-product/ProductSummary';
+import { ProductAddToCart } from '../components/shop/single-product/ProductAddToCart';
+import { ProductMeta } from '../components/shop/single-product/ProductMeta';
+import { ProductTabs } from '../components/shop/single-product/ProductTabs';
+import { RelatedProducts } from '../components/shop/single-product/RelatedProducts';
 
 // Mock Product Data
 const PRODUCT = {
@@ -39,122 +45,55 @@ const RELATED_PRODUCTS = [
 ];
 
 export const Product = () => {
-  const [quantity, setQuantity] = useState(1);
-  const [activeImage, setActiveImage] = useState(0);
-  const [activeTab, setActiveTab] = useState('Tasting Notes');
+  const handleAddToCart = (qty: number, subscription: boolean) => {
+    console.log(`Added ${qty} items (Subscription: ${subscription})`);
+    // Ideally triggering a store action here
+  };
+
+  const tabs = Object.keys(PRODUCT.details).map(key => ({
+    label: key,
+    content: <p>{PRODUCT.details[key as keyof typeof PRODUCT.details]}</p>
+  }));
+
+  const breadcrumbs = [
+    { label: 'Shop', href: '/shop' },
+    { label: 'Red Wine', href: '/shop/wine/red' },
+    { label: PRODUCT.name }
+  ];
 
   return (
     <Layout>
       <Container variant="site" className="py-12">
-        {/* Breadcrumbs */}
-        <div className="mb-8 flex items-center gap-2 text-sm text-gray-500">
-          <span>Home</span> / <span>Shop</span> / <span>Red Wine</span> / <span className="text-[#8B0000]">{PRODUCT.name}</span>
-        </div>
+        
+        <ProductBreadcrumbs items={breadcrumbs} />
+        
+        <StoreNotices notices={[]} /> {/* Empty for now, but ready to use */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-          {/* Gallery */}
-          <div className="space-y-4">
-            <div className="aspect-[3/4] bg-gray-50 overflow-hidden relative">
-              <ImageWithFallback 
-                src={PRODUCT.images[activeImage]} 
-                alt={PRODUCT.name} 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-4 right-4 flex flex-col gap-3">
-                <button className="p-2 bg-white rounded-full shadow-md hover:text-[#8B0000] transition-colors"><Heart size={20} /></button>
-                <button className="p-2 bg-white rounded-full shadow-md hover:text-[#8B0000] transition-colors"><Share2 size={20} /></button>
-              </div>
-            </div>
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              {PRODUCT.images.map((img, idx) => (
-                <button 
-                  key={idx} 
-                  onClick={() => setActiveImage(idx)}
-                  className={`w-20 h-20 flex-shrink-0 border-2 ${activeImage === idx ? 'border-[#8B0000]' : 'border-transparent'} transition-all`}
-                >
-                  <ImageWithFallback src={img} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Gallery Column */}
+          <ProductGallery images={PRODUCT.images} productName={PRODUCT.name} />
 
-          {/* Info */}
+          {/* Product Info Column */}
           <div>
-            <Typography variant="caption" className="text-[#8B0000] uppercase tracking-widest mb-2 font-bold">
-              {PRODUCT.brand}
-            </Typography>
-            <Typography variant="h2" className="mb-4">{PRODUCT.name}</Typography>
+            <ProductTitle title={PRODUCT.name} brand={PRODUCT.brand} />
+            <ProductRating rating={PRODUCT.rating} reviewCount={PRODUCT.reviews} />
+            <ProductPrice price={PRODUCT.price} />
+            <ProductSummary summary={PRODUCT.description} />
             
-            <div className="flex items-center gap-4 mb-6">
-               <Typography variant="h3" className="!text-2xl text-[#2C1810]">R {PRODUCT.price.toFixed(2)}</Typography>
-               <div className="flex items-center gap-1">
-                 {[1,2,3,4,5].map(i => <Star key={i} size={14} fill={i <= PRODUCT.rating ? "#DAA520" : "none"} color={i <= PRODUCT.rating ? "#DAA520" : "#ccc"} />)}
-                 <span className="text-sm text-gray-500 ml-1">({PRODUCT.reviews} reviews)</span>
-               </div>
-            </div>
+            <ProductAddToCart 
+              onAddToCart={handleAddToCart} 
+              inStock={true} 
+              isSubscriptionAvailable={true}
+            />
 
-            <Typography variant="body" className="mb-8 text-gray-600 leading-relaxed">
-              {PRODUCT.description}
-            </Typography>
+            <ProductMeta sku={PRODUCT.sku} categories={PRODUCT.categories} />
 
-            <div className="border-t border-b border-gray-200 py-8 mb-8 space-y-6">
-               {/* Quantity & Add to Cart */}
-               <div className="flex flex-wrap gap-4">
-                 <div className="flex items-center border border-gray-300 h-12 w-32">
-                   <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 h-full hover:bg-gray-100"><Minus size={16} /></button>
-                   <input type="text" value={quantity} readOnly className="w-full h-full text-center border-none focus:ring-0 font-medium" />
-                   <button onClick={() => setQuantity(quantity + 1)} className="px-3 h-full hover:bg-gray-100"><Plus size={16} /></button>
-                 </div>
-                 <Button size="lg" className="flex-1 h-12">
-                   Add to Cart
-                 </Button>
-               </div>
-               
-               <div className="bg-[#F9F9F9] p-4 border border-gray-100 rounded-sm">
-                  <Typography variant="h4" className="!text-base mb-2">Subscribe & Save</Typography>
-                  <div className="flex items-center gap-3">
-                    <input type="checkbox" className="w-5 h-5 accent-[#8B0000]" />
-                    <Typography variant="body" className="text-sm">
-                      Join the Wine Club and save 15% on this order.
-                    </Typography>
-                  </div>
-               </div>
-            </div>
-
-            {/* Meta */}
-            <div className="space-y-2 text-sm text-gray-500 mb-8">
-              <p><span className="font-bold text-gray-900">SKU:</span> {PRODUCT.sku}</p>
-              <p><span className="font-bold text-gray-900">Category:</span> {PRODUCT.categories.join(', ')}</p>
-            </div>
-
-            {/* Accordions / Tabs */}
-            <div>
-              <div className="flex border-b border-gray-200 mb-6 overflow-x-auto">
-                {Object.keys(PRODUCT.details).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-3 font-medium whitespace-nowrap transition-colors relative ${activeTab === tab ? 'text-[#8B0000]' : 'text-gray-500 hover:text-gray-800'}`}
-                  >
-                    {tab}
-                    {activeTab === tab && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#8B0000]" />}
-                  </button>
-                ))}
-              </div>
-              <div className="prose prose-sm max-w-none text-gray-600">
-                <p>{PRODUCT.details[activeTab as keyof typeof PRODUCT.details]}</p>
-              </div>
-            </div>
+            <ProductTabs tabs={tabs} />
           </div>
         </div>
         
-        {/* Related Products */}
-        <div className="mt-20">
-           <Typography variant="h2" className="mb-8">You Might Also Like</Typography>
-           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-             {RELATED_PRODUCTS.map(p => <ProductCard key={p.id} product={p} />)}
-           </div>
-        </div>
+        <RelatedProducts products={RELATED_PRODUCTS} />
+        
       </Container>
       
       <FAQSection items={[

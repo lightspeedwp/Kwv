@@ -8,16 +8,24 @@ import { Button } from '../common/Button';
 import { KWVShopLogo } from '../common/Logo';
 import { AnimatePresence, motion } from 'motion/react';
 import { MiniCart } from '../shop/MiniCart';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from '../ui/navigation-menu';
 
 export const ShopHeader: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop/search?q=${encodeURIComponent(searchQuery)}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300 bg-[#2C1810] text-white shadow-md">
-      {/* Top Bar - Optional based on design, but focusing on main request items */}
-      
       <Container variant="site" className="py-4">
         <div className="flex items-center justify-between">
           {/* Mobile Menu Toggle */}
@@ -36,9 +44,6 @@ export const ShopHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6">
-            <Link to="/account" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
-              Login Here
-            </Link>
             <Link to="/shop/promotions" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-[#DAA520]">
               Promotions
             </Link>
@@ -114,7 +119,7 @@ export const ShopHeader: React.FC = () => {
              <Link to="/shop/gifting" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
               Gifting
             </Link>
-             <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
+             <Link to="/shop/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
               FAQ
             </Link>
              <Link to="/pricelist" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
@@ -123,10 +128,38 @@ export const ShopHeader: React.FC = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
-            <button aria-label="Search" className="p-2 hover:opacity-70">
-              <Search size={20} color="white" />
+          <div className="flex items-center gap-4 relative">
+            <AnimatePresence>
+                {isSearchOpen && (
+                    <motion.form 
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: 200, opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        onSubmit={handleSearch}
+                        className="absolute right-full mr-2 overflow-hidden"
+                    >
+                        <input 
+                            type="text" 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search products..."
+                            className="w-full bg-[#3d2319] text-white px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
+                            autoFocus
+                        />
+                    </motion.form>
+                )}
+            </AnimatePresence>
+            <button 
+                aria-label="Search" 
+                className="p-2 hover:opacity-70"
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              {isSearchOpen ? <X size={20} color="white" /> : <Search size={20} color="white" />}
             </button>
+
+            <Link to="/account" className="p-2 hover:opacity-70">
+                <User size={20} color="white" />
+            </Link>
             
             <MiniCart />
             
@@ -155,7 +188,7 @@ export const ShopHeader: React.FC = () => {
                </button>
             </div>
             <div className="flex flex-col p-8 gap-6 overflow-y-auto">
-              <Link to="/account" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Login Here</Link>
+              <Link to="/account" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Login / Account</Link>
               <Link to="/shop/promotions" className="text-xl font-serif border-b pb-2 border-gray-700 text-[#DAA520]" onClick={() => setIsMobileMenuOpen(false)}>Promotions</Link>
               
               <div className="space-y-2">
@@ -188,7 +221,7 @@ export const ShopHeader: React.FC = () => {
               <Link to="/shop/mixers" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Mixers</Link>
               <Link to="/shop/gifting" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Gifting</Link>
               <Link to="/experiences" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Visit Us</Link>
-              <Link to="/faq" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
+              <Link to="/shop/faq" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
               <Link to="/pricelist" className="text-xl font-serif border-b pb-2 border-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Pricelist</Link>
               <Link to="/wine-club" className="mt-4" onClick={() => setIsMobileMenuOpen(false)}>
                  <Button className="w-full bg-[#DAA520] text-[#2C1810]">Join Wine Club</Button>

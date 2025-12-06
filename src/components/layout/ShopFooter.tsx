@@ -28,9 +28,10 @@ export const ShopFooter: React.FC = () => {
               Customer Care
             </Typography>
             <ul className="space-y-3 opacity-80">
-              <li><Link to="/faq" className="hover:text-[#DAA520] transition-colors">FAQ</Link></li>
+              <li><Link to="/shop/faq" className="hover:text-[#DAA520] transition-colors">FAQ</Link></li>
               <li><Link to="/pricelist" className="hover:text-[#DAA520] transition-colors">Pricelist</Link></li>
               <li><Link to="/contact" className="hover:text-[#DAA520] transition-colors">Contact Us</Link></li>
+              <li><Link to="/coming-soon" className="hover:text-[#DAA520] transition-colors">Coming Soon</Link></li>
             </ul>
           </div>
 
