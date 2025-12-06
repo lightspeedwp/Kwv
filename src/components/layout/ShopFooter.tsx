@@ -14,7 +14,7 @@ export const ShopFooter: React.FC = () => {
             <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
               Shop Categories
             </Typography>
-            <ul className="space-y-3 opacity-80">
+            <ul className="space-y-3 text-gray-300">
               <li><Link to="/shop/wine" className="hover:text-[#DAA520] transition-colors">Wine</Link></li>
               <li><Link to="/shop/spirits" className="hover:text-[#DAA520] transition-colors">Spirits</Link></li>
               <li><Link to="/shop/mixers" className="hover:text-[#DAA520] transition-colors">Mixers</Link></li>
@@ -27,23 +27,26 @@ export const ShopFooter: React.FC = () => {
             <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
               Customer Care
             </Typography>
-            <ul className="space-y-3 opacity-80">
+            <ul className="space-y-3 text-gray-300">
               <li><Link to="/shop/faq" className="hover:text-[#DAA520] transition-colors">FAQ</Link></li>
               <li><Link to="/pricelist" className="hover:text-[#DAA520] transition-colors">Pricelist</Link></li>
               <li><Link to="/contact" className="hover:text-[#DAA520] transition-colors">Contact Us</Link></li>
-              <li><Link to="/coming-soon" className="hover:text-[#DAA520] transition-colors">Coming Soon</Link></li>
             </ul>
           </div>
 
-           {/* Column 3: About */}
+           {/* Column 3: Explore KWV (Cross-Site Nav) */}
           <div>
             <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
-              About
+              Explore KWV
             </Typography>
-            <ul className="space-y-3 opacity-80">
+            <ul className="space-y-3 text-gray-300">
+              <li><Link to="/" className="hover:text-[#DAA520] transition-colors">Company Home</Link></li>
+              <li><Link to="/shop" className="hover:text-[#DAA520] transition-colors">Shop Home</Link></li>
+              <li><Link to="/experiences" className="hover:text-[#DAA520] transition-colors">Experiences</Link></li>
+              <li><Link to="/experiences/events" className="hover:text-[#DAA520] transition-colors">Events</Link></li>
+              <li><Link to="/contact" className="hover:text-[#DAA520] transition-colors">Contact</Link></li>
               <li><Link to="/history" className="hover:text-[#DAA520] transition-colors">Our Story</Link></li>
               <li><Link to="/sustainability" className="hover:text-[#DAA520] transition-colors">Sustainability</Link></li>
-              <li><Link to="/experiences" className="hover:text-[#DAA520] transition-colors">Experiences</Link></li>
             </ul>
           </div>
 
@@ -52,7 +55,7 @@ export const ShopFooter: React.FC = () => {
              <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
               Stay Updated
             </Typography>
-            <Typography variant="body" className="opacity-80 mb-4 text-sm text-white">
+            <Typography variant="body" className="mb-4 text-sm text-gray-300">
               Subscribe to our newsletter for the latest news and exclusive offers.
             </Typography>
             <form className="flex flex-col gap-2">
@@ -71,7 +74,7 @@ export const ShopFooter: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-8 flex flex-col items-center text-center text-sm opacity-60">
+        <div className="border-t border-gray-700 pt-8 flex flex-col items-center text-center text-sm text-gray-400">
            <Typography variant="caption" className="uppercase tracking-widest text-[#DAA520] mb-4">
              Alcohol not for sale to persons under the age of 18.
            </Typography>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { ShopHeader } from '../../components/layout/ShopHeader';
-import { ShopFooter } from '../../components/layout/ShopFooter';
+import { Layout } from '../../components/layout/Layout';
 import { FAQSection } from '../../components/sections/FAQSection';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
@@ -89,44 +88,38 @@ const ServiceFeature = ({ icon: Icon, text }: { icon: any, text: string }) => (
 
 export const ShopFAQ: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <ShopHeader />
-      
-      <main className="flex-grow">
-        {/* Hero */}
-        <div className="bg-[#2C1810] text-white py-12">
-          <Container variant="content" className="text-center">
-            <Typography variant="h2" className="mb-0 text-white">
-              Frequently Asked Questions
-            </Typography>
-          </Container>
+    <Layout>
+      {/* Hero */}
+      <div className="bg-[#2C1810] text-white py-12">
+        <Container variant="content" className="text-center">
+          <Typography variant="h2" className="mb-0 text-white">
+            Shop FAQ
+          </Typography>
+        </Container>
+      </div>
+
+      <FAQSection items={faqItems} title="" className="border-t-0 pt-12 pb-16" />
+
+      <Container variant="content">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <ContactInfo />
+          <SocialIcons />
         </div>
 
-        <FAQSection items={faqItems} title="" className="border-t-0 pt-12 pb-16" />
-
-        <Container variant="content">
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-            <ContactInfo />
-            <SocialIcons />
+        <div className="border-t border-gray-200 pt-16 pb-20">
+          <Typography variant="h3" className="mb-10 text-center uppercase tracking-widest text-sm font-bold" color={COLORS.darkBrown}>
+            Our Excellent Service Includes
+          </Typography>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <ServiceFeature icon={Truck} text="Delivery within 3-5 working days" />
+            <ServiceFeature icon={ShieldCheck} text="Safe & Secure" />
+            <ServiceFeature icon={CreditCard} text="3 ways to pay" />
+            <ServiceFeature icon={Banknote} text="Affordable Delivery Fee" />
+            <ServiceFeature icon={Store} text="Click & Collect after 72 hours" />
           </div>
-
-          <div className="border-t border-gray-200 pt-16 pb-20">
-            <Typography variant="h3" className="mb-10 text-center uppercase tracking-widest text-sm font-bold" color={COLORS.darkBrown}>
-              Our Excellent Service Includes
-            </Typography>
-            
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              <ServiceFeature icon={Truck} text="Delivery within 3-5 working days" />
-              <ServiceFeature icon={ShieldCheck} text="Safe & Secure" />
-              <ServiceFeature icon={CreditCard} text="3 ways to pay" />
-              <ServiceFeature icon={Banknote} text="Affordable Delivery Fee" />
-              <ServiceFeature icon={Store} text="Click & Collect after 72 hours" />
-            </div>
-          </div>
-        </Container>
-      </main>
-
-      <ShopFooter />
-    </div>
+        </div>
+      </Container>
+    </Layout>
   );
 };

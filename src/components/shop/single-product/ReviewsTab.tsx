@@ -1,0 +1,82 @@
+import React, { useState } from 'react';
+import { Star } from 'lucide-react';
+import { Button } from '../../common/Button';
+import { Typography } from '../../common/Typography';
+
+export const ReviewsTab: React.FC = () => {
+  const [rating, setRating] = useState(0);
+
+  return (
+    <div className="space-y-12">
+      {/* Reviews List */}
+      <div className="space-y-8">
+        <div className="border-b border-gray-100 pb-8">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} size={14} fill="#DAA520" color="#DAA520" />
+              ))}
+            </div>
+            <Typography variant="h4" className="text-sm font-bold">Great Wine!</Typography>
+          </div>
+          <Typography variant="body" className="text-gray-600 mb-2">
+            "Absolutely delicious. Will buy again."
+          </Typography>
+          <p className="text-xs text-gray-400">By <span className="font-semibold">John Doe</span> (Verified Owner) - Dec 12, 2024</p>
+        </div>
+      </div>
+
+      {/* Review Form */}
+      <div className="bg-gray-50 p-8 rounded-sm">
+        <Typography variant="h3" className="mb-2">Add a review</Typography>
+        <p className="text-sm text-gray-500 mb-6 italic">
+          Note: Reviews can only be submitted by verified customers who have purchased this product.
+        </p>
+
+        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Your rating</label>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <button 
+                  key={i} 
+                  type="button"
+                  onClick={() => setRating(i)}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <Star 
+                    size={20} 
+                    fill={i <= rating ? "#DAA520" : "none"} 
+                    color={i <= rating ? "#DAA520" : "#9CA3AF"} 
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Your review</label>
+            <textarea 
+              rows={4}
+              className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none"
+              placeholder="Tell us what you liked or didn't like..."
+            ></textarea>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+             <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none" />
+             </div>
+             <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                <input type="email" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none" />
+             </div>
+          </div>
+
+          <Button type="submit" variant="primary">Submit Review</Button>
+        </form>
+      </div>
+    </div>
+  );
+};

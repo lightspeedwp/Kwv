@@ -4,6 +4,8 @@ import { Footer } from './Footer';
 import { AgeVerificationModal } from '../common/AgeVerificationModal';
 import { useLocation } from 'react-router-dom';
 
+import { BackToTopButton } from '../common/BackToTopButton';
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -20,6 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen font-sans text-[#333333]">
       <AgeVerificationModal />
+      <BackToTopButton />
       <Header variant={isShop ? 'shop' : 'corporate'} />
       <main className="flex-grow">
         {children}

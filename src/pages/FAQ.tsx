@@ -1,6 +1,5 @@
 import React from 'react';
-import { CorporateHeader } from '../components/layout/CorporateHeader';
-import { CorporateFooter } from '../components/layout/CorporateFooter';
+import { Layout } from '../components/layout/Layout';
 import { FAQSection } from '../components/sections/FAQSection';
 import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
@@ -49,41 +48,35 @@ const faqItems = [
 
 export const FAQ: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <CorporateHeader />
-      
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <div className="bg-[#F5F5DC] py-16 md:py-24">
-          <Container variant="content" className="text-center">
-            <Typography variant="h1" className="mb-6" color={COLORS.darkBrown}>
-              Frequently Asked Questions
-            </Typography>
-            <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-gray-600">
-              Find answers to common questions about our heritage, winemaking, and products.
-            </Typography>
-          </Container>
-        </div>
+    <Layout>
+      {/* Hero Section */}
+      <div className="bg-[#F5F5DC] py-16 md:py-24">
+        <Container variant="content" className="text-center">
+          <Typography variant="h1" className="mb-6" color={COLORS.darkBrown}>
+            Frequently Asked Questions
+          </Typography>
+          <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-gray-600">
+            Find answers to common questions about our heritage, winemaking, and products.
+          </Typography>
+        </Container>
+      </div>
 
-        <FAQSection items={faqItems} title="" className="border-t-0 pt-0 pb-20" />
+      <FAQSection items={faqItems} title="" className="border-t-0 pt-0 pb-20" />
 
-        {/* Contact CTA */}
-        <section className="py-16 bg-white">
-          <Container variant="content" className="text-center">
-            <Typography variant="h3" className="mb-4" color={COLORS.darkBrown}>
-              Still have questions?
-            </Typography>
-            <Typography variant="body" className="mb-8 text-gray-600">
-              For any further questions, please contact us.
-            </Typography>
-            <Link to="/contact">
-              <Button variant="primary">Contact Us</Button>
-            </Link>
-          </Container>
-        </section>
-      </main>
-
-      <CorporateFooter />
-    </div>
+      {/* Contact CTA */}
+      <section className="py-16 bg-white">
+        <Container variant="content" className="text-center">
+          <Typography variant="h3" className="mb-4" color={COLORS.darkBrown}>
+            Still have questions?
+          </Typography>
+          <Typography variant="body" className="mb-8 text-gray-600">
+            For any further questions, please contact us.
+          </Typography>
+          <Link to="/contact">
+            <Button variant="primary">Contact Us</Button>
+          </Link>
+        </Container>
+      </section>
+    </Layout>
   );
 };

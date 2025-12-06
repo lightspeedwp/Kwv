@@ -4,9 +4,11 @@ import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 import { Button } from '../components/common/Button';
 import { Link } from 'react-router-dom';
-import { Minus, Plus, ChevronDown, ChevronUp } from 'lucide-react';
+import { Minus, Plus, ChevronDown, ChevronUp, Frown } from 'lucide-react';
 import { FAQSection } from '../components/sections/FAQSection';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { FloatingLabelInput } from '../components/common/FloatingLabelInput';
+import { ProductCard } from '../components/shop/ProductCard';
 
 // Mock Data consistent with MiniCart
 interface CartItem {
@@ -48,9 +50,46 @@ const INITIAL_ITEMS: CartItem[] = [
   }
 ];
 
+const NEW_IN_STORE_PRODUCTS = [
+   {
+      id: "new-1",
+      name: "T-Shirt with Logo",
+      price: 18.00,
+      images: ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=400"],
+      inStock: true,
+      slug: "t-shirt-with-logo"
+   },
+   {
+      id: "new-2",
+      name: "WordPress Pennant",
+      price: 11.05,
+      images: ["https://images.unsplash.com/photo-1558882423-85d5b55db7c1?auto=format&fit=crop&q=80&w=400"],
+      inStock: true,
+      slug: "wordpress-pennant"
+   },
+   {
+      id: "new-3",
+      name: "Logo Collection",
+      price: 35.00,
+      images: ["https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&q=80&w=400"],
+      inStock: true,
+      slug: "logo-collection"
+   },
+   {
+      id: "new-4",
+      name: "Beanie with Logo",
+      price: 18.00,
+      originalPrice: 20.00,
+      images: ["https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&q=80&w=400"],
+      inStock: true,
+      slug: "beanie-with-logo"
+   }
+];
+
 export const Cart = () => {
   const [items, setItems] = useState<CartItem[]>(INITIAL_ITEMS);
   const [isCouponOpen, setIsCouponOpen] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
 
   const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const total = subtotal; // + shipping logic etc.
@@ -71,17 +110,31 @@ export const Cart = () => {
   if (items.length === 0) {
     return (
       <Layout>
-         <Container variant="content" className="py-20 text-center min-h-[50vh] flex flex-col items-center justify-center">
-            <Typography variant="h2" className="mb-6">Your cart is currently empty.</Typography>
-            <Typography variant="body" className="text-gray-500 mb-8 max-w-md mx-auto">
-              Before you proceed to checkout you must add some products to your shopping cart.
-              You will find a lot of interesting products on our "Shop" page.
-            </Typography>
-            <Link to="/shop">
-               <Button size="lg" className="bg-[#2C1810] text-white px-8 py-4 h-auto rounded-none">
-                 Return to Shop
-               </Button>
-            </Link>
+         <Container variant="content" className="py-20 text-center min-h-[50vh] flex flex-col items-center">
+            {/* Sad Face */}
+            <div className="mb-6 flex justify-center">
+               <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center">
+                  <Frown size={48} className="text-white" strokeWidth={2} />
+               </div>
+            </div>
+
+            <Typography variant="h2" className="mb-12 font-normal text-2xl">Your cart is currently empty!</Typography>
+
+            <div className="w-full max-w-6xl mx-auto mt-8">
+               <div className="flex items-center justify-center gap-4 mb-10">
+                  <div className="h-[1px] w-4 bg-gray-300"></div>
+                  <div className="h-[1px] w-4 bg-gray-300"></div>
+                  <div className="h-[1px] w-4 bg-gray-300"></div>
+               </div>
+
+               <Typography variant="h3" className="mb-8 font-normal text-3xl">New in store</Typography>
+
+               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                  {NEW_IN_STORE_PRODUCTS.map(product => (
+                     <ProductCard key={product.id} product={product} />
+                  ))}
+               </div>
+            </div>
          </Container>
       </Layout>
     );
@@ -102,7 +155,7 @@ export const Cart = () => {
 
               <div className="space-y-10">
                  {items.map(item => (
-                    <div key={item.id} className="flex gap-6 py-4 border-b border-gray-100 last:border-0">
+                    <div key={item.id} className="flex gap-6 py-4 border-b border-gray-200">
                        {/* Image */}
                        <div className="w-24 h-24 bg-gray-50 flex-shrink-0">
                           <ImageWithFallback src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -187,13 +240,14 @@ export const Cart = () => {
                     </button>
                     
                     {isCouponOpen && (
-                       <div className="mt-4 flex gap-2">
-                          <input 
-                             type="text" 
-                             placeholder="Coupon code" 
-                             className="flex-1 border border-gray-300 p-3 text-sm focus:outline-none focus:border-gray-900 rounded-none"
+                       <div className="mt-4 flex gap-2 items-start">
+                          <FloatingLabelInput
+                              label="Enter code"
+                              value={couponCode}
+                              onChange={(e) => setCouponCode(e.target.value)}
+                              className="flex-1"
                           />
-                          <Button variant="outline" className="whitespace-nowrap rounded-none border-gray-300 hover:bg-gray-50 text-gray-900">
+                          <Button className="bg-[#111111] text-white hover:bg-black rounded-none h-12 px-8 font-medium text-sm">
                              Apply
                           </Button>
                        </div>
