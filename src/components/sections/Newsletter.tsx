@@ -18,18 +18,26 @@ export const Newsletter = () => {
            Subscribe to our newsletter for the latest news, exclusive offers, and invitations to special events.
          </Typography>
 
-         <form className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-           <input 
-             type="text" 
-             placeholder="First Name" 
-             className="flex-1 bg-white/10 border border-white/20 p-4 text-white placeholder-white/50 focus:outline-none focus:border-[#DAA520]"
-           />
-           <input 
-             type="email" 
-             placeholder="Email Address" 
-             className="flex-1 bg-white/10 border border-white/20 p-4 text-white placeholder-white/50 focus:outline-none focus:border-[#DAA520]"
-           />
-           <Button variant="secondary" className="md:w-auto w-full">
+         <form className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto items-end">
+           <div className="flex-1 w-full text-left">
+             <label htmlFor="newsletter-name" className="block text-xs font-bold uppercase tracking-widest text-[#DAA520] mb-2 ml-1">First Name</label>
+             <input 
+               id="newsletter-name"
+               type="text" 
+               placeholder="First Name" 
+               className="w-full bg-white/10 border border-white/20 p-4 text-white placeholder-white/50 focus:outline-none focus:border-[#DAA520] focus:ring-1 focus:ring-[#DAA520]"
+             />
+           </div>
+           <div className="flex-1 w-full text-left">
+             <label htmlFor="newsletter-email" className="block text-xs font-bold uppercase tracking-widest text-[#DAA520] mb-2 ml-1">Email Address</label>
+             <input 
+               id="newsletter-email"
+               type="email" 
+               placeholder="Email Address" 
+               className="w-full bg-white/10 border border-white/20 p-4 text-white placeholder-white/50 focus:outline-none focus:border-[#DAA520] focus:ring-1 focus:ring-[#DAA520]"
+             />
+           </div>
+           <Button variant="secondary" className="md:w-auto w-full h-[58px]" type="submit">
              Subscribe
            </Button>
          </form>

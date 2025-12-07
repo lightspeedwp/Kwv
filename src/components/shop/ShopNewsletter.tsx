@@ -25,22 +25,31 @@ export const ShopNewsletter: React.FC = () => {
          </Typography>
 
          <form className="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 items-stretch">
+            <label htmlFor="shop-newsletter-name" className="sr-only">Name</label>
             <input 
+               id="shop-newsletter-name"
                type="text" 
                placeholder="name" 
                className="flex-1 bg-white/90 border-none p-4 text-[#2C1810] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DAA520] lowercase"
+               aria-label="Name"
             />
+            <label htmlFor="shop-newsletter-surname" className="sr-only">Surname</label>
             <input 
+               id="shop-newsletter-surname"
                type="text" 
                placeholder="surname" 
                className="flex-1 bg-white/90 border-none p-4 text-[#2C1810] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DAA520] lowercase"
+               aria-label="Surname"
             />
+            <label htmlFor="shop-newsletter-email" className="sr-only">Email</label>
             <input 
+               id="shop-newsletter-email"
                type="email" 
                placeholder="email" 
                className="flex-1 bg-white/90 border-none p-4 text-[#2C1810] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DAA520] lowercase"
+               aria-label="Email"
             />
-            <button className="bg-[#333] text-white uppercase font-bold tracking-widest px-8 py-4 hover:bg-[#DAA520] hover:text-[#2C1810] transition-colors text-sm">
+            <button type="submit" className="bg-[#333] text-white uppercase font-bold tracking-widest px-8 py-4 hover:bg-[#DAA520] hover:text-[#2C1810] transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#DAA520] focus:ring-offset-2">
                Submit
             </button>
          </form>

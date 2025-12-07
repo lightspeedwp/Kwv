@@ -80,6 +80,7 @@ export const ShopSidebar = () => {
                <input 
                  type="text" 
                  defaultValue="0" 
+                 aria-label="Minimum Price"
                  className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[#DAA520]"
                />
              </div>
@@ -88,6 +89,7 @@ export const ShopSidebar = () => {
                <input 
                  type="text" 
                  defaultValue="5000" 
+                 aria-label="Maximum Price"
                  className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[#DAA520]"
                />
              </div>

@@ -30,7 +30,7 @@ export const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
           className={`
             peer w-full h-12 px-3 pt-4 pb-1
             bg-white border rounded-none text-[#333333] placeholder-transparent 
-            focus:outline-none focus:ring-1 focus:ring-[#2C1810] focus:border-[#2C1810]
+            focus:outline-none focus:ring-2 focus:ring-[#2C1810] focus:border-[#2C1810]
             ${hasError ? 'border-red-500' : 'border-gray-300'}
             ${className}
           `}

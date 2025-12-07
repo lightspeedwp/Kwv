@@ -31,7 +31,7 @@ export const ShopBrandGrid: React.FC = () => {
             <Link 
               key={idx} 
               to={brand.link} 
-              className="group flex items-center justify-center aspect-[3/2] border border-gray-200 p-6 hover:border-[#DAA520] hover:shadow-md transition-all"
+              className="group flex items-center justify-center aspect-[3/2] border border-gray-200 p-6 hover:border-[#DAA520] hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#2C1810] focus:ring-offset-2"
             >
               <div className="text-center">
                  {/* Placeholder for Logo */}

@@ -52,13 +52,14 @@ export const CorporateHeader: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search content..."
-                className="flex-1 bg-transparent outline-none text-white placeholder-gray-500 h-10 border-none focus:ring-0 text-base"
+                className="flex-1 bg-transparent outline-none text-white placeholder-gray-400 h-10 border-none focus:ring-0 text-base"
                 autoFocus
               />
               <button 
                 type="button"
                 onClick={() => setIsSearchOpen(false)}
                 className="p-2 text-gray-400 hover:text-white"
+                aria-label="Close search"
               >
                 <X size={24} />
               </button>
@@ -167,7 +168,7 @@ export const CorporateHeader: React.FC = () => {
                               value={searchQuery}
                               onChange={(e) => setSearchQuery(e.target.value)}
                               placeholder="Search content..."
-                              className="w-full bg-[#3d2319] text-white px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
+                              className="w-full bg-[#3d2319] text-white placeholder-white/60 px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
                               autoFocus
                           />
                       </motion.form>
@@ -210,7 +211,7 @@ export const CorporateHeader: React.FC = () => {
                        <div className="mb-8 flex items-center justify-between">
                           <KWVLogo className="h-10 w-auto text-white" color="white" />
                           <SheetClose asChild>
-                            <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                            <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Close menu">
                               <X size={24} color="white" />
                             </button>
                           </SheetClose>

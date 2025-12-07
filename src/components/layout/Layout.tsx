@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header } from './Header';
+import { BreadcrumbsBar } from './BreadcrumbsBar';
 import { Footer } from './Footer';
 import { AgeVerificationModal } from '../common/AgeVerificationModal';
 import { useLocation } from 'react-router-dom';
@@ -27,10 +28,14 @@ export const Layout: React.FC<LayoutProps> = ({ children, variant: propsVariant 
 
   return (
     <div className="flex flex-col min-h-screen font-sans text-[#333333]">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-white focus:text-black focus:top-0 focus:left-0">
+        Skip to main content
+      </a>
       <AgeVerificationModal />
       <BackToTopButton />
       <Header variant={variant} />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow relative" tabIndex={-1}>
+        <BreadcrumbsBar />
         {children}
       </main>
       <Footer variant={variant} />

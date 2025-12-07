@@ -32,7 +32,7 @@ export const Typography: React.FC<TypographyProps> = ({
   return (
     <Component
       className={`${TYPOGRAPHY[variant]} ${className}`}
-      style={styles}
+      style={{ ...styles, color: color || undefined }}
       {...props}
     >
       {children}

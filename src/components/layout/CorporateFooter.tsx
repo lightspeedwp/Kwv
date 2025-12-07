@@ -7,70 +7,84 @@ import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
 export const CorporateFooter: React.FC = () => {
   return (
-    <footer className="pt-16 pb-8 bg-[#333333] text-white">
+    <footer className="pt-16 pb-8 bg-[#2C1810] text-white">
       <Container variant="site">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Column 1: About */}
+          {/* Column 1: Brand & Social */}
           <div>
-            <Link to="/">
-              <Typography variant="h3" color={COLORS.gold} className="mb-6 hover:text-[#DAA520] transition-colors inline-block">KWV</Typography>
+            <Link to="/" className="block mb-6 focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-sm">
+               <Typography variant="h3" color={COLORS.gold} className="hover:text-[#DAA520] transition-colors inline-block font-serif">KWV</Typography>
             </Link>
-            <Typography variant="body" className="text-gray-300 mb-6">
+            <Typography variant="body" className="text-gray-300 mb-8 max-w-xs">
               Leading South African wine & spirits producer with a distinguished heritage stretching back to 1918.
             </Typography>
-          </div>
-
-          {/* Column 2: Explore KWV (Cross-Site Nav) */}
-          <div>
-            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
-              Explore KWV
-            </Typography>
-            <ul className="space-y-3 text-gray-300">
-              <li><Link to="/" className="hover:text-[#DAA520] transition-colors">Company Home</Link></li>
-              <li><Link to="/shop" className="hover:text-[#DAA520] transition-colors">Shop Home</Link></li>
-              <li><Link to="/experiences" className="hover:text-[#DAA520] transition-colors">Experiences</Link></li>
-              <li><Link to="/experiences/events" className="hover:text-[#DAA520] transition-colors">Events</Link></li>
-              <li><Link to="/contact" className="hover:text-[#DAA520] transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Quick Links (Corporate Specific) */}
-          <div>
-            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
-              Corporate
-            </Typography>
-            <ul className="space-y-3 text-gray-300">
-              <li><Link to="/about" className="hover:text-[#DAA520] transition-colors">About Us</Link></li>
-              <li><Link to="/history" className="hover:text-[#DAA520] transition-colors">Our History</Link></li>
-              <li><Link to="/brands" className="hover:text-[#DAA520] transition-colors">Our Brands</Link></li>
-              <li><Link to="/sustainability" className="hover:text-[#DAA520] transition-colors">Sustainability</Link></li>
-              <li><Link to="/news" className="hover:text-[#DAA520] transition-colors">News</Link></li>
-              <li><Link to="/awards" className="hover:text-[#DAA520] transition-colors">Awards</Link></li>
-              <li><Link to="/careers" className="hover:text-[#DAA520] transition-colors">Careers</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Social & Legal */}
-          <div>
-            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm">
-              Social & Legal
-            </Typography>
-            <div className="flex gap-4 mb-8 text-gray-300">
-              <Facebook size={24} className="hover:text-[#DAA520] cursor-pointer transition-colors" />
-              <Instagram size={24} className="hover:text-[#DAA520] cursor-pointer transition-colors" />
-              <Twitter size={24} className="hover:text-[#DAA520] cursor-pointer transition-colors" />
-              <Linkedin size={24} className="hover:text-[#DAA520] cursor-pointer transition-colors" />
+            <div className="flex gap-4 text-white">
+              <a href="#" aria-label="Facebook" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Facebook size={20} /></a>
+              <a href="#" aria-label="Instagram" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Instagram size={20} /></a>
+              <a href="#" aria-label="Twitter" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Twitter size={20} /></a>
+              <a href="#" aria-label="LinkedIn" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Linkedin size={20} /></a>
             </div>
-            <ul className="space-y-3 text-gray-300">
-               <li><Link to="/terms" className="hover:text-[#DAA520] transition-colors">Terms & Conditions</Link></li>
-               <li><Link to="/privacy" className="hover:text-[#DAA520] transition-colors">Privacy Policy</Link></li>
-               <li><Link to="/popi" className="hover:text-[#DAA520] transition-colors">POPI Act</Link></li>
+          </div>
+
+          {/* Column 2: Our Company */}
+          <div>
+            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm font-bold">
+              Our Company
+            </Typography>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li><Link to="/about" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">About Us</Link></li>
+              <li><Link to="/history" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Our History</Link></li>
+              <li><Link to="/executive-team" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Executive Team</Link></li>
+              <li><Link to="/sustainability" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Sustainability</Link></li>
+              <li><Link to="/global-distribution" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Global Distribution</Link></li>
+              <li><Link to="/careers" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Careers</Link></li>
+              <li><Link to="/awards" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Awards</Link></li>
+              <li><Link to="/news" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">News & Media</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Experiences & Support */}
+          <div>
+            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm font-bold">
+              Experiences & Support
+            </Typography>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li><Link to="/experiences" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Visit Us</Link></li>
+              <li><Link to="/experiences/emporium" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">KWV Emporium</Link></li>
+              <li><Link to="/experiences/events" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Events</Link></li>
+              <li><Link to="/wine-club" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Wine Club</Link></li>
+              <li><Link to="/faq" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">FAQ</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Contact Us</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Explore & Legal */}
+          <div>
+            <Typography variant="h4" color={COLORS.gold} className="mb-6 uppercase tracking-wider text-sm font-bold">
+              Explore & Legal
+            </Typography>
+            <ul className="space-y-3 text-sm text-gray-300 mb-8">
+               <li><Link to="/shop" className="hover:text-white transition-colors font-medium text-[#DAA520] focus:outline-none focus:text-white focus:underline">Online Shop</Link></li>
+               <li><Link to="/brands" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Our Brands</Link></li>
+            </ul>
+            
+            <Typography variant="h4" color={COLORS.gold} className="mb-4 uppercase tracking-wider text-xs font-bold opacity-70">
+              Legal
+            </Typography>
+            <ul className="space-y-2 text-xs text-gray-400">
+               <li><Link to="/terms" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Terms & Conditions</Link></li>
+               <li><Link to="/privacy" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Privacy Policy</Link></li>
+               <li><Link to="/paia" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">PAIA Manual</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-600 pt-8 flex justify-between items-center text-sm text-gray-400">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4">
           <p>&copy; {new Date().getFullYear()} KWV. All rights reserved.</p>
+          <div className="flex gap-6 text-center md:text-right">
+            <span className="uppercase tracking-widest">Enjoy Responsibly</span>
+            <span className="uppercase tracking-widest">Not for Sale to Persons Under 18</span>
+          </div>
         </div>
       </Container>
     </footer>

@@ -90,7 +90,7 @@ export const MiniCart: React.FC = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
-          className="p-2 hover:opacity-70 relative"
+          className="p-2 hover:opacity-70 relative focus:outline-none focus:ring-2 focus:ring-white/50 rounded-sm"
           aria-label="Cart"
         >
           <ShoppingBag size={20} color="white" />
@@ -194,7 +194,8 @@ export const MiniCart: React.FC = () => {
                         onClick={() =>
                           updateQuantity(item.id, -1)
                         }
-                        className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600"
+                        className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600 focus:outline-none focus:bg-gray-100"
+                        aria-label="Decrease quantity"
                       >
                         <Minus size={12} />
                       </button>
@@ -205,7 +206,8 @@ export const MiniCart: React.FC = () => {
                         onClick={() =>
                           updateQuantity(item.id, 1)
                         }
-                        className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600"
+                        className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600 focus:outline-none focus:bg-gray-100"
+                        aria-label="Increase quantity"
                       >
                         <Plus size={12} />
                       </button>

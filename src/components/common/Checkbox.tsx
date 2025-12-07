@@ -13,7 +13,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ className, ...props }) => {
         {...props}
       />
       <div className={cn(
-        "w-6 h-6 border border-gray-400 rounded-[4px] bg-white peer-checked:border-[#111111] transition-colors flex items-center justify-center cursor-pointer",
+        "w-6 h-6 border border-gray-400 rounded-[4px] bg-white peer-checked:border-[#111111] peer-focus-visible:ring-2 peer-focus-visible:ring-[#2C1810] peer-focus-visible:ring-offset-2 transition-all flex items-center justify-center cursor-pointer",
         className
       )}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 peer-checked:opacity-100">

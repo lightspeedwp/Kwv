@@ -132,9 +132,6 @@ export const Shop = () => {
             
             {/* Header Top: Title and Breadcrumbs */}
             <div>
-              <Typography variant="caption" className="uppercase tracking-widest mb-2 opacity-60">
-                Home / Shop {category ? `/ ${pageTitle}` : (tag ? `/ Tag / ${tag}` : '')}
-              </Typography>
               <Typography variant="h1" color={COLORS.darkBrown}>
                 {pageTitle}
               </Typography>

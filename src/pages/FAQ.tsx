@@ -53,7 +53,7 @@ export const FAQ: React.FC = () => {
       <div className="bg-[#F5F5DC] py-16 md:py-24">
         <Container variant="content" className="text-center">
           <Typography variant="h1" className="mb-6" color={COLORS.darkBrown}>
-            Frequently Asked Questions
+            Corporate FAQ
           </Typography>
           <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-gray-600">
             Find answers to common questions about our heritage, winemaking, and products.

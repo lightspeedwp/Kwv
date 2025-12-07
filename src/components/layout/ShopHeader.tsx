@@ -53,13 +53,14 @@ export const ShopHeader: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="flex-1 bg-transparent outline-none text-white placeholder-gray-500 h-10 border-none focus:ring-0 text-base"
+                className="flex-1 bg-transparent outline-none text-white placeholder-gray-400 h-10 border-none focus:ring-0 text-base"
                 autoFocus
               />
               <button 
                 type="button"
                 onClick={() => setIsSearchOpen(false)}
                 className="p-2 text-gray-400 hover:text-white"
+                aria-label="Close search"
               >
                 <X size={24} />
               </button>
@@ -213,7 +214,7 @@ export const ShopHeader: React.FC = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search products..."
-                                className="w-full bg-[#3d2319] text-white px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
+                                className="w-full bg-[#3d2319] text-white placeholder-white/60 px-3 py-2 rounded-sm outline-none border border-[#5e382b] focus:border-[#DAA520]"
                                 autoFocus
                             />
                         </motion.form>
@@ -265,23 +266,35 @@ export const ShopHeader: React.FC = () => {
                      <div className="mb-8 flex items-center justify-between">
                         <KWVShopLogo className="h-10 w-auto text-white" />
                         <SheetClose asChild>
-                          <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                          <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Close menu">
                             <X size={24} color="white" />
                           </button>
                         </SheetClose>
                      </div>
 
+                     {/* Mobile Menu Search */}
+                     <form onSubmit={handleSearch} className="mb-8 relative">
+                       <input 
+                         type="text" 
+                         placeholder="Search products..." 
+                         value={searchQuery}
+                         onChange={(e) => setSearchQuery(e.target.value)}
+                         className="w-full bg-white/5 text-white placeholder-white/70 rounded-sm py-3 pl-10 pr-4 border border-white/10 focus:border-[#DAA520] focus:bg-white/10 outline-none transition-all text-base"
+                       />
+                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70" size={18} />
+                     </form>
+
                      <div className="flex-1 space-y-6">
                         <nav className="flex flex-col space-y-4">
-                            <Link to="/account" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
-                               <span>Login / Account</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
-                            </Link>
-                            
-                            <Link to="/shop/promotions" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
-                               <span>Promotions</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
-                            </Link>
+                            {/* Account Icon */}
+                            <div className="flex items-center gap-6 pb-2 mb-2">
+                                <Link to="/account" onClick={closeMenu} className="flex flex-col items-center gap-1 text-white hover:text-[#DAA520] transition-colors group">
+                                    <div className="p-3 bg-white/5 rounded-full group-hover:bg-white/10 transition-colors">
+                                        <User size={20} />
+                                    </div>
+                                    <span className="text-[10px] uppercase tracking-widest font-medium">Account</span>
+                                </Link>
+                            </div>
 
                              <Accordion type="single" collapsible className="w-full border-none">
                                 <AccordionItem value="brands" className="border-b border-white/10">
@@ -319,7 +332,19 @@ export const ShopHeader: React.FC = () => {
                                      <Link to="/shop/mixers/grape-juice" onClick={closeMenu} className="block hover:text-white">Grape Juice</Link>
                                   </AccordionContent>
                                </AccordionItem>
+                             </Accordion>
 
+                            <Link to="/shop/promotions" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
+                               <span>Promotions</span>
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                            </Link>
+
+                            <Link to="/shop/gifting" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
+                               <span>Gifting</span>
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                            </Link>
+
+                            <Accordion type="single" collapsible className="w-full border-none">
                                 <AccordionItem value="company" className="border-b border-white/10">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Company</AccordionTrigger>
                                    <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
@@ -348,18 +373,13 @@ export const ShopHeader: React.FC = () => {
                                    </AccordionContent>
                                 </AccordionItem>
                              </Accordion>
-
-                            <Link to="/shop/gifting" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
-                               <span>Gifting</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
-                            </Link>
                             
-                            <Link to="/shop/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                            <Link to="/shop/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
                                <span>FAQ</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
                             
-                            <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                            <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white py-4">
                                <span>Contact</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>

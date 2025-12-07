@@ -131,7 +131,7 @@ export const ExperiencesHeader: React.FC = () => {
                      <div className="mb-8 flex items-center justify-between">
                         <KWVExperiencesLogo className="h-10 w-auto text-white" color="white" />
                         <SheetClose asChild>
-                          <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                          <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Close menu">
                             <X size={24} color="white" />
                           </button>
                         </SheetClose>

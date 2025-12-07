@@ -45,7 +45,7 @@ export default function App() {
       <ScrollToTop />
       {/* Load Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Pinyon+Script&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
       `}</style>

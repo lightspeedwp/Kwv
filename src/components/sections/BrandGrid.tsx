@@ -52,7 +52,7 @@ export const BrandGrid = () => {
             <Link 
               key={brand.slug} 
               to={`/brands/${brand.slug}`}
-              className="group flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1"
+              className="group flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#2C1810] focus:ring-offset-4 rounded-lg"
             >
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:shadow-lg group-hover:border-[#DAA520] transition-all">
                  <ImageWithFallback 

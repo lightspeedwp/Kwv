@@ -92,7 +92,7 @@ export const ShopFAQ: React.FC = () => {
       {/* Hero */}
       <div className="bg-[#2C1810] text-white py-12">
         <Container variant="content" className="text-center">
-          <Typography variant="h2" className="mb-0 text-white">
+          <Typography variant="h1" className="mb-0 text-white">
             Shop FAQ
           </Typography>
         </Container>
