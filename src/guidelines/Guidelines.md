@@ -1,579 +1,1023 @@
-# **KWV – Figma Make Prototype Guidelines**
+# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3 – Integrated)
 
-These guidelines translate the KWV website and project specifications into a comprehensive brief for the **Figma Make** AI and the developers who will build the WordPress block theme. They combine insights from the live site, the attached PDFs, project notes and email feedback from KWV’s team. All measurements use metric units; typography and spacing use fluid values for responsive behaviour. Keep the tone premium, trustworthy and rooted in heritage while providing a modern shopping experience.
+Accessibility is the **first and non-negotiable requirement** for all KWV designs and implementations.  
+Figma Make **must** treat accessibility (including WCAG 2.1 AA contrast, keyboard access and screen-reader support) as a hard constraint, not an optional enhancement.
 
-## **1 Project overview**
+---
 
-KWV (Koöperatieve Wijnbouwers Vereeniging) is a South African producer of wine and spirits with a **heritage stretching back to 1918**. The website serves two distinct audiences:
+## 1\. Accessibility & inclusive design (non-negotiable)
 
-1. **Corporate visitors** – interested in the company history, brands, sustainability initiatives and experiences. These pages highlight KWV’s role as a *leading South African wine & spirits producer* and showcase its range of brands such as **Roodeberg, The Mentors, KWV Brandy, Laborie and Cruxland Gin**.
+This section applies to **every** frame, component, page template and pattern.  
+If a design conflicts with these rules, the accessibility rules win.
 
-2. **Consumers** – using the **online shop** to purchase wine, brandy and gift products. The shop uses categories such as *Wine, Spirits, Brandy & Cognac, Liqueurs, Gin, Rum, Vodka and Gifts* and includes filters for brand, price, type and volume. A subscription offering (KWV Wine Club Edition 11\) is promoted prominently.
+### 1.1 Accessibility rules for Figma Make AI
 
-### **Site Structure**
+When generating or modifying layouts and components, Figma Make must:
 
-### **Sitemap**
+- **Enforce WCAG 2.1 AA contrast** for all text and essential UI:
+  - Normal text: contrast ratio **≥ 4.5:1**.
+  - Large text (approx. ≥18 px regular or ≥14 px bold): contrast ratio **≥ 3:1**.
+  - Icons and essential graphical UI (e.g. buttons, toggles) must also meet AA contrast against their background.
+- **Avoid colour-only communication**:
+  - Never rely on colour alone to indicate state (e.g. error vs success, active vs inactive, sale vs regular).
+  - Always pair colour with text, icons or shape differences.
+- **Preserve keyboard access**:
+  - All interactive elements must be reachable via keyboard alone (Tab/Shift+Tab).
+  - Focus must be visible at all times and must not be removed or hidden for visual reasons.
+- **Respect focus order and semantics**:
+  - Keep focus order logical and aligned with visual reading order (left-to-right, top-to-bottom where appropriate).
+  - Use a meaningful heading hierarchy (H1 → H2 → H3) rather than picking heading levels for visual size only.
+- **Support screen readers**:
+  - Ensure all controls have descriptive labels.
+  - Avoid visual-only indicators where a text label is needed (e.g. icon-only buttons must have a text label or accessible name).
+- **Avoid inaccessible patterns**:
+  - No critical content should be locked in auto-advancing carousels.
+  - Avoid layouts that depend on precise pointer positioning (e.g. hover-only reveals that hide critical information).
+- **Design for different text lengths and zoom**:
+  - Components must tolerate longer labels and translations.
+  - Layouts must remain usable at browser zooms up to at least 200%.
 
-```md
+If these constraints conflict with aesthetics or a proposed layout, accessibility wins.
+
+### 1.2 Colour & contrast
+
+- Background/text combinations must meet **WCAG 2.1 AA** contrast ratios:
+  - Normal text: **≥ 4.5:1**.
+  - Large text: **≥ 3:1**.
+- When placing text on images:
+  - Use solid or gradient overlays where necessary.
+  - Avoid placing key copy on busy image regions.
+- Focus, hover and active states:
+  - Must remain visible for users with low vision and colour blindness.
+  - Focus styles must be clearly distinguishable from hover-only effects.
+
+### 1.3 Typography & readability
+
+- Minimum body text:
+  - **16 px** on mobile, **18 px** preferred for long reads.
+- Line length:
+  - Target **70–80 characters** per line on large screens, shorter on mobile.
+- Line-height:
+  - Body: **1.5–1.7**.
+  - Headings: **1.2–1.3**.
+- Avoid long paragraphs of centred text. Use left alignment for sustained reading.
+- Maintain a logical heading hierarchy (H1, H2, H3…) and don’t skip levels purely for style.
+
+### 1.4 Keyboard navigation & focus management
+
+- All interactive elements (links, buttons, tabs, accordions, filter controls, menu items, pagination, mini cart triggers, modal close buttons) must:
+  - Be reachable via keyboard (Tab/Shift+Tab).
+  - Show a clear and consistent **focus ring** or focus treatment.
+- Include a **“Skip to main content”** link at the top of every page, visible on focus.
+- For complex components (menus, accordions, tabs), ensure arrow-key navigation does not trap focus or skip content.
+
+### 1.5 Modals, drawers & overlays (incl. age gate)
+
+- When an overlay opens (age gate, mini cart drawer, newsletter modal, etc.):
+  - Focus moves into the overlay.
+  - Tab/Shift+Tab cycles inside the overlay until it is closed.
+  - ESC closes the overlay and returns focus to the element that opened it.
+- Provide visible, clearly-labelled close controls.
+- Scrims must be dark/light enough that content in front is visually dominant.
+- The age gate must be fully keyboard accessible and screen-reader friendly:
+  - Clear question.
+  - Clear “Yes, I am over 18” and “No, leave site” or equivalent.
+  - No hidden content is accessible behind the age gate until the correct choice is made.
+
+### 1.6 Motion, animation & carousels
+
+- Avoid auto-advancing carousels for core reading content. Where used:
+  - Provide explicit play/pause controls.
+  - Use slow, readable timing (≥5 seconds per slide).
+- Respect “prefers reduced motion”:
+  - Swap heavy motion for fades or subtle transitions.
+- Hover animations must be subtle and must not cause layout shifts or make content harder to read.
+
+### 1.7 Forms, validation & messaging
+
+- Each form field must have a visible label (placeholders are not enough).
+- Error messages:
+  - Must be adjacent to the problem field.
+  - Must describe the issue clearly (e.g. “Enter a valid email address”).
+  - Must be more than just red colour; use icons or text as well.
+- Success messages must be obvious and distinct from errors.
+- Required fields should be clearly indicated, and the meaning of indicators explained (e.g. “\* indicates a required field”).
+
+### 1.8 Components with extra complexity
+
+**Accordions (FAQs, sections)**
+
+- Entire row of the header should be clickable.
+- Include an open/closed icon that rotates or changes meaningfully with state.
+- Only one level of nested accordions unless absolutely necessary.
+
+**Tabs (My Account, product info)**
+
+- Tabs must be keyboard focusable.
+- Active tab should be visually distinct.
+- Only one tab panel is visible at a time.
+- Use concise, descriptive labels.
+
+**Timelines (History)**
+
+- Use a single clear reading direction (vertical or horizontal).
+- Ensure markers and labels are legible and adequately spaced on all devices.
+- Avoid requiring horizontal scroll on mobile for core timeline content.
+
+**Carousels**
+
+- Use carousels sparingly and avoid relying on them for information that must be read in sequence.
+- Provide keyboard controls and clear next/previous buttons.
+
+---
+
+## 2\. Project overview
+
+KWV (Koöperatieve Wijnbouwers Vereeniging) is a South African wine and spirits producer with more than a century of history. The digital experience has two tightly-linked contexts:
+
+1. **Corporate (“main”) site** – brand story, heritage, brands, sustainability, awards, careers, experiences, news, etc.
+2. **Shop (WooCommerce)** – online sales for wine, spirits, mixers and gifts, plus account, cart, checkout and order flows.
+
+There is also a focused **Wine Club** experience (Winemakers Club 11th Edition) that is promoted via the main site and converts through the shop checkout.
+
+### 2.1 Experience goals
+
+- Present **one KWV brand** across corporate and shop, but with clearly different intent and emphasis.
+- Allow visitors to move easily between **story content** (brands, experiences, news) and **shopping flows**.
+- Ensure editors can maintain everything via **structured content and block patterns**, not custom hard-coded layouts.
+- Treat **accessibility and performance** as first-class requirements, not later fixes.
+- Keep the design/token system directly mappable to **theme.json, block styles, and React components**.
+
+---
+
+## 3\. Visual system & design tokens
+
+The visual system should be fully tokenised so Figma styles map cleanly into `theme.json` and CSS.
+
+### 3.1 Colour tokens
+
+Suggested tokens (names are illustrative – final palette is driven by brand):
+
+| Token         | Hex       | Typical usage                                     |
+| :------------ | :-------- | :------------------------------------------------ |
+| `color.wine`  | `#8B0000` | Primary action colour, key headings, highlights   |
+| `color.gold`  | `#DAA520` | Secondary accents, icons, badges on dark surfaces |
+| `color.brown` | `#2C1810` | Deep backgrounds: header, footer, overlays        |
+| `color.grey`  | `#333333` | Main body text and dividers on light backgrounds  |
+| `color.beige` | `#F5F5DC` | Warm light panels, content blocks                 |
+| `color.white` | `#FFFFFF` | Text and cards on dark backgrounds                |
+
+Guidelines:
+
+- Prefer **shades and tints** of these tokens (e.g. `color.wine.700`, `color.wine.500`) instead of introducing random new colours.
+- Avoid using yellow/gold for body text on light backgrounds.
+- Any new colour must match the warm, heritage-driven palette – no neon or high-saturation “techy” tones.
+
+### 3.2 Typography
+
+Recommended pairing:
+
+- Headings: classic serif (e.g. Playfair Display or similar).
+- Body: readable humanist sans (e.g. Open Sans or similar).
+
+Use fluid sizing with `clamp()` where possible. Suggested scale:
+
+| Element            | Weight | Example clamp                  | Role                                  |
+| :----------------- | :----- | :----------------------------- | :------------------------------------ |
+| H1 (page/hero)     | 700    | `clamp(2.4rem, 6vw, 4rem)`     | Page and hero titles                  |
+| H2 (section)       | 600    | `clamp(2rem, 5vw, 3rem)`       | Main section headings                 |
+| H3 (card title)    | 600    | `clamp(1.6rem, 4vw, 2.2rem)`   | Product names, news and brand cards   |
+| H4 (subheading)    | 500    | `clamp(1.3rem, 3vw, 1.8rem)`   | Minor headings and labels             |
+| Body – large       | 400    | `clamp(1.2rem, 2vw, 1.6rem)`   | Lead paragraphs, key callouts         |
+| Body – default     | 400    | `clamp(1rem, 1.5vw, 1.3rem)`   | Standard paragraphs                   |
+| Caption / metadata | 400    | `clamp(0.875rem, 1.2vw, 1rem)` | By-lines, tasting notes, small labels |
+
+All typography must still honour the accessibility rules in section 1\.
+
+### 3.3 Imagery
+
+- Prioritise authentic KWV images (vineyards, cellars, products, locations).
+- Hero imagery should be high resolution but optimised for weight.
+- Use overlays/gradients where needed to maintain legibility of text.
+
+### 3.4 Layout, spacing & containers
+
+Standard container widths (conceptual):
+
+- `container.site` – full layout width (roughly `clamp(320px, 90vw, 1400px)`).
+- `container.content` – narrower reading width for articles (`clamp(320px, 80vw, 960px)`).
+- `container.wide` – wide treatments such as hero content (`clamp(320px, 95vw, 1200px)`).
+- `container.full` – full-bleed sections spanning viewport width.
+
+Spacing:
+
+- Use numeric tokens (e.g. `space.10`, `space.20`, `space.30`).
+- Section padding vertically: around `space.40–60`.
+- Gaps inside card grids: around `space.20–30`.
+
+Behaviour:
+
+- Mobile: predominantly single-column with comfortable vertical spacing.
+- Tablet/desktop: 2–4 column grids for cards (news, products, brands, experiences) with consistent gutters.
+
+### 3.5 Token architecture
+
+- Group tokens into clear sets: `color.*`, `space.*`, `font.*`, `radius.*`.
+- Prefer numeric scales over vague labels (small/medium/large).
+- Keep a **base “defaults”** set, then layer on:
+  - Palette variations (e.g. light, dark, high contrast).
+  - Section “skins” (hero, content panels, footer, CTA banners).
+- Figma token names should map directly into `theme.json` presets and CSS variables where possible.
+
+---
+
+## 4\. Site structure & page blueprints
+
+This section is the **canonical sitemap** for the prototype, the block theme, and the React routes.
+
+### 4.1 High-level sitemap
+
+```
 KWV.co.za
-├─ Home 						## main website with main site specific header and footer
-│  ├─ About (Hub)
+├─ Home (Main site)
+│  ├─ About (hub)
 │  │  ├─ About Us
 │  │  ├─ History
-│  │  ├─ Awards 				## Mobile friendly
-│  │  ├─ Our Brands 			## Logo grid
+│  │  ├─ Awards
+│  │  ├─ Our Brands
 │  │  ├─ Executive Team
 │  │  ├─ Sustainability
+│  │  ├─ Global Distribution
 │  │  ├─ Careers
-│  │  └─ Wine Club
+│  │  │  └─ Jobs
+│  │  └─ Wine Club (Winemakers Club 11th Edition)
 │  ├─ News & Media
 │  │  ├─ News Listing
 │  │  └─ Single Post
-│  ├─ Visit us 					## Experience KWV
+│  ├─ Visit Us (Experiences)
 │  │  ├─ Emporium
 │  │  ├─ Cathedral Cellar
 │  │  ├─ House of Fire
 │  │  ├─ Events
-│  │  └─ Conference Facilities
+│  │  ├─ Conference Facilities
+│  │  └─ Cathedral Cellar Kitchen Venue
 │  ├─ Main site search
 │  ├─ FAQ
-│  ├─ Contact us
-│  └─ Legal
-│     ├─ Terms & Conditions
-│     └─ Policies & Guidelines
+│  ├─ Contact Us
+│  └─ Legal (Terms & Conditions of Use; Policies & Guidelines)
 │
-├─ Shop		 					## WooCommerce store with shop site specific header and footer
+├─ Shop (WooCommerce)
+│  ├─ Shop Homepage (Online Shop)
 │  ├─ Promotions
-│  ├─ Brands
-│  ├─ My Account
+│  ├─ Brands (shop brand landing)
+│  ├─ Spirits (category + subcategories)
+│  ├─ Wine (category + subcategories)
+│  ├─ Mixers (non-alcoholic)
+│  ├─ Gifting
+│  ├─ Product category / brand / tag archives
+│  ├─ Single Product
 │  ├─ Cart
 │  ├─ Checkout
-│  └─ ...
+│  ├─ Order Confirmation
+│  ├─ My Account
+│  ├─ Shop FAQ
+│  ├─ Coming Soon
+│  └─ Shop Legal (Returns, Terms, Privacy)
 │
-└─ Join our Wineclub			## Landing page that links directly to Checkout 
+└─ Join our Wine Club
+   └─ Winemakers Club 11th Edition landing (direct to Checkout)
 ```
 
-### **Main Site Pages**
+### 4.2 Corporate pages – summary blueprints
 
-#### **About (Hub)**
-An expanded entry point acting as a hub for all corporate information. It must serve as a navigation gateway to the following pages:
-*   **About Us:** [Live Link](https://kwv.co.za/our-company/about-us/)
-*   **Our Brands:** [Live Link](https://kwv.co.za/our-company/our-brands/) - *New Requirement:* Create a dedicated "Our Brands" page featuring a grid of brand logos that link to their respective pages. Pull in logos to use throughout the prototype.
-*   **Awards:** [Live Link](https://kwv.co.za/our-company/awards/) - *New Requirement:* Develop a mobile-friendly solution for displaying the extensive list of awards.
-*   **Careers:** [Live Link](https://kwv.co.za/our-company/careers-at-kwv/)
-*   **Executive Team:** [Live Link](https://kwv.co.za/our-company/executive-team/)
-*   **Sustainability:** [Live Link](https://kwv.co.za/our-company/sustainability/)
-*   **Experience KWV:** [Live Link](https://kwv.co.za/experience-kwv/)
-*   **Wine Club:** [Live Link](https://kwv.co.za/our-company/winemakers-club-11/)
+Below, each page lists:
 
-#### **News & Media**
-*   **News Landing Page:** [Live Link](https://kwv.co.za/our-company/news/) - A grid layout of news articles.
-*   **Single Blog Post:** [Live Link](https://kwv.co.za/kwv-secures-top-honours-at-2024-trophy-wine-show/) - Article reading view with related posts.
+- **URL** (current or proposed)
+- **WP template**
+- **Key sections/patterns**
+- **React route name**
 
-#### **Experience KWV (Visit Us)**
-[Live Link](https://kwv.co.za/experience-kwv/)
-Improve the experience landing page to clearly signpost the different visitor options. **Important:** This page must be linked logically in the navigational footer.
-Sub-pages to include (and make available in the drop-down):
-*   **KWV Emporium:** [Live Link](https://kwv.co.za/experience-kwv/experience-emporium/)
-*   **Cathedral Cellar:** [Live Link](https://kwv.co.za/experience-kwv/experience-cathedral-cellar/)
-*   **House of Fire:** [Live Link](https://kwv.co.za/experience-kwv/house-of-fire/)
-*   **KWV Events:** [Live Link](https://kwv.co.za/experience-kwv/kwv-events/)
-*   **KWV Conference Facilities:** [Live Link](https://kwv.co.za/experience-kwv/kwv-conference-facilities/)
-*   **Cathedral Cellar Kitchen Venue:** [Live Link](https://kwv.co.za/experience-kwv/cathedral-cellar-kitchen-venue/)
+#### Home (main site)
 
-#### **Contact Us**
-[Live Link](https://kwv.co.za/contact-us/)
-Standard contact form with location details.
+- **URL:** `/`
+- **Template:** `front-page`
+- **Goals:** Introduce KWV, surface key pathways (brands, experiences, news, Wine Club, shop), and drive newsletter sign-ups.
+- **Sections (patterns):**
+  - Campaign / hero (flagship brand or seasonal focus).
+  - “Our Brands” logo/cards grid.
+  - “Our Spirits & Wines” teaser tiles linking into shop categories.
+  - Latest news/awards (Query Loop).
+  - “Visit Us” / Experiences teaser.
+  - Wine Club CTA.
+  - Newsletter strip.
+- **Key blocks:** Group, Columns, Cover/Image, Heading, Paragraph, Buttons, Query Loop \+ Post Template, optional Terms Query.
+- **React route:** `HomePage`.
 
-#### **Legal Pages**
-Ensure these are linked in the footer:
-*   **Terms and Conditions of Use:** [Live Link](https://kwv.co.za/our-company/terms-and-conditions-of-use/)
-*   **Policies & Guidelines:** [Live Link](https://kwv.co.za/our-company/policies-guidelines/)
+#### About hub
 
-#### **FAQ**
-[Live Link](https://kwv.co.za/online-shop/frequently-asked-questions/)
-Should use clean, responsive accordions. Needs to be significantly visually improved compared to the current site. Note: All static pages should ideally include a relevant FAQ section at the bottom.
+- **URL:** planned hub page.
+- **Template:** `page`
+- **Purpose:** Visual table of contents for “Our Company”.
+- **Sections:**
+  - Hero with overview.
+  - Card grid linking to About Us, History, Awards, Our Brands, Executive Team, Sustainability, Global Distribution, Careers, Wine Club, Experiences.
+- **React route:** `AboutHubPage`.
 
-### **Shop Pages**
+#### About Us
 
-#### **Shop Landing (Product Archive)**
-Standard WooCommerce grid layout with sidebar filters (Brand, Price, Type, Volume). Should include a hero banner with promotion.
+- **URL:** `/our-company/about-us/`
+- **Template:** `page`
+- **Sections:**
+  - Hero with origin story.
+  - Two-column “Who we are” (copy \+ imagery).
+  - Heritage highlights / stats band.
+  - Cross-links to History, Sustainability, Experiences.
+- **React route:** `AboutPage`.
 
-#### **Single Product**
-Standard two-column layout:
-*   **Left:** Large product gallery with zoom/lightbox.
-*   **Right:** Product title, price, short description, tasting notes, rating, add-to-cart button, quantity selector.
-*   **Tabs:** Description, Additional Info, Reviews.
-*   **Bottom:** Related products section.
+#### History
 
-#### **Product Category / Brand / Tag**
-Variations of the Shop template, filtered by taxonomy.
+- **URL:** `/our-company/our-history/`
+- **Template:** `page`
+- **Sections:**
+  - Hero with historical imagery.
+  - Timeline layout (vertical or horizontal) with year, description and optional image per milestone.
+- **Blocks:** Group, Columns/Stack, Heading, Paragraph, Image.
+- **React route:** `HistoryPage`.
 
-#### **Cart**
-Standard table layout with line items, quantity adjusters, coupon code field, and cart totals.
+#### Awards
 
-#### **Checkout**
-Two-column layout: Billing/Shipping details on the left, Order Review/Payment on the right.
+- **URL:** `/our-company/awards/`
+- **Template:** `page`
+- **Notes:** Needs a mobile-friendly solution for long award lists.
+- **Sections:**
+  - Hero.
+  - Filterable awards listing (year, competition, product) – can be cards or grouped accordions by year.
+- **Blocks:** Group, Accordion plus heading/content blocks; table or column layouts.
+- **React route:** `AwardsPage`.
 
-#### **My Account**
-*   **Logged Out:** Split layout for Login and Register forms.
-*   **Logged In:** Dashboard with tabs for Orders, Addresses, Account Details, Logout.
+#### Executive Team
 
-### **WineClub Landing Page**
-A dedicated landing page based on the [KWV Wine Club](https://kwv.lightspeedwp.dev/our-company/winemakers-club-11/).
-*   **Hero:** High impact visual of the current pack.
-*   **Benefits:** Icon grid detailing membership perks (Free delivery, Exclusive access, etc.).
-*   **The Pack:** Detailed breakdown of the current edition's contents (wines included).
-*   **Sign Up:** Form or CTA that links directly to the checkout with the subscription product added.
+- **URL:** `/our-company/executive-team/`
+- **Template:** `page`
+- **Sections:** Hero \+ team grid (portrait, name, title, short bio).
+- **React route:** `ExecutiveTeamPage`.
 
-## **React Component Diagram**
+#### Sustainability
 
-```md
+- **URL:** `/our-company/sustainability/`
+- **Template:** `page`
+- **Sections:**
+  - Hero.
+  - Pillars (Environment, Community, Governance).
+  - Impact stats, stories, imagery.
+- **React route:** `SustainabilityPage`.
+
+#### Global Distribution
+
+- **URL:** `/our-company/global-distribution/`
+- **Template:** `page`
+- **Sections:**
+  - Hero.
+  - Region list or map.
+  - Distributor contacts per region.
+- **React route:** `GlobalDistributionPage`.
+
+#### Careers & Jobs
+
+- **URLs:**
+  - Careers landing: `/our-company/careers-at-kwv/`
+  - Jobs listing: `/our-company/jobs/`
+- **Templates:** `page` (optionally a custom `jobs` template).
+- **Sections:**
+  - Careers: hero, culture, benefits, CTA to jobs.
+  - Jobs: list/grid of roles with basic filtering.
+- **React routes:** `CareersPage`, `JobsPage`.
+
+#### News & Media
+
+- **URLs:**
+  - Listing: `/our-company/news/`
+  - Single: individual news URLs.
+- **Templates:**
+  - Listing: `archive` / `index`.
+  - Single: `single` / `single-post`.
+- **Patterns:**
+  - Archive header (breadcrumbs, title, intro).
+  - Post cards in Query Loop (image, title, date, excerpt, time-to-read).
+  - Single: title, meta bar, feature image, article body, footer meta (tags, sharing), comments.
+- **Blocks (archive):** Archive Title/Description, Query Loop, Post Template, Post Title, Post Excerpt, Post Featured Image, Post Date, Post Author, Post Terms, Post Time To Read, pagination.
+- **Blocks (single):** Post Title, Post Content, Post Featured Image, metadata blocks, Comments, Comment Form.
+- **React routes:** `NewsListingPage`, `NewsDetailPage`.
+
+#### Experiences (“Visit Us”)
+
+- **Main landing URL:** `/experience-kwv/`
+- **Template:** `page`
+- **Subpages:**
+  - Emporium, Cathedral Cellar, House of Fire, Events, Conference Facilities, Cathedral Cellar Kitchen Venue.
+- **Landing sections:**
+  - Hero (“Experience KWV”) with CTA.
+  - Experience cards grid.
+  - Link into events or booking.
+- **Subpage layout:**
+  - Hero with imagery \+ title.
+  - Rich description, opening times, pricing if relevant.
+  - Practical information: location, accessibility, booking details.
+  - Strong booking CTAs.
+- **React routes:** `ExperiencesLandingPage` and experience detail pages (`ExperienceEmporiumPage`, etc.).
+
+#### FAQ (main site)
+
+- **URL:** `/faq/`
+- **Template:** `page`
+- **Pattern:** FAQ accordion grouped by topic for corporate questions.
+- **Blocks:** Accordion group/items, headings, text.
+- **React route:** `FAQPage`.
+
+#### Contact Us
+
+- **URL:** `/contact-us/`
+- **Template:** `page`
+- **Sections:**
+  - Hero \+ intro.
+  - Contact details.
+  - Contact form.
+  - Map or location image.
+- **Blocks:** Form block and inner blocks (Input, Submission Notification, Submit Button) plus layout blocks.
+- **React route:** `ContactPage`.
+
+#### Legal (main site)
+
+- **URLs:**
+  - Terms & Conditions of Use
+  - Policies & Guidelines
+- **Template:** `page`
+- **Pattern:** Legal page layout – hero/title, then long-form text with section anchors and optional downloadable files.
+- **Blocks:** Heading, Paragraph, List, Table, File, Separator.
+- **React routes:** `LegalTermsPage`, `LegalPoliciesPage`.
+
+### 4.3 Shop pages – summary blueprints
+
+All shop pages use the **shop header/footer** and WooCommerce templates.
+
+#### Shop Homepage (Online Shop)
+
+- **URL:** `/online-shop/`
+- **Template:** `page` (with Woo blocks).
+- **Sections:**
+  - Intro hero with promotion or campaign.
+  - Short “about” strip.
+  - Curated product collections (awarded wines, brandies, spirits etc.).
+  - Link to Promotions landing.
+  - Featured products.
+  - Brand grid (“Shop our famous brands”).
+  - Newsletter \+ social follow.
+- **React route:** `ShopHomePage`.
+
+#### Promotions
+
+- **URL:** e.g. `/promotions-view-our-special-offers/`
+- **Template:** `page` \+ Product Collection blocks.
+- **Behaviour:** Curated promotional groupings (campaign sections), plus optional “on sale” collection.
+- **React route:** `ShopPromotionsPage`.
+
+#### Shop Brands landing
+
+- **URL:** new dedicated “Shop brands” page.
+- **Template:** `page`
+- **Structure:**
+  - Group brands under Wines, Spirits, Ready-to-drink, Non-alcoholic.
+  - Each brand links to brand taxonomy archive or brand detail page.
+- **React route:** `ShopBrandsLandingPage`.
+
+#### Product category / brand archives
+
+- **Examples:**
+  - `/product-category/spirits/`
+  - `/product-category/wine/`
+  - `/product-category/mixers/`
+  - `/product-category/accessory-gifts/`
+  - Brand tax URLs (Roodeberg, Laborie, etc.).
+- **Templates:**
+  - `archive-product`
+  - `taxonomy-product_cat`, `taxonomy-product_tag`, `taxonomy-product_attribute`
+- **Pattern:** “Shop Category Hero \+ Filters”:
+  - Hero (title \+ description).
+  - Filter row (Product Filters block).
+  - Product Collection grid.
+- **React routes:** `ShopCategoryPage`, `ShopBrandTaxPage`.
+
+#### Single Product
+
+- **Template:** `single-product`
+- **Layout:**
+  - Gallery vs details split on desktop; stacked on mobile.
+  - Title, brand, badges, price, options, add-to-cart.
+  - Tasting notes and short copy.
+  - Tabs/accordions for description, details, reviews.
+  - Related products section.
+- **React route:** `ProductDetailPage`.
+
+#### My Account
+
+- **URL:** `/my-account/` (Woo default).
+- **Template:** `page` with My Account blocks.
+- **States:**
+  - Logged-out: two-column login/register (stacked on mobile).
+  - Logged-in: tabs for dashboard, orders, downloads, addresses, account details.
+- **React routes:** `MyAccountLoggedOutPage`, `MyAccountDashboardPage`, `MyAccountOrdersPage`, `MyAccountAddressesPage`, `MyAccountDetailsPage`.
+
+#### Cart
+
+- **Template:** `page-cart` with Cart block.
+- **States:** filled cart vs empty (with CTA back to shop).
+- **React route:** `CartPage`.
+
+#### Checkout
+
+- **Template:** `page-checkout` with Checkout block.
+- **States:** guest vs logged-in checkout.
+- **React route:** `CheckoutPage`.
+
+#### Order Confirmation
+
+- **Template:** `order-confirmation`
+- **States:** logged-in vs guest (guest may be prompted to create an account).
+- **React route:** `OrderConfirmationPage`.
+
+#### Shop FAQ
+
+- **URL:** `/online-shop/frequently-asked-questions/`
+- **Template:** `page`
+- **Pattern:** Shop FAQ accordion (shipping, returns, payment, delivery, age restrictions).
+- **React route:** `ShopFAQPage`.
+
+#### Shop Coming Soon
+
+- **Template:** `page-coming-soon`
+- **React route:** `ShopComingSoonPage`.
+
+#### Shop Legal
+
+- **Pages:** Returns, Terms & Conditions, Privacy.
+- **Template:** `page`
+- **React routes:** `ShopReturnsPage`, `ShopTermsPage`, `ShopPrivacyPage`.
+
+### 4.4 Wine Club – Winemakers Club 11th Edition
+
+- **URL:** `/our-company/winemakers-club-11/`
+- **Template:** `page` (special layout)
+- **Behaviour:**
+  - Acts as a campaign-ready landing page.
+  - Header may use a simplified variant (Company, Shop, Experiences, Events, FAQ, Contact).
+  - Main CTA takes the user directly to checkout with the correct product populated (no separate cart step).
+- **Sections:**
+  - Hero with pack imagery.
+  - Benefits grid (icons \+ text).
+  - Pack contents breakdown.
+  - Pricing and conditions.
+  - Strong “Subscribe now” CTAs.
+- **React route:** `WineClubLandingPage`.
+
+---
+
+## 5\. WordPress templates, template parts & patterns
+
+### 5.1 Main-site templates
+
+- `front-page` – main home page.
+- `page` – default page (About, brands, experiences, corporate FAQ, contact, legal, careers, global distribution, Wine Club, About hub).
+- `single` / `single-post` – news posts.
+- `archive` / `index` – blog/news archives.
+- `search` – search results.
+- `404` – not-found page.
+
+### 5.2 WooCommerce templates
+
+- `single-product.html` – product detail page.
+- `archive-product.html` – main product archive.
+- `taxonomy-product_cat.html` – product category.
+- `taxonomy-product_tag.html` – product tag.
+- `taxonomy-product_attribute.html` – attribute archives.
+- `product-search-results.html` – product search.
+- `page-coming-soon.html` – Coming Soon.
+- `page-cart.html` – Cart.
+- `page-checkout.html` – Checkout.
+- `order-confirmation.html` – Order confirmation.
+
+Shop-specific pages using `page` \+ blocks:
+
+- Shop homepage.
+- Promotions landing.
+- Shop brands landing.
+- Shop FAQ.
+- Shop legal pages.
+
+### 5.3 Template parts – main site
+
+- `header-main` – corporate header (main navigation, search, etc.).
+- `footer-main` – corporate footer.
+- `breadcrumbs` – breadcrumb strip.
+- `post-meta` – reusable post meta bar.
+- `hero` – hero template part (generic).
+- `sidebar` – optional blog sidebar.
+- `footer-newsletter` – newsletter strip.
+
+### 5.4 Template parts – WooCommerce
+
+- `header-shop` – shop header.
+- `footer-shop` – shop footer.
+- `header-checkout` – simplified header for checkout & order confirmation.
+- `footer-checkout` – minimal/legal footer for checkout & order confirmation.
+- `mini-cart-drawer` – mini cart off-canvas region.
+- `add-to-cart-options` – grouped add-to-cart options for variable/grouped products.
+
+### 5.5 Menu-designer template parts
+
+- `mobile-menu-main` – main-site mobile nav.
+- `mobile-menu-shop` – shop mobile nav.
+- `mega-menu-main` – desktop mega menu for the main site (Company, Shop, Experiences, Events, FAQ, Contact, etc.).
+- `mega-menu-shop` – desktop mega menu for the shop (Promotions, Brands, Spirits, Wine, Mixers, Gifting, FAQ, Pricelist, Wine Club).
+
+### 5.6 Pattern families (for block patterns & Figma sections)
+
+**Global patterns**
+
+- Hero variants (corporate, shop, Wine Club).
+- Two-column content sections.
+- Timeline section.
+- Card grids (brands, experiences, news, events, products).
+- Newsletter block.
+- Contact \+ form block.
+
+**Blog patterns**
+
+- Archive header.
+- Post card.
+- Post meta bar.
+- Post footer meta.
+- Comments section.
+
+**Main site patterns**
+
+- Brands overview grid.
+- Brands by category (wine, spirits, RTD, non-alc).
+- Experiences cards.
+- Events list section.
+- Corporate FAQ accordion.
+
+**Shop patterns**
+
+- Shop homepage layout.
+- Promotions landing layout.
+- Shop brands landing layout.
+- Category hero \+ filters layout.
+- Product carousel rows.
+- Cart states (full/empty).
+- Checkout layout.
+- Order confirmation layout.
+- My Account login/register split.
+
+Patterns should be built as **Section components** in Figma with variants and be registered as **block patterns** in the theme.
+
+---
+
+## 6\. WordPress & WooCommerce blocks to use
+
+No page builders, widget-based layouts, shortcodes or footnotes. Use **core blocks**, **core theme blocks** and **modern WooCommerce blocks**.
+
+### 6.1 Highlighted core blocks
+
+**Form block**
+
+Used on Contact and any other forms.
+
+- `core/form`
+- `core/form-input`
+- `core/form-submission-notification`
+- `core/form-submit-button`
+
+**Accordion block**
+
+For FAQs and collapsible content.
+
+- `core/accordion`
+  - `core/accordion-heading`
+  - `core/accordion-item`
+  - `core/accordion-panel`
+
+**Terms Query**
+
+For brand grids and taxonomy-driven listings.
+
+- `core/terms-query`
+  - `core/term-template`
+  - `core/term-name`
+  - `core/term-description`
+  - `core/term-count`
+
+**Other key core blocks (summary)**
+
+- Content: Paragraph, Heading, List, Quote, Pullquote, Table, Code.
+- Media: Image, Gallery, Video, Cover, File.
+- Layout: Group, Columns/Column, Stack/Row, Spacer, Separator, Buttons/Button.
+- Theme/Post: Site Title, Site Logo, Site Tagline, Post Title, Post Content, Post Excerpt, Post Featured Image, Post Date, Post Author/Name, Post Terms, Post Comments Count/Link, Post Time To Read.
+- Query/archive: Query Loop, Post Template, Query Pagination (and variants), Archive Title, Archive Description, Query Title, Query Total.
+- Navigation: Navigation, Navigation Link, Navigation Submenu, Home Link, Page List, Breadcrumbs (core or plugin).
+- Taxonomy: Terms Query and inner term blocks.
+- Search/utility: Search, HTML (for rare embeds).
+
+### 6.2 WooCommerce blocks (by area)
+
+**Single product**
+
+Represented as separate UI components:
+
+- Store Breadcrumbs
+- Store Notices
+- Product Image Gallery
+- Product Title
+- Product Rating
+- Product Price
+- Product Summary
+- Add to Cart with Options
+- Product Meta
+- Product Details
+- Related Products
+
+**Cart**
+
+- Cart block with clear full/empty states.
+
+**Checkout**
+
+- Express checkout area.
+- Delivery/shipping method block.
+- Shipping address fields.
+- Terms & conditions acceptance.
+- Checkout actions.
+- Checkout totals.
+- Local pickup option where relevant.
+
+**Mini cart**
+
+- Mini cart block with full and empty states.
+
+**Product collection (shop/archive)**
+
+- Product Collection block with:
+  - Product Template (image, title, price, add-to-cart).
+  - Pagination.
+  - Empty results handling.
+- Layout variants: stack, grid, carousel.
+
+**Add to cart \+ options**
+
+- Base actions: add-to-cart button, quantity control.
+- Variants:
+  - Variable product add-to-cart.
+  - Grouped product add-to-cart.
+  - Dynamic variation behaviour.
+
+**Product gallery**
+
+- Thumbnails strip.
+- Large image area (incl. on-sale badge, next/prev controls).
+
+**Product filters**
+
+- Active filters
+- Price
+- Rating
+- Attribute-based filters
+- Status
+- Category
+- Brand
+- Tag
+
+**Order confirmation page blocks**
+
+- Account creation block.
+- Order status.
+- Order summary.
+- Order details.
+- Downloads section.
+- Address information.
+- Additional fields / extra info.
+
+---
+
+## 7\. React component architecture & mapping
+
+The React app should mirror the sitemap and WordPress templates so that Figma frames, React routes and block templates stay aligned.
+
+### 7.1 High-level structure
+
+```
 App
+├─ Providers
+│  ├─ RouterProvider
+│  ├─ QueryClientProvider (data fetching)
+│  └─ AgeVerificationProvider
+│
 ├─ Shell
-│  ├─ Header
-│  │  ├─ CorporateHeader
-│  │  │  ├─ KWVLogo
-│  │  │  └─ MegaMenu
-│  │  └─ ShopHeader
-│  │     ├─ KWVShopLogo
-│  │     ├─ ShopNav (Brands, Spirits, Wine dropdowns)
-│  │     └─ MiniCart
-│  ├─ Layout (Wrapper)
-│  └─ Footer
-│     ├─ CorporateFooter
-│     └─ ShopFooter
+│  └─ Layout
+│     ├─ HeaderSwitcher
+│     │  ├─ CorporateHeader   (maps to `header-main`, mega-menu-main, mobile-menu-main)
+│     │  ├─ ShopHeader        (maps to `header-shop`, mobile-menu-shop)
+│     │  └─ CheckoutHeader    (maps to `header-checkout`)
+│     │
+│     ├─ FooterSwitcher
+│     │  ├─ CorporateFooter   (maps to `footer-main`)
+│     │  ├─ ShopFooter        (maps to `footer-shop`)
+│     │  └─ CheckoutFooter    (maps to `footer-checkout`)
+│     │
+│     ├─ BreadcrumbsBar       (maps to `breadcrumbs`)
+│     ├─ MiniCartDrawer       (maps to `mini-cart-drawer`)
+│     ├─ AgeVerificationModal
+│     ├─ BackToTopButton
+│     └─ ScrollToTopOnRouteChange
 │
 ├─ Routes
-│  ├─ Home (Corporate)
-│  ├─ AboutHub
-│  ├─ History (Timeline)
-│  ├─ BrandsGrid (Our Brands)
-│  ├─ BrandDetail (Dynamic: /brands/:id)
-│  ├─ Awards (Mobile Friendly)
-│  ├─ NewsList
-│  ├─ NewsDetail
-│  ├─ Experiences (Visit Us)
-│  ├─ Contact
-│  ├─ LegalPages
-│  ├─ WineClub (Landing)
-│  │
-│  └─ Shop (E-commerce)
-│     ├─ ShopHome (All Products)
-│     ├─ CategoryPage (/shop/:category)
-│     ├─ ProductDetail (/product/:id)
-│     ├─ Cart
-│     ├─ Checkout
-│     ├─ OrderConfirmation
-│     └─ MyAccount
+│  ├─ Corporate (Home, About, History, Awards, Executive, Sustainability, Global Distribution, Careers, Jobs, News listing/single, Brands, Brand detail, Experiences, FAQ, Contact, Legal, Wine Club landing)
+│  ├─ Shop      (Shop home, Promotions, Shop brands, category/brand archives, Product detail, Cart, Checkout, Order confirmation, My Account screens, Shop FAQ, Coming Soon, Shop Legal)
+│  └─ System    (Search results, NotFound)
 │
 └─ Shared Components
-   ├─ Common
-   │  ├─ Container
-   │  ├─ Typography
-   │  ├─ Button
-   │  ├─ Logo
-   │  ├─ ScrollToTop       <-- New (Implement on Shop & Main)
-   │  └─ ScrollDownArrow   <-- New (Hero to next section)
-   ├─ Shop
-   │  ├─ ProductCard
-   │  ├─ ShopSidebar (Filters)
-   │  └─ MiniCart
-   ├─ Sections
-   │  ├─ Hero
-   │  ├─ Newsletter
-   │  ├─ BrandGrid
-   │  └─ FAQSection        <-- New (Required on all pages)
-   ├─ UI (Shadcn)
-   │  ├─ Sheet (Mobile Menu / Cart)
-   │  ├─ Tabs (My Account)
-   │  ├─ Accordion (FAQ)
-   │  └─ ...
-   │
-   └─ Core Blocks (WP Mapping)
-      ├─ Text
-      │  ├─ Paragraph (Typography)
-      │  ├─ Heading (Typography)
-      │  ├─ List
-      │  ├─ Quote
-      │  ├─ Code
-      │  ├─ Details
-      │  └─ Table
-      ├─ Media
-      │  ├─ Image (ImageWithFallback)
-      │  ├─ Gallery
-      │  ├─ Audio
-      │  ├─ Video
-      │  ├─ File
-      │  ├─ MediaText
-      │  └─ Cover (Hero)
-      ├─ Design
-      │  ├─ Buttons (Button)
-      │  ├─ Columns
-      │  ├─ Group (Container)
-      │  ├─ Separator
-      │  └─ Spacer
-      ├─ Widgets
-      │  ├─ Archives
-      │  ├─ Calendar
-      │  ├─ Categories
-      │  ├─ LatestPosts
-      │  ├─ Search
-      │  ├─ SocialIcons
-      │  └─ TagCloud
-      └─ Theme
-         ├─ Navigation
-         ├─ SiteLogo
-         ├─ SiteTitle
-         ├─ PostTemplate (Single Post)
-         │  ├─ PostTitle
-         │  ├─ PostContent
-         │  ├─ PostDate
-         │  ├─ PostExcerpt
-         │  ├─ PostFeaturedImage
-         │  ├─ PostAuthor
-         │  └─ PostNavigation
-         ├─ QueryLoop (News/Products)
-         ├─ Comments
-         └─ LoginOut
+   ├─ Common (Container, Typography, Button, Icon, ImageWithFallback, Badge/Chip)
+   ├─ Sections (Hero, HeroShop, HeroWineClub, Timeline, Card grids, Newsletter, Contact form, FAQ, Archive header, Post meta, Post footer meta, Comments)
+   ├─ Blog (PostCard, PostMetaBar, PostFooterMeta, PostBody)
+   ├─ Shop (ProductCard, ProductGrid, ProductFiltersSidebar, ProductCarousel, CartSummary, CheckoutFormLayout, OrderSummaryBlock, MyAccountTabs, MiniCartContents)
+   ├─ WooBlocks (conceptual wrappers for StoreBreadcrumbs, StoreNotices, ProductImageGallery, etc.)
+   └─ CoreBlockMapping (Text, Media, Layout, Interactive, Theme, Taxonomy abstractions)
 ```
 
-### **Goals**
+Names can adjust slightly, but the **shape** and mapping to templates/template parts should stay consistent.
+
+---
 
-* **Unify the brand experience** across corporate pages and the shop while retaining the premium KWV aesthetic.
-
-* **Improve navigation and discoverability** of products and brand information. Reduce friction when switching between corporate content and shopping.
-
-* **Empower content editors** – ensure all sections (hero sliders, text, images and product listings) can be updated via the WordPress block editor without developer assistance.
-
-* **Optimise performance** by using a lean block theme, caching and image optimisation. Follow the guidelines for hosting and plugin management provided in the project specification.
-
-* **Ensure accessibility** and compliance with WCAG 2.1 AA; provide an age‑verification modal on entry and avoid overstimulation of users.
-
-* **WooCommerce Native Structure** – The e-commerce section must be built using standard WooCommerce block templates and structure to ensure future compatibility and ease of development.
-
-## **2 Brand identity**
-
-### **Colour palette**
-
-KWV’s palette evokes heritage and luxury. Use the colours below consistently; provide light and dark variations for accessibility. Colour tokens should be defined in `theme.json` and Figma styles.
-
-| Token | Hex | Usage |
-| ----- | ----- | ----- |
-| **Wine red** | `#8B0000` | Primary accent. Use for calls‑to‑action (buttons, links), highlights and headings. |
-| **Gold** | `#DAA520` | Secondary accent. Use for badges, icons and subtle details. |
-| **Dark brown** | `#2C1810` | Base for the shop header, footers and overlays. |
-| **Dark grey** | `#333333` | Body text on light backgrounds, icons and dividers. |
-| **Beige** | `#F5F5DC` | Background on light sections (hero, product listings) to create warmth. |
-| **White** | `#FFFFFF` | Text on dark backgrounds and section backgrounds. |
-
-Notes:
-
-* Ensure a minimum contrast ratio of 4.5:1 for text on backgrounds. When overlaying text on photography, add a semi‑transparent gradient to meet contrast requirements.
-
-* In dark sections (e.g., shop header), invert body text to white and lighten accent colours accordingly.
-
-### **Typography**
-
-Use **Playfair Display** (or another elegant serif) for headings and **Open Sans** (or a similar humanist sans-serif) for body copy. Both fonts are available in Google Fonts; substitute with system fonts if unavailable. All sizes use `clamp(min, viewport‑based, max)` for responsiveness. Suggested scales:
-
-| Element | Weight | Clamp values | Notes |
-| ----- | ----- | ----- | ----- |
-| **H1** – page/hero titles | 700 | `clamp(2.4rem, 6vw, 4rem)` | Use for hero banners and important page headings. |
-| **H2** – section headings | 600 | `clamp(2rem, 5vw, 3rem)` | Introduce major sections (e.g., “Our Brands”). |
-| **H3** – card titles | 600 | `clamp(1.6rem, 4vw, 2.2rem)` | For product names, news headlines and sub‑sections. |
-| **H4** – minor headings/labels | 500 | `clamp(1.3rem, 3vw, 1.8rem)` | Used in metadata and form labels. |
-| **Body large** | 400 | `clamp(1.2rem, 2vw, 1.6rem)` | Lead paragraphs and callouts. |
-| **Body text** | 400 | `clamp(1rem, 1.5vw, 1.3rem)` | Default paragraph text. |
-| **Caption/meta** | 400 | `clamp(0.875rem, 1.2vw, 1rem)` | Tasting notes, prices, bylines. |
-
-Guidelines:
-
-* Set line‑height to 1.5 for body text and 1.2–1.3 for headings.
-
-* Avoid all‑caps except for small labels; rely on font weight and size to create hierarchy.
-
-* Use letter-spacing of `0.02em` on uppercase labels (e.g., category chips) to improve readability.
-
-### **Imagery and tone**
-
-Hero images should feature vineyards, cellars, bottles and lifestyle scenes that evoke craftsmanship and the Cape Winelands. Use high‑resolution images and compress them. Avoid generic stock; prefer authentic photography. For brand pages, include historic photographs and product hero shots. Apply gentle gradients on top of images to improve text legibility.
-
-## **3 Layout and spacing**
-
-### **Container system**
-
-Use a set of container classes to constrain content width. Define these in the `theme.css` and Figma autolayout presets:
-
-`.container-site { width: clamp(320px, 90vw, 1400px); margin-inline: auto; }`  
-`.container-content { width: clamp(320px, 80vw, 960px); margin-inline: auto; }`  
-`.container-wide { width: clamp(320px, 95vw, 1200px); margin-inline: auto; }`  
-`.container-full { width: 100vw; margin-left: calc(50% - 50vw); }`
-
-### **Spacing system**
-
-Define spacing tokens for padding, margins and gaps. Use descriptive classes rather than pixel values. Examples:
-
-`.padding-section { padding-block: clamp(3rem, 6vw, 5rem); }`  
-`.padding-inner { padding-inline: clamp(1rem, 4vw, 3rem); }`  
-`.gap-sm { gap: clamp(0.5rem, 1.5vw, 1.5rem); }`  
-`.gap-lg { gap: clamp(1rem, 3vw, 3rem); }`
-
-Guidelines:
-
-* Start with a single column layout on mobile; stack sections vertically with generous spacing.
-
-* Introduce two‑column grids at tablet widths for product listings and brand stories. On desktop, use three or four columns for product cards but ensure consistent gutters.
-
-* The header is sticky but should reduce in height after scrolling. Add a subtle shadow to separate it from content.
-
-## **4 Components**
-
-### **4.1 Header & navigation**
-
-The website requires two distinct header and footer experiences to cater to the different user contexts (Corporate vs. Shop).
-
-**Logos:**
-*   Use the `KWVLogo` SVG component for the corporate header (high quality vector recreation).
-*   Use the `KWVShopLogo` component for the shop header (Clean lockup of KWV logo + "SHOP ONLINE").
-
-**Main Website Header:**
-*   **Context:** Used on Home, About, History, Brands, News, Experiences, and other corporate pages.
-*   **Navigation Structure:**
-    *   **Online Shop** (Link to shop home)
-    *   **Account Login** (Link to My Account)
-    *   **Our Company** (Mega Menu): About Us, History, Our Brands, News, Careers, Executive Team, Sustainability, Wine Club.
-    *   **KWV Shop** (Link to Shop)
-    *   **Visit Us** (Dropdown or Link to Experiences landing)
-    *   **FAQ**
-    *   **Contact Us**
-    *   **Join our Wine Club** (CTA Button)
-
-**Shop Header:**
-*   **Context:** Used on Shop Home, Product Categories, Single Product, Cart, Checkout, My Account.
-*   **Navigation Structure:**
-    *   **Login Here**
-    *   **Promotions**
-    *   **Brands** (Dropdown with list of key brands)
-    *   **Spirits** (Dropdown with sub-categories: Brandy, Gin, Vodka, etc.)
-    *   **Wine** (Dropdown with sub-categories: Red, White, Sparkling, etc.)
-    *   **Mixers**
-    *   **Visit Us**
-    *   **Gifting**
-    *   **FAQ**
-    *   **Pricelist**
-    *   **Join our Wine Club** (CTA Button)
-
-**Mobile navigation:**
-*   Both headers collapse into a hamburger menu on mobile.
-*   Ensure the specific menu items for the current context are preserved in the mobile view.
-
-**Search:**
-*   Provide a search icon in the header that opens a modal with a search field.
-*   Show live suggestions (products or pages) as the user types.
-
-**Age verification:**
-*   On first load, display an age‑verification modal asking “Are you over 18?”; use a checkbox or buttons for Yes/No. Store the choice locally to avoid repeat prompts.
-
-### **4.2 Hero banners**
-
-Used on the home page, brand taxonomy pages and product categories. Each hero includes a background image, an overlay colour, headline (H1) and supporting text. Optionally include primary and secondary buttons (e.g. “Shop Now”, “Explore Brand”). On mobile, stack the text below the image; on desktop, overlay the text with a gradient.
-
-### **4.3 Product card**
-
-Display products in grids on the shop landing page, category pages and brand pages. Each card includes:
-
-* Product image (16:9 or 3:4 ratio), lazy‑loaded.
-
-* Brand name and product name (H3). Use the brand chip as a label.
-
-* Price and any promotional badge (e.g., “15 % Off All Wine Orders of R500+” – as shown on the current site banners). Represent discounts clearly, using strikethrough for original price.
-
-* Add‑to‑cart button; show “Out of stock” or “Join waitlist” states based on inventory data. For subscription wines, the button should link to the subscription form.
-
-* On hover (desktop), raise the card slightly with a shadow; on tap (mobile), navigate to the product page.
-
-### **4.4 Brand hero & timeline**
-
-Brand taxonomy pages should start with a hero section featuring the brand logo and tagline, followed by a **timeline or story** about the brand’s heritage. Use a vertical timeline or horizontal slider to tell the story (e.g., KWV’s establishment in 1918). Use cards for milestones (year, event, description) and include imagery where available.
-
-### **4.5 Filters & sorting**
-
-In the shop and brand pages, include collapsible filter panels for **Brand**, **Price range**, **Type**, **Volume** and **Special offers** (as extracted from the shop PDFs). Provide sliders or range inputs for numeric filters. Show an active filter bar summarising selected filters with clear removal controls.
-
-### **4.6 Wine club subscription CTA**
-
-Promote the KWV Wine Club (Edition 11\) subscription with a dedicated section. Include a brief description (e.g., monthly curated wines, exclusive benefits), an image of the wine pack and a call‑to‑action button leading to the subscription page. Use a contrasting background (gold or beige) to draw attention.
-
-### **4.7 Newsletter sign‑up**
-
-Encourage visitors to join the KWV family by subscribing to the newsletter. Provide an email input, name fields and a clear success/error message area. Place this section near the footer on both corporate and shop pages.
-
-### **4.8 Footer**
-
-Separate the corporate and shop footers:
-
-* **Corporate footer** – three columns: About KWV (brief description), Quick links (About, History, Brands, Sustainability, News, Careers, Contact), and Social & legal links (Facebook, Instagram, Twitter, Terms & Conditions, Privacy & POPI). Include the company tagline “Leading South African wine & spirits producer with a distinguished heritage”.
-
-* **Shop footer** – four columns: Product categories (Wine, Spirits, Mixers, Gifting), Customer care (FAQ, Pricelist, Contact), About (Our Story, Sustainability, Experiences) and Newsletter sign‑up. Include an age‑restriction notice (“Alcohol not for sale to persons under the age of 18”).
-
-## **5 Patterns and WooCommerce Templates**
-
-The prototype must adhere to standard WooCommerce block template structures. Although built in React, the layout and logic should mirror how WooCommerce Blocks function to ensure easy translation to the final WordPress theme.
-
-**Required WooCommerce Templates:**
-
-1.  **Shop (Product Archive):** Standard grid layout with sidebar filters (Brand, Price, Type, Volume).
-2.  **Single Product:** Standard two-column layout (Gallery left, Info right). Tabs for description, additional info, reviews. Related products section at bottom.
-3.  **Product Category / Brand / Tag:** Variations of the Shop template, filtered by taxonomy.
-4.  **Cart:** Standard table layout with line items, quantity adjusters, coupon code field, and cart totals.
-5.  **Checkout:** Two-column layout (Billing/Shipping details left, Order Review/Payment right).
-6.  **Mini Cart:** Slide-out drawer or dropdown showing recent items and subtotal.
-7.  **Order Confirmation:** "Thank You" page with order details and downloads.
-8.  **My Account (Logged Out):** Login / Register form split.
-9.  **My Account (Logged In):** Dashboard with tabs for Orders, Addresses, Account Details, Logout.
-10. **Product Search Results:** Grid layout similar to Shop, but for search queries.
-
-**Corporate Patterns:**
-
-*   **Hero banner patterns** – generic hero with image, overlay and text; variation for news pages with call‑to‑action.
-*   **Timeline pattern** – vertical/horizontal timeline for history pages and brand stories.
-*   **Article/news card pattern** – for News & Awards posts.
-*   **Form pattern** – contact form, newsletter sign‑up, subscription sign‑up.
-*   **Carousel/slider** – used for brand logos and testimonials.
-
-## **6 Templates and pages**
-
-Define the following **Page templates** and describe their structure for the Figma prototype:
-
-1.  **Home** – age verification (if first visit); hero banner promoting latest news or seasonal campaign; sections for *Our Brands* (logo grid linking to each brand page), *Our Spirits* and *Our Wines*; highlights of *Latest News & Awards* with cards linking to posts; call‑to‑action to join the wine club; newsletter sign‑up; corporate footer.
-2.  **Shop Landing** – hero with promotion banner; filter sidebar and product grid; featured collections; subscription CTA; shop footer.
-3.  **Single Product** – large gallery with zoom/lightbox; product title, price, description, tasting notes and rating; add‑to‑cart button; quantity selector; toggles for subscription or one‑off purchase; accordion for details; related products.
-4.  **Cart & Checkout** - Standard WooCommerce flows.
-5.  **My Account** - Login/Register and Dashboard views.
-6.  **Our Brands** – A grid or list of all KWV brands (Roodeberg, The Mentors, Laborie, etc.) with logos and links to their respective brand pages.
-7.  **Join Our Wine Club** – Dedicated subscription page based on [KWV Wine Club](https://kwv.lightspeedwp.dev/our-company/winemakers-club-11/). Features benefits, pack details, and sign-up form.
-8.  **About Us Hub** – An expanded entry point linking to:
-    *   **History** (Timeline)
-    *   **Awards** (Responsive grid/list of accolades)
-    *   **Careers** (Job listings/Culture)
-    *   **Executive Team** (Profiles)
-    *   **Sustainability** (Initiatives)
-    *   **Experiences** (Visit Us)
-9.  **News & Awards** – Blog index listing posts; filters by year or tag; single post page.
-10. **Visit Us (Experiences)** – Landing page with options for Tastings, Emporium, Cathedral Cellar, House of Fire.
-11. **Contact** – Contact details and form.
-
-## **7 Content and CMS considerations**
-
-To ensure content editors can manage the site efficiently:
-
-* **Use custom post types and taxonomies**: `brand`, `product`, `news`, `award`, `experience`. Associate products with brands and categories. Use ACF or block‑based custom fields for tasting notes, grape varieties, awards, etc.
-
-* **Dynamic product updates**: integrate with the SAP API as described in the meeting notes; allow editors to revise titles and descriptions before publishing. Provide guidance on the workflow and ensure WooCommerce product attributes align with SAP fields.
-
-* **Price list block**: create a reusable block that fetches pricing data from the middleware and displays it with filters (e.g., by category or brand). Provide CSV import capabilities.
-
-* **Subscription management**: implement the WooCommerce Subscriptions plugin and set up automations via AutomateWoo for welcome emails and renewal reminders. Include a terms & conditions checkbox.
-
-* **Age verification and cookie banner**: required by law; integrate with a consent management plugin.
-
-## **8 Performance, accessibility & SEO**
-
-* **Performance**: optimise images, enable lazy loading and use a CDN. Minimise JavaScript; avoid heavy sliders on the home page unless necessary. Utilise caching and server‑side rendering. Follow the guidelines for plugin optimisation in the project overview.
-
-* **Accessibility**: follow WCAG 2.1 AA. Use semantic HTML, ARIA roles and labels, keyboard navigable menus and modals, sufficient colour contrast and focus styling. Provide skip‑to‑content links.
-
-* **SEO & metadata**: include descriptive page titles, meta descriptions and Open Graph tags. Use structured data for products, articles and organisation. Maintain a proper heading hierarchy. Provide alt text for all images and transcripts for videos.
-
-## **9 Development guidelines**
-
-* **Code organisation**: follow a modular architecture with **React functional components**. Document components with JSDoc, including props, default values and accessibility notes.
-
-* **Naming conventions**: adopt BEM or utility‑based class names; avoid long nested selectors. Use `utility` classes for spacing, typography and colours.
-
-* **State management**: rely on WordPress data stores for content; use React state sparingly (e.g., filter selections). Avoid heavy client‑side state libraries.
-
-* **Internationalisation**: prepare strings for translation (English by default); ensure currency formatting uses South African Rand (R).
-
-* **Testing & QA**: write unit tests for components and integrate end‑to‑end tests with Playwright or Cypress. Conduct cross‑browser testing and ensure responsive layouts across breakpoints.
-
-* **Deployment**: host on a performant platform (e.g., Kinsta or WP Engine). Use CI/CD pipelines for staging and production; implement caching and monitoring.
-
-## **10 Acceptance criteria**
-
-For each component or page, create acceptance criteria such as:
-
-1. **Header**: displays correct menu for context (corporate/shop); collapses into a hamburger on screens below 768 px; remains sticky; search modal accessible via keyboard; age verification displayed on first visit.
-
-2. **Product grid**: filters can be applied and removed without page reloads; grid displays correct number of products; loading states and empty states are present; out‑of‑stock items display a clear label.
-
-3. **Timeline**: events load dynamically; timeline is keyboard navigable; items maintain equal spacing across devices; ARIA labels correctly describe years and events.
-
-4. **Newsletter sign‑up**: form validates email; success and error messages are announced via ARIA live regions; double opt‑in integrated with mailing service.
-
-5. **Subscription page**: subscription forms create a subscription product; pricing is correct; terms & conditions must be accepted; user receives confirmation email.
-
-## **11 WordPress 6.9 and theme.json enhancements**
-
-WordPress 6.9 introduces major improvements to the block theme API. To ensure the KWV theme is future‑proof and maximises editor flexibility, adopt the following enhancements:
-
-### **Numeric slugs & fluid scales**
-
-* **Spacing and typography sizes** should use **numeric slugs** (`10`, `20`, `30`, etc.) rather than semantic names. Numeric slugs allow predictable scaling, machine‑readable scripts and clean CSS variables (e.g. `--wp--preset--spacing--20`). Map these slugs to Figma tokens (`space.20`, `font.200`, etc.).
-
-* Define complete **spacing scales** in `theme.json` using `clamp()` so that margins, padding and gaps scale smoothly from 320 px to 1440 px. Provide increments from 10 to 100 with documented values in the theme file.
-
-* Implement a **fluid typography system** with `fluid` definitions in `theme.json`. Set global minimum and maximum viewport widths (e.g., 320 px to 1440 px) and define each font size preset with `min` and `max` values. This eliminates media queries and ensures text scales automatically.
-
-### **Block‑level settings vs global**
-
-* Use `settings.blocks` in `theme.json` to **restrict options per block**. For example, limit buttons to primary/secondary/CTA colours, prevent custom font sizes on buttons and define fixed spacing for navigation menus. This enforces brand consistency and reduces editor error.
-
-* Global presets (colours, spacing, typography) are defined in the root `settings` object and inherited by all blocks. Override them at block level only when necessary to restrict or extend options.
-
-### **Presets & new WP 6.9 features**
-
-Add the following preset groups in `theme.json` to leverage WordPress 6.9:
-
-* **Border radius presets** – define sizes (`none`, `small`, `medium`, `large`, `full`) and reference them via variables in block styles.
-
-* **Aspect ratio presets** – provide ratios (square, 4/3, 16/9, 21/9, etc.) so editors can select image proportions without custom values. Use these in hero sections and image blocks.
-
-* **Shadow presets** – define light and dark mode shadow scales (`small`, `medium`, `large`, `x-large`) to apply depth consistently. In dark mode, increase opacity for improved visibility.
-
-* **Fluid typography settings** – include `fluid` properties with min/max viewport widths to auto‑generate clamp() values for font sizes.
-
-* **Focus and outline styles** – implement `:focus` and `:focus-visible` pseudo‑selectors in button and link styles to meet WCAG 2.1 AA requirements. Use accessible outlines (e.g., 2 px solid CTA colour).
-
-* **Background image controls** – enable background image settings in `theme.json` so editors can set images on cover blocks and control size and position.
-
-### **Style variations architecture**
-
-To support dark mode, high‑contrast variants and future brand themes, adopt a **composable styles folder**. A proposed structure is as follows:
-
-`styles/`  
-`├── defaults.json          # Base styles inherited by all variations`  
-`├── color-palettes/        # light.json, dark.json, high-contrast.json`  
-`├── typesets/              # sans-serif.json, serif.json, monospace.json`  
-`├── block-styles/          # button-primary.json, button-rounded.json, outline.json, ghost.json, etc.`  
-`├── section-styles/        # hero.json, content-box.json, footer.json, testimonial.json, cta-banner.json`  
-`└── variations/            # dark.json, high-contrast.json, compact.json, ocean.json, ocean-serif.json`
-
-Each file defines only the properties it needs and inherits from `defaults.json`. Variation files combine palettes, typesets and custom accents to create new themes without duplication. This architecture allows the KWV theme to add, for example, a festive Christmas palette or a summer promotion variation by composing existing presets.
-
-### **Implementation roadmap**
-
-The WordPress 6.9 evaluation identified several **critical gaps** that must be addressed before production. Key tasks include:
-
-1. **Block‑level settings (P0‑1)** – configure per‑block colour and typography options to enforce brand consistency and prevent misuse. Estimated 4–6 hours.
-
-2. **Complete shadow system (P0‑2)** – implement full shadow scale in both light and dark themes and apply to all relevant blocks.
-
-3. **Spacing and typography scales (P0‑3 & P0‑4)** – document and implement numeric spacing sizes and line‑height/letter‑spacing scales using `clamp()`.
-
-4. **Contrast validation (P0‑5)** – add tests to ensure all colour combinations meet WCAG AA contrast ratios.
-
-5. **Refactor styles folder (Phase 2\)** – adopt the composable architecture with palettes, typesets, block and section styles. This will expand the number of style files from 7 to \~27 and allow safe composition of variations.
-
-Completing these tasks will ensure full utilisation of WordPress 6.9 capabilities, improve maintainability and provide editors with a rich library of styles.
+## 8\. Templates & layout patterns
+
+This section ties pages, components and patterns together for Figma Make and the block theme.
+
+### 8.1 Page-template families
+
+**Corporate**
+
+- `CorporateHomeTemplate`
+- `AboutHubTemplate`
+- `StandardPageTemplate` (About, Sustainability, Global Distribution, etc.)
+- `TimelinePageTemplate` (History)
+- `AwardsPageTemplate`
+- `ExecutiveTeamTemplate`
+- `NewsArchiveTemplate`
+- `NewsSingleTemplate`
+- `ExperiencesLandingTemplate`
+- `ExperienceDetailTemplate`
+- `FAQPageTemplate`
+- `ContactPageTemplate`
+- `LegalPageTemplate`
+- `WineClubLandingTemplate`
+
+**Shop**
+
+- `ShopHomeTemplate`
+- `PromotionsTemplate`
+- `ShopBrandsTemplate`
+- `ProductListingTemplate` (categories/brands/tags)
+- `ProductSingleTemplate`
+- `CartTemplate`
+- `CheckoutTemplate`
+- `OrderConfirmationTemplate`
+- `MyAccountTemplate` (variants for logged-in/out)
+- `ShopFAQTemplate`
+- `ShopLegalTemplate`
+- `ComingSoonTemplate`
+
+### 8.2 Cross-site layout patterns
+
+- Hero pattern: image/gradient background, heading, subheading, CTAs.
+- Two-column content pattern: text and media with flexible order.
+- Card grid pattern: brands, experiences, news, events, collections.
+- Timeline pattern.
+- FAQ accordion pattern.
+- Newsletter pattern.
+- Contact pattern (details \+ form).
+
+### 8.3 Corporate-specific patterns
+
+- Brands overview and “brands by category” grids.
+- Brand story layout (hero, brand narrative, imagery, related products/posts).
+- Awards listing (filters \+ grouped lists or accordions).
+- Team grid.
+- Experiences card grid and experience detail pattern.
+
+### 8.4 Shop-specific patterns
+
+- Shop homepage layout (hero, collections, promotions strip, brand grid, newsletter).
+- Promotions page layout (stacked promotional groups).
+- Category hero \+ filters layout.
+- Product detail layout.
+- Cart layouts (full/empty).
+- Checkout layout.
+- Order confirmation layout.
+- My Account split layout (login/register, tabs for logged-in).
+
+Patterns should be built as **Section components** in Figma with variants and be registered as **block patterns** in the theme.
+
+---
+
+## 9\. Performance & SEO
+
+- **Images:** design with sensible sizes and aspect ratios; reserve space to avoid layout shifts; assume lazy-loading.
+- **Scripts:** favour simple, declarative patterns; avoid heavy client-side experiments for core tasks.
+- **Layout stability:** ensure cards, grids and hero sections don’t shift as content loads.
+- **SEO:**
+  - One clear H1 per page; structured headings afterwards.
+  - Space for SEO meta (titles, descriptions) and social share images.
+  - Product pages should expose obvious structured data fields (price, brand, availability) that can be mapped into schema.
+
+---
+
+## 10\. Development guidelines
+
+These are shared expectations for Figma Make, React and the block theme.
+
+- **Component scope:** prefer small, focused components with well-defined props and clear variants.
+- **Naming:** align names across Figma components, React components, template parts, patterns and tokens.
+- **States:** explicitly design all important states – hover, focus, disabled, loading, error, success, empty, logged-in/logged-out.
+- **Internationalisation:** keep labels concise and avoid designs that break when copy length changes.
+- **Testability:** ensure layouts have predictable regions and state variants; this makes visual regression and end-to-end tests easier to write.
+
+---
+
+## 11\. Acceptance criteria – examples
+
+Each major component/page should have testable acceptance criteria. Examples:
+
+1. **Header (all contexts)**
+   - Shows the correct menu set for corporate/shop/checkout.
+   - Mobile nav is keyboard accessible and easy to collapse/expand.
+   - Search is usable by keyboard and pointer and clear on mobile.
+   - Sticky behaviour never hides important content.
+
+2. **Product grid and filters**
+   - Filters can be combined and reset without breaking layout.
+   - Empty and “no result” states look intentional.
+   - Grid adapts across 1–4 columns with readable card content.
+
+3. **History timeline**
+   - Events remain readable on all breakpoints.
+   - Keyboard navigation between entries is clear.
+   - Long timelines are visually grouped to avoid fatigue.
+
+4. **Newsletter sign-up**
+   - Fields and button are clearly labelled and accessible.
+   - Success and error states are visually distinct and expressed in text.
+   - Works both as a standalone section and in footer context.
+
+5. **Wine Club landing**
+   - Benefits and pack contents are clearly explained.
+   - There is one primary route into the purchase flow.
+   - The mobile layout communicates just as clearly as desktop.
+
+Every template, pattern and component should be validated against:
+
+- Accessibility rules (section 1).
+- Visual system & tokens (section 3).
+- Site structure & templates (sections 4–5).
+- Block usage & architecture (sections 6–8).
+
+---
+
+## 12\. How Figma Make should use this document
+
+1. **Create a frame for each template**
+   - Create named frames matching the route/template names (e.g. `HomePage`, `ShopHomePage`, `CheckoutPage`).
+   - Ensure each frame clearly indicates which WordPress template it corresponds to.
+
+2. **Build components aligned with patterns & template parts**
+   - Build components for header variants, footers, mini cart drawer, hero sections, FAQ sections, product cards, post cards, newsletter, contact, etc.
+   - Use variants for states: cart full/empty, account logged-in/logged-out, accordions open/closed, tab active/inactive.
+
+3. **Use block-aware layouts**
+   - Layouts should visually reflect block composition:
+     - Query Loop \+ Post Template for news.
+     - Product Collection \+ Filters for shop archives.
+     - Accordion groups for FAQs.
+     - Terms Query for brand grids.
+     - Woo single-product blocks for product pages.
+
+4. **Apply token-driven styling**
+   - Reference colour, type and spacing tokens consistently.
+   - Keep Figma token names compatible with `theme.json` presets and numeric scales.
+
+5. **Design state-specific artboards**
+   - Provide separate frames/variants for important states, especially:
+     - Checkout (guest vs logged-in).
+     - Order confirmation (with/without account).
+     - Cart and mini cart (empty vs items).
+     - My Account (login vs dashboard).
+
+Accessibility rules in section 1 are mandatory and must be respected in all outputs from Figma Make.  
+This `Guidelines.md` is the shared source-of-truth for the KWV Figma file, the React app and the WordPress/WooCommerce build.

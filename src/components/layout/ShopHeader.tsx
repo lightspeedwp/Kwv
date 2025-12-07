@@ -13,6 +13,8 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetTitle,
+  SheetDescription,
 } from "../ui/sheet";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
 
@@ -162,9 +164,9 @@ export const ShopHeader: React.FC = () => {
 
             {/* Company Mega Menu */}
             <div className="relative group">
-               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
                  Company <ChevronDown size={14} />
-               </button>
+               </Link>
                <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
                   <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
                   <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
@@ -257,6 +259,8 @@ export const ShopHeader: React.FC = () => {
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-[#2C1810] text-white overflow-y-auto [&>button]:hidden border-l border-[#3d2319]">
+                  <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                  <SheetDescription className="sr-only">Navigation menu</SheetDescription>
                   <div className="p-6 flex flex-col min-h-full">
                      <div className="mb-8 flex items-center justify-between">
                         <KWVShopLogo className="h-10 w-auto text-white" />
@@ -319,6 +323,7 @@ export const ShopHeader: React.FC = () => {
                                 <AccordionItem value="company" className="border-b border-white/10">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Company</AccordionTrigger>
                                    <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/" onClick={closeMenu} className="block text-[#DAA520] font-bold">Company Home</Link>
                                       <Link to="/about" onClick={closeMenu} className="block hover:text-white">About Us</Link>
                                       <Link to="/history" onClick={closeMenu} className="block hover:text-white">History</Link>
                                       <Link to="/brands" onClick={closeMenu} className="block hover:text-white">Our Brands</Link>
@@ -334,6 +339,7 @@ export const ShopHeader: React.FC = () => {
                               <AccordionItem value="experiences" className="border-b border-white/10">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Visit Us</AccordionTrigger>
                                    <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/experiences" onClick={closeMenu} className="block text-[#DAA520] font-bold">Experiences Home</Link>
                                       <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
                                       <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
                                       <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
