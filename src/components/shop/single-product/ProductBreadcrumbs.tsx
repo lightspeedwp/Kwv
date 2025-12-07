@@ -12,6 +12,14 @@ interface ProductBreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
+/**
+ * ProductBreadcrumbs Component
+ * 
+ * Specialized breadcrumb navigation for Product Detail pages.
+ * Supports deep hierarchy navigation (Home > Category > Subcategory > Product).
+ * 
+ * @param {ProductBreadcrumbsProps} props - List of breadcrumb items.
+ */
 export const ProductBreadcrumbs: React.FC<ProductBreadcrumbsProps> = ({ items }) => {
   return (
     <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">

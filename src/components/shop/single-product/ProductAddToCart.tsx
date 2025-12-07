@@ -20,6 +20,19 @@ interface ProductAddToCartProps {
   variationLabel?: string;
 }
 
+/**
+ * ProductAddToCart Component
+ * 
+ * The main action area for the Product Detail page.
+ * Features:
+ * - Quantity selector (+/-).
+ * - Variation selector (if product has variations).
+ * - "Subscribe & Save" toggle option.
+ * - Stock status handling (Out of Stock state).
+ * - "Add to Cart" button.
+ * 
+ * @param {ProductAddToCartProps} props - Product stock, variations, and subscription options.
+ */
 export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({ 
   onAddToCart, 
   inStock = true, 

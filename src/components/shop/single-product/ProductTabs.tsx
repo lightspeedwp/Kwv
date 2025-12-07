@@ -10,6 +10,16 @@ interface ProductTabsProps {
   tabs: TabData[];
 }
 
+/**
+ * ProductTabs Component
+ * 
+ * A tabbed interface for extended product information (Description, Specifications, Reviews).
+ * Features:
+ * - Animated indicator for active tab (using `motion/react`).
+ * - Smooth switching between content panels.
+ * 
+ * @param {ProductTabsProps} props - Array of tab objects (label + content).
+ */
 export const ProductTabs: React.FC<ProductTabsProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 

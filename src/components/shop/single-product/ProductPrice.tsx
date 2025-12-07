@@ -6,6 +6,14 @@ interface ProductPriceProps {
   salePrice?: number;
 }
 
+/**
+ * ProductPrice Component
+ * 
+ * Displays the product price with support for sale pricing.
+ * Shows original price with strikethrough if a sale price is present.
+ * 
+ * @param {ProductPriceProps} props - Regular price and optional sale price.
+ */
 export const ProductPrice: React.FC<ProductPriceProps> = ({ price, salePrice }) => {
   return (
     <div className="flex items-center gap-3 mb-6">

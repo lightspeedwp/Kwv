@@ -6,6 +6,14 @@ interface ProductMetaProps {
   tags?: string[];
 }
 
+/**
+ * ProductMeta Component
+ * 
+ * Displays metadata about the product such as SKU, Categories, and Tags.
+ * Renders categories and tags as clickable links (visual-only in prototype).
+ * 
+ * @param {ProductMetaProps} props - SKU, categories array, tags array.
+ */
 export const ProductMeta: React.FC<ProductMetaProps> = ({ sku, categories, tags }) => {
   return (
     <div className="space-y-2 text-sm text-gray-500 mb-8">

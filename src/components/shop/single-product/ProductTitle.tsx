@@ -6,6 +6,14 @@ interface ProductTitleProps {
   brand?: string;
 }
 
+/**
+ * ProductTitle Component
+ * 
+ * Displays the main H1 title for the product page.
+ * Optionally displays the Brand name above the title as a badge/eyebrow.
+ * 
+ * @param {ProductTitleProps} props - Product title and brand name.
+ */
 export const ProductTitle: React.FC<ProductTitleProps> = ({ title, brand }) => {
   return (
     <div className="mb-4">

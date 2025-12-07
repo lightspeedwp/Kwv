@@ -10,6 +10,14 @@ interface StoreNoticesProps {
   notices: Notice[];
 }
 
+/**
+ * StoreNotices Component
+ * 
+ * Displays global or context-specific store alerts (e.g., "Added to cart", "Out of stock").
+ * Supports Success, Error, and Info states with corresponding icons and colors.
+ * 
+ * @param {StoreNoticesProps} props - Array of notice objects.
+ */
 export const StoreNotices: React.FC<StoreNoticesProps> = ({ notices }) => {
   if (notices.length === 0) return null;
 

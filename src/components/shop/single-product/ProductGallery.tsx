@@ -8,6 +8,19 @@ interface ProductGalleryProps {
   productName: string;
 }
 
+/**
+ * ProductGallery Component
+ * 
+ * An interactive image gallery for the Product Detail page.
+ * Features:
+ * - Large main image display.
+ * - Thumbnail strip navigation.
+ * - Lightbox modal for full-screen viewing.
+ * - Zoom on hover.
+ * - Image actions (Wishlist, Share, Expand).
+ * 
+ * @param {ProductGalleryProps} props - Array of image URLs and product name.
+ */
 export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productName }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);

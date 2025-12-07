@@ -258,6 +258,9 @@ All Hero sections (Corporate, Shop, Experiences) must adhere to these standard d
 4.  **Typography:**
     *   Hero titles must support a `stretchy` prop or mechanism to ensure titles remain on a single line where possible, scaling fluidly.
 
+5.  **Call to Actions (Buttons):**
+    *   Primary hero buttons must use `variant="hero"` or `variant="heroGold"` which implements specific uppercase tracking and `shadow-lg` styles.
+
 ---
 
 ## 4\. Site structure & page blueprints
@@ -909,11 +912,12 @@ App
    │  └─ shop      (ContactFollowSection, ServiceFeaturesSection)
    ├─ shop         
    │  ├─ common    (ProductCard, ProductGrid)
-   │  ├─ home      (ShopHero, ShopBrandGrid, ShopCategorySlider)
+   │  ├─ home      (ShopHero, ShopBrandGrid, ShopCategorySlider, ShopNewsletter, ShopSocialSection)
    │  ├─ cart      (MiniCart, Cart components)
-   │  ├─ checkout  (CheckoutForm, PaymentGateways, ShippingMethods)
-   │  ├─ single-product (ProductGallery, ProductPrice, ProductAddToCart, ProductTabs)
-   │  └─ order     (OrderSummary, OrderStatus, AccountCreation)
+   │  ├─ checkout  (BillingAddress, ShippingAddressForm, ContactInfo, PaymentMethods, OrderSummary, DeliveryMethodSelector, CheckoutStep, CheckoutInput, PickupLocationSelect)
+   │  ├─ single-product (ProductGallery, ProductPrice, ProductAddToCart, ProductTabs, ProductMeta, RelatedProducts, PayflexWidget, ProductBreadcrumbs, ProductRating, ProductSummary, ProductTitle, ReviewsTab, StoreNotices)
+   │  ├─ layout    (ShopInfoFooter, ShopSidebar)
+   │  └─ order     (OrderSummary, OrderStatusHeader, AccountCreation, AdditionalFields, AdditionalInformation, AddressDetails, DownloadsSection, OrderDetails)
    ├─ experiences  (ExperiencePageLayout)
    ├─ figma        (ImageWithFallback)
    └─ ui           (Radix/Shadcn UI primitives)
@@ -1020,6 +1024,8 @@ These are shared expectations for Figma Make, React and the block theme.
 - **Navigation (SPA):** Always use `react-router-dom`'s `Link` or `useNavigate` for internal navigation. Never use `window.location` or `<a>` tags for internal routes to ensure Single Page Application (SPA) state is preserved.
 - **CTA Consistency:** All Hero section Call-to-Action buttons must follow the standardized "chunky" style (large size, uppercase, bold font, shadow) defined in `Hero.tsx` and `ShopHero.tsx`.
 - **JSDoc Documentation:** It is **mandatory** to add JSDoc comments to all components, hooks, and utility functions in `pages/` and `components/` directories. Explain props, return types, and complex logic.
+- **File Headers:** Every component file must start with a JSDoc block explaining the component's purpose, key features, and available props/variants.
+- **Import Rules:** Always use explicit relative paths (e.g., `../../components/common/Button`) for internal imports. Never use aliases like `@/` as they are not supported in this build environment.
 
 ---
 

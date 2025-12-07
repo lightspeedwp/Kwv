@@ -6,6 +6,14 @@ interface ProductRatingProps {
   reviewCount: number;
 }
 
+/**
+ * ProductRating Component
+ * 
+ * Visual star rating display for products.
+ * Includes the star count (1-5) and a link to the reviews section anchor.
+ * 
+ * @param {ProductRatingProps} props - Numeric rating and review count.
+ */
 export const ProductRating: React.FC<ProductRatingProps> = ({ rating, reviewCount }) => {
   return (
     <div className="flex items-center gap-1 mb-6">

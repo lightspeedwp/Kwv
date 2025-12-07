@@ -20,6 +20,14 @@ interface RelatedProductsProps {
   title?: string;
 }
 
+/**
+ * RelatedProducts Component
+ * 
+ * A section displaying a grid of suggested products.
+ * Typically used at the bottom of the Product Detail page.
+ * 
+ * @param {RelatedProductsProps} props - Array of product objects.
+ */
 export const RelatedProducts: React.FC<RelatedProductsProps> = ({ products, title = "You Might Also Like" }) => {
   if (!products || products.length === 0) return null;
 

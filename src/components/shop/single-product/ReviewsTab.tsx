@@ -3,6 +3,15 @@ import { Star } from 'lucide-react';
 import { Button } from '../../common/Button';
 import { Typography } from '../../common/Typography';
 
+/**
+ * ReviewsTab Component
+ * 
+ * The content for the "Reviews" tab on the Product Page.
+ * Features:
+ * - List of existing reviews.
+ * - Form for submitting a new review.
+ * - Star rating input.
+ */
 export const ReviewsTab: React.FC = () => {
   const [rating, setRating] = useState(0);
 

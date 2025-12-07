@@ -4,6 +4,14 @@ interface PayflexWidgetProps {
   price: number;
 }
 
+/**
+ * PayflexWidget Component
+ * 
+ * A promotional widget displayed on Product Pages to advertise Buy Now Pay Later options.
+ * Calculates and displays the installment amount based on the product price.
+ * 
+ * @param {PayflexWidgetProps} props - Price of the product to calculate installments.
+ */
 export const PayflexWidget: React.FC<PayflexWidgetProps> = ({ price }) => {
   const installment = (price / 4).toFixed(2);
 
