@@ -1,4 +1,4 @@
-# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3 – Integrated)
+# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3.1 – Integrated)
 
 Accessibility is the **first and non-negotiable requirement** for all KWV designs and implementations.  
 Figma Make **must** treat accessibility (including WCAG 2.1 AA contrast, keyboard access and screen-reader support) as a hard constraint, not an optional enhancement.
@@ -18,6 +18,7 @@ When generating or modifying layouts and components, Figma Make must:
   - Normal text: contrast ratio **≥ 4.5:1**.
   - Large text (approx. ≥18 px regular or ≥14 px bold): contrast ratio **≥ 3:1**.
   - Icons and essential graphical UI (e.g. buttons, toggles) must also meet AA contrast against their background.
+  - **Dynamic Contrast**: Navigation elements (like breadcrumbs and menus) must dynamically adjust their color based on the background they are placed on (e.g., white text on dark hero images, dark text on light page backgrounds).
 - **Avoid colour-only communication**:
   - Never rely on colour alone to indicate state (e.g. error vs success, active vs inactive, sale vs regular).
   - Always pair colour with text, icons or shape differences.
@@ -254,7 +255,7 @@ KWV.co.za
 │  ├─ News & Media
 │  │  ├─ News Listing
 │  │  └─ Single Post
-│  ├─ Visit Us (Experiences)
+│  ├─ Visit Us (/experiences)
 │  │  ├─ Emporium
 │  │  ├─ Cathedral Cellar
 │  │  ├─ House of Fire
@@ -266,7 +267,7 @@ KWV.co.za
 │  ├─ Contact Us
 │  └─ Legal (Terms & Conditions of Use; Policies & Guidelines)
 │
-├─ Shop (WooCommerce)
+├─ Shop (/shop) (WooCommerce)
 │  ├─ Shop Homepage (Online Shop)
 │  ├─ Promotions
 │  ├─ Brands (shop brand landing)
@@ -411,7 +412,7 @@ Below, each page lists:
 
 #### Experiences (“Visit Us”)
 
-- **Main landing URL:** `/experience-kwv/`
+- **Main landing URL:** `/experiences/`
 - **Template:** `page`
 - **Subpages:**
   - Emporium, Cathedral Cellar, House of Fire, Events, Conference Facilities, Cathedral Cellar Kitchen Venue.
@@ -423,8 +424,8 @@ Below, each page lists:
   - Hero with imagery \+ title.
   - Rich description, opening times, pricing if relevant.
   - Practical information: location, accessibility, booking details.
-  - Strong booking CTAs.
-- **React routes:** `ExperiencesLandingPage` and experience detail pages (`ExperienceEmporiumPage`, etc.).
+  - Strong booking CTAs (linking to Contact/Enquiry).
+- **React routes:** `ExperiencesLandingPage` and experience detail pages (`ExperienceEmporiumPage`, etc.) using `ExperiencePageLayout`.
 
 #### FAQ (main site)
 
@@ -462,7 +463,7 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 
 #### Shop Homepage (Online Shop)
 
-- **URL:** `/online-shop/`
+- **URL:** `/shop/`
 - **Template:** `page` (with Woo blocks).
 - **Sections:**
   - Intro hero with promotion or campaign.
@@ -476,14 +477,14 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 
 #### Promotions
 
-- **URL:** e.g. `/promotions-view-our-special-offers/`
+- **URL:** `/shop/promotions`
 - **Template:** `page` \+ Product Collection blocks.
 - **Behaviour:** Curated promotional groupings (campaign sections), plus optional “on sale” collection.
 - **React route:** `ShopPromotionsPage`.
 
 #### Shop Brands landing
 
-- **URL:** new dedicated “Shop brands” page.
+- **URL:** `/shop/brands`
 - **Template:** `page`
 - **Structure:**
   - Group brands under Wines, Spirits, Ready-to-drink, Non-alcoholic.
@@ -493,11 +494,11 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 #### Product category / brand archives
 
 - **Examples:**
-  - `/product-category/spirits/`
-  - `/product-category/wine/`
-  - `/product-category/mixers/`
-  - `/product-category/accessory-gifts/`
-  - Brand tax URLs (Roodeberg, Laborie, etc.).
+  - `/shop/spirits/`
+  - `/shop/wine/`
+  - `/shop/mixers/`
+  - `/shop/gifting/`
+  - Brand tax URLs (`/shop/brand/roodeberg`, etc.).
 - **Templates:**
   - `archive-product`
   - `taxonomy-product_cat`, `taxonomy-product_tag`, `taxonomy-product_attribute`
@@ -547,7 +548,7 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 
 #### Shop FAQ
 
-- **URL:** `/online-shop/frequently-asked-questions/`
+- **URL:** `/shop/faq`
 - **Template:** `page`
 - **Pattern:** Shop FAQ accordion (shipping, returns, payment, delivery, age restrictions).
 - **React route:** `ShopFAQPage`.
@@ -565,7 +566,7 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 
 ### 4.4 Wine Club – Winemakers Club 11th Edition
 
-- **URL:** `/our-company/winemakers-club-11/`
+- **URL:** `/wine-club/`
 - **Template:** `page` (special layout)
 - **Behaviour:**
   - Acts as a campaign-ready landing page.
@@ -832,7 +833,7 @@ App
 │     │  ├─ ShopFooter        (maps to `footer-shop`)
 │     │  └─ CheckoutFooter    (maps to `footer-checkout`)
 │     │
-│     ├─ BreadcrumbsBar       (maps to `breadcrumbs`)
+│     ├─ BreadcrumbsBar       (Context-aware: overlay on Hero, block on standard pages)
 │     ├─ MiniCartDrawer       (maps to `mini-cart-drawer`)
 │     ├─ AgeVerificationModal
 │     ├─ BackToTopButton
@@ -845,11 +846,13 @@ App
 │
 └─ Shared Components
    ├─ Common (Container, Typography, Button, Icon, ImageWithFallback, Badge/Chip)
-   ├─ Sections (Hero, HeroShop, HeroWineClub, Timeline, Card grids, Newsletter, Contact form, FAQ, Archive header, Post meta, Post footer meta, Comments)
+   ├─ Sections (Hero, ShopHero, WineClubCTA, Timeline, Card grids, Newsletter, Contact form, FAQ, Archive header, Post meta, Post footer meta, Comments)
    ├─ Blog (PostCard, PostMetaBar, PostFooterMeta, PostBody)
    ├─ Shop (ProductCard, ProductGrid, ProductFiltersSidebar, ProductCarousel, CartSummary, CheckoutFormLayout, OrderSummaryBlock, MyAccountTabs, MiniCartContents)
    ├─ WooBlocks (conceptual wrappers for StoreBreadcrumbs, StoreNotices, ProductImageGallery, etc.)
-   └─ CoreBlockMapping (Text, Media, Layout, Interactive, Theme, Taxonomy abstractions)
+   ├─ CoreBlockMapping (Text, Media, Layout, Interactive, Theme, Taxonomy abstractions)
+   └─ Templates/Layouts
+      └─ ExperiencePageLayout (Standardized detail page for venues like Emporium, Cathedral Cellar)
 ```
 
 Names can adjust slightly, but the **shape** and mapping to templates/template parts should stay consistent.
@@ -873,7 +876,7 @@ This section ties pages, components and patterns together for Figma Make and the
 - `NewsArchiveTemplate`
 - `NewsSingleTemplate`
 - `ExperiencesLandingTemplate`
-- `ExperienceDetailTemplate`
+- `ExperienceDetailTemplate` (Uses `ExperiencePageLayout` component)
 - `FAQPageTemplate`
 - `ContactPageTemplate`
 - `LegalPageTemplate`
@@ -897,8 +900,9 @@ This section ties pages, components and patterns together for Figma Make and the
 ### 8.2 Cross-site layout patterns
 
 - Hero pattern: image/gradient background, heading, subheading, CTAs.
+  - **Standardized CTA:** Primary hero buttons must be large, uppercase, bold, and use the `shadow-lg` style for consistency.
 - Two-column content pattern: text and media with flexible order.
-- Card grid pattern: brands, experiences, news, events, collections.
+- Card grid pattern: brands, experiences, news, events, products.
 - Timeline pattern.
 - FAQ accordion pattern.
 - Newsletter pattern.
@@ -948,6 +952,8 @@ These are shared expectations for Figma Make, React and the block theme.
 - **States:** explicitly design all important states – hover, focus, disabled, loading, error, success, empty, logged-in/logged-out.
 - **Internationalisation:** keep labels concise and avoid designs that break when copy length changes.
 - **Testability:** ensure layouts have predictable regions and state variants; this makes visual regression and end-to-end tests easier to write.
+- **Navigation (SPA):** Always use `react-router-dom`'s `Link` or `useNavigate` for internal navigation. Never use `window.location` or `<a>` tags for internal routes to ensure Single Page Application (SPA) state is preserved.
+- **CTA Consistency:** All Hero section Call-to-Action buttons must follow the standardized "chunky" style (large size, uppercase, bold font, shadow) defined in `Hero.tsx` and `ShopHero.tsx`.
 
 ---
 
@@ -1021,3 +1027,6 @@ Every template, pattern and component should be validated against:
 
 Accessibility rules in section 1 are mandatory and must be respected in all outputs from Figma Make.  
 This `Guidelines.md` is the shared source-of-truth for the KWV Figma file, the React app and the WordPress/WooCommerce build.
+
+ Some of the base components you are using may have styling(eg. gap/typography) baked in as defaults.
+So make sure you explicitly set any styling information from the guidelines in the generated react to override the defaults.

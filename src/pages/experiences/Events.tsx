@@ -1,8 +1,11 @@
 import React from 'react';
 import { ExperiencePageLayout } from '../../components/experiences/ExperiencePageLayout';
 import { Button } from '../../components/common/Button';
+import { useNavigate } from 'react-router-dom';
 
 export const Events: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <ExperiencePageLayout
       title="KWV EVENTS"
@@ -10,7 +13,7 @@ export const Events: React.FC = () => {
       heroImage="https://images.unsplash.com/photo-1519671482538-eb2335b9ea9d?auto=format&fit=crop&q=80"
       heroDescription="Join us for our upcoming events. From music concerts in the Cathedral Cellar to food and wine festivals, there is always something happening at KWV."
       ctaText="VIEW CALENDAR"
-      ctaLink="#"
+      ctaLink="/experiences"
       galleryImages={[
         "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80",
@@ -31,7 +34,7 @@ export const Events: React.FC = () => {
                         <span className="text-[#DAA520] font-bold text-xs tracking-widest">DECEMBER 15, 2024</span>
                         <h4 className="text-xl font-bold mt-1 mb-2">Classics in the Cellar</h4>
                         <p className="text-sm text-gray-600 mb-4">Enjoy an evening of classical music performed by the Cape Philharmonic Orchestra in the acoustic perfection of our Cathedral Cellar.</p>
-                        <Button size="sm" variant="outline">Book Tickets</Button>
+                        <Button size="sm" variant="outline" onClick={() => navigate('/contact')}>Book Tickets</Button>
                     </div>
                 </div>
 
@@ -44,7 +47,7 @@ export const Events: React.FC = () => {
                         <span className="text-[#DAA520] font-bold text-xs tracking-widest">JANUARY 20, 2025</span>
                         <h4 className="text-xl font-bold mt-1 mb-2">Harvest Festival Long Table</h4>
                         <p className="text-sm text-gray-600 mb-4">Celebrate the start of the harvest with a traditional long table dinner under the stars.</p>
-                        <Button size="sm" variant="outline">Book Tickets</Button>
+                        <Button size="sm" variant="outline" onClick={() => navigate('/contact')}>Book Tickets</Button>
                     </div>
                 </div>
 
@@ -57,7 +60,7 @@ export const Events: React.FC = () => {
                         <span className="text-[#DAA520] font-bold text-xs tracking-widest">FEBRUARY 14, 2025</span>
                         <h4 className="text-xl font-bold mt-1 mb-2">Valentine's Chocolate & Wine Masterclass</h4>
                         <p className="text-sm text-gray-600 mb-4">A romantic masterclass featuring our limited edition wines paired with artisanal chocolates.</p>
-                        <Button size="sm" variant="outline">Book Tickets</Button>
+                        <Button size="sm" variant="outline" onClick={() => navigate('/contact')}>Book Tickets</Button>
                     </div>
                 </div>
             </div>

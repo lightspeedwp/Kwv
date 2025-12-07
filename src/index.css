@@ -2502,6 +2502,10 @@
     padding-top: calc(var(--spacing) * 20);
   }
 
+  .pt-24 {
+    padding-top: calc(var(--spacing) * 24);
+  }
+
   .pr-0 {
     padding-right: calc(var(--spacing) * 0);
   }
@@ -2556,10 +2560,6 @@
 
   .pb-10 {
     padding-bottom: calc(var(--spacing) * 10);
-  }
-
-  .pb-12 {
-    padding-bottom: calc(var(--spacing) * 12);
   }
 
   .pb-16 {
@@ -3555,6 +3555,12 @@
   @media (hover: hover) {
     .hover\:border-gray-800:hover {
       border-color: var(--color-gray-800);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:\!bg-\[\#b08d4a\]:hover {
+      background-color: #b08d4a !important;
     }
   }
 

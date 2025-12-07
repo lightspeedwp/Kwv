@@ -8,6 +8,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import { KWVLogo } from '../components/common/Logo';
 import { ShopCategorySlider } from '../components/shop/ShopCategorySlider';
 import { ScrollDownArrow } from '../components/common/ScrollDownArrow';
+import { useNavigate } from 'react-router-dom';
 
 // Reusing images or placeholders similar to the design
 const IMAGES = {
@@ -23,6 +24,15 @@ const IMAGES = {
 };
 
 export const WineClub: React.FC = () => {
+  const navigate = useNavigate();
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -81,7 +91,10 @@ export const WineClub: React.FC = () => {
                    You don't just drink the wine; you create memories with friends and family. You also enjoy rewarding regular updates, promotions, and competitions.
                  </Typography>
                  
-                 <Button className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-8 py-3 rounded-none mt-4 uppercase tracking-wider text-sm font-bold">
+                 <Button 
+                    onClick={() => scrollToSection('inside-box')}
+                    className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-8 py-3 rounded-none mt-4 uppercase tracking-wider text-sm font-bold"
+                 >
                     Read More
                  </Button>
               </div>
@@ -90,7 +103,7 @@ export const WineClub: React.FC = () => {
       </div>
 
       {/* Inside This Box Section */}
-      <div className="bg-[#F4F4F4] py-12 md:py-20">
+      <div id="inside-box" className="bg-[#F4F4F4] py-12 md:py-20">
          <Container variant="site">
             <div className="bg-white shadow-xl max-w-5xl mx-auto">
                <div className="grid grid-cols-1 lg:grid-cols-5">
@@ -154,7 +167,10 @@ export const WineClub: React.FC = () => {
                      <Typography variant="h3" className="text-white uppercase font-bold text-2xl">Price: R950</Typography>
                      <Typography variant="caption" className="text-gray-400 uppercase tracking-wider text-xs">Subscription Amount</Typography>
                   </div>
-                  <Button className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-10 py-3 uppercase font-bold tracking-wider text-sm rounded-none">
+                  <Button 
+                    onClick={() => navigate('/shop')}
+                    className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-10 py-3 uppercase font-bold tracking-wider text-sm rounded-none"
+                  >
                      Become a member
                   </Button>
                </div>
@@ -202,11 +218,17 @@ export const WineClub: React.FC = () => {
                </Typography>
                
                <div className="flex flex-col items-center gap-6">
-                  <button className="text-[#C5A059] uppercase tracking-widest text-sm font-bold border-b border-[#C5A059] pb-1 hover:text-[#2C1810] transition-colors">
+                  <button 
+                    onClick={() => scrollToSection('benefits')}
+                    className="text-[#C5A059] uppercase tracking-widest text-sm font-bold border-b border-[#C5A059] pb-1 hover:text-[#2C1810] transition-colors"
+                  >
                      Read More
                   </button>
                   
-                  <Button className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-10 py-3 uppercase font-bold tracking-wider text-sm rounded-none">
+                  <Button 
+                    onClick={() => navigate('/shop')}
+                    className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-10 py-3 uppercase font-bold tracking-wider text-sm rounded-none"
+                  >
                      Become a member
                   </Button>
                   
@@ -219,7 +241,7 @@ export const WineClub: React.FC = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="bg-[#FDFBF7]">
+      <div id="benefits" className="bg-[#FDFBF7]">
          <Container variant="site">
             <div className="grid grid-cols-1 lg:grid-cols-2">
                {/* Left Image */}
@@ -261,7 +283,10 @@ export const WineClub: React.FC = () => {
                         ))}
                      </ul>
                      
-                     <Button className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-8 py-3 uppercase font-bold tracking-wider text-xs w-fit rounded-none">
+                     <Button 
+                        onClick={() => navigate('/shop')}
+                        className="bg-[#C5A059] text-white hover:bg-[#B08D45] border-none px-8 py-3 uppercase font-bold tracking-wider text-xs w-fit rounded-none"
+                     >
                         Become a member
                      </Button>
                   </div>
@@ -327,7 +352,10 @@ export const WineClub: React.FC = () => {
             <Typography variant="body" className="text-gray-400 mb-8 max-w-2xl mx-auto">
                To find out more, please contact the KWV team for assistance.
             </Typography>
-            <Button className="bg-transparent text-white border border-white hover:bg-white hover:text-black px-12 py-3 uppercase font-bold tracking-wider text-sm rounded-none transition-all">
+            <Button 
+               onClick={() => navigate('/contact')}
+               className="bg-transparent text-white border border-white hover:bg-white hover:text-black px-12 py-3 uppercase font-bold tracking-wider text-sm rounded-none transition-all"
+            >
                Enquire
             </Button>
          </Container>

@@ -6,7 +6,7 @@ import { Layout } from '../components/layout/Layout';
 import { COLORS } from '../constants/theme';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { KWVExperiencesLogo } from '../components/common/Logo';
 
 const EXPERIENCE_CARDS = [
@@ -59,15 +59,17 @@ const GALLERY_IMAGES = [
 ];
 
 export const Experiences: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout>
-      {/* Header Section */}
-      <section className="bg-white pt-16 pb-12 text-center">
+      {/* Header Section - Converted to Dark Hero for Breadcrumb Consistency */}
+      <section className="bg-black pt-24 pb-16 text-center relative">
          <Container variant="content">
-            <Typography variant="h1" className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C1810] uppercase tracking-wide">
+            <Typography variant="h1" className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-wide">
                THE KWV EXPERIENCE
             </Typography>
-            <Typography variant="body" className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <Typography variant="body" className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
                KWV is situated in the heart of the Cape Winelands, in the picturesque town of Paarl, where it offers a range of products and experiences. Join us for a memorable experience!
             </Typography>
          </Container>
@@ -162,7 +164,10 @@ export const Experiences: React.FC = () => {
                      Blend and bottle your own KWV brandy with a <span className="underline">personalised</span> label.
                   </p>
                   
-                  <Button className="bg-[#A0522D] hover:bg-[#8B4513] text-white uppercase tracking-widest px-8 py-3 rounded-sm text-sm">
+                  <Button 
+                     className="bg-[#A0522D] hover:bg-[#8B4513] text-white uppercase tracking-widest px-8 py-3 rounded-sm text-sm"
+                     onClick={() => navigate('/contact')}
+                  >
                      BOOK YOUR VOUCHER
                   </Button>
                </div>

@@ -64,7 +64,7 @@ export const Emporium: React.FC = () => {
       heroImage="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&q=80"
       heroDescription="Visit and experience KWV like never before. From cellar tours and special food and wine pairings, to simply enjoying our wide variety of wines and brandies."
       ctaText="BOOK A TASTING"
-      ctaLink="#"
+      ctaLink="/contact"
       galleryImages={[
         "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1559563362-c667ba5f5480?auto=format&fit=crop&q=80",

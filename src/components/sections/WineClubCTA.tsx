@@ -30,8 +30,8 @@ export const WineClubCTA = () => {
                ))}
              </ul>
 
-             <Link to="/subscription">
-               <Button variant="primary" size="lg">
+             <Link to="/wine-club">
+               <Button variant="hero" size="lg" className="min-w-[200px]">
                  Join the Club
                </Button>
              </Link>

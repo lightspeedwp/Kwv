@@ -29,7 +29,7 @@ export const CathedralCellar: React.FC = () => {
       heroImage="https://images.unsplash.com/photo-1597843797221-e0e1f74dd7e2?auto=format&fit=crop&q=80"
       heroDescription="Step into history. The Cathedral Cellar is one of the most spectacular cellar complexes in the world, home to our gigantic vats and award-winning wines."
       ctaText="BOOK A TOUR"
-      ctaLink="#"
+      ctaLink="/contact"
       galleryImages={[
         "https://images.unsplash.com/photo-1504279577054-9234796147a6?auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&q=80",

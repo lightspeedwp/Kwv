@@ -67,7 +67,7 @@ export const Brands: React.FC = () => {
                        <ChevronLeft size={16} /> All Brands
                     </Button>
                  </Link>
-                 <Link to={`/shop/brands`}>
+                 <Link to={`/shop/search?q=${encodeURIComponent(brand.name)}`}>
                     <Button className="bg-[#8B0000] hover:bg-[#600000] text-white border-none">
                        Shop {brand.name}
                     </Button>

@@ -29,7 +29,7 @@ export const HouseOfFire: React.FC = () => {
       heroImage="https://images.unsplash.com/photo-1613325245242-1c5069a82383?auto=format&fit=crop&q=80"
       heroDescription="The House of Fire is where our award-winning brandies are distilled. It is a place of alchemy, patience, and craftsmanship."
       ctaText="VISIT HOF"
-      ctaLink="#"
+      ctaLink="/contact"
       galleryImages={[
         "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80",

@@ -78,7 +78,10 @@ export const BreadcrumbsBar: React.FC = () => {
     '/wine-club',
     '/contact',
     '/contact-us',
-    '/shop'
+    // Shop pages that specifically HAVE a hero:
+    '/shop/promotions',
+    '/shop/brands',
+    '/shop/faq'
   ];
   
   // Pages that match the hero path prefix but definitely DON'T have a hero
@@ -87,7 +90,8 @@ export const BreadcrumbsBar: React.FC = () => {
   ];
 
   // Also check if path starts with certain prefixes that always have heroes
-  const matchesHeroPath = HERO_PATHS.some(path => location.pathname === path || location.pathname.startsWith(path + '/')) 
+  const matchesHeroPath = (location.pathname === '/shop') || 
+    HERO_PATHS.some(path => location.pathname === path || location.pathname.startsWith(path + '/')) 
     || location.pathname.startsWith('/experiences/') 
     || location.pathname.startsWith('/news/');
 
@@ -130,7 +134,7 @@ export const BreadcrumbsBar: React.FC = () => {
                 <li key={to} className="flex items-center">
                   <ChevronRight size={14} className={`mx-2 ${hasHero ? 'text-white/60' : 'text-gray-400'}`} />
                   {isLast ? (
-                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-white' : 'text-[#333333]'}`} aria-current="page">
+                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-white drop-shadow-md' : 'text-[#333333]'}`} aria-current="page">
                       {name}
                     </span>
                   ) : isNonClickable ? (

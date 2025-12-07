@@ -5,6 +5,7 @@ import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export interface PricingItem {
   name: string;
@@ -53,21 +54,17 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
   pairings,
   infoSection,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Layout variant="experiences">
       {/* Hero Section */}
       <div className="relative w-full bg-black text-white">
-        {/* Hero Image Background */}
-        <div className="relative h-[60vh] min-h-[500px] w-full">
-            <ImageWithFallback 
-                src={heroImage} 
-                alt={title} 
-                className="w-full h-full object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
+        {/* Hero Background - Solid Black as per request */}
+        <div className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center bg-black">
             
             {/* Hero Content Overlay */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            <div className="flex flex-col items-center justify-center text-center p-6 max-w-4xl mx-auto z-10">
                 {/* Logo Area - Simplified as text/shield for now if no specific logo provided */}
                 <div className="mb-6 border border-white/30 p-4 bg-white/10 backdrop-blur-sm">
                     <div className="text-2xl font-serif font-bold tracking-widest uppercase">{title}</div>
@@ -77,7 +74,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                     EXPERIENCE
                 </Typography>
                 
-                <Typography variant="h2" className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider">
+                <Typography variant="h2" className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider text-white">
                     {subtitle}
                 </Typography>
 
@@ -87,8 +84,9 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
 
                 {ctaLink && (
                     <Button 
-                        onClick={() => window.location.href = ctaLink}
-                        className="bg-[#C5A059] hover:bg-[#b08d4a] text-white font-bold uppercase tracking-widest px-8 py-3 rounded-none text-sm"
+                        onClick={() => navigate(ctaLink)}
+                        variant="heroGold"
+                        className="hover:!bg-[#b08d4a] text-white border-none"
                     >
                         {ctaText}
                     </Button>

@@ -47,31 +47,49 @@ const ITEMS_PER_PAGE = 12;
 
 export const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { category, tag } = useParams();
+  const { category, subcategory, tag } = useParams();
 
-  // Reset to page 1 when category or tag changes
+  // Reset to page 1 when params change
   useEffect(() => {
     setCurrentPage(1);
-  }, [category, tag]);
+  }, [category, subcategory, tag]);
 
-  // Basic filtering based on category or tag param
+  // Basic filtering based on params
   const allFilteredProducts = React.useMemo(() => {
     if (tag) {
-        // Filter by tag (assuming products have tags in the real app, here we mock it or just return all for demo if tags missing in data)
-        // In a real app: return PRODUCTS.filter(p => p.tags.includes(tag));
-        return PRODUCTS; // Returning all for prototype demo as mock data lacks robust tags
+        return PRODUCTS; // In real app: filter by tag
     }
-    if (category) {
-        return PRODUCTS.filter(p => p.category === category || p.category === category.split('/')[0]);
+    
+    let filtered = PRODUCTS;
+
+    if (category && category !== 'brand') {
+        filtered = filtered.filter(p => p.category === category || p.category === category.split('/')[0]);
     }
-    return PRODUCTS;
-  }, [category, tag]);
+
+    if (category === 'brand' && subcategory) {
+         const brandId = subcategory.toLowerCase();
+         filtered = filtered.filter(p => p.brand.toLowerCase().replace(/\s+/g, '-').includes(brandId));
+    } else if (subcategory) {
+        // Mock logic: if subcategory is present (and not brand mode), try to match it against name or brand or category
+        // In a real app, products would have a subcategory field
+        const sub = subcategory.toLowerCase();
+        filtered = filtered.filter(p => 
+            p.name.toLowerCase().includes(sub) || 
+            p.brand.toLowerCase().includes(sub) ||
+            p.category.toLowerCase().includes(sub)
+        );
+    }
+
+    return filtered;
+  }, [category, subcategory, tag]);
 
   const pageTitle = tag 
     ? `Tag: ${tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ')}`
-    : category 
-        ? category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ') 
-        : 'Shop';
+    : subcategory
+        ? `${category?.charAt(0).toUpperCase() + category?.slice(1)}: ${subcategory.charAt(0).toUpperCase() + subcategory.slice(1).replace('-', ' ')}`
+        : category 
+            ? category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ') 
+            : 'Shop';
 
   // Pagination Logic
   const totalResults = allFilteredProducts.length;

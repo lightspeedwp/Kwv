@@ -76,12 +76,22 @@ export const Hero: React.FC<HeroProps> = ({
 
           <div className={`flex gap-4 flex-wrap ${align === 'center' ? 'justify-center' : ''}`}>
             {primaryAction && (
-              <Button onClick={primaryAction.onClick}>
+              <Button 
+                variant="hero"
+                size="lg"
+                className="min-w-[200px]"
+                onClick={primaryAction.onClick}
+              >
                 {primaryAction.label}
               </Button>
             )}
             {secondaryAction && (
-              <Button variant="secondary" onClick={secondaryAction.onClick}>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="min-w-[200px] uppercase tracking-wider font-bold shadow-lg !text-white !border-white hover:!bg-white hover:!text-black bg-transparent"
+                onClick={secondaryAction.onClick}
+              >
                 {secondaryAction.label}
               </Button>
             )}

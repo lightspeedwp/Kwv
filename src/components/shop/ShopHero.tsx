@@ -3,8 +3,11 @@ import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 import { ScrollDownArrow } from '../common/ScrollDownArrow';
+import { useNavigate } from 'react-router-dom';
 
 export const ShopHero: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative h-[80vh] min-h-[600px] w-full flex items-center bg-black overflow-hidden">
       
@@ -27,10 +30,10 @@ export const ShopHero: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
               <Button 
-                  variant="primary" 
+                  variant="hero" 
                   size="lg"
-                  className="min-w-[200px] uppercase tracking-wider font-bold shadow-lg"
-                  onClick={() => window.location.href = '/shop'}
+                  className="min-w-[200px]"
+                  onClick={() => navigate('/shop')}
               >
                   Shop Now
               </Button>
@@ -40,7 +43,7 @@ export const ShopHero: React.FC = () => {
                   size="lg"
                   className="min-w-[200px] uppercase tracking-wider font-bold shadow-lg !text-white !border-white hover:!bg-white hover:!text-black"
                   style={{ backgroundColor: 'transparent', borderColor: 'white', color: 'white' }}
-                  onClick={() => window.location.href = '/wine-club'}
+                  onClick={() => navigate('/wine-club')}
               >
                   Join Wine Club
               </Button>
