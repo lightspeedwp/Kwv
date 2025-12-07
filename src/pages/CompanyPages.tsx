@@ -4,6 +4,7 @@ import { Typography } from '../components/common/Typography';
 import { Layout } from '../components/layout/Layout';
 import { COLORS } from '../constants/theme';
 import { FAQSection } from '../components/sections/FAQSection';
+import { Globe, MapPin } from 'lucide-react';
 
 export const Careers: React.FC = () => (
   <Layout>
@@ -74,5 +75,50 @@ export const Sustainability: React.FC = () => (
       { question: "Is KWV IPW accredited?", answer: "Yes, KWV is fully accredited by the Integrated Production of Wine (IPW), ensuring sustainable environmental practices." },
       { question: "Do you use solar energy?", answer: "We have implemented significant solar energy projects at our production facilities to reduce our carbon footprint." }
     ]} />
+  </Layout>
+);
+
+export const GlobalDistribution: React.FC = () => (
+  <Layout>
+    <Container variant="content" className="py-20 text-center">
+      <Typography variant="h1" color={COLORS.wineRed} className="mb-6">Global Distribution</Typography>
+      <Typography variant="bodyLarge" className="text-gray-600 mb-12">
+        Bringing the excellence of South African wine and spirits to the world.
+      </Typography>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mb-16">
+         <div className="bg-white p-8 shadow-sm border border-gray-100">
+            <Globe className="text-[#DAA520] mb-4" size={32} />
+            <Typography variant="h3" className="mb-2">International Markets</Typography>
+            <p className="text-gray-600 mb-4">
+               KWV exports to over 100 countries across the globe. Our key markets include Europe, North America, Asia, and other African nations.
+            </p>
+            <ul className="list-disc list-inside text-sm text-gray-500 space-y-1">
+               <li>United Kingdom</li>
+               <li>Germany</li>
+               <li>Canada</li>
+               <li>China</li>
+               <li>Japan</li>
+            </ul>
+         </div>
+         <div className="bg-white p-8 shadow-sm border border-gray-100">
+            <MapPin className="text-[#DAA520] mb-4" size={32} />
+            <Typography variant="h3" className="mb-2">Logistics & Supply Chain</Typography>
+            <p className="text-gray-600">
+               Our sophisticated logistics network ensures that our products reach international destinations in optimal condition, preserving the quality and integrity of our wines and spirits.
+            </p>
+         </div>
+      </div>
+
+      <div className="bg-[#F9F9F9] p-10 rounded-lg">
+         <Typography variant="h3" className="mb-6">Become a Distributor</Typography>
+         <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Interested in distributing KWV products in your region? We are always looking for partners who share our passion for quality and excellence.
+         </p>
+         <button className="bg-[#8B0000] text-white px-8 py-3 font-medium hover:bg-[#600000] transition-colors rounded-sm uppercase tracking-wider text-sm">
+            Contact Sales Team
+         </button>
+      </div>
+    </Container>
   </Layout>
 );

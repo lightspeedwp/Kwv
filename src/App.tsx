@@ -21,14 +21,20 @@ import { HouseOfFire } from './pages/experiences/HouseOfFire';
 import { ConferenceFacilities } from './pages/experiences/ConferenceFacilities';
 import { Events } from './pages/experiences/Events';
 import { CathedralCellarKitchen } from './pages/experiences/CathedralCellarKitchen';
-import { Careers, ExecutiveTeam, Sustainability } from './pages/CompanyPages';
+import { ExperiencesFAQ } from './pages/experiences/ExperiencesFAQ';
+import { Careers, ExecutiveTeam, Sustainability, GlobalDistribution } from './pages/CompanyPages';
+import { Jobs } from './pages/Jobs';
 import { MyAccount } from './pages/MyAccount';
 import { OrderConfirmation } from './pages/OrderConfirmation';
 import { ComingSoon } from './pages/ComingSoon';
 import { SearchResults } from './pages/SearchResults';
 import { ProductSearchResults } from './pages/shop/ProductSearchResults';
+import { ShopPromotions } from './pages/shop/ShopPromotions';
+import { ReturnsPolicy } from './pages/ReturnsPolicy';
 import { ShopFAQ } from './pages/shop/ShopFAQ';
 import { FAQ } from './pages/FAQ';
+import { Terms } from './pages/Terms';
+import { Policies } from './pages/Policies';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
 import { ShopHome } from './pages/ShopHome';
@@ -50,6 +56,7 @@ export default function App() {
         
         {/* Shop Routes */}
         <Route path="/shop/faq" element={<ShopFAQ />} />
+        <Route path="/shop/promotions" element={<ShopPromotions />} />
         <Route path="/shop" element={<ShopHome />} />
         <Route path="/shop/all" element={<Shop />} />
         <Route path="/shop/search" element={<ProductSearchResults />} />
@@ -77,6 +84,9 @@ export default function App() {
         <Route path="/awards" element={<Awards />} />
         <Route path="/news" element={<News />} />
         <Route path="/news/:slug" element={<NewsPost />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/returns-policy" element={<ReturnsPolicy />} />
+        <Route path="/policies" element={<Policies />} />
         
         {/* Experience Routes */}
         <Route path="/experiences" element={<Experiences />} />
@@ -87,11 +97,15 @@ export default function App() {
         <Route path="/experiences/conference-facilities" element={<ConferenceFacilities />} />
         <Route path="/experiences/events" element={<Events />} />
         <Route path="/experiences/cathedral-cellar-kitchen" element={<CathedralCellarKitchen />} />
+        <Route path="/experiences/faq" element={<ExperiencesFAQ />} />
         
         {/* Sub Pages */}
         <Route path="/careers" element={<Careers />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/our-company/jobs" element={<Jobs />} />
         <Route path="/executive-team" element={<ExecutiveTeam />} />
         <Route path="/sustainability" element={<Sustainability />} />
+        <Route path="/global-distribution" element={<GlobalDistribution />} />
         
         {/* Fallbacks */}
         <Route path="*" element={<Home />} />

@@ -3,58 +3,90 @@ import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 import { Layout } from '../components/layout/Layout';
 import { COLORS } from '../constants/theme';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowRight, ChevronLeft } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-
+import { Button } from '../components/common/Button';
 import { FAQSection } from '../components/sections/FAQSection';
-
-const BRANDS = [
-  {
-    id: 'roodeberg',
-    name: 'Roodeberg',
-    tagline: 'The Legendary Red',
-    image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'Roodeberg has been a part of the fabric of South African culture for over 70 years.'
-  },
-  {
-    id: 'mentors',
-    name: 'The Mentors',
-    tagline: 'Strictly Limited',
-    image: 'https://images.unsplash.com/photo-1559563362-c667ba5f5480?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'Small batch, premium wines that showcase the absolute pinnacle of our winemaking capabilities.'
-  },
-  {
-    id: 'kwv-brandy',
-    name: 'KWV Brandy',
-    tagline: 'World Class',
-    image: 'https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'Consistently crowned the best brandy in the world. A testament to patience and craftsmanship.'
-  },
-  {
-    id: 'laborie',
-    name: 'Laborie',
-    tagline: 'La Grande Vie',
-    image: 'https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'Wines and Cap Classique that celebrate the good life, inspired by our French heritage.'
-  },
-  {
-    id: 'cruxland',
-    name: 'Cruxland Gin',
-    tagline: 'Kalahari Truffles',
-    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'The world\'s first gin infused with rare Kalahari truffles. A taste of the African wilderness.'
-  },
-  {
-    id: 'cathedral-cellar',
-    name: 'Cathedral Cellar',
-    tagline: 'Monumental Wine',
-    image: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    desc: 'Wines with a sense of place, aged in our historic Cathedral Cellar with its vaulted ceilings.'
-  }
-];
+import { BRAND_DATA } from '../data/brands';
 
 export const Brands: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
+  // --- DETAIL VIEW ---
+  if (id) {
+    const brand = BRAND_DATA.find(b => b.id === id);
+
+    if (!brand) {
+      return (
+        <Layout>
+          <Container variant="content" className="py-20 text-center">
+            <Typography variant="h2">Brand not found</Typography>
+            <Link to="/brands" className="text-[#8B0000] hover:underline mt-4 inline-block">
+              Return to all brands
+            </Link>
+          </Container>
+        </Layout>
+      );
+    }
+
+    return (
+      <Layout>
+        {/* Hero */}
+        <div className="relative h-[60vh] min-h-[500px] w-full bg-gray-900">
+           <ImageWithFallback 
+              src={brand.image} 
+              alt={brand.name} 
+              className="w-full h-full object-cover opacity-70"
+           />
+           <div className="absolute inset-0 bg-black/30" />
+           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+              <Typography variant="caption" color={COLORS.gold} className="uppercase tracking-widest mb-4 text-lg font-bold">
+                 {brand.category}
+              </Typography>
+              <Typography variant="h1" color={COLORS.white} className="mb-6 text-5xl md:text-7xl font-serif">
+                 {brand.name}
+              </Typography>
+              <p className="text-white/90 text-lg max-w-2xl leading-relaxed font-light">
+                 {brand.desc}
+              </p>
+           </div>
+        </div>
+
+        {/* Content */}
+        <Container variant="content" className="py-20">
+           <div className="text-center max-w-3xl mx-auto">
+              <Typography variant="h3" className="mb-6 text-[#2C1810]">About {brand.name}</Typography>
+              <p className="text-gray-600 text-lg leading-relaxed mb-12">
+                 Experience the unique character and exceptional quality of {brand.name}. Crafted with passion and expertise, it represents the pinnacle of our {brand.category.toLowerCase()} portfolio.
+              </p>
+              
+              <div className="flex justify-center gap-6">
+                 <Link to="/brands">
+                    <Button variant="outline" className="flex items-center gap-2">
+                       <ChevronLeft size={16} /> All Brands
+                    </Button>
+                 </Link>
+                 <Link to={`/shop/brands`}>
+                    <Button className="bg-[#8B0000] hover:bg-[#600000] text-white border-none">
+                       Shop {brand.name}
+                    </Button>
+                 </Link>
+              </div>
+           </div>
+        </Container>
+      </Layout>
+    );
+  }
+
+  // --- LIST VIEW ---
+  // Group brands by category
+  const categories = ['Wine', 'Spirits', 'Ready to Drink', 'Non-alcoholic'];
+  const groupedBrands = categories.reduce((acc, category) => {
+    acc[category] = BRAND_DATA.filter(b => b.category === category);
+    return acc;
+  }, {} as Record<string, typeof BRAND_DATA>);
+
   return (
     <Layout>
       <div className="bg-[#2C1810] py-20 text-center">
@@ -66,38 +98,49 @@ export const Brands: React.FC = () => {
         </Container>
       </div>
 
-      <Container variant="site" className="py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BRANDS.map((brand) => (
-            <Link to={`/brands/${brand.id}`} key={brand.id} className="group block h-full">
-              <div className="relative h-full border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <ImageWithFallback 
-                    src={brand.image} 
-                    alt={brand.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                    <Typography variant="h3" color={COLORS.white} className="font-serif italic">{brand.name}</Typography>
-                  </div>
-                </div>
-                
-                <div className="p-8 flex flex-col flex-grow">
-                  <Typography variant="caption" color={COLORS.gold} className="uppercase tracking-widest mb-3 font-bold">
-                    {brand.tagline}
-                  </Typography>
-                  <Typography variant="body" className="text-gray-600 mb-6 flex-grow">
-                    {brand.desc}
-                  </Typography>
-                  <div className="flex items-center text-[#8B0000] font-medium uppercase tracking-wider text-sm group-hover:translate-x-2 transition-transform">
-                    Explore Brand <ArrowRight size={16} className="ml-2" />
-                  </div>
-                </div>
+      <Container variant="site" className="py-12">
+        {categories.map((category) => {
+           const brandsInCategory = groupedBrands[category];
+           if (brandsInCategory.length === 0) return null;
+
+           return (
+              <div key={category} className="mb-20 last:mb-0">
+                 <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-3xl font-serif font-bold text-[#2C1810] uppercase tracking-wider">{category}</h2>
+                    <div className="h-[1px] bg-gray-200 flex-grow"></div>
+                 </div>
+                 
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {brandsInCategory.map((brand) => (
+                       <Link to={`/brands/${brand.id}`} key={brand.id} className="group block h-full">
+                          <div className="relative h-full border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col rounded-sm overflow-hidden">
+                             <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                                <ImageWithFallback 
+                                   src={brand.image} 
+                                   alt={brand.name}
+                                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                             </div>
+                             
+                             <div className="p-6 flex flex-col flex-grow">
+                                <Typography variant="h4" className="mb-2 text-[#2C1810] group-hover:text-[#8B0000] transition-colors">
+                                   {brand.name}
+                                </Typography>
+                                <p className="text-gray-500 text-sm line-clamp-2 mb-4 flex-grow">
+                                   {brand.desc}
+                                </p>
+                                <div className="flex items-center text-[#DAA520] font-bold uppercase tracking-widest text-xs mt-auto">
+                                   Explore <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                                </div>
+                             </div>
+                          </div>
+                       </Link>
+                    ))}
+                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
+           );
+        })}
       </Container>
 
       <FAQSection items={[

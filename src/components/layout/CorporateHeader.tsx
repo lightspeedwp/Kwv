@@ -75,73 +75,74 @@ export const CorporateHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 mx-8">
-            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
-              Online Shop
-            </Link>
-            
-            <Link to="/account" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
-              Account Login
-            </Link>
-
-            {/* Mega Menu for Our Company */}
+            {/* About Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
-                Our Company <ChevronDown size={14} />
-              </button>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-white shadow-lg rounded-sm p-8 hidden group-hover:grid grid-cols-3 gap-8 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none group-hover:pointer-events-auto border-t-4 border-[#DAA520]">
-                 <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">About KWV</Typography>
-                    <Link to="/about" className="block text-sm text-gray-600 hover:text-[#8B0000]">About Us</Link>
-                    <Link to="/history" className="block text-sm text-gray-600 hover:text-[#8B0000]">History</Link>
-                    <Link to="/brands" className="block text-sm text-gray-600 hover:text-[#8B0000]">Our Brands</Link>
-                    <Link to="/awards" className="block text-sm text-gray-600 hover:text-[#8B0000]">Awards</Link>
-                    <Link to="/executive-team" className="block text-sm text-gray-600 hover:text-[#8B0000]">Executive Team</Link>
-                 </div>
-                 <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Connect</Typography>
-                    <Link to="/news" className="block text-sm text-gray-600 hover:text-[#8B0000]">News & Awards</Link>
-                    <Link to="/careers" className="block text-sm text-gray-600 hover:text-[#8B0000]">Careers</Link>
-                    <Link to="/contact" className="block text-sm text-gray-600 hover:text-[#8B0000]">Contact Us</Link>
-                 </div>
-                 <div className="space-y-4">
-                    <Typography variant="h4" className="text-sm text-[#2C1810] border-b border-gray-200 pb-2 font-bold uppercase tracking-widest">Initiatives</Typography>
-                    <Link to="/sustainability" className="block text-sm text-gray-600 hover:text-[#8B0000]">Sustainability</Link>
-                    <Link to="/wine-club" className="block text-sm text-gray-600 hover:text-[#8B0000]">Wine Club</Link>
-                 </div>
-                 
-                 <div className="col-span-3 mt-4 p-4 bg-gray-50 rounded-sm flex items-center justify-between">
-                    <div>
-                       <Typography variant="h4" className="text-sm font-bold text-[#2C1810]">Visit our Emporium</Typography>
-                       <p className="text-xs text-gray-500">Experience world-class tastings in Paarl.</p>
-                    </div>
-                    <Link to="/experiences" className="text-xs font-bold text-[#8B0000] uppercase tracking-wider hover:underline">Book Now</Link>
-                 </div>
-              </div>
-            </div>
-
-            <Link to="/shop" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
-              KWV Shop
-            </Link>
-
-            <div className="relative group">
-               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
-                Visit Us <ChevronDown size={14} />
-              </Link>
-               <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white shadow-lg py-2 hidden group-hover:block z-50 border-t-4 border-[#DAA520]">
-                  <Link to="/experiences/emporium" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
-                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
-                  <Link to="/experiences/house-of-fire" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
-                  <Link to="/experiences/events" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
-                  <Link to="/experiences/conference-facilities" className="block px-4 py-2 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
+                 About <ChevronDown size={14} />
+               </button>
+               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
+                  <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
+                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
+                  <Link to="/awards" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Awards</Link>
+                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
+                  <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
+                  <Link to="/careers" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Careers</Link>
+                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
                </div>
             </div>
+
+            {/* Shop Mega Menu */}
+            <div className="relative group">
+               <Link to="/shop" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
+                 Shop <ChevronDown size={14} />
+               </Link>
+               <div className="absolute top-full left-0 w-[600px] bg-white shadow-xl p-6 hidden group-hover:grid grid-cols-3 gap-6 z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <div className="col-span-1">
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Wines</Typography>
+                     <Link to="/shop/wine/red" className="block py-2 text-gray-600 hover:text-[#8B0000]">Red Wine</Link>
+                     <Link to="/shop/wine/white" className="block py-2 text-gray-600 hover:text-[#8B0000]">White Wine</Link>
+                     <Link to="/shop/wine/sparkling" className="block py-2 text-gray-600 hover:text-[#8B0000]">Sparkling</Link>
+                  </div>
+                  <div className="col-span-1">
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Spirits</Typography>
+                     <Link to="/shop/spirits/brandy" className="block py-2 text-gray-600 hover:text-[#8B0000]">Brandy</Link>
+                     <Link to="/shop/spirits/gin" className="block py-2 text-gray-600 hover:text-[#8B0000]">Gin</Link>
+                     <Link to="/shop/spirits/vodka" className="block py-2 text-gray-600 hover:text-[#8B0000]">Vodka</Link>
+                  </div>
+                  <div className="col-span-1">
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Brands</Typography>
+                     <Link to="/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
+                     <Link to="/brands/mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
+                     <Link to="/shop" className="block py-2 text-[#DAA520] font-bold">Visit Shop</Link>
+                  </div>
+               </div>
+            </div>
+
+            {/* Experiences Dropdown */}
+            <div className="relative group">
+               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
+                 Experiences <ChevronDown size={14} />
+               </Link>
+               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <Link to="/experiences/emporium" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
+                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
+                  <Link to="/experiences/house-of-fire" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
+                  <Link to="/experiences/events" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
+                  <Link to="/experiences/conference-facilities" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+               </div>
+            </div>
+
+            <Link to="/news" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              News
+            </Link>
 
             <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               FAQ
             </Link>
 
             <Link to="/contact" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
-              Contact Us
+              Contact
             </Link>
           </nav>
 
@@ -200,78 +201,90 @@ export const CorporateHeader: React.FC = () => {
                      <Menu size={24} color="white" />
                    </button>
                  </SheetTrigger>
-                 <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-white text-[#2C1810] overflow-y-auto [&>button]:hidden">
+                 <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-[#2C1810] text-white overflow-y-auto [&>button]:hidden border-l border-[#3d2319]">
                     <div className="p-6 flex flex-col min-h-full">
                        <div className="mb-8 flex items-center justify-between">
-                          <KWVLogo className="h-10 w-auto text-[#2C1810]" />
+                          <KWVLogo className="h-10 w-auto text-white" color="white" />
                           <SheetClose asChild>
-                            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                              <X size={24} color="#2C1810" />
+                            <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                              <X size={24} color="white" />
                             </button>
                           </SheetClose>
                        </div>
   
                        <div className="flex-1 space-y-6">
                           <nav className="flex flex-col space-y-4">
-                             <Link to="/shop" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                             <Link to="/shop" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                 <span>Online Shop</span>
-                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                              </Link>
                              
-                             <Link to="/account" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                             <Link to="/account" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                 <span>Account Login</span>
-                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                              </Link>
   
                              <Accordion type="single" collapsible className="w-full border-none">
-                                <AccordionItem value="company" className="border-none">
-                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Our Company</AccordionTrigger>
-                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                      <Link to="/about" onClick={closeMenu} className="block">About Us</Link>
-                                      <Link to="/history" onClick={closeMenu} className="block">History</Link>
-                                      <Link to="/brands" onClick={closeMenu} className="block">Our Brands</Link>
-                                      <Link to="/awards" onClick={closeMenu} className="block">Awards</Link>
-                                      <Link to="/executive-team" onClick={closeMenu} className="block">Executive Team</Link>
-                                      <Link to="/news" onClick={closeMenu} className="block">News & Awards</Link>
-                                      <Link to="/careers" onClick={closeMenu} className="block">Careers</Link>
-                                      <Link to="/sustainability" onClick={closeMenu} className="block">Sustainability</Link>
+                                <AccordionItem value="about" className="border-b border-white/10">
+                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">About</AccordionTrigger>
+                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/about" onClick={closeMenu} className="block hover:text-white">About Us</Link>
+                                      <Link to="/history" onClick={closeMenu} className="block hover:text-white">History</Link>
+                                      <Link to="/brands" onClick={closeMenu} className="block hover:text-white">Our Brands</Link>
+                                      <Link to="/awards" onClick={closeMenu} className="block hover:text-white">Awards</Link>
+                                      <Link to="/executive-team" onClick={closeMenu} className="block hover:text-white">Executive Team</Link>
+                                      <Link to="/sustainability" onClick={closeMenu} className="block hover:text-white">Sustainability</Link>
+                                      <Link to="/careers" onClick={closeMenu} className="block hover:text-white">Careers</Link>
+                                      <Link to="/global-distribution" onClick={closeMenu} className="block hover:text-white">Global Distribution</Link>
                                    </AccordionContent>
                                 </AccordionItem>
   
-                                <AccordionItem value="visit" className="border-none">
-                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Visit Us</AccordionTrigger>
-                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block">Emporium</Link>
-                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block">Cathedral Cellar</Link>
-                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block">House of Fire</Link>
-                                      <Link to="/experiences/events" onClick={closeMenu} className="block">Events</Link>
-                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block">Conference Facilities</Link>
+                                <AccordionItem value="shop" className="border-b border-white/10">
+                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Shop</AccordionTrigger>
+                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/shop" onClick={closeMenu} className="block hover:text-white">Online Shop</Link>
+                                      <Link to="/shop/brands" onClick={closeMenu} className="block hover:text-white">Brands</Link>
+                                   </AccordionContent>
+                                </AccordionItem>
+  
+                                <AccordionItem value="experiences" className="border-b border-white/10">
+                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Experiences</AccordionTrigger>
+                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
+                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
+                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
+                                      <Link to="/experiences/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
+                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
                                    </AccordionContent>
                                 </AccordionItem>
                              </Accordion>
   
-                             <Link to="/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                             <Link to="/news" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                                <span>News</span>
+                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                             </Link>
+  
+                             <Link to="/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                 <span>FAQ</span>
-                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                              </Link>
                              
-                             <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
-                                <span>Contact Us</span>
-                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                             <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                                <span>Contact</span>
+                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                              </Link>
                           </nav>
                        </div>
   
-                       <div className="mt-8 pt-8 border-t border-gray-100">
+                       <div className="mt-8 pt-8 border-t border-white/10">
                           <Link to="/wine-club" onClick={closeMenu} className="block">
-                             <Button className="w-full bg-[#8B0000] text-white hover:bg-[#600000] h-12 text-lg">Join Wine Club</Button>
+                             <Button className="w-full bg-[#DAA520] text-[#2C1810] hover:bg-white h-12 text-lg border-none">Join Wine Club</Button>
                           </Link>
                        </div>
                     </div>
                  </SheetContent>
                </Sheet>
             </div>
-
           </div>
         </div>
       </Container>

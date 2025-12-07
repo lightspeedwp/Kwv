@@ -88,6 +88,8 @@ export const ExperiencesFooter: React.FC = () => {
       
       <div className="bg-[#111111] py-4 text-center">
          <p className="text-[10px] text-gray-500 uppercase tracking-widest">
+            <Link to="/" className="hover:text-[#DAA520] transition-colors font-bold">KWV Home</Link>
+            <span className="mx-2">|</span>
             Terms & Conditions | Privacy Policy | POPI Policy 
             <span className="ml-4">Alcohol not for sale to persons under the age of 18</span>
          </p>

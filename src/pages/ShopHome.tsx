@@ -5,6 +5,9 @@ import { ShopCategorySlider } from '../components/shop/ShopCategorySlider';
 import { ShopBrandGrid } from '../components/shop/ShopBrandGrid';
 import { ShopNewsletter } from '../components/shop/ShopNewsletter';
 import { ShopSocialSection } from '../components/shop/ShopSocialSection';
+import { ProductCard } from '../components/shop/ProductCard';
+import { Button } from '../components/common/Button';
+import { Link } from 'react-router-dom';
 import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 
@@ -32,16 +35,71 @@ export const ShopHome: React.FC = () => {
         </Container>
       </div>
 
-      {/* 3. Category Slider */}
+      {/* 3. Promotions CTA */}
+      <div className="bg-[#2C1810] py-20 text-center bg-[url('https://images.unsplash.com/photo-1597652392437-01389779df53?auto=format&fit=crop&q=80')] bg-cover bg-fixed bg-center relative">
+         <div className="absolute inset-0 bg-black/60"></div>
+         <Container variant="content" className="relative z-10">
+            <Typography variant="h2" className="text-white mb-6">Current Promotions</Typography>
+            <p className="text-gray-200 text-lg mb-8 max-w-2xl mx-auto">
+               Discover exceptional value on our award-winning wines and spirits. From seasonal bundles to limited-time offers.
+            </p>
+            <Link to="/shop/promotions">
+               <Button className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none h-14 px-10 text-lg">
+                  View All Specials
+               </Button>
+            </Link>
+         </Container>
+      </div>
+
+      {/* 4. Featured Products */}
+      <div className="bg-[#F9F9F9] py-20">
+         <Container variant="site">
+             <div className="text-center mb-12">
+                 <Typography variant="h2" className="text-[#2C1810] mb-4">Shop Our Awarded Selection</Typography>
+                 <Typography variant="body" className="text-gray-600 max-w-2xl mx-auto">
+                     Explore the finest wines, brandies and spirits that have earned us our reputation as a world-class producer.
+                 </Typography>
+             </div>
+             
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                 <ProductCard product={{
+                    id: '1', name: 'The Mentors Orchestra 2020', brand: 'The Mentors', price: 429.00, 
+                    image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true, badges: ['Award Winner']
+                 }} />
+                 <ProductCard product={{
+                    id: '5', name: 'Cruxland Gin', brand: 'Cruxland', price: 349.00, 
+                    image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: true, badges: ['Double Gold']
+                 }} />
+                 <ProductCard product={{
+                    id: '6', name: 'KWV 10 Year Old Brandy', brand: 'KWV Brandy', price: 299.00, 
+                    image: 'https://images.unsplash.com/photo-1757694907428-5ef2f3ff7854?auto=format&fit=crop&q=80', inStock: true, badges: ['Best in Class']
+                 }} />
+                 <ProductCard product={{
+                    id: '3', name: 'Laborie Merlot 2022', brand: 'Laborie', price: 85.00, 
+                    image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true
+                 }} />
+             </div>
+             
+             <div className="text-center mt-12">
+                <Link to="/shop/all">
+                   <Button variant="outline" className="border-[#2C1810] text-[#2C1810] hover:bg-[#2C1810] hover:text-white px-8">
+                      View All Products
+                   </Button>
+                </Link>
+             </div>
+         </Container>
+      </div>
+
+      {/* 5. Category Slider */}
       <ShopCategorySlider />
 
-      {/* 4. Brand Grid */}
+      {/* 6. Brand Grid */}
       <ShopBrandGrid />
 
-      {/* 5. Newsletter */}
+      {/* 7. Newsletter */}
       <ShopNewsletter />
 
-      {/* 6. Social Section */}
+      {/* 8. Social Section */}
       <ShopSocialSection />
     </Layout>
   );

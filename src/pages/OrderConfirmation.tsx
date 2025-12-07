@@ -6,6 +6,8 @@ import { AccountCreation } from '../components/shop/order/AccountCreation';
 import { OrderDetails } from '../components/shop/order/OrderDetails';
 import { AddressDetails } from '../components/shop/order/AddressDetails';
 import { DownloadsSection } from '../components/shop/order/DownloadsSection';
+import { AdditionalInformation } from '../components/shop/order/AdditionalInformation';
+import { AdditionalFields } from '../components/shop/order/AdditionalFields';
 import { User, UserX } from 'lucide-react';
 
 export const OrderConfirmation: React.FC = () => {
@@ -53,6 +55,10 @@ export const OrderConfirmation: React.FC = () => {
         <OrderDetails />
         
         <AddressDetails />
+
+        <AdditionalFields />
+
+        <AdditionalInformation />
 
       </Container>
     </CheckoutLayout>

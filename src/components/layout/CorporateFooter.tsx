@@ -12,7 +12,9 @@ export const CorporateFooter: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Column 1: About */}
           <div>
-            <Typography variant="h3" color={COLORS.gold} className="mb-6">KWV</Typography>
+            <Link to="/">
+              <Typography variant="h3" color={COLORS.gold} className="mb-6 hover:text-[#DAA520] transition-colors inline-block">KWV</Typography>
+            </Link>
             <Typography variant="body" className="text-gray-300 mb-6">
               Leading South African wine & spirits producer with a distinguished heritage stretching back to 1918.
             </Typography>

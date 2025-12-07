@@ -47,19 +47,31 @@ const ITEMS_PER_PAGE = 12;
 
 export const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { category } = useParams();
+  const { category, tag } = useParams();
 
-  // Reset to page 1 when category changes
+  // Reset to page 1 when category or tag changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [category]);
+  }, [category, tag]);
 
-  // Basic filtering based on category param
-  const allFilteredProducts = category 
-    ? PRODUCTS.filter(p => p.category === category || p.category === category.split('/')[0])
-    : PRODUCTS;
+  // Basic filtering based on category or tag param
+  const allFilteredProducts = React.useMemo(() => {
+    if (tag) {
+        // Filter by tag (assuming products have tags in the real app, here we mock it or just return all for demo if tags missing in data)
+        // In a real app: return PRODUCTS.filter(p => p.tags.includes(tag));
+        return PRODUCTS; // Returning all for prototype demo as mock data lacks robust tags
+    }
+    if (category) {
+        return PRODUCTS.filter(p => p.category === category || p.category === category.split('/')[0]);
+    }
+    return PRODUCTS;
+  }, [category, tag]);
 
-  const pageTitle = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Shop';
+  const pageTitle = tag 
+    ? `Tag: ${tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ')}`
+    : category 
+        ? category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ') 
+        : 'Shop';
 
   // Pagination Logic
   const totalResults = allFilteredProducts.length;
@@ -121,7 +133,7 @@ export const Shop = () => {
             {/* Header Top: Title and Breadcrumbs */}
             <div>
               <Typography variant="caption" className="uppercase tracking-widest mb-2 opacity-60">
-                Home / Shop {category && `/ ${pageTitle}`}
+                Home / Shop {category ? `/ ${pageTitle}` : (tag ? `/ Tag / ${tag}` : '')}
               </Typography>
               <Typography variant="h1" color={COLORS.darkBrown}>
                 {pageTitle}

@@ -32,14 +32,18 @@ export const ExperiencesHeader: React.FC = () => {
           <nav className="hidden lg:flex items-center gap-6 mx-8">
             {/* Company Mega Menu */}
             <div className="relative group">
-               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
                  Company <ChevronDown size={14} />
-               </button>
+               </Link>
                <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
                   <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
                   <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
+                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
+                  <Link to="/awards" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Awards</Link>
+                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
                   <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
                   <Link to="/careers" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Careers</Link>
+                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
                </div>
             </div>
 
@@ -88,7 +92,7 @@ export const ExperiencesHeader: React.FC = () => {
               Events
             </Link>
             
-            <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
+            <Link to="/experiences/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
               FAQ
             </Link>
              
@@ -118,69 +122,86 @@ export const ExperiencesHeader: React.FC = () => {
                     <Menu size={24} color="white" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-white text-[#2C1810] overflow-y-auto [&>button]:hidden">
+                <SheetContent side="right" className="w-full sm:w-[400px] p-0 bg-[#2C1810] text-white overflow-y-auto [&>button]:hidden border-l border-[#3d2319]">
                   <div className="p-6 flex flex-col min-h-full">
                      <div className="mb-8 flex items-center justify-between">
-                        <KWVExperiencesLogo className="h-10 w-auto text-[#2C1810]" color="#2C1810" />
+                        <KWVExperiencesLogo className="h-10 w-auto text-white" color="white" />
                         <SheetClose asChild>
-                          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                            <X size={24} color="#2C1810" />
+                          <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                            <X size={24} color="white" />
                           </button>
                         </SheetClose>
                      </div>
 
                      <div className="flex-1 space-y-6">
                         <nav className="flex flex-col space-y-4">
+                            <Link to="/account" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                               <span>Login / Account</span>
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                            </Link>
+                            
+                            <Link to="/shop/promotions" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                               <span>Promotions</span>
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                            </Link>
+
                             <Accordion type="single" collapsible className="w-full border-none">
-                               <AccordionItem value="company" className="border-none">
-                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Company</AccordionTrigger>
-                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                     <Link to="/about" onClick={closeMenu} className="block">About Us</Link>
-                                     <Link to="/history" onClick={closeMenu} className="block">History</Link>
-                                     <Link to="/sustainability" onClick={closeMenu} className="block">Sustainability</Link>
-                                     <Link to="/careers" onClick={closeMenu} className="block">Careers</Link>
+                               <AccordionItem value="company" className="border-b border-white/10">
+                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Company</AccordionTrigger>
+                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                     <Link to="/about" onClick={closeMenu} className="block hover:text-white">About Us</Link>
+                                     <Link to="/history" onClick={closeMenu} className="block hover:text-white">History</Link>
+                                     <Link to="/brands" onClick={closeMenu} className="block hover:text-white">Our Brands</Link>
+                                     <Link to="/awards" onClick={closeMenu} className="block hover:text-white">Awards</Link>
+                                     <Link to="/executive-team" onClick={closeMenu} className="block hover:text-white">Executive Team</Link>
+                                     <Link to="/sustainability" onClick={closeMenu} className="block hover:text-white">Sustainability</Link>
+                                     <Link to="/careers" onClick={closeMenu} className="block hover:text-white">Careers</Link>
+                                     <Link to="/global-distribution" onClick={closeMenu} className="block hover:text-white">Global Distribution</Link>
                                   </AccordionContent>
                                </AccordionItem>
                                
-                               <AccordionItem value="shop" className="border-none">
-                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Shop</AccordionTrigger>
-                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                     <Link to="/shop" onClick={closeMenu} className="block">Wines</Link>
-                                     <Link to="/shop" onClick={closeMenu} className="block">Spirits</Link>
-                                     <Link to="/shop" onClick={closeMenu} className="block text-[#DAA520]">Go to Shop</Link>
+                               <AccordionItem value="shop" className="border-b border-white/10">
+                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Shop</AccordionTrigger>
+                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                     <Link to="/shop" onClick={closeMenu} className="block hover:text-white">Wines</Link>
+                                     <Link to="/shop" onClick={closeMenu} className="block hover:text-white">Spirits</Link>
+                                     <Link to="/shop" onClick={closeMenu} className="block text-[#DAA520] font-bold">Go to Shop</Link>
                                   </AccordionContent>
                                </AccordionItem>
                                
-                               <AccordionItem value="experiences" className="border-none">
-                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#8B0000] py-2 hover:no-underline">Experiences</AccordionTrigger>
-                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-600">
-                                     <Link to="/experiences/emporium" onClick={closeMenu} className="block">Emporium</Link>
-                                     <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block">Cathedral Cellar</Link>
-                                     <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block">House of Fire</Link>
-                                     <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block">Conference Facilities</Link>
+                               <AccordionItem value="experiences" className="border-b border-white/10">
+                                  <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Experiences</AccordionTrigger>
+                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                     <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
+                                     <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
+                                     <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
+                                     <Link to="/experiences/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
+                                     <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
                                   </AccordionContent>
                                </AccordionItem>
                             </Accordion>
                             
-                            <Link to="/experiences/events" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                            <Link to="/experiences/events" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                <span>Events</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
 
-                            <Link to="/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                            <Link to="/experiences/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                <span>FAQ</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
                             
-                            <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#8B0000] flex items-center justify-between group">
+                            <Link to="/contact" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                <span>Contact</span>
-                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#8B0000]" />
+                               <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
                         </nav>
                      </div>
 
-                     <div className="mt-8 pt-8 border-t border-gray-100">
-                        <Button className="w-full bg-[#2C1810] text-white hover:bg-[#8B0000] h-12 text-lg">Book an Experience</Button>
+                     <div className="mt-8 pt-8 border-t border-white/10">
+                        <Link to="/wine-club" onClick={closeMenu} className="block">
+                           <Button className="w-full bg-[#DAA520] text-[#2C1810] hover:bg-white h-12 text-lg border-none">Book an Experience</Button>
+                        </Link>
                      </div>
                   </div>
                 </SheetContent>

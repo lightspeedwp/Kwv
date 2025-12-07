@@ -81,6 +81,8 @@ export const ShopFooter: React.FC = () => {
        <div className="bg-black py-4 text-center border-t border-gray-900">
            <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest">
                <div className="space-x-4 mb-2 md:mb-0">
+                   <Link to="/" className="hover:text-white transition-colors font-bold text-[#DAA520]">KWV Home</Link>
+                   <span>|</span>
                    <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
                    <span>|</span>
                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

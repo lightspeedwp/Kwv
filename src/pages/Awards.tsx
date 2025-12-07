@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Layout } from '../components/layout/Layout';
 import { Container } from '../components/common/Container';
 import { Typography } from '../components/common/Typography';
 import { Button } from '../components/common/Button';
-import { ChevronDown, Search, Printer, FileText, FileSpreadsheet, Copy, Filter, X, ChevronUp } from 'lucide-react';
+import { ChevronDown, Search, Printer, FileText, FileSpreadsheet, Copy, Filter, X, ChevronUp, ArrowDown } from 'lucide-react';
 import { COLORS } from '../constants/theme';
-import exampleImage from 'figma:asset/97d6c5e7a5dca14826cb229577c7145c98ae11c5.png';
+import exampleImage from 'figma:asset/dfa0e54405c973969c9c003c1ae5ef0e7a16880c.png';
 import { AnimatePresence, motion } from 'motion/react';
 
 // --- Mock Data ---
@@ -103,6 +103,7 @@ export const Awards: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'wine' | 'spirits'>('wine');
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const data = activeTab === 'wine' ? WINE_AWARDS : SPIRITS_AWARDS;
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   // Mock Filter Options
   const filterOptions = {
@@ -121,27 +122,46 @@ export const Awards: React.FC = () => {
   const updateFilter = (key: string, val: string) => setFilters(prev => ({ ...prev, [key]: val }));
   const clearFilters = () => setFilters({ year: '', brand: '', variety: '', vintage: '', award: '', competition: '' });
 
+  const scrollToTabs = () => {
+    tabsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <img 
           src={exampleImage} 
           alt="KWV Awards" 
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div> {/* Overlay for text readability */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <Typography variant="h4" className="text-white uppercase tracking-widest mb-4 font-normal text-sm md:text-base">
-                AWARDS
+        
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center h-full justify-center">
+            <Typography variant="h4" className="text-white uppercase tracking-widest mb-6 font-normal text-sm md:text-base">
+                Our Achievements
             </Typography>
-            <Typography variant="h2" className="text-white font-serif md:text-4xl lg:text-5xl leading-tight drop-shadow-md">
+            <Typography variant="h2" className="text-white font-serif md:text-5xl lg:text-6xl leading-tight drop-shadow-lg mb-8">
+                Excellence Rewarded
+            </Typography>
+            <Typography variant="bodyLarge" className="text-white/90 max-w-2xl mx-auto mb-12">
                 Driven by innovation and fuelled to make products our consumers can believe in, KWV is proud to feature locally and globally for its range of award-winning wines and spirits.
             </Typography>
+
+            <motion.button 
+                onClick={scrollToTabs}
+                initial={{ y: 0 }}
+                animate={{ y: 10 }}
+                transition={{ repeat: Infinity, duration: 1.5, repeatType: "reverse" }}
+                className="absolute bottom-8 text-white hover:text-[#DAA520] transition-colors p-2"
+                aria-label="Scroll to content"
+            >
+                <ChevronDown size={48} strokeWidth={1.5} />
+            </motion.button>
         </div>
       </div>
 
-      <Container variant="site" className="py-12">
+      <Container variant="site" className="py-12" ref={tabsRef}>
         
         {/* Tabs */}
         <div className="flex justify-center gap-4 md:gap-8 mb-12 border-b border-gray-200 pb-1">
