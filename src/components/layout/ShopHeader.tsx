@@ -7,7 +7,7 @@ import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 import { KWVShopLogo } from '../common/Logo';
 import { AnimatePresence, motion } from 'motion/react';
-import { MiniCart } from '../shop/MiniCart';
+import { MiniCart } from '../shop/cart/MiniCart';
 import {
   Sheet,
   SheetContent,
@@ -18,6 +18,17 @@ import {
 } from "../ui/sheet";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
 
+/**
+ * ShopHeader Component
+ * 
+ * Specialized header for the E-commerce section.
+ * Features:
+ * - "Shop Online" Branding.
+ * - Shop-specific Mega Menus (Brands, Spirits, Wine, Mixers).
+ * - Cart Icon with MiniCart dropdown.
+ * - My Account access.
+ * - Product-focused search.
+ */
 export const ShopHeader: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -79,47 +90,52 @@ export const ShopHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 mx-8">
-            <Link to="/shop/promotions" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-[#DAA520]">
-              Promotions
-            </Link>
-
             {/* Brands Dropdown */}
             <div className="relative group">
-               <Link to="/shop/brands" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <Link to="/shop/brands" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
                  Brands <ChevronDown size={14} />
                </Link>
-               <div className="absolute top-full left-0 w-[800px] bg-white shadow-xl p-6 hidden group-hover:grid grid-cols-4 gap-6 z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+               <div className="absolute top-full left-0 w-[900px] bg-white shadow-xl p-8 hidden group-hover:grid grid-cols-4 gap-8 z-50 rounded-b-sm border-t-4 border-[#DAA520]">
                   <div className="col-span-1">
-                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Premium</Typography>
-                     <Link to="/brands/mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
-                     <Link to="/brands/cathedral-cellar" className="block py-2 text-gray-600 hover:text-[#8B0000]">Cathedral Cellar</Link>
-                     <Link to="/brands/kwv-brandy" className="block py-2 text-gray-600 hover:text-[#8B0000]">KWV Brandy</Link>
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-100 pb-2 font-bold text-xs uppercase tracking-widest">Premium Wines</Typography>
+                     <div className="space-y-3">
+                       <Link to="/shop/brands/the-mentors" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">The Mentors</Link>
+                       <Link to="/shop/brands/cathedral-cellar" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Cathedral Cellar</Link>
+                       <Link to="/shop/brands/laborie" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Laborie</Link>
+                     </div>
                   </div>
                   <div className="col-span-1">
-                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Heritage</Typography>
-                     <Link to="/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
-                     <Link to="/brands/laborie" className="block py-2 text-gray-600 hover:text-[#8B0000]">Laborie</Link>
-                     <Link to="/brands/kwv-classic" className="block py-2 text-gray-600 hover:text-[#8B0000]">KWV Classic</Link>
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-100 pb-2 font-bold text-xs uppercase tracking-widest">Heritage & Lifestyle</Typography>
+                     <div className="space-y-3">
+                       <Link to="/shop/brands/roodeberg" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Roodeberg</Link>
+                       <Link to="/shop/brands/kwv-classic-collection" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Classic Collection</Link>
+                       <Link to="/shop/brands/annabelle" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Annabelle</Link>
+                       <Link to="/shop/brands/pearly-bay" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Pearly Bay</Link>
+                     </div>
                   </div>
                   <div className="col-span-1">
-                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Spirits</Typography>
-                     <Link to="/brands/cruxland" className="block py-2 text-gray-600 hover:text-[#8B0000]">Cruxland Gin</Link>
-                     <Link to="/brands/imoya" className="block py-2 text-gray-600 hover:text-[#8B0000]">Imoya</Link>
-                     <Link to="/brands/wild-africa" className="block py-2 text-gray-600 hover:text-[#8B0000]">Wild Africa Cream</Link>
+                     <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-100 pb-2 font-bold text-xs uppercase tracking-widest">Spirits</Typography>
+                     <div className="space-y-3">
+                       <Link to="/shop/brands/kwv-brandy" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">KWV Brandy</Link>
+                       <Link to="/shop/brands/cruxland-gin" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Cruxland Gin</Link>
+                       <Link to="/shop/brands/wild-africa-cream" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Wild Africa Cream</Link>
+                       <Link to="/shop/brands/bacardi" className="block text-sm text-gray-600 hover:text-[#8B0000] hover:translate-x-1 transition-all">Bacardi</Link>
+                     </div>
                   </div>
-                  <div className="col-span-1 bg-[#f9f9f9] p-4 rounded-lg">
-                      <div className="aspect-video w-full bg-gray-200 mb-2 rounded overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1559563362-c667ba5f5480?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=300" alt="Brand Highlight" className="w-full h-full object-cover" />
+                  <div className="col-span-1 bg-[#f9f9f9] p-4 rounded-lg flex flex-col items-center text-center">
+                      <div className="aspect-square w-32 bg-white rounded-full mb-4 overflow-hidden shadow-md flex items-center justify-center p-2">
+                          <img src="https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=300" alt="KWV Brandy" className="w-full h-full object-cover rounded-full" />
                       </div>
-                      <Typography variant="caption" className="text-[#DAA520]">Featured</Typography>
-                      <Typography variant="h4" className="text-[#2C1810] text-sm">The Mentors</Typography>
+                      <Typography variant="caption" className="text-[#DAA520] uppercase tracking-widest font-bold mb-1">Spotlight</Typography>
+                      <Typography variant="h4" className="text-[#2C1810] text-lg font-serif mb-2">KWV Brandy</Typography>
+                      <Link to="/shop/brands/kwv-brandy" className="text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-[#8B0000] underline decoration-[#DAA520] decoration-2 underline-offset-4">Discover More</Link>
                   </div>
                </div>
             </div>
 
             {/* Spirits Dropdown */}
             <div className="relative group">
-               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
                  Spirits <ChevronDown size={14} />
                </button>
                <div className="absolute top-full left-0 w-56 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
@@ -133,7 +149,7 @@ export const ShopHeader: React.FC = () => {
 
             {/* Wine Dropdown */}
             <div className="relative group">
-               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
                  Wine <ChevronDown size={14} />
                </button>
                <div className="absolute top-full left-0 w-56 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
@@ -147,7 +163,7 @@ export const ShopHeader: React.FC = () => {
 
             {/* Mixers Dropdown */}
             <div className="relative group">
-               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <button className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
                  Mixers <ChevronDown size={14} />
                </button>
                <div className="absolute top-full left-0 w-56 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
@@ -156,16 +172,33 @@ export const ShopHeader: React.FC = () => {
                   <Link to="/shop/mixers/grape-juice" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Grape Juice</Link>
                </div>
             </div>
-             <Link to="/shop/gifting" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
-              Gifting
+
+            <Link to="/shop/gifting" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              Gifts
             </Link>
-             <Link to="/shop/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
-              FAQ
+
+            <Link to="/shop/promotions" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              Offers
             </Link>
+
+            {/* Visit Us Dropdown */}
+            <div className="relative group">
+               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
+                 Visit <ChevronDown size={14} />
+               </Link>
+               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <Link to="/experiences/emporium" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
+                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
+                  <Link to="/experiences/house-of-fire" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
+                  <Link to="/events" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
+                  <Link to="/experiences/conference-facilities" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+                  <Link to="/experiences/cathedral-cellar-kitchen" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Kitchen Venue</Link>
+               </div>
+            </div>
 
             {/* Company Mega Menu */}
             <div className="relative group">
-               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
                  Company <ChevronDown size={14} />
                </Link>
                <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
@@ -180,19 +213,13 @@ export const ShopHeader: React.FC = () => {
                </div>
             </div>
 
-            {/* Experiences Dropdown */}
-            <div className="relative group">
-               <Link to="/experiences" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
-                 Visit Us <ChevronDown size={14} />
-               </Link>
-               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
-                  <Link to="/experiences/emporium" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
-                  <Link to="/experiences/cathedral-cellar" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
-                  <Link to="/experiences/house-of-fire" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
-                  <Link to="/experiences/events" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
-                  <Link to="/experiences/conference-facilities" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
-               </div>
-            </div>
+             <Link to="/shop/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              FAQ
+            </Link>
+
+             <Link to="/contact" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              Contact
+            </Link>
           </nav>
 
           {/* Actions */}
@@ -299,11 +326,34 @@ export const ShopHeader: React.FC = () => {
                              <Accordion type="single" collapsible className="w-full border-none">
                                 <AccordionItem value="brands" className="border-b border-white/10">
                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Brands</AccordionTrigger>
-                                  <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
-                                     <Link to="/brands/roodeberg" onClick={closeMenu} className="block hover:text-white">Roodeberg</Link>
-                                     <Link to="/brands/mentors" onClick={closeMenu} className="block hover:text-white">The Mentors</Link>
-                                     <Link to="/brands/kwv-brandy" onClick={closeMenu} className="block hover:text-white">KWV Brandy</Link>
-                                     <Link to="/brands" onClick={closeMenu} className="block text-[#DAA520] font-medium mt-2">View All Brands</Link>
+                                  <AccordionContent className="pl-4 space-y-4 text-base text-gray-300">
+                                     <div>
+                                        <Typography variant="caption" className="text-[#DAA520] uppercase tracking-widest font-bold mb-2 text-xs">Premium Wines</Typography>
+                                        <div className="space-y-2 pl-2 border-l border-white/10">
+                                           <Link to="/shop/brands/the-mentors" onClick={closeMenu} className="block hover:text-white">The Mentors</Link>
+                                           <Link to="/shop/brands/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
+                                           <Link to="/shop/brands/laborie" onClick={closeMenu} className="block hover:text-white">Laborie</Link>
+                                        </div>
+                                     </div>
+                                     <div>
+                                        <Typography variant="caption" className="text-[#DAA520] uppercase tracking-widest font-bold mb-2 text-xs">Heritage & Lifestyle</Typography>
+                                        <div className="space-y-2 pl-2 border-l border-white/10">
+                                           <Link to="/shop/brands/roodeberg" onClick={closeMenu} className="block hover:text-white">Roodeberg</Link>
+                                           <Link to="/shop/brands/kwv-classic-collection" onClick={closeMenu} className="block hover:text-white">Classic Collection</Link>
+                                           <Link to="/shop/brands/annabelle" onClick={closeMenu} className="block hover:text-white">Annabelle</Link>
+                                           <Link to="/shop/brands/pearly-bay" onClick={closeMenu} className="block hover:text-white">Pearly Bay</Link>
+                                        </div>
+                                     </div>
+                                     <div>
+                                        <Typography variant="caption" className="text-[#DAA520] uppercase tracking-widest font-bold mb-2 text-xs">Spirits</Typography>
+                                        <div className="space-y-2 pl-2 border-l border-white/10">
+                                           <Link to="/shop/brands/kwv-brandy" onClick={closeMenu} className="block hover:text-white">KWV Brandy</Link>
+                                           <Link to="/shop/brands/cruxland-gin" onClick={closeMenu} className="block hover:text-white">Cruxland Gin</Link>
+                                           <Link to="/shop/brands/wild-africa-cream" onClick={closeMenu} className="block hover:text-white">Wild Africa Cream</Link>
+                                           <Link to="/shop/brands/bacardi" onClick={closeMenu} className="block hover:text-white">Bacardi</Link>
+                                        </div>
+                                     </div>
+                                     <Link to="/shop/brands" onClick={closeMenu} className="block text-[#DAA520] font-bold mt-4 uppercase tracking-widest text-sm">View All Brands</Link>
                                   </AccordionContent>
                                </AccordionItem>
                                
@@ -313,6 +363,8 @@ export const ShopHeader: React.FC = () => {
                                      <Link to="/shop/spirits/brandy" onClick={closeMenu} className="block hover:text-white">Brandy & Cognac</Link>
                                      <Link to="/shop/spirits/gin" onClick={closeMenu} className="block hover:text-white">Gin</Link>
                                      <Link to="/shop/spirits/vodka" onClick={closeMenu} className="block hover:text-white">Vodka</Link>
+                                     <Link to="/shop/spirits/liqueurs" onClick={closeMenu} className="block hover:text-white">Liqueurs</Link>
+                                     <Link to="/shop/spirits/rum" onClick={closeMenu} className="block hover:text-white">Rum</Link>
                                   </AccordionContent>
                                </AccordionItem>
 
@@ -321,7 +373,9 @@ export const ShopHeader: React.FC = () => {
                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
                                      <Link to="/shop/wine/red" onClick={closeMenu} className="block hover:text-white">Red Wine</Link>
                                      <Link to="/shop/wine/white" onClick={closeMenu} className="block hover:text-white">White Wine</Link>
+                                     <Link to="/shop/wine/rose" onClick={closeMenu} className="block hover:text-white">Rosé</Link>
                                      <Link to="/shop/wine/sparkling" onClick={closeMenu} className="block hover:text-white">Sparkling</Link>
+                                     <Link to="/shop/wine/fortified" onClick={closeMenu} className="block hover:text-white">Fortified</Link>
                                   </AccordionContent>
                                </AccordionItem>
                                <AccordionItem value="mixers" className="border-b border-white/10">
@@ -334,17 +388,30 @@ export const ShopHeader: React.FC = () => {
                                </AccordionItem>
                              </Accordion>
 
-                            <Link to="/shop/promotions" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
-                               <span>Promotions</span>
+                            <Link to="/shop/gifting" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
+                               <span>Gifts</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
 
-                            <Link to="/shop/gifting" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
-                               <span>Gifting</span>
+                            <Link to="/shop/promotions" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white border-b border-white/10 py-4">
+                               <span>Offers</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
 
                             <Accordion type="single" collapsible className="w-full border-none">
+                              <AccordionItem value="experiences" className="border-b border-white/10">
+                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Visit</AccordionTrigger>
+                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
+                                      <Link to="/experiences" onClick={closeMenu} className="block text-[#DAA520] font-bold">Experiences Home</Link>
+                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
+                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
+                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
+                                      <Link to="/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
+                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
+                                      <Link to="/experiences/cathedral-cellar-kitchen" onClick={closeMenu} className="block hover:text-white">Kitchen Venue</Link>
+                                   </AccordionContent>
+                                </AccordionItem>
+
                                 <AccordionItem value="company" className="border-b border-white/10">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Company</AccordionTrigger>
                                    <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
@@ -357,19 +424,6 @@ export const ShopHeader: React.FC = () => {
                                       <Link to="/sustainability" onClick={closeMenu} className="block hover:text-white">Sustainability</Link>
                                       <Link to="/careers" onClick={closeMenu} className="block hover:text-white">Careers</Link>
                                       <Link to="/global-distribution" onClick={closeMenu} className="block hover:text-white">Global Distribution</Link>
-                                   </AccordionContent>
-                                </AccordionItem>
-
-
-                              <AccordionItem value="experiences" className="border-b border-white/10">
-                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Visit Us</AccordionTrigger>
-                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
-                                      <Link to="/experiences" onClick={closeMenu} className="block text-[#DAA520] font-bold">Experiences Home</Link>
-                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
-                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
-                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
-                                      <Link to="/experiences/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
-                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
                                    </AccordionContent>
                                 </AccordionItem>
                              </Accordion>

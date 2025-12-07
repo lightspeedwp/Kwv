@@ -21,6 +21,12 @@ const EXPERIENCES: PricingSection[] = [
   }
 ];
 
+/**
+ * HouseOfFire Page Component
+ * 
+ * Highlights the brandy distillation experience.
+ * Features Brandy Blending experiences and Chocolate & Brandy pairings.
+ */
 export const HouseOfFire: React.FC = () => {
   return (
     <ExperiencePageLayout

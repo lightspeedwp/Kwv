@@ -21,6 +21,12 @@ const TOUR_PRICES: PricingSection[] = [
   }
 ];
 
+/**
+ * CathedralCellar Page Component
+ * 
+ * Displays information about the historic Cathedral Cellar experience.
+ * Uses `ExperiencePageLayout` to present tours, pricing, and gallery.
+ */
 export const CathedralCellar: React.FC = () => {
   return (
     <ExperiencePageLayout

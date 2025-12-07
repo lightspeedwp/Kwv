@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { CheckoutInput } from './CheckoutInput';
 import { ChevronDown } from 'lucide-react';
 
+/**
+ * BillingAddress Component
+ * 
+ * A form section for entering billing address details during checkout.
+ * Handles form state locally for the prototype demo (validation, touched states).
+ * Features a country selector and standard address fields.
+ */
 export const BillingAddress: React.FC = () => {
   // State for form fields to handle "touched" and validation for demo
   const [formData, setFormData] = useState({

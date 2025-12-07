@@ -4,6 +4,15 @@ import { Typography } from '../common/Typography';
 import { COLORS } from '../../constants/theme';
 import { Button } from '../common/Button';
 
+/**
+ * Newsletter Component
+ * 
+ * A full-width signup form for the KWV newsletter.
+ * Features:
+ * - Dark background with subtle pattern.
+ * - First Name and Email inputs.
+ * - Compliance text.
+ */
 export const Newsletter = () => {
   return (
     <section className="py-20 bg-[#2C1810] text-white relative overflow-hidden">

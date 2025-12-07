@@ -7,6 +7,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
+/**
+ * Button Component
+ * 
+ * A flexible button component supporting multiple variants and sizes.
+ * 
+ * Variants:
+ * - primary: Brand red background, white text.
+ * - secondary: Gold background, dark text.
+ * - outline: Transparent background, red border/text.
+ * - ghost: Transparent background, no border.
+ * - hero: Large, uppercase, shadowed (Primary style).
+ * - heroGold: Large, uppercase, shadowed (Gold style).
+ * 
+ * @param {ButtonProps} props - Component props
+ */
 export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'md',

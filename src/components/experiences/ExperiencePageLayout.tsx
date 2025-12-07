@@ -6,6 +6,7 @@ import { Button } from '../common/Button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ScrollDownArrow } from '../common/ScrollDownArrow';
 
 export interface PricingItem {
   name: string;
@@ -39,8 +40,25 @@ export interface ExperiencePageProps {
     tel?: string;
     email?: string;
   };
+  logoComponent?: React.ReactNode;
 }
 
+/**
+ * ExperiencePageLayout Component
+ * 
+ * A reusable layout template for all "Experience" pages (e.g., Emporium, House of Fire).
+ * Enforces a consistent visual structure:
+ * 1. Hero with Background & Title
+ * 2. Intro Text / Main Content
+ * 3. Image Gallery (3 columns)
+ * 4. Pricing / Menu Sections
+ * 5. Practical Info (Opening hours, Address)
+ * 
+ * This component abstracts away the repetitive layout code, allowing pages to just pass data.
+ * 
+ * @param {ExperiencePageProps} props - Configuration for the experience page
+ * @returns {JSX.Element} The rendered layout
+ */
 export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
   title,
   subtitle,
@@ -53,6 +71,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
   pricingSections,
   pairings,
   infoSection,
+  logoComponent,
 }) => {
   const navigate = useNavigate();
 
@@ -61,20 +80,26 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
       {/* Hero Section */}
       <div className="relative w-full bg-black text-white">
         {/* Hero Background - Solid Black as per request */}
-        <div className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center bg-black">
+        <div className="relative min-h-[calc(100dvh-90px)] md:min-h-[60vh] w-full flex items-center justify-center bg-black">
             
             {/* Hero Content Overlay */}
-            <div className="flex flex-col items-center justify-center text-center p-6 max-w-4xl mx-auto z-10">
-                {/* Logo Area - Simplified as text/shield for now if no specific logo provided */}
-                <div className="mb-6 border border-white/30 p-4 bg-white/10 backdrop-blur-sm">
-                    <div className="text-2xl font-serif font-bold tracking-widest uppercase">{title}</div>
-                </div>
+            <div className="flex flex-col items-center justify-center text-center p-6 pb-32 max-w-4xl mx-auto z-10 w-full">
+                {/* Logo Area */}
+                {logoComponent ? (
+                  <div className="mb-6 scale-90 md:scale-110">
+                    {logoComponent}
+                  </div>
+                ) : (
+                  <div className="mb-6 border border-white/30 p-4 bg-white/10 backdrop-blur-sm">
+                      <div className="text-xl md:text-2xl font-serif font-bold tracking-widest uppercase">{title}</div>
+                  </div>
+                )}
 
-                <Typography variant="h1" className="text-[#DAA520] font-light text-sm tracking-[0.2em] mb-2 uppercase">
+                <Typography variant="h1" className="text-[#DAA520] font-light text-xs md:text-sm tracking-[0.2em] mb-2 uppercase">
                     EXPERIENCE
                 </Typography>
                 
-                <Typography variant="h2" className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider text-white">
+                <Typography variant="h2" className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider text-white">
                     {subtitle}
                 </Typography>
 
@@ -86,12 +111,14 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                     <Button 
                         onClick={() => navigate(ctaLink)}
                         variant="heroGold"
-                        className="hover:!bg-[#b08d4a] text-white border-none"
+                        className="hover:!bg-[#b08d4a] text-white border-none w-full sm:w-auto"
                     >
                         {ctaText}
                     </Button>
                 )}
             </div>
+            
+            <ScrollDownArrow className="z-30 text-white" />
         </div>
       </div>
 

@@ -1,6 +1,12 @@
 import React from 'react';
 import { Typography } from '../../common/Typography';
 
+/**
+ * AddressDetails Component
+ * 
+ * Displays the Billing (and optionally Shipping) address on the Order Confirmation page.
+ * Styled with a double-border container (`border-2 border-[#D3D3D3]`).
+ */
 export const AddressDetails: React.FC = () => {
   return (
     <div className="mb-12">

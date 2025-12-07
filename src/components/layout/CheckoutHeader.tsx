@@ -4,6 +4,16 @@ import { KWVShopLogo } from '../common/Logo';
 import { Lock, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+/**
+ * CheckoutHeader Component
+ * 
+ * A simplified header used during the Checkout process to reduce distractions.
+ * Features:
+ * - Isolated Logo (links back to shop).
+ * - "Secure Checkout" badge.
+ * - "Back to Cart" link.
+ * - Removes standard navigation menus.
+ */
 export const CheckoutHeader: React.FC = () => {
   return (
     <header className="bg-[#2C1810] border-b border-[#4A3B32] py-4 sticky top-0 z-50 shadow-md">

@@ -3,6 +3,13 @@ import { Typography } from '../../common/Typography';
 import { Button } from '../../common/Button';
 import { Download } from 'lucide-react';
 
+/**
+ * DownloadsSection Component
+ * 
+ * Displays available digital downloads for the order.
+ * Only renders if the order contains virtual/downloadable products.
+ * Features a table layout with "Product", "Expires", and "Download" button.
+ */
 export const DownloadsSection: React.FC = () => {
   return (
     <div className="mb-12">

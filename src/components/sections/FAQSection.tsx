@@ -13,15 +13,29 @@ interface FAQSectionProps {
   title?: string;
   items: FAQItem[];
   className?: string;
+  id?: string;
 }
 
+/**
+ * FAQSection Component
+ * 
+ * A reusable accordion-style FAQ component.
+ * 
+ * Features:
+ * - Expandable/Collapsible items using `shadcn/ui` Accordion.
+ * - Supports HTML content in answers (e.g., for links).
+ * - Customizable title and ID for anchor linking.
+ * 
+ * @param {FAQSectionProps} props - Title, items array, and styling.
+ */
 export const FAQSection: React.FC<FAQSectionProps> = ({
   title = "Frequently Asked Questions",
   items,
-  className
+  className,
+  id
 }) => {
   return (
-    <section className={`py-16 bg-[#F9F9F9] border-t border-gray-100 ${className}`}>
+    <section id={id} className={`py-16 bg-[#F9F9F9] border-t border-gray-100 ${className}`}>
       <Container variant="content">
         <Typography variant="h2" color={COLORS.darkBrown} className="mb-10 text-center">
           {title}

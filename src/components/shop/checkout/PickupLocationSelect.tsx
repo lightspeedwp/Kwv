@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * PickupLocationSelect Component
+ * 
+ * Displays the available pickup location when "Pickup" delivery method is selected.
+ * Currently hardcoded to "Dispatch" (KWV Emporium).
+ * Features visual indicator of the location on a "map" line.
+ */
 export const PickupLocationSelect: React.FC = () => {
   return (
     <div className="border border-[#333333] p-4 rounded-sm flex items-start justify-between bg-white">

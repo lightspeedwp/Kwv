@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+/**
+ * BackToTopButton Component
+ * 
+ * A floating button that appears when the user scrolls down the page.
+ * Clicking it smoothly scrolls the window back to the top.
+ * 
+ * Features:
+ * - Visible only after scrolling 300px down.
+ * - Uses `motion/react` for smooth appearance/disappearance.
+ * - Fixed position at the bottom right.
+ * 
+ * @returns {JSX.Element} The Back to Top Button component.
+ */
 export const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 

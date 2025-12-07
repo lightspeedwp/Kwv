@@ -1,3 +1,16 @@
+/**
+ * Brand Data
+ * 
+ * Central repository of all Corporate Brands.
+ * Used in Brand Grid, Brand Listings, and Filtering.
+ * 
+ * @typedef {Object} Brand
+ * @property {string} id - Unique identifier for the brand.
+ * @property {string} name - Display name of the brand.
+ * @property {string} category - Category (Wine, Spirits, RTD, Non-alcoholic).
+ * @property {string} image - URL to the brand's representative image.
+ * @property {string} desc - Short description/tagline for the brand.
+ */
 export const BRAND_DATA = [
   // Wines
   {
@@ -115,6 +128,13 @@ export const BRAND_DATA = [
     desc: 'Kalahari Truffles. The world\'s first gin infused with rare Kalahari truffles. A taste of the African wilderness.'
   },
   {
+    id: 'imoya',
+    name: 'Imoya',
+    category: 'Spirits',
+    image: 'https://images.unsplash.com/photo-1609325331523-2e2a388676b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    desc: 'A premium brandy known for its smoothness and depth of character.'
+  },
+  {
     id: 'ponchos-tequila',
     name: 'Ponchos Tequila',
     category: 'Spirits',
@@ -176,6 +196,13 @@ export const BRAND_DATA = [
     category: 'Spirits',
     image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
     desc: 'A rum with a bold heart.'
+  },
+  {
+    id: 'bacardi',
+    name: 'Bacardi',
+    category: 'Spirits',
+    image: 'https://images.unsplash.com/photo-1614313511387-1436a4480ebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
+    desc: 'The world\'s most awarded rum.'
   },
 
   // Ready to Drink

@@ -26,6 +26,15 @@ const MOCK_ITEMS = [
     }
 ];
 
+/**
+ * OrderSummary Component
+ * 
+ * The sidebar component on the Checkout page.
+ * Features:
+ * - List of products with images, quantities (badge), and prices.
+ * - Coupon code input field (collapsible).
+ * - Subtotal, Shipping cost, and Total calculation.
+ */
 export const OrderSummary: React.FC = () => {
   const [isCouponOpen, setIsCouponOpen] = useState(false);
   const [couponCode, setCouponCode] = useState('');

@@ -28,6 +28,13 @@ const INITIAL_DATA: AddressData = {
   phone: '+27845656767'
 };
 
+/**
+ * BillingAddressForm Component
+ * 
+ * The form component for capturing billing address information.
+ * Can function standalone or as part of the checkout flow.
+ * Includes validation logic and state management for fields.
+ */
 export const BillingAddressForm: React.FC = () => {
   const [data, setData] = useState<AddressData>(INITIAL_DATA);
   const [errors, setErrors] = useState<Partial<AddressData>>({});

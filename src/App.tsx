@@ -1,43 +1,60 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Shop } from './pages/Shop';
-import { Product } from './pages/Product';
-import { History } from './pages/History';
-import { Cart } from './pages/Cart';
-import { Checkout } from './pages/Checkout';
-import { WineClub } from './pages/WineClub';
-import { Brands } from './pages/Brands';
-import { ShopBrands } from './pages/ShopBrands';
-import { About } from './pages/About';
-import { Contact } from './pages/Contact';
-import { Awards } from './pages/Awards';
-import { News } from './pages/News';
-import { NewsPost } from './pages/NewsPost';
-import { Experiences } from './pages/Experiences';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+// Company Pages
+import { Home } from './pages/company/Home';
+import { About } from './pages/company/About';
+import { History } from './pages/company/History';
+import { Contact } from './pages/company/Contact';
+import { FAQ } from './pages/company/FAQ';
+import { Awards } from './pages/company/Awards';
+import { News } from './pages/company/News';
+import { NewsPost } from './pages/company/NewsPost';
+import { WineClub } from './pages/company/WineClub';
+import { Careers } from './pages/company/Careers';
+import { ExecutiveTeam } from './pages/company/ExecutiveTeam';
+import { Sustainability } from './pages/company/Sustainability';
+import { GlobalDistribution } from './pages/company/GlobalDistribution';
+import { SearchResults } from './pages/company/SearchResults';
+
+// Shop Pages
+import { ShopHome } from './pages/shop/ShopHome';
+import { Shop } from './pages/shop/Shop';
+import { Product } from './pages/shop/Product';
+import { Cart } from './pages/shop/Cart';
+import { Checkout } from './pages/shop/Checkout';
+import { OrderConfirmation } from './pages/shop/OrderConfirmation';
+import { MyAccount } from './pages/shop/MyAccount';
+import { ComingSoon } from './pages/shop/ComingSoon';
+import { ShopFAQ } from './pages/shop/ShopFAQ';
+import { ShopPromotions } from './pages/shop/ShopPromotions';
+import { ShopBrands } from './pages/shop/ShopBrands';
+import { ProductSearchResults } from './pages/shop/ProductSearchResults';
+
+// Brands Pages
+import { Brands } from './pages/brands/Brands';
+
+// Experience Pages
+import { Experiences } from './pages/experiences/Experiences';
 import { Emporium } from './pages/experiences/Emporium';
 import { CathedralCellar } from './pages/experiences/CathedralCellar';
 import { HouseOfFire } from './pages/experiences/HouseOfFire';
 import { ConferenceFacilities } from './pages/experiences/ConferenceFacilities';
-import { Events } from './pages/experiences/Events';
+import { Events } from './pages/events/Events';
+import { EventDetail } from './pages/events/EventDetail';
+import { EventsFAQ } from './pages/events/EventsFAQ';
 import { CathedralCellarKitchen } from './pages/experiences/CathedralCellarKitchen';
 import { ExperiencesFAQ } from './pages/experiences/ExperiencesFAQ';
-import { Careers, ExecutiveTeam, Sustainability, GlobalDistribution } from './pages/CompanyPages';
-import { Jobs } from './pages/Jobs';
-import { MyAccount } from './pages/MyAccount';
-import { OrderConfirmation } from './pages/OrderConfirmation';
-import { ComingSoon } from './pages/ComingSoon';
-import { SearchResults } from './pages/SearchResults';
-import { ProductSearchResults } from './pages/shop/ProductSearchResults';
-import { ShopPromotions } from './pages/shop/ShopPromotions';
-import { ReturnsPolicy } from './pages/ReturnsPolicy';
-import { ShopFAQ } from './pages/shop/ShopFAQ';
-import { FAQ } from './pages/FAQ';
-import { Terms } from './pages/Terms';
-import { Policies } from './pages/Policies';
-import { ScrollToTop } from './components/common/ScrollToTop';
 
-import { ShopHome } from './pages/ShopHome';
+// Legal Pages
+import { Terms } from './pages/legal/Terms';
+import { Policies } from './pages/legal/Policies';
+import { ReturnsPolicy } from './pages/legal/ReturnsPolicy';
+
+import { ShopBrandLanding } from './pages/shop/ShopBrandLanding';
+
+// Common
+import { ScrollToTop } from './components/common/ScrollToTop';
 
 export default function App() {
   return (
@@ -51,19 +68,41 @@ export default function App() {
       `}</style>
       
       <Routes>
+        {/* Company Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact-us" element={<Contact />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/awards" element={<Awards />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/news/:slug" element={<NewsPost />} />
+        <Route path="/wine-club" element={<WineClub />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/jobs" element={<Careers />} />
+        <Route path="/our-company/jobs" element={<Careers />} />
+        <Route path="/executive-team" element={<ExecutiveTeam />} />
+        <Route path="/our-company/sustainability" element={<Sustainability />} />
+        <Route path="/sustainability" element={<Navigate to="/our-company/sustainability" replace />} />
+        <Route path="/global-distribution" element={<GlobalDistribution />} />
         <Route path="/search" element={<SearchResults />} />
-        
+
+        {/* Brand Routes */}
+        <Route path="/brands" element={<Brands />} />
+        <Route path="/brands/:id" element={<Brands />} />
+
         {/* Shop Routes */}
-        <Route path="/shop/faq" element={<ShopFAQ />} />
-        <Route path="/shop/promotions" element={<ShopPromotions />} />
         <Route path="/shop" element={<ShopHome />} />
         <Route path="/shop/all" element={<Shop />} />
         <Route path="/shop/search" element={<ProductSearchResults />} />
         <Route path="/shop/brands" element={<ShopBrands />} />
+        <Route path="/shop/brands/:slug" element={<ShopBrandLanding />} />
+        <Route path="/shop/promotions" element={<ShopPromotions />} />
+        <Route path="/shop/faq" element={<ShopFAQ />} />
         <Route path="/shop/tag/:tag" element={<Shop />} />
         <Route path="/shop/:category" element={<Shop />} />
-        <Route path="/shop/:category/:subcategory" element={<Shop />} /> {/* Added deeper nesting support */}
+        <Route path="/shop/:category/:subcategory" element={<Shop />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
@@ -72,22 +111,6 @@ export default function App() {
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/coming-soon" element={<ComingSoon />} />
 
-        {/* Corporate Routes */}
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/contact-us" element={<Contact />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/brands" element={<Brands />} />
-        <Route path="/brands/:id" element={<Brands />} /> {/* Placeholder for single brand if needed, or re-use grid */}
-        <Route path="/wine-club" element={<WineClub />} />
-        <Route path="/awards" element={<Awards />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/news/:slug" element={<NewsPost />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/returns-policy" element={<ReturnsPolicy />} />
-        <Route path="/policies" element={<Policies />} />
-        
         {/* Experience Routes */}
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/visit" element={<Experiences />} />
@@ -95,18 +118,17 @@ export default function App() {
         <Route path="/experiences/cathedral-cellar" element={<CathedralCellar />} />
         <Route path="/experiences/house-of-fire" element={<HouseOfFire />} />
         <Route path="/experiences/conference-facilities" element={<ConferenceFacilities />} />
-        <Route path="/experiences/events" element={<Events />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:slug" element={<EventDetail />} />
+        <Route path="/events/faq" element={<EventsFAQ />} />
         <Route path="/experiences/cathedral-cellar-kitchen" element={<CathedralCellarKitchen />} />
         <Route path="/experiences/faq" element={<ExperiencesFAQ />} />
-        
-        {/* Sub Pages */}
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/our-company/jobs" element={<Jobs />} />
-        <Route path="/executive-team" element={<ExecutiveTeam />} />
-        <Route path="/sustainability" element={<Sustainability />} />
-        <Route path="/global-distribution" element={<GlobalDistribution />} />
-        
+
+        {/* Legal Routes */}
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/returns-policy" element={<ReturnsPolicy />} />
+
         {/* Fallbacks */}
         <Route path="*" element={<Home />} />
       </Routes>

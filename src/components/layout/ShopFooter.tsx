@@ -85,7 +85,7 @@ export const ShopFooter: React.FC = () => {
                    <span className="hidden md:inline">|</span>
                    <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
                    <span>|</span>
-                   <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                   <Link to="/policies" className="hover:text-white transition-colors">Privacy Policy</Link>
                </div>
                <div className="text-[#DAA520]">
                    Alcohol not for sale to persons under the age of 18

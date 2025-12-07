@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, AlertCircle } from 'lucide-react';
 import { Button } from '../../common/Button';
 import { CheckoutInput } from './CheckoutInput';
-import { Checkbox } from '../../common/Checkbox';
+import { Checkbox } from './Checkbox';
 
 interface ShippingAddressFormProps {
   useSameBilling?: boolean;
@@ -35,6 +35,18 @@ const INITIAL_DATA: AddressData = {
   phone: '+27845656767'
 };
 
+/**
+ * ShippingAddressForm Component
+ * 
+ * Form for capturing the delivery address.
+ * Features:
+ * - Country/Province selectors.
+ * - "Use same address for billing" toggle.
+ * - Collapsible "Apartment" field.
+ * - Standard address fields validation.
+ * 
+ * @param {ShippingAddressFormProps} props - Billing toggle handlers.
+ */
 export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({ 
   useSameBilling = true, 
   onToggleSameBilling 

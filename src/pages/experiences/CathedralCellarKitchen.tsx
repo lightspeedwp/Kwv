@@ -20,6 +20,12 @@ const MENU_HIGHLIGHTS: PricingSection[] = [
   }
 ];
 
+/**
+ * CathedralCellarKitchen Page Component
+ * 
+ * Displays information about the culinary venue within the Cathedral Cellar.
+ * Highlights Chef's Table and Private Functions.
+ */
 export const CathedralCellarKitchen: React.FC = () => {
   return (
     <ExperiencePageLayout

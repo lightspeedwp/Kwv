@@ -8,6 +8,18 @@ interface AccountCreationProps {
   email: string;
 }
 
+/**
+ * AccountCreation Component
+ * 
+ * A prominent "Upsell" block shown on the Order Confirmation page for guest users.
+ * Encourages them to convert their guest checkout into a full account.
+ * 
+ * Features:
+ * - List of benefits (Faster purchase, Secure payment, Order tracking).
+ * - CTA to register page.
+ * 
+ * @param {AccountCreationProps} props - User's email to display in the context message.
+ */
 export const AccountCreation: React.FC<AccountCreationProps> = ({ email }) => {
   return (
     <div className="bg-white p-8 md:p-12 mb-16 flex flex-col lg:flex-row gap-12 items-center border-2 border-[#D3D3D3]">

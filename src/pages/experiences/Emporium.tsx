@@ -56,6 +56,12 @@ const PAIRINGS: PricingSection[] = [
   }
 ];
 
+/**
+ * Emporium Page Component
+ * 
+ * The main tasting room and visitor center experience.
+ * Lists available tastings (Classic, Premium, Exclusive, Brandy) and food pairings.
+ */
 export const Emporium: React.FC = () => {
   return (
     <ExperiencePageLayout

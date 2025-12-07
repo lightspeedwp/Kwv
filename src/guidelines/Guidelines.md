@@ -1,4 +1,6 @@
-# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3.1 – Integrated)
+# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3.2 – Integrated)
+
+**IMPORTANT DEVELOPMENT NOTE:** It is a high priority to add JSDoc inline documentation to all JavaScript/TypeScript files to explain component props, complex logic, and utility functions.
 
 Accessibility is the **first and non-negotiable requirement** for all KWV designs and implementations.  
 Figma Make **must** treat accessibility (including WCAG 2.1 AA contrast, keyboard access and screen-reader support) as a hard constraint, not an optional enhancement.
@@ -181,17 +183,20 @@ Recommended pairing:
 - Headings: classic serif (e.g. Playfair Display or similar).
 - Body: readable humanist sans (e.g. Open Sans or similar).
 
-Use fluid sizing with `clamp()` where possible. Suggested scale:
+**Standardized Fluid Typography:**
+All typography must use `clamp()` to ensure fluid scaling between mobile and desktop.
+**Formula:** `clamp(min_rem, preferred_vw + preferred_rem, max_rem)`
+We enforce a strict standardization of VH/VW + min/max values.
 
-| Element            | Weight | Example clamp                  | Role                                  |
-| :----------------- | :----- | :----------------------------- | :------------------------------------ |
-| H1 (page/hero)     | 700    | `clamp(2.4rem, 6vw, 4rem)`     | Page and hero titles                  |
-| H2 (section)       | 600    | `clamp(2rem, 5vw, 3rem)`       | Main section headings                 |
-| H3 (card title)    | 600    | `clamp(1.6rem, 4vw, 2.2rem)`   | Product names, news and brand cards   |
-| H4 (subheading)    | 500    | `clamp(1.3rem, 3vw, 1.8rem)`   | Minor headings and labels             |
-| Body – large       | 400    | `clamp(1.2rem, 2vw, 1.6rem)`   | Lead paragraphs, key callouts         |
-| Body – default     | 400    | `clamp(1rem, 1.5vw, 1.3rem)`   | Standard paragraphs                   |
-| Caption / metadata | 400    | `clamp(0.875rem, 1.2vw, 1rem)` | By-lines, tasting notes, small labels |
+| Element            | Weight | Fluid Clamp Rule (Strict)                                          | Role                                  |
+| :----------------- | :----- | :----------------------------------------------------------------- | :------------------------------------ |
+| H1 (page/hero)     | 700    | `clamp(2.4rem, 5vw + 1rem, 4.5rem)`                                | Page and hero titles                  |
+| H2 (section)       | 600    | `clamp(2rem, 4vw + 1rem, 3.5rem)`                                  | Main section headings                 |
+| H3 (card title)    | 600    | `clamp(1.5rem, 3vw + 0.5rem, 2.25rem)`                             | Product names, news and brand cards   |
+| H4 (subheading)    | 500    | `clamp(1.25rem, 2vw + 0.5rem, 1.75rem)`                            | Minor headings and labels             |
+| Body – large       | 400    | `clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem)`                          | Lead paragraphs, key callouts         |
+| Body – default     | 400    | `clamp(1rem, 1vw + 0.5rem, 1.125rem)`                              | Standard paragraphs                   |
+| Caption / metadata | 400    | `clamp(0.875rem, 1vw + 0.25rem, 1rem)`                             | By-lines, tasting notes, small labels |
 
 All typography must still honour the accessibility rules in section 1\.
 
@@ -203,18 +208,19 @@ All typography must still honour the accessibility rules in section 1\.
 
 ### 3.4 Layout, spacing & containers
 
+**Standardized Fluid Spacing:**
+Use `clamp()` for spacing to ensure layouts breathe on large screens but remain compact on mobile.
+
+- **Section Vertical Padding:** `clamp(3rem, 5vh + 2rem, 8rem)` (Approx 48px -> 128px)
+- **Container Side Padding:** `clamp(1rem, 4vw, 3rem)`
+- **Grid Gaps:** `clamp(1rem, 2vw, 2rem)`
+
 Standard container widths (conceptual):
 
-- `container.site` – full layout width (roughly `clamp(320px, 90vw, 1400px)`).
-- `container.content` – narrower reading width for articles (`clamp(320px, 80vw, 960px)`).
-- `container.wide` – wide treatments such as hero content (`clamp(320px, 95vw, 1200px)`).
+- `container.site` – full layout width (roughly `clamp(320px, 95vw, 1440px)`).
+- `container.content` – narrower reading width for articles (`clamp(320px, 85vw, 960px)`).
+- `container.wide` – wide treatments such as hero content (`clamp(320px, 98vw, 1280px)`).
 - `container.full` – full-bleed sections spanning viewport width.
-
-Spacing:
-
-- Use numeric tokens (e.g. `space.10`, `space.20`, `space.30`).
-- Section padding vertically: around `space.40–60`.
-- Gaps inside card grids: around `space.20–30`.
 
 Behaviour:
 
@@ -229,6 +235,28 @@ Behaviour:
   - Palette variations (e.g. light, dark, high contrast).
   - Section “skins” (hero, content panels, footer, CTA banners).
 - Figma token names should map directly into `theme.json` presets and CSS variables where possible.
+
+### 3.6 Hero Component Standards (Mandatory)
+
+All Hero sections (Corporate, Shop, Experiences) must adhere to these standard dimensions and layout rules to ensure consistency across the platform:
+
+1.  **Mobile Height (Mandatory):**
+    *   **All Hero sections must use `min-h-[calc(100dvh-90px)]` on mobile devices.** This accounts for the sticky header height (~90px) so the hero fits exactly within the remaining viewport space.
+    *   Desktop heights can vary (e.g., `md:min-h-[60vh]` for standard pages, `md:min-h-[80vh]` for landing pages).
+
+2.  **Scroll Down Arrow:**
+    *   **Visibility:** Must be present on all Hero sections.
+    *   **Styling:** Must use a consistent design with a **circle around the arrow** (e.g., the `ScrollDownArrow` component).
+    *   **Placement:** Standardized to `absolute bottom-8 left-1/2 -translate-x-1/2`.
+    *   **Z-Index:** Must have a high z-index (e.g., `z-30`) to ensuring it sits above all other content and backgrounds.
+    *   **Spacing:** There must **always** be a gap between the arrow and the content above it. The arrow should never overlap text or buttons.
+
+3.  **Content Padding:**
+    *   Standard vertical padding within the hero content container: `py-20` (top) and `pb-32` (bottom).
+    *   **Crucial:** The `pb-32` bottom padding is mandatory to ensure the content clears the scroll-down arrow on all screen sizes.
+
+4.  **Typography:**
+    *   Hero titles must support a `stretchy` prop or mechanism to ensure titles remain on a single line where possible, scaling fluidly.
 
 ---
 
@@ -260,8 +288,11 @@ KWV.co.za
 │  │  ├─ Cathedral Cellar
 │  │  ├─ House of Fire
 │  │  ├─ Events
+│  │  │  └─ Event Details
+│  │  │  └─ Events FAQ
 │  │  ├─ Conference Facilities
-│  │  └─ Cathedral Cellar Kitchen Venue
+│  │  ├─ Cathedral Cellar Kitchen Venue
+│  │  └─ Experiences FAQ
 │  ├─ Main site search
 │  ├─ FAQ
 │  ├─ Contact Us
@@ -269,13 +300,15 @@ KWV.co.za
 │
 ├─ Shop (/shop) (WooCommerce)
 │  ├─ Shop Homepage (Online Shop)
-│  ├─ Promotions
+│  ├─ Offers (Promotions)
 │  ├─ Brands (shop brand landing)
 │  ├─ Spirits (category + subcategories)
 │  ├─ Wine (category + subcategories)
 │  ├─ Mixers (non-alcoholic)
-│  ├─ Gifting
+│  ├─ Gifts
+│  ├─ Visit (link to Experiences)
 │  ├─ Product category / brand / tag archives
+│  ├─ Product Search Results
 │  ├─ Single Product
 │  ├─ Cart
 │  ├─ Checkout
@@ -475,9 +508,9 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
   - Newsletter \+ social follow.
 - **React route:** `ShopHomePage`.
 
-#### Promotions
+#### Offers (Promotions)
 
-- **URL:** `/shop/promotions`
+- **URL:** `/shop/promotions` (Nav label: "Offers")
 - **Template:** `page` \+ Product Collection blocks.
 - **Behaviour:** Curated promotional groupings (campaign sections), plus optional “on sale” collection.
 - **React route:** `ShopPromotionsPage`.
@@ -609,7 +642,7 @@ All shop pages use the **shop header/footer** and WooCommerce templates.
 Shop-specific pages using `page` \+ blocks:
 
 - Shop homepage.
-- Promotions landing.
+- Promotions landing (Offers).
 - Shop brands landing.
 - Shop FAQ.
 - Shop legal pages.
@@ -633,12 +666,32 @@ Shop-specific pages using `page` \+ blocks:
 - `mini-cart-drawer` – mini cart off-canvas region.
 - `add-to-cart-options` – grouped add-to-cart options for variable/grouped products.
 
-### 5.5 Menu-designer template parts
+### 5.5 Menu-designer template parts (Mega Menus)
 
-- `mobile-menu-main` – main-site mobile nav.
-- `mobile-menu-shop` – shop mobile nav.
-- `mega-menu-main` – desktop mega menu for the main site (Company, Shop, Experiences, Events, FAQ, Contact, etc.).
-- `mega-menu-shop` – desktop mega menu for the shop (Promotions, Brands, Spirits, Wine, Mixers, Gifting, FAQ, Pricelist, Wine Club).
+This section maps the specific mega menus to their parent header template parts.
+
+**Template Part: `header-main`**
+- `mega-menu-corporate`: "Company" (About, History, Awards, etc.)
+- `mega-menu-experiences`: "Visit Us" (Experiences, Events)
+
+**Template Part: `header-shop`**
+- `mega-menu-shop-categories`: "Shop" (Spirits, Wine, Mixers, Gifting)
+- `mega-menu-shop-brands`: "Brands" (Shop brands A-Z or featured)
+
+**Template Part: `header-experiences`**
+- `mega-menu-experiences-nav`: Simple nav or mega menu for various experience sub-venues.
+
+**Template Part: `header-events`**
+- Shared or specific nav for Events (likely shared with Experiences).
+
+**Template Part: `footer-main`**
+- Not a mega menu, but contains column groups:
+  - `footer-col-company`
+  - `footer-col-shop`
+  - `footer-col-legal`
+
+**Template Part: `footer-shop`**
+- `footer-shop-links`
 
 ### 5.6 Pattern families (for block patterns & Figma sections)
 
@@ -827,11 +880,13 @@ App
 │     │  ├─ CorporateHeader   (maps to `header-main`, mega-menu-main, mobile-menu-main)
 │     │  ├─ ShopHeader        (maps to `header-shop`, mobile-menu-shop)
 │     │  └─ CheckoutHeader    (maps to `header-checkout`)
+│     │  └─ ExperiencesHeader
 │     │
 │     ├─ FooterSwitcher
 │     │  ├─ CorporateFooter   (maps to `footer-main`)
 │     │  ├─ ShopFooter        (maps to `footer-shop`)
-│     │  └─ CheckoutFooter    (maps to `footer-checkout`)
+│     │  ├─ CheckoutFooter    (maps to `footer-checkout`)
+│     │  └─ ExperiencesFooter
 │     │
 │     ├─ BreadcrumbsBar       (Context-aware: overlay on Hero, block on standard pages)
 │     ├─ MiniCartDrawer       (maps to `mini-cart-drawer`)
@@ -839,20 +894,29 @@ App
 │     ├─ BackToTopButton
 │     └─ ScrollToTopOnRouteChange
 │
-├─ Routes
-│  ├─ Corporate (Home, About, History, Awards, Executive, Sustainability, Global Distribution, Careers, Jobs, News listing/single, Brands, Brand detail, Experiences, FAQ, Contact, Legal, Wine Club landing)
-│  ├─ Shop      (Shop home, Promotions, Shop brands, category/brand archives, Product detail, Cart, Checkout, Order confirmation, My Account screens, Shop FAQ, Coming Soon, Shop Legal)
-│  └─ System    (Search results, NotFound)
+├─ Routes (Pages)
+│  ├─ company      (Home, About, History, Awards, Executive, Sustainability, Global Distribution, Careers, Jobs, News, WineClub, Contact, FAQ)
+│  ├─ shop         (ShopHome, Shop, Product, Cart, Checkout, MyAccount, ShopFAQ, etc.)
+│  ├─ experiences  (Experiences landing, Emporium, CathedralCellar, HouseOfFire, ConferenceFacilities, KitchenVenue)
+│  ├─ events       (Events listing, EventDetail)
+│  ├─ brands       (Brands listing, BrandDetail)
+│  └─ legal        (Terms, Policies, Returns)
 │
-└─ Shared Components
-   ├─ Common (Container, Typography, Button, Icon, ImageWithFallback, Badge/Chip)
-   ├─ Sections (Hero, ShopHero, WineClubCTA, Timeline, Card grids, Newsletter, Contact form, FAQ, Archive header, Post meta, Post footer meta, Comments)
-   ├─ Blog (PostCard, PostMetaBar, PostFooterMeta, PostBody)
-   ├─ Shop (ProductCard, ProductGrid, ProductFiltersSidebar, ProductCarousel, CartSummary, CheckoutFormLayout, OrderSummaryBlock, MyAccountTabs, MiniCartContents)
-   ├─ WooBlocks (conceptual wrappers for StoreBreadcrumbs, StoreNotices, ProductImageGallery, etc.)
-   ├─ CoreBlockMapping (Text, Media, Layout, Interactive, Theme, Taxonomy abstractions)
-   └─ Templates/Layouts
-      └─ ExperiencePageLayout (Standardized detail page for venues like Emporium, Cathedral Cellar)
+└─ Components
+   ├─ common       (Container, Typography, Button, Icon, ImageWithFallback, Badge/Chip, Logo, ScrollToTop)
+   ├─ layout       (Headers, Footers, Breadcrumbs, Layout wrapper)
+   ├─ sections     (Hero, BrandGrid, FAQSection, Newsletter, WineClubCTA, LatestNews, FullWidthSection)
+   │  └─ shop      (ContactFollowSection, ServiceFeaturesSection)
+   ├─ shop         
+   │  ├─ common    (ProductCard, ProductGrid)
+   │  ├─ home      (ShopHero, ShopBrandGrid, ShopCategorySlider)
+   │  ├─ cart      (MiniCart, Cart components)
+   │  ├─ checkout  (CheckoutForm, PaymentGateways, ShippingMethods)
+   │  ├─ single-product (ProductGallery, ProductPrice, ProductAddToCart, ProductTabs)
+   │  └─ order     (OrderSummary, OrderStatus, AccountCreation)
+   ├─ experiences  (ExperiencePageLayout)
+   ├─ figma        (ImageWithFallback)
+   └─ ui           (Radix/Shadcn UI primitives)
 ```
 
 Names can adjust slightly, but the **shape** and mapping to templates/template parts should stay consistent.
@@ -885,7 +949,7 @@ This section ties pages, components and patterns together for Figma Make and the
 **Shop**
 
 - `ShopHomeTemplate`
-- `PromotionsTemplate`
+- `PromotionsTemplate` (Offers)
 - `ShopBrandsTemplate`
 - `ProductListingTemplate` (categories/brands/tags)
 - `ProductSingleTemplate`
@@ -901,6 +965,7 @@ This section ties pages, components and patterns together for Figma Make and the
 
 - Hero pattern: image/gradient background, heading, subheading, CTAs.
   - **Standardized CTA:** Primary hero buttons must be large, uppercase, bold, and use the `shadow-lg` style for consistency.
+  - **Standardized Height:** `min-h-[60vh]` for standard pages, `min-h-[80vh]` for home/landing pages.
 - Two-column content pattern: text and media with flexible order.
 - Card grid pattern: brands, experiences, news, events, products.
 - Timeline pattern.
@@ -954,6 +1019,7 @@ These are shared expectations for Figma Make, React and the block theme.
 - **Testability:** ensure layouts have predictable regions and state variants; this makes visual regression and end-to-end tests easier to write.
 - **Navigation (SPA):** Always use `react-router-dom`'s `Link` or `useNavigate` for internal navigation. Never use `window.location` or `<a>` tags for internal routes to ensure Single Page Application (SPA) state is preserved.
 - **CTA Consistency:** All Hero section Call-to-Action buttons must follow the standardized "chunky" style (large size, uppercase, bold font, shadow) defined in `Hero.tsx` and `ShopHero.tsx`.
+- **JSDoc Documentation:** It is **mandatory** to add JSDoc comments to all components, hooks, and utility functions in `pages/` and `components/` directories. Explain props, return types, and complex logic.
 
 ---
 
@@ -1027,6 +1093,3 @@ Every template, pattern and component should be validated against:
 
 Accessibility rules in section 1 are mandatory and must be respected in all outputs from Figma Make.  
 This `Guidelines.md` is the shared source-of-truth for the KWV Figma file, the React app and the WordPress/WooCommerce build.
-
- Some of the base components you are using may have styling(eg. gap/typography) baked in as defaults.
-So make sure you explicitly set any styling information from the guidelines in the generated react to override the defaults.

@@ -19,10 +19,10 @@ export const CorporateFooter: React.FC = () => {
               Leading South African wine & spirits producer with a distinguished heritage stretching back to 1918.
             </Typography>
             <div className="flex gap-4 text-white">
-              <a href="#" aria-label="Facebook" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Facebook size={20} /></a>
-              <a href="#" aria-label="Instagram" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Instagram size={20} /></a>
-              <a href="#" aria-label="Twitter" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Twitter size={20} /></a>
-              <a href="#" aria-label="LinkedIn" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Linkedin size={20} /></a>
+              <a href="https://facebook.com/KWVwines" aria-label="Facebook" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Facebook size={20} /></a>
+              <a href="https://instagram.com/kwvwines" aria-label="Instagram" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Instagram size={20} /></a>
+              <a href="https://twitter.com/KWVwines" aria-label="Twitter" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Twitter size={20} /></a>
+              <a href="https://linkedin.com/company/kwv" aria-label="LinkedIn" className="hover:text-[#DAA520] transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-full p-1"><Linkedin size={20} /></a>
             </div>
           </div>
 
@@ -51,7 +51,7 @@ export const CorporateFooter: React.FC = () => {
             <ul className="space-y-3 text-sm text-gray-300">
               <li><Link to="/experiences" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Visit Us</Link></li>
               <li><Link to="/experiences/emporium" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">KWV Emporium</Link></li>
-              <li><Link to="/experiences/events" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Events</Link></li>
+              <li><Link to="/events" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Events</Link></li>
               <li><Link to="/wine-club" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Wine Club</Link></li>
               <li><Link to="/faq" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">FAQ</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Contact Us</Link></li>
@@ -73,8 +73,8 @@ export const CorporateFooter: React.FC = () => {
             </Typography>
             <ul className="space-y-2 text-xs text-gray-400">
                <li><Link to="/terms" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Terms & Conditions</Link></li>
-               <li><Link to="/privacy" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Privacy Policy</Link></li>
-               <li><Link to="/paia" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">PAIA Manual</Link></li>
+               <li><Link to="/policies" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">Privacy Policy</Link></li>
+               <li><Link to="/policies" className="hover:text-white transition-colors focus:outline-none focus:text-white focus:underline">PAIA Manual</Link></li>
             </ul>
           </div>
         </div>

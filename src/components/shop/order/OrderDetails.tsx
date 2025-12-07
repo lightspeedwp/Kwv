@@ -2,6 +2,15 @@ import React from 'react';
 import { Typography } from '../../common/Typography';
 import { Link } from 'react-router-dom';
 
+/**
+ * OrderDetails Component
+ * 
+ * A comprehensive table summary of items purchased in the order.
+ * Features:
+ * - Product links and quantity indicators.
+ * - Subtotals, Shipping info, and Grand Total.
+ * - specific styling for the table footer (Totals).
+ */
 export const OrderDetails: React.FC = () => {
   return (
     <div className="mb-12">
@@ -17,7 +26,7 @@ export const OrderDetails: React.FC = () => {
           <tbody className="divide-y divide-[#D3D3D3]">
              <tr>
                 <td className="py-4 pl-0">
-                   <Link to="#" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
+                   <Link to="/product/album" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
                     Album
                    </Link> 
                    <strong className="text-[#333333]">× 1</strong>
@@ -26,7 +35,7 @@ export const OrderDetails: React.FC = () => {
              </tr>
              <tr>
                 <td className="py-4 pl-0">
-                   <Link to="#" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
+                   <Link to="/product/cap" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
                     Cap
                    </Link> 
                    <strong className="text-[#333333]">× 1</strong>
@@ -35,7 +44,7 @@ export const OrderDetails: React.FC = () => {
              </tr>
              <tr>
                 <td className="py-4 pl-0">
-                   <Link to="#" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
+                   <Link to="/product/tee" className="text-[#333333] border-b border-black/20 hover:text-[#8B0000] hover:border-[#8B0000] transition-colors mr-1">
                     Long Sleeve Tee
                    </Link> 
                    <strong className="text-[#333333]">× 1</strong>

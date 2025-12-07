@@ -10,9 +10,9 @@ export const CheckoutFooter: React.FC = () => {
           <p>&copy; {new Date().getFullYear()} KWV. All rights reserved.</p>
           
           <div className="flex gap-6">
-            <Link to="/privacy-policy" className="hover:text-gray-900 underline">Privacy Policy</Link>
-            <Link to="/terms-conditions" className="hover:text-gray-900 underline">Terms & Conditions</Link>
-            <Link to="/refund-returns" className="hover:text-gray-900 underline">Returns Policy</Link>
+            <Link to="/policies" className="hover:text-gray-900 underline">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-gray-900 underline">Terms & Conditions</Link>
+            <Link to="/returns-policy" className="hover:text-gray-900 underline">Returns Policy</Link>
           </div>
 
           <div className="flex items-center gap-2 grayscale opacity-60">

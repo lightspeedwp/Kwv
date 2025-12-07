@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Checkbox } from '../../common/Checkbox';
-import { RadioButton } from '../../common/RadioButton';
+import { Checkbox } from './Checkbox';
+import { RadioButton } from './RadioButton';
 
+/**
+ * PaymentMethods Component
+ * 
+ * Handles the selection of payment options during checkout.
+ * Features:
+ * - Accordion-like selection for methods (Bank Transfer, Check, COD).
+ * - Description text for the active method.
+ * - "Add Note" functionality.
+ * - Terms & Conditions agreement check.
+ * - "Place Order" button.
+ */
 export const PaymentMethods: React.FC = () => {
   const navigate = useNavigate();
   const [selectedPayment, setSelectedPayment] = useState('bank_transfer');

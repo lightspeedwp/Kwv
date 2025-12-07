@@ -5,6 +5,16 @@ import { Button } from '../common/Button';
 import { COLORS } from '../../constants/theme';
 import { Link } from 'react-router-dom';
 
+/**
+ * WineClubCTA Component
+ * 
+ * A promotional section driving users to join the Wine Club.
+ * Features:
+ * - Split layout (Text + Image).
+ * - Bulleted list of benefits.
+ * - "Join the Club" CTA.
+ * - Distinctive beige background (`#F5F5DC`).
+ */
 export const WineClubCTA = () => {
   return (
     <section className="py-20 bg-[#F5F5DC]">

@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
 import { Link } from 'react-router-dom';
 import { CheckoutInput } from './CheckoutInput';
-import { Checkbox } from '../../common/Checkbox';
+import { Checkbox } from './Checkbox';
 
 interface ContactInfoProps {
   isLoggedIn: boolean;
 }
 
+/**
+ * ContactInfo Component
+ * 
+ * The first step of checkout: capturing the user's email.
+ * Features:
+ * - Toggle between "Guest" (Email input) and "Logged In" states.
+ * - "Create an account" checkbox for guests.
+ * - Email validation.
+ * 
+ * @param {ContactInfoProps} props - Logged in state.
+ */
 export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
   const [createAccount, setCreateAccount] = useState(false);
   const [email, setEmail] = useState('ashley@lsdev.biz');

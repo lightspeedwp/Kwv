@@ -54,6 +54,17 @@ const PATH_MAP: Record<string, string> = {
 // Paths that should not be clickable (because they are not pages themselves)
 const NON_CLICKABLE_PATHS = ['product', 'shop/tag'];
 
+/**
+ * BreadcrumbsBar Component
+ * 
+ * Context-aware breadcrumb navigation.
+ * 
+ * Features:
+ * - Automatically generates crumbs based on the URL path.
+ * - Handles "Hero" pages (transparent overlay, white text) vs "Standard" pages (light gray bg, dark text).
+ * - Supports custom path-to-label mapping (e.g., "contact-us" -> "Contact Us").
+ * - Hides on Home and Product pages (Product pages use their own breadcrumbs).
+ */
 export const BreadcrumbsBar: React.FC = () => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter(x => x);
@@ -69,7 +80,7 @@ export const BreadcrumbsBar: React.FC = () => {
     '/brands',
     '/awards',
     '/executive-team',
-    '/sustainability',
+    '/our-company/sustainability',
     '/global-distribution',
     '/careers',
     // '/news', // News listing page uses beige background, so use default breadcrumbs
@@ -78,15 +89,19 @@ export const BreadcrumbsBar: React.FC = () => {
     '/wine-club',
     '/contact',
     '/contact-us',
+    '/faq', 
+    '/terms',
+    '/policies',
+    '/returns-policy',
     // Shop pages that specifically HAVE a hero:
     '/shop/promotions',
     '/shop/brands',
-    '/shop/faq'
+    '/shop/faq' 
   ];
   
   // Pages that match the hero path prefix but definitely DON'T have a hero
   const EXCLUDED_HERO_PATHS = [
-    '/shop/search'
+    '/shop/search',
   ];
 
   // Also check if path starts with certain prefixes that always have heroes

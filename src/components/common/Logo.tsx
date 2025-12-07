@@ -6,6 +6,13 @@ interface LogoProps {
   className?: string;
 }
 
+/**
+ * KWV Main Logo
+ * 
+ * The primary KWV emblem with the roof/pediment structure.
+ * 
+ * @param {LogoProps} props - Color and ClassName overrides.
+ */
 export const KWVLogo: React.FC<LogoProps> = ({ color = COLORS.wineRed, className }) => {
   return (
     <svg 
@@ -63,6 +70,14 @@ export const KWVLogo: React.FC<LogoProps> = ({ color = COLORS.wineRed, className
   );
 };
 
+/**
+ * KWV Shop Logo
+ * 
+ * Variant of the logo for the Online Shop header.
+ * Includes the vertical divider and "SHOP ONLINE" text.
+ * 
+ * @param {LogoProps} props - Color and ClassName overrides.
+ */
 export const KWVShopLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
   return (
     <div className={`flex flex-row items-center gap-3 ${className}`}>
@@ -91,6 +106,14 @@ export const KWVShopLogo: React.FC<LogoProps> = ({ color = COLORS.white, classNa
   );
 };
 
+/**
+ * KWV Experiences Logo
+ * 
+ * Variant of the logo for the Experiences section.
+ * Includes "EXPERIENCES - VISIT US" text.
+ * 
+ * @param {LogoProps} props - Color and ClassName overrides.
+ */
 export const KWVExperiencesLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
   return (
     <div className={`flex flex-row items-center gap-3 ${className}`}>
@@ -113,6 +136,78 @@ export const KWVExperiencesLogo: React.FC<LogoProps> = ({ color = COLORS.white, 
                 style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
             >
                 VISIT US
+            </span>
+        </div>
+    </div>
+  );
+};
+
+/**
+ * KWV Events Logo
+ * 
+ * Variant of the logo for the Events section.
+ * Includes "EVENTS - CALENDAR" text.
+ * 
+ * @param {LogoProps} props - Color and ClassName overrides.
+ */
+export const KWVEventsLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
+  return (
+    <div className={`flex flex-row items-center gap-3 ${className}`}>
+        {/* Use the main logo but slightly smaller */}
+        <KWVLogo color={color} className="h-12 w-auto" />
+        
+        {/* Vertical Divider */}
+        <div className="h-10 w-[1px] bg-white/20"></div>
+        
+        {/* EVENTS Text */}
+        <div className="flex flex-col justify-center">
+            <span 
+                className="text-xl font-serif tracking-widest leading-none uppercase"
+                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
+            >
+                EVENTS
+            </span>
+            <span 
+                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
+                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
+            >
+                CALENDAR
+            </span>
+        </div>
+    </div>
+  );
+};
+
+/**
+ * KWV Wine Club Logo
+ * 
+ * Variant of the logo for the Wine Club section.
+ * Includes "WINE CLUB - MEMBERSHIP" text.
+ * 
+ * @param {LogoProps} props - Color and ClassName overrides.
+ */
+export const KWVWineClubLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
+  return (
+    <div className={`flex flex-row items-center gap-3 ${className}`}>
+        {/* Use the main logo but slightly smaller */}
+        <KWVLogo color={color} className="h-12 w-auto" />
+        
+        {/* Vertical Divider */}
+        <div className="h-10 w-[1px] bg-white/20"></div>
+        
+        {/* WINE CLUB Text */}
+        <div className="flex flex-col justify-center">
+            <span 
+                className="text-xl font-serif tracking-widest leading-none uppercase whitespace-nowrap"
+                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
+            >
+                WINE CLUB
+            </span>
+            <span 
+                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
+                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
+            >
+                MEMBERSHIP
             </span>
         </div>
     </div>

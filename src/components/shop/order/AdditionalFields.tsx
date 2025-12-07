@@ -1,6 +1,12 @@
 import React from 'react';
-import { Typography } from '../../../common/Typography';
+import { Typography } from '../../common/Typography';
 
+/**
+ * AdditionalFields Component
+ * 
+ * Displays custom checkout fields on the Order Confirmation page.
+ * Typically maps to "Order Notes", "Gift Messages", or "Delivery Instructions".
+ */
 export const AdditionalFields: React.FC = () => {
   return (
     <div className="mt-12 border-t border-gray-200 pt-8">

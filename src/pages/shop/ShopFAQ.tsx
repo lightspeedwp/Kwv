@@ -1,10 +1,9 @@
 import React from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { FAQSection } from '../../components/sections/FAQSection';
-import { Container } from '../../components/common/Container';
-import { Typography } from '../../components/common/Typography';
-import { COLORS } from '../../constants/theme';
-import { Facebook, Instagram, Twitter, Truck, ShieldCheck, CreditCard, Banknote, Store } from 'lucide-react';
+import { Hero } from '../../components/sections/Hero';
+import { ContactFollowSection } from '../../components/sections/shop/ContactFollowSection';
+import { ServiceFeaturesSection } from '../../components/sections/shop/ServiceFeaturesSection';
 
 const faqItems = [
   {
@@ -45,81 +44,29 @@ const faqItems = [
   }
 ];
 
-const ContactInfo = () => (
-  <div className="text-center mb-12">
-    <Typography variant="h3" className="mb-8 uppercase tracking-widest text-sm font-bold" color={COLORS.darkBrown}>
-      Contact Us
-    </Typography>
-    <div className="space-y-2 text-gray-600">
-      <p>Tel: 021-807-3007/8</p>
-      <p>Email: <a href="mailto:info@kwvemporium.co.za" className="hover:text-[#8B0000] transition-colors">info@kwvemporium.co.za</a></p>
-      <p>GPS: 33°45′ 47.1″ S 18°57′ 59.0″ E</p>
-    </div>
-  </div>
-);
-
-const SocialIcons = () => (
-  <div className="text-center mb-16">
-    <Typography variant="h3" className="mb-8 uppercase tracking-widest text-sm font-bold" color={COLORS.darkBrown}>
-      Follow Us
-    </Typography>
-    <div className="flex justify-center space-x-8">
-      <a href="#" className="text-[#2C1810] hover:text-[#8B0000] transition-colors">
-        <Facebook size={24} />
-      </a>
-      <a href="#" className="text-[#2C1810] hover:text-[#8B0000] transition-colors">
-        <Instagram size={24} />
-      </a>
-      <a href="#" className="text-[#2C1810] hover:text-[#8B0000] transition-colors">
-        <Twitter size={24} />
-      </a>
-    </div>
-  </div>
-);
-
-const ServiceFeature = ({ icon: Icon, text }: { icon: any, text: string }) => (
-  <div className="flex flex-col items-center text-center p-4">
-    <div className="mb-4 p-3 bg-[#F5F5DC] rounded-full">
-      <Icon size={24} className="text-[#2C1810]" />
-    </div>
-    <span className="text-sm font-medium text-gray-800 uppercase tracking-wide">{text}</span>
-  </div>
-);
-
+/**
+ * ShopFAQ Page Component
+ * 
+ * Frequently Asked Questions specific to the online shopping experience.
+ * Covers Shipping, Returns, Payment Methods, and Tracking.
+ * Distinct from the Corporate FAQ page.
+ */
 export const ShopFAQ: React.FC = () => {
   return (
     <Layout>
       {/* Hero */}
-      <div className="bg-[#2C1810] text-white py-12">
-        <Container variant="content" className="text-center">
-          <Typography variant="h1" className="mb-0 text-white">
-            Shop FAQ
-          </Typography>
-        </Container>
-      </div>
+      <Hero 
+        title="Shop FAQ"
+        subtitle="Find answers to common questions about ordering, shipping, and returns."
+        height="medium"
+        nextSectionId="shop-faq-content"
+      />
 
-      <FAQSection items={faqItems} title="" className="border-t-0 pt-12 pb-16" />
+      <FAQSection id="shop-faq-content" items={faqItems} title="" className="border-t-0 pt-12 pb-16" />
 
-      <Container variant="content">
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-          <ContactInfo />
-          <SocialIcons />
-        </div>
-
-        <div className="border-t border-gray-200 pt-16 pb-20">
-          <Typography variant="h3" className="mb-10 text-center uppercase tracking-widest text-sm font-bold" color={COLORS.darkBrown}>
-            Our Excellent Service Includes
-          </Typography>
-          
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            <ServiceFeature icon={Truck} text="Delivery within 3-5 working days" />
-            <ServiceFeature icon={ShieldCheck} text="Safe & Secure" />
-            <ServiceFeature icon={CreditCard} text="3 ways to pay" />
-            <ServiceFeature icon={Banknote} text="Affordable Delivery Fee" />
-            <ServiceFeature icon={Store} text="Click & Collect after 72 hours" />
-          </div>
-        </div>
-      </Container>
+      <ContactFollowSection className="pt-12 md:pt-20 mb-16" />
+      
+      <ServiceFeaturesSection />
     </Layout>
   );
 };

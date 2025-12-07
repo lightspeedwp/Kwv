@@ -9,6 +9,17 @@ interface CheckoutStepProps {
   headerRight?: React.ReactNode;
 }
 
+/**
+ * CheckoutStep Component
+ * 
+ * A layout wrapper for each step in the checkout process (e.g., "1. Contact Information").
+ * Features:
+ * - Step number with vertical connecting line (unless last step).
+ * - Title and optional right-aligned header content (e.g., "Log in" link).
+ * - Indented content area.
+ * 
+ * @param {CheckoutStepProps} props - Configuration for the step.
+ */
 export const CheckoutStep: React.FC<CheckoutStepProps> = ({ 
   number, 
   title, 

@@ -4,9 +4,16 @@ import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import { ShopSidebar } from '../../components/shop/ShopSidebar';
-import { ProductCard, Product } from '../../components/shop/ProductCard';
+import { ShopSidebar } from '../../components/shop/layout/ShopSidebar';
+import { ProductCard, Product } from '../../components/shop/common/ProductCard';
 
+/**
+ * ProductSearchResults Page Component
+ * 
+ * Displays search results specifically for the Shop section.
+ * Features a sidebar filter and a grid of matching products.
+ * Differentiates from the corporate `SearchResults` page.
+ */
 export const ProductSearchResults: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';

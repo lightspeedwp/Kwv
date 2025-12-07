@@ -16,7 +16,18 @@ import {
   SheetDescription,
 } from "../ui/sheet";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
+import { BrandsMegaMenu } from './BrandsMegaMenu';
 
+/**
+ * CorporateHeader Component
+ * 
+ * The main navigation header for the corporate/informational side of the website.
+ * Features:
+ * - Sticky positioning.
+ * - Mega Menus for "Brands", "Shop", "Visit Us", "Company".
+ * - Search overlay.
+ * - Mobile Drawer menu.
+ */
 export const CorporateHeader: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -76,24 +87,26 @@ export const CorporateHeader: React.FC = () => {
              <KWVLogo className="h-14 w-auto" color="white" />
           </Link>
 
-          {/* Desktop Navigation */}
+            {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 mx-8">
-            {/* Company Dropdown */}
-            <div className="relative group">
-               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
-                 Company <ChevronDown size={14} />
+            <div className="group">
+               <Link to="/brands" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white py-4">
+                 Brands <ChevronDown size={14} />
                </Link>
-               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
-                  <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
-                  <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
-                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
-                  <Link to="/awards" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Awards</Link>
-                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
-                  <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
-                  <Link to="/careers" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Careers</Link>
-                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
-               </div>
+               <BrandsMegaMenu />
             </div>
+
+            <Link to="/awards" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              Awards
+            </Link>
+
+            <Link to="/careers" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              Careers
+            </Link>
+
+            <Link to="/news" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
+              News
+            </Link>
 
             {/* Shop Mega Menu */}
             <div className="relative group">
@@ -115,8 +128,8 @@ export const CorporateHeader: React.FC = () => {
                   </div>
                   <div className="col-span-1">
                      <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Brands</Typography>
-                     <Link to="/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
-                     <Link to="/brands/mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
+                     <Link to="/shop/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
+                     <Link to="/shop/brands/the-mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
                      <Link to="/shop" className="block py-2 text-[#DAA520] font-bold">Visit Shop</Link>
                   </div>
                </div>
@@ -131,14 +144,26 @@ export const CorporateHeader: React.FC = () => {
                   <Link to="/experiences/emporium" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Emporium</Link>
                   <Link to="/experiences/cathedral-cellar" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Cathedral Cellar</Link>
                   <Link to="/experiences/house-of-fire" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">House of Fire</Link>
-                  <Link to="/experiences/events" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
+                  <Link to="/events" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Events</Link>
                   <Link to="/experiences/conference-facilities" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Conference Facilities</Link>
+                  <Link to="/experiences/cathedral-cellar-kitchen" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Kitchen Venue</Link>
                </div>
             </div>
 
-            <Link to="/news" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
-              News
-            </Link>
+            {/* Company Dropdown */}
+            <div className="relative group">
+               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4 text-white">
+                 Company <ChevronDown size={14} />
+               </Link>
+               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
+                  <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
+                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
+                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
+                  <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
+                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
+               </div>
+            </div>
 
             <Link to="/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium text-white">
               FAQ
@@ -237,13 +262,26 @@ export const CorporateHeader: React.FC = () => {
                                       <Link to="/about" onClick={closeMenu} className="block hover:text-white">About Us</Link>
                                       <Link to="/history" onClick={closeMenu} className="block hover:text-white">History</Link>
                                       <Link to="/brands" onClick={closeMenu} className="block hover:text-white">Our Brands</Link>
-                                      <Link to="/awards" onClick={closeMenu} className="block hover:text-white">Awards</Link>
                                       <Link to="/executive-team" onClick={closeMenu} className="block hover:text-white">Executive Team</Link>
                                       <Link to="/sustainability" onClick={closeMenu} className="block hover:text-white">Sustainability</Link>
-                                      <Link to="/careers" onClick={closeMenu} className="block hover:text-white">Careers</Link>
                                       <Link to="/global-distribution" onClick={closeMenu} className="block hover:text-white">Global Distribution</Link>
                                    </AccordionContent>
                                 </AccordionItem>
+
+                                <Link to="/brands" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white py-4 border-b border-white/10">
+                                   <span>Brands</span>
+                                   <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                                </Link>
+
+                                <Link to="/awards" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white py-4 border-b border-white/10">
+                                   <span>Awards</span>
+                                   <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                                </Link>
+
+                                <Link to="/careers" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white py-4 border-b border-white/10">
+                                   <span>Careers</span>
+                                   <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
+                                </Link>
   
                                 <AccordionItem value="shop" className="border-b border-white/10">
                                    <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Shop</AccordionTrigger>
@@ -260,8 +298,9 @@ export const CorporateHeader: React.FC = () => {
                                       <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
                                       <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
                                       <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
-                                      <Link to="/experiences/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
+                                      <Link to="/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
                                       <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
+                                      <Link to="/experiences/cathedral-cellar-kitchen" onClick={closeMenu} className="block hover:text-white">Kitchen Venue</Link>
                                    </AccordionContent>
                                 </AccordionItem>
                              </Accordion>

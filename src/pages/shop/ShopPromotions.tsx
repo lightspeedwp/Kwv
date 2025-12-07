@@ -3,7 +3,7 @@ import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
-import { ProductCard } from '../../components/shop/ProductCard';
+import { ProductCard } from '../../components/shop/common/ProductCard';
 import { Link } from 'react-router-dom';
 import { Tag } from 'lucide-react';
 
@@ -50,6 +50,12 @@ const PROMO_PRODUCTS = [
   },
 ];
 
+/**
+ * ShopPromotions Page Component
+ * 
+ * Landing page for special offers and deals.
+ * Highlights "On Sale" items and special bundle offers.
+ */
 export const ShopPromotions: React.FC = () => {
   return (
     <Layout>

@@ -1,75 +1,79 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { COLORS } from '../../constants/theme';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { Link } from 'react-router-dom';
 
-const BRANDS = [
-  { 
-    name: 'Roodeberg', 
-    slug: 'roodeberg', 
-    image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
+const CATEGORIES = [
+  {
+    title: 'WINES',
+    description: 'Our wine brands include trusted favourites such as the KWV Classic Collection (our core range), Roodeberg (an iconic South African brand launched in 1949), Laborie (wines of distinction) and Cathedral Cellar (a premium product within our celebrated portfolio).',
+    link: '/shop/wine'
   },
-  { 
-    name: 'The Mentors', 
-    slug: 'mentors', 
-    image: 'https://images.unsplash.com/photo-1559563362-c667ba5f5480?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
+  {
+    title: 'SPIRITS',
+    description: 'Brands in our spirits category include popular choices such as Cruxland Gin, Ponchos, Wild Africa and Sally Williams Cream Liqueur. Cruxland Gin brings together the rare Kalahari truffle and nine Southern African botanicals.',
+    link: '/shop/spirits'
   },
-  { 
-    name: 'KWV Brandy', 
-    slug: 'kwv-brandy', 
-    image: 'https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
+  {
+    title: 'READY TO DRINK',
+    description: 'Our ready-to-drink brands range consists of Hooch, CIAO and KWV Brandy and Cola. Hooch – with its brightly coloured beverages – has outlasted countless fads and trends since 1997.',
+    link: '/shop/ready-to-drink'
   },
-  { 
-    name: 'Laborie', 
-    slug: 'laborie', 
-    image: 'https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
-  },
-  { 
-    name: 'Cruxland', 
-    slug: 'cruxland', 
-    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
-  },
-  { 
-    name: 'Cathedral Cellar', 
-    slug: 'cathedral-cellar', 
-    image: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200' 
-  },
+  {
+    title: 'NON-ALCOHOLIC',
+    description: 'Finally, we have two non-alcoholic brands, namely Fruit Lagoon Cocktail Base and Annabelle Cuvee Rosé Non-Alcoholic Sparkling Wine.',
+    link: '/shop/non-alcoholic'
+  }
 ];
 
+/**
+ * BrandGrid Component
+ * 
+ * Displays a grid of product category cards (Wines, Spirits, RTD, Non-Alc).
+ * Acts as a high-level navigation component for the Corporate "Our Brands" section
+ * or the "Shop" entry point.
+ */
 export const BrandGrid = () => {
   return (
-    <section className="py-20 bg-[#F9F9F9]">
+    <section className="py-20 bg-white">
       <Container variant="site">
-        <div className="text-center mb-12">
-          <Typography variant="h2" color={COLORS.darkBrown} className="mb-4">Our Brands</Typography>
-          <div className="w-24 h-1 bg-[#DAA520] mx-auto"></div>
+        <div className="text-center mb-12 max-w-5xl mx-auto">
+          <Typography variant="caption" className="uppercase tracking-widest text-[#2C1810] mb-4">
+            OUR BRANDS
+          </Typography>
+          <Typography variant="h2" color={COLORS.darkBrown} className="mb-6 font-bold leading-tight">
+            KWV enjoys a worldwide reputation for its brands that consistently deliver exceptional enjoyment. We are proud to offer you our portfolio!
+          </Typography>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {BRANDS.map((brand) => (
-            <Link 
-              key={brand.slug} 
-              to={`/brands/${brand.slug}`}
-              className="group flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#2C1810] focus:ring-offset-4 rounded-lg"
-            >
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:shadow-lg group-hover:border-[#DAA520] transition-all">
-                 <ImageWithFallback 
-                   src={brand.image}
-                   alt={brand.name}
-                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                 />
-                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {CATEGORIES.map((category) => (
+            <Link to={category.link} key={category.title} className="group block h-full">
+              <div className="flex flex-col h-full">
+                {/* Gold Header Bar */}
+                <div className="bg-[#BFA15F] py-3 px-2 text-center mb-6 shadow-sm group-hover:bg-[#DAA520] transition-colors">
+                  <Typography 
+                    variant="h4" 
+                    className="!text-sm font-bold uppercase tracking-widest text-white m-0"
+                  >
+                    {category.title}
+                  </Typography>
+                </div>
+                
+                {/* Text Content */}
+                <Typography variant="body" className="text-gray-600 leading-relaxed text-center lg:text-left text-sm md:text-base">
+                  {category.description}
+                </Typography>
               </div>
-              <Typography 
-                variant="h4" 
-                className="!text-sm font-bold uppercase tracking-widest text-[#2C1810] group-hover:text-[#8B0000]"
-              >
-                {brand.name}
-              </Typography>
             </Link>
           ))}
+        </div>
+        
+        <div className="mt-16 text-center max-w-4xl mx-auto">
+           <Typography variant="body" className="text-gray-500 italic">
+              We currently feature 13 wine brands, 10 spirits brands, 3 ready to drink products and 2 non-alcoholic products.
+           </Typography>
         </div>
       </Container>
     </section>

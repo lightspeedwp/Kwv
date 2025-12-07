@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, Search, X, ChevronDown, ChevronRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
-import { KWVExperiencesLogo } from '../common/Logo';
+import { KWVExperiencesLogo, KWVEventsLogo } from '../common/Logo';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   Sheet,
@@ -15,10 +15,15 @@ import {
   SheetDescription,
 } from "../ui/sheet";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
+import { BrandsMegaMenu } from './BrandsMegaMenu';
 
 export const ExperiencesHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
   const closeMenu = () => setIsMenuOpen(false);
+  
+  const showEventsTitle = location.pathname.startsWith('/events');
+  const isEventsContext = location.pathname.startsWith('/events');
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300 bg-[#2C1810] text-white shadow-md relative">
@@ -26,28 +31,35 @@ export const ExperiencesHeader: React.FC = () => {
         <div className="flex items-center justify-between">
           
           {/* 1. Logo (Left aligned) */}
-          <Link to="/experiences" className="flex-shrink-0 mr-auto">
-             <KWVExperiencesLogo className="h-14 w-auto" />
-          </Link>
+          <div className="flex items-center gap-6 mr-auto">
+            <Link to={isEventsContext ? "/events" : "/experiences"} className="flex-shrink-0">
+               {isEventsContext ? (
+                 <KWVEventsLogo className="h-14 w-auto" />
+               ) : (
+                 <KWVExperiencesLogo className="h-14 w-auto" />
+               )}
+            </Link>
+            
+            {showEventsTitle && (
+                <div className="hidden sm:flex items-center border-l border-white/20 pl-6 h-10">
+                    <span className="text-white font-serif text-lg tracking-widest uppercase">Events Calendar</span>
+                </div>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 mx-8">
-            {/* Company Mega Menu */}
-            <div className="relative group">
-               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
-                 Company <ChevronDown size={14} />
+            {/* Brands Mega Menu */}
+            <div className="group">
+               <Link to="/brands" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+                 Brands <ChevronDown size={14} />
                </Link>
-               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
-                  <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
-                  <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
-                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
-                  <Link to="/awards" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Awards</Link>
-                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
-                  <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
-                  <Link to="/careers" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Careers</Link>
-                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
-               </div>
+               <BrandsMegaMenu />
             </div>
+
+            <Link to="/events" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
+              Events
+            </Link>
 
             {/* Shop Mega Menu */}
             <div className="relative group">
@@ -69,8 +81,8 @@ export const ExperiencesHeader: React.FC = () => {
                   </div>
                   <div className="col-span-1">
                      <Typography variant="h4" className="text-[#2C1810] mb-4 border-b border-gray-200 pb-2 font-bold">Brands</Typography>
-                     <Link to="/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
-                     <Link to="/brands/mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
+                     <Link to="/shop/brands/roodeberg" className="block py-2 text-gray-600 hover:text-[#8B0000]">Roodeberg</Link>
+                     <Link to="/shop/brands/the-mentors" className="block py-2 text-gray-600 hover:text-[#8B0000]">The Mentors</Link>
                      <Link to="/shop" className="block py-2 text-[#DAA520] font-bold">Visit Shop</Link>
                   </div>
                </div>
@@ -90,11 +102,24 @@ export const ExperiencesHeader: React.FC = () => {
                </div>
             </div>
 
-            <Link to="/experiences/events" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
-              Events
-            </Link>
+            {/* Company Mega Menu */}
+            <div className="relative group">
+               <Link to="/" className="flex items-center gap-1 text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium py-4">
+                 Company <ChevronDown size={14} />
+               </Link>
+               <div className="absolute top-full left-0 w-64 bg-white shadow-xl py-2 hidden group-hover:block z-50 rounded-b-sm border-t-4 border-[#DAA520]">
+                  <Link to="/about" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">About Us</Link>
+                  <Link to="/history" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">History</Link>
+                  <Link to="/brands" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Our Brands</Link>
+                  <Link to="/awards" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Awards</Link>
+                  <Link to="/executive-team" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Executive Team</Link>
+                  <Link to="/sustainability" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Sustainability</Link>
+                  <Link to="/careers" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Careers</Link>
+                  <Link to="/global-distribution" className="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-100 last:border-0">Global Distribution</Link>
+               </div>
+            </div>
             
-            <Link to="/experiences/faq" className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
+            <Link to={isEventsContext ? "/events/faq" : "/experiences/faq"} className="text-sm uppercase tracking-wider hover:text-[#DAA520] transition-colors font-medium">
               FAQ
             </Link>
              
@@ -108,9 +133,11 @@ export const ExperiencesHeader: React.FC = () => {
              
             {/* Desktop Only: Book Experience Button */}
             <div className="hidden lg:block">
-              <Button size="sm" className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none">
-                Book an Experience
-              </Button>
+               <Link to="/experiences">
+                  <Button size="sm" className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none">
+                     Book an Experience
+                  </Button>
+               </Link>
             </div>
 
             {/* Mobile Menu Icon */}
@@ -168,8 +195,8 @@ export const ExperiencesHeader: React.FC = () => {
                                <AccordionItem value="shop" className="border-b border-white/10">
                                   <AccordionTrigger className="text-xl font-serif font-medium hover:text-[#DAA520] py-4 hover:no-underline text-white">Shop</AccordionTrigger>
                                   <AccordionContent className="pl-4 space-y-3 text-base text-gray-300">
-                                     <Link to="/shop" onClick={closeMenu} className="block hover:text-white">Wines</Link>
-                                     <Link to="/shop" onClick={closeMenu} className="block hover:text-white">Spirits</Link>
+                                     <Link to="/shop/wine" onClick={closeMenu} className="block hover:text-white">Wines</Link>
+                                     <Link to="/shop/spirits" onClick={closeMenu} className="block hover:text-white">Spirits</Link>
                                      <Link to="/shop" onClick={closeMenu} className="block text-[#DAA520] font-bold">Go to Shop</Link>
                                   </AccordionContent>
                                </AccordionItem>
@@ -181,18 +208,19 @@ export const ExperiencesHeader: React.FC = () => {
                                      <Link to="/experiences/emporium" onClick={closeMenu} className="block hover:text-white">Emporium</Link>
                                      <Link to="/experiences/cathedral-cellar" onClick={closeMenu} className="block hover:text-white">Cathedral Cellar</Link>
                                      <Link to="/experiences/house-of-fire" onClick={closeMenu} className="block hover:text-white">House of Fire</Link>
-                                     <Link to="/experiences/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
+                                     <Link to="/events" onClick={closeMenu} className="block hover:text-white">Events</Link>
                                      <Link to="/experiences/conference-facilities" onClick={closeMenu} className="block hover:text-white">Conference Facilities</Link>
+                                     <Link to="/experiences/cathedral-cellar-kitchen" onClick={closeMenu} className="block hover:text-white">Kitchen Venue</Link>
                                   </AccordionContent>
                                </AccordionItem>
                             </Accordion>
                             
-                            <Link to="/experiences/events" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                            <Link to="/events" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                <span>Events</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
 
-                            <Link to="/experiences/faq" onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
+                            <Link to={isEventsContext ? "/events/faq" : "/experiences/faq"} onClick={closeMenu} className="text-xl font-serif font-medium hover:text-[#DAA520] flex items-center justify-between group text-white">
                                <span>FAQ</span>
                                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#DAA520]" />
                             </Link>
@@ -205,7 +233,7 @@ export const ExperiencesHeader: React.FC = () => {
                      </div>
 
                      <div className="mt-8 pt-8 border-t border-white/10">
-                        <Link to="/wine-club" onClick={closeMenu} className="block">
+                        <Link to="/experiences" onClick={closeMenu} className="block">
                            <Button className="w-full bg-[#DAA520] text-[#2C1810] hover:bg-white h-12 text-lg border-none">Book an Experience</Button>
                         </Link>
                      </div>

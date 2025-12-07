@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Minus, Plus, ChevronDown } from 'lucide-react';
 import { Button } from '../../common/Button';
 import { Typography } from '../../common/Typography';
-import { Checkbox } from '../../common/Checkbox';
+import { Checkbox } from '../checkout/Checkbox';
 
 export interface Variation {
   id: string;

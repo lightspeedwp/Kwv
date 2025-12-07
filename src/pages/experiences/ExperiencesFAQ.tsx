@@ -38,22 +38,27 @@ const faqItems = [
   }
 ];
 
+/**
+ * ExperiencesFAQ Page Component
+ * 
+ * Frequently asked questions specific to visiting KWV (booking, dress code, accessibility, etc.).
+ */
 export const ExperiencesFAQ: React.FC = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="bg-[#F5F5DC] py-16 md:py-24">
+      <div className="bg-[#2C1810] text-white py-12 md:py-16">
         <Container variant="content" className="text-center">
-          <Typography variant="h1" className="mb-6" color={COLORS.darkBrown}>
+          <Typography variant="h1" className="mb-6 text-white" color="white">
             Experiences FAQ
           </Typography>
-          <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-gray-600">
+          <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-white/80" color="white">
             Everything you need to know about visiting the KWV Emporium and our world-class experiences.
           </Typography>
         </Container>
       </div>
 
-      <FAQSection items={faqItems} title="" className="border-t-0 pt-0 pb-20" />
+      <FAQSection items={faqItems} title="" className="border-t-0 pt-12 pb-20" />
 
       {/* Contact CTA */}
       <section className="py-16 bg-white">

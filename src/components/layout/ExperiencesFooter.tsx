@@ -21,15 +21,18 @@ export const ExperiencesFooter: React.FC = () => {
 
           <Typography variant="h3" className="text-[#DAA520] mb-4 uppercase tracking-wider text-lg">Follow Us</Typography>
           <div className="flex gap-4 justify-center lg:justify-start mb-8 text-white">
-             <a href="#" className="hover:text-[#DAA520] transition-colors"><Facebook size={24} /></a>
-             <a href="#" className="hover:text-[#DAA520] transition-colors"><Instagram size={24} /></a>
-             <a href="#" className="hover:text-[#DAA520] transition-colors"><Twitter size={24} /></a>
+             <a href="https://facebook.com/KWVwines" aria-label="Facebook" className="hover:text-[#DAA520] transition-colors"><Facebook size={24} /></a>
+             <a href="https://instagram.com/kwvwines" aria-label="Instagram" className="hover:text-[#DAA520] transition-colors"><Instagram size={24} /></a>
+             <a href="https://twitter.com/KWVwines" aria-label="Twitter" className="hover:text-[#DAA520] transition-colors"><Twitter size={24} /></a>
           </div>
           
           <div className="mt-4 flex justify-center lg:justify-start">
-            <div className="w-16 h-16 border border-white/20 rounded-full flex items-center justify-center">
-                {/* Placeholder for award logo */}
-                <span className="text-xs text-center leading-tight text-gray-400">Award Logo</span>
+            <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden">
+                <ImageWithFallback 
+                   src="https://images.unsplash.com/photo-1665110161951-6abc48bea1ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200" 
+                   alt="Award Winning"
+                   className="w-full h-full object-cover"
+                />
             </div>
           </div>
         </div>
@@ -90,7 +93,7 @@ export const ExperiencesFooter: React.FC = () => {
          <p className="text-[10px] text-gray-500 uppercase tracking-widest">
             <span className="mr-4">&copy; {new Date().getFullYear()} KWV. All rights reserved.</span>
             <span className="mx-2">|</span>
-            Terms & Conditions | Privacy Policy
+            <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link> | <Link to="/policies" className="hover:text-white transition-colors">Privacy Policy</Link>
             <span className="ml-4">Alcohol not for sale to persons under the age of 18</span>
          </p>
       </div>

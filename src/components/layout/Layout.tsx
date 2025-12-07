@@ -9,7 +9,7 @@ import { BackToTopButton } from '../common/BackToTopButton';
 
 interface LayoutProps {
   children: React.ReactNode;
-  variant?: 'corporate' | 'shop' | 'experiences';
+  variant?: 'corporate' | 'shop' | 'experiences' | 'events';
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, variant: propsVariant }) => {
@@ -24,7 +24,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, variant: propsVariant 
   const isExperiences = location.pathname.startsWith('/experiences') ||
                         location.pathname.startsWith('/visit');
 
-  const variant = propsVariant || (isShop ? 'shop' : (isExperiences ? 'experiences' : 'corporate'));
+  const isEvents = location.pathname.startsWith('/events');
+
+  const isWineClub = location.pathname.startsWith('/wine-club');
+
+  const variant = propsVariant || (isShop ? 'shop' : (isExperiences ? 'experiences' : (isEvents ? 'events' : (isWineClub ? 'wine-club' : 'corporate'))));
 
   return (
     <div className="flex flex-col min-h-screen font-sans text-[#333333]">

@@ -1,11 +1,28 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 
+/**
+ * Props for the ScrollDownArrow component.
+ */
 interface ScrollDownArrowProps {
+  /** The ID of the HTML element to scroll to. If not provided, scrolls down by window height. */
   targetId?: string;
+  /** Additional CSS classes. */
   className?: string;
 }
 
+/**
+ * ScrollDownArrow Component
+ * 
+ * A bouncing arrow indicator typically used in hero sections to prompt the user to scroll down.
+ * 
+ * Features:
+ * - Bouncing animation (`animate-bounce`).
+ * - Scrolls to a specific element ID or just down by one viewport height.
+ * 
+ * @param {ScrollDownArrowProps} props - The props for the component.
+ * @returns {JSX.Element} The Scroll Down Arrow component.
+ */
 export const ScrollDownArrow: React.FC<ScrollDownArrowProps> = ({ targetId, className = '' }) => {
   const handleClick = () => {
     if (targetId) {

@@ -1,6 +1,12 @@
 import React from 'react';
 import { ExperiencePageLayout } from '../../components/experiences/ExperiencePageLayout';
 
+/**
+ * ConferenceFacilities Page Component
+ * 
+ * Showcases KWV's conference and function venues (Sensorium, Cathedral Cellar, Laborie Room, Courtyard).
+ * Provides booking information and venue highlights.
+ */
 export const ConferenceFacilities: React.FC = () => {
   return (
     <ExperiencePageLayout

@@ -4,6 +4,20 @@ import { COLORS } from '../../constants/theme';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 
+/**
+ * AgeVerificationModal Component
+ * 
+ * Displays a modal dialog to verify the user's age.
+ * 
+ * Features:
+ * - Checks localStorage for previous verification ('kwv_age_verified').
+ * - If not verified, shows a modal blocking access to the site.
+ * - If user confirms age > 18, saves to localStorage and closes modal.
+ * - If user denies, redirects to Google.
+ * - Uses `motion/react` for fade/scale animations.
+ * 
+ * @returns {JSX.Element} The Age Verification Modal component.
+ */
 export const AgeVerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -14,6 +28,10 @@ export const AgeVerificationModal = () => {
     }
   }, []);
 
+  /**
+   * Handles the verification logic.
+   * @param {boolean} isOver18 - Whether the user confirmed they are over 18.
+   */
   const handleVerify = (isOver18: boolean) => {
     if (isOver18) {
       localStorage.setItem('kwv_age_verified', 'true');

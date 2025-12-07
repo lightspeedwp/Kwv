@@ -6,6 +6,17 @@ interface DeliveryMethodSelectorProps {
   setMethod: (method: 'ship' | 'pickup') => void;
 }
 
+/**
+ * DeliveryMethodSelector Component
+ * 
+ * Allows the user to choose between "Ship" and "Pickup".
+ * Features:
+ * - Visual selection cards with icons (Truck vs Store).
+ * - Price display (cost vs FREE).
+ * - Updates the parent state `setMethod`.
+ * 
+ * @param {DeliveryMethodSelectorProps} props - Current method and setter.
+ */
 export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ method, setMethod }) => {
   return (
     <div>

@@ -9,6 +9,16 @@ interface OrderStatusHeaderProps {
   paymentMethod: string;
 }
 
+/**
+ * OrderStatusHeader Component
+ * 
+ * The primary success message at the top of the Order Confirmation page.
+ * Features:
+ * - "Order received" heading.
+ * - Dashed-border grid displaying key metrics: Order Number, Date, Total, Email, Payment Method.
+ * 
+ * @param {OrderStatusHeaderProps} props - Data for the order summary strip.
+ */
 export const OrderStatusHeader: React.FC<OrderStatusHeaderProps> = ({
   orderNumber,
   date,

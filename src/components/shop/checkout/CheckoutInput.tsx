@@ -7,6 +7,17 @@ interface CheckoutInputProps extends React.InputHTMLAttributes<HTMLInputElement>
   touched?: boolean;
 }
 
+/**
+ * CheckoutInput Component
+ * 
+ * A reusable floating label input designed specifically for the Checkout flow.
+ * Features:
+ * - Floating label animation (Material Design style).
+ * - Validation error display.
+ * - Custom styling to match the shop's aesthetic (square borders, specific focus states).
+ * 
+ * @param {CheckoutInputProps} props - Input attributes plus label and error state.
+ */
 export const CheckoutInput: React.FC<CheckoutInputProps> = ({ 
   label, 
   error, 

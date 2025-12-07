@@ -1,6 +1,12 @@
 import React from 'react';
-import { Typography } from '../../../common/Typography';
+import { Typography } from '../../common/Typography';
 
+/**
+ * AdditionalInformation Component
+ * 
+ * Displays standard WooCommerce "Order Notes" added by the customer during checkout.
+ * Rendered on the Order Confirmation page.
+ */
 export const AdditionalInformation: React.FC = () => {
   return (
     <div className="mt-12 border-t border-gray-200 pt-8">
