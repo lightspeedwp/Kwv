@@ -5,6 +5,17 @@ import { COLORS } from '../../constants/theme';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
+/**
+ * CorporateFooter Component
+ * 
+ * The standard footer for the Corporate (Main) site.
+ * 
+ * Features:
+ * - 4-column grid layout (Brand/Social, Company, Experiences, Explore/Legal).
+ * - Social media links (Facebook, Instagram, Twitter, LinkedIn).
+ * - Comprehensive site map links.
+ * - Copyright and "Enjoy Responsibly" legal text.
+ */
 export const CorporateFooter: React.FC = () => {
   return (
     <footer className="pt-16 pb-8 bg-[#2C1810] text-white">

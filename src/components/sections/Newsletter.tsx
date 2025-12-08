@@ -8,10 +8,12 @@ import { Button } from '../common/Button';
  * Newsletter Component
  * 
  * A full-width signup form for the KWV newsletter.
+ * 
  * Features:
- * - Dark background with subtle pattern.
- * - First Name and Email inputs.
- * - Compliance text.
+ * - Dark background with subtle radial gradient pattern.
+ * - Inline form layout on desktop, stacked on mobile.
+ * - Custom styled inputs (transparent background).
+ * - "Join the KWV Family" branding.
  */
 export const Newsletter = () => {
   return (

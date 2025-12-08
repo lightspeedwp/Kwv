@@ -17,6 +17,17 @@ import {
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
 import { BrandsMegaMenu } from './BrandsMegaMenu';
 
+/**
+ * ExperiencesHeader Component
+ * 
+ * Navigation header for the Experiences and Events section.
+ * 
+ * Features:
+ * - Displays `KWVExperiencesLogo` or `KWVEventsLogo` based on context.
+ * - "Events Calendar" title indicator when in the Events section.
+ * - Experiences-specific navigation links.
+ * - Mega Menus for cross-navigation to Shop, Brands, and Company.
+ */
 export const ExperiencesHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();

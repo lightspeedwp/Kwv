@@ -14,6 +14,18 @@ interface ProductRatingProps {
  * 
  * @param {ProductRatingProps} props - Numeric rating and review count.
  */
+/**
+ * ProductRating Component
+ * 
+ * Displays the star rating and review count.
+ * Features:
+ * - Star icons (filled/empty based on rating).
+ * - "Be the first to review" link if no reviews.
+ * - Scroll-to-reviews functionality.
+ * 
+ * @param {number} rating - Average rating (0-5).
+ * @param {number} reviewCount - Total number of reviews.
+ */
 export const ProductRating: React.FC<ProductRatingProps> = ({ rating, reviewCount }) => {
   return (
     <div className="flex items-center gap-1 mb-6">

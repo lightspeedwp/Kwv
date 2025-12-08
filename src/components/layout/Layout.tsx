@@ -12,6 +12,19 @@ interface LayoutProps {
   variant?: 'corporate' | 'shop' | 'experiences' | 'events';
 }
 
+/**
+ * Layout Component
+ * 
+ * The main layout wrapper for the application.
+ * 
+ * Features:
+ * - Determines the active "variant" based on the current route URL (Corporate, Shop, Experiences, etc.).
+ * - Renders the appropriate Header and Footer variants.
+ * - Includes global utilities: `AgeVerificationModal`, `BackToTopButton`, `BreadcrumbsBar`.
+ * - Accessibility features ("Skip to main content").
+ * 
+ * @param {LayoutProps} props - Children and optional variant override.
+ */
 export const Layout: React.FC<LayoutProps> = ({ children, variant: propsVariant }) => {
   const location = useLocation();
   // Determine if we are in the "shop" context

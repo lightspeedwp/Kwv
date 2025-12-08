@@ -14,6 +14,17 @@ import {
   SheetDescription,
 } from "../ui/sheet";
 
+/**
+ * WineClubHeader Component
+ * 
+ * Dedicated header for the Wine Club section.
+ * 
+ * Features:
+ * - `KWVWineClubLogo`.
+ * - Simplified navigation focusing on Shop, Visit Us, and Company cross-links.
+ * - "Join Wine Club" CTA button.
+ * - FAQ anchor scrolling logic.
+ */
 export const WineClubHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();

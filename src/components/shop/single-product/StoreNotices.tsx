@@ -18,6 +18,16 @@ interface StoreNoticesProps {
  * 
  * @param {StoreNoticesProps} props - Array of notice objects.
  */
+/**
+ * StoreNotices Component
+ * 
+ * Displays global store alerts or notices above the product.
+ * Features:
+ * - Can show "Free Shipping", "Low Stock", or "Holiday Delays" messages.
+ * - Dismissible (optional).
+ * 
+ * @param {string[]} notices - Array of notice strings.
+ */
 export const StoreNotices: React.FC<StoreNoticesProps> = ({ notices }) => {
   if (notices.length === 0) return null;
 

@@ -32,7 +32,11 @@ const NEWS_ITEMS = [
  * 
  * A section displaying the 3 most recent news items.
  * Typically used on the Home Page.
- * Features hover effects on cards and a "View More" CTA.
+ * 
+ * Features:
+ * - Responsive grid of news cards.
+ * - Hover effects on images and titles.
+ * - "View More" CTA button linking to the News Archive.
  */
 export const LatestNews: React.FC = () => {
   return (

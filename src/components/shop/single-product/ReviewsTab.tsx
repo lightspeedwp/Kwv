@@ -12,6 +12,15 @@ import { Typography } from '../../common/Typography';
  * - Form for submitting a new review.
  * - Star rating input.
  */
+/**
+ * ReviewsTab Component
+ * 
+ * The content for the "Reviews" tab on the Single Product page.
+ * Features:
+ * - List of existing reviews (mocked).
+ * - "Add a Review" form with Star Rating input.
+ * - Submission handling (mocked).
+ */
 export const ReviewsTab: React.FC = () => {
   const [rating, setRating] = useState(0);
 

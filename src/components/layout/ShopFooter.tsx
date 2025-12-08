@@ -3,6 +3,17 @@ import { Typography } from '../common/Typography';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+/**
+ * ShopFooter Component
+ * 
+ * A rich footer for the Online Shop section.
+ * 
+ * Features:
+ * - 3-column layout (Contact/Social, Service Value Props, Map).
+ * - Service guarantees (Delivery, Secure Payment, etc.).
+ * - Payment provider logos strip (Visa, Mastercard, PayFast, SnapScan).
+ * - Copyright and legal links.
+ */
 export const ShopFooter: React.FC = () => {
   return (
     <footer className="w-full">

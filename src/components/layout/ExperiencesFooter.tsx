@@ -6,6 +6,17 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { ShieldCheck, CreditCard } from 'lucide-react'; // Fallback icons for payment
 
+/**
+ * ExperiencesFooter Component
+ * 
+ * A specialized footer for the Experiences / Visit Us section.
+ * 
+ * Features:
+ * - 3-column layout (Contact/Social, Loyalty Corner, Map).
+ * - Embedded map image with visual marker.
+ * - Loyalty program promotion for tour operators.
+ * - Payment methods strip at the bottom.
+ */
 export const ExperiencesFooter: React.FC = () => {
   return (
     <footer className="flex flex-col">

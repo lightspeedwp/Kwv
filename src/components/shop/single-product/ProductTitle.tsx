@@ -14,6 +14,17 @@ interface ProductTitleProps {
  * 
  * @param {ProductTitleProps} props - Product title and brand name.
  */
+/**
+ * ProductTitle Component
+ * 
+ * Displays the Product Name and Brand.
+ * Features:
+ * - Brand displayed as a small kicker/super-title.
+ * - Product Name as the main H1.
+ * 
+ * @param {string} title - Product Name.
+ * @param {string} brand - Brand Name.
+ */
 export const ProductTitle: React.FC<ProductTitleProps> = ({ title, brand }) => {
   return (
     <div className="mb-4">

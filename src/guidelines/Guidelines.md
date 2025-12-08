@@ -319,7 +319,7 @@ KWV.co.za
 │  ├─ My Account
 │  ├─ Shop FAQ
 │  ├─ Coming Soon
-│  └─ Shop Legal (Returns, Terms, Privacy)
+���  └─ Shop Legal (Returns, Terms, Privacy)
 │
 └─ Join our Wine Club
    └─ Winemakers Club 11th Edition landing (direct to Checkout)
@@ -879,45 +879,46 @@ App
 │
 ├─ Shell
 │  └─ Layout
-│     ├─ HeaderSwitcher
+│     ├─ Header (Switcher)
 │     │  ├─ CorporateHeader   (maps to `header-main`, mega-menu-main, mobile-menu-main)
 │     │  ├─ ShopHeader        (maps to `header-shop`, mobile-menu-shop)
-│     │  └─ CheckoutHeader    (maps to `header-checkout`)
-│     │  └─ ExperiencesHeader
+│     │  ├─ CheckoutHeader    (maps to `header-checkout`)
+│     │  ├─ ExperiencesHeader
+│     │  └─ WineClubHeader
 │     │
-│     ├─ FooterSwitcher
+│     ├─ Footer (Switcher)
 │     │  ├─ CorporateFooter   (maps to `footer-main`)
 │     │  ├─ ShopFooter        (maps to `footer-shop`)
 │     │  ├─ CheckoutFooter    (maps to `footer-checkout`)
 │     │  └─ ExperiencesFooter
 │     │
 │     ├─ BreadcrumbsBar       (Context-aware: overlay on Hero, block on standard pages)
-│     ├─ MiniCartDrawer       (maps to `mini-cart-drawer`)
+│     ├─ MiniCart             (maps to `mini-cart-drawer`)
 │     ├─ AgeVerificationModal
 │     ├─ BackToTopButton
-│     └─ ScrollToTopOnRouteChange
+│     └─ ScrollToTop
 │
 ├─ Routes (Pages)
-│  ├─ company      (Home, About, History, Awards, Executive, Sustainability, Global Distribution, Careers, Jobs, News, WineClub, Contact, FAQ)
-│  ├─ shop         (ShopHome, Shop, Product, Cart, Checkout, MyAccount, ShopFAQ, etc.)
-│  ├─ experiences  (Experiences landing, Emporium, CathedralCellar, HouseOfFire, ConferenceFacilities, KitchenVenue)
-│  ├─ events       (Events listing, EventDetail)
-│  ├─ brands       (Brands listing, BrandDetail)
-│  └─ legal        (Terms, Policies, Returns)
+│  ├─ company      (Home, About, History, Awards, ExecutiveTeam, Sustainability, GlobalDistribution, Careers, News, NewsPost, WineClub, Contact, FAQ, SearchResults)
+│  ├─ shop         (ShopHome, Shop, Product, Cart, Checkout, OrderConfirmation, MyAccount, ShopPromotions, ShopBrands, ShopBrandLanding, ShopFAQ, ProductSearchResults, ComingSoon)
+│  ├─ experiences  (Experiences, Emporium, CathedralCellar, HouseOfFire, ConferenceFacilities, CathedralCellarKitchen, ExperiencesFAQ)
+│  ├─ events       (Events, EventDetail, EventsFAQ)
+│  ├─ brands       (Brands - List & Detail)
+│  └─ legal        (Terms, Policies, ReturnsPolicy)
 │
 └─ Components
-   ├─ common       (Container, Typography, Button, Icon, ImageWithFallback, Badge/Chip, Logo, ScrollToTop)
-   ├─ layout       (Headers, Footers, Breadcrumbs, Layout wrapper)
-   ├─ sections     (Hero, BrandGrid, FAQSection, Newsletter, WineClubCTA, LatestNews, FullWidthSection)
+   ├─ common       (AgeVerificationModal, BackToTopButton, Button, Container, Logo, ScrollDownArrow, ScrollToTop, Typography)
+   ├─ layout       (BrandsMegaMenu, BreadcrumbsBar, CheckoutFooter, CheckoutHeader, CheckoutLayout, CorporateFooter, CorporateHeader, ExperiencesFooter, ExperiencesHeader, Footer, Header, Layout, ShopFooter, ShopHeader, WineClubHeader)
+   ├─ sections     (BrandGrid, FAQSection, FullWidthSection, Hero, HomeEntryPoints, LatestNews, Newsletter, WineClubCTA)
    │  └─ shop      (ContactFollowSection, ServiceFeaturesSection)
    ├─ shop         
-   │  ├─ common    (ProductCard, ProductGrid)
-   │  ├─ home      (ShopHero, ShopBrandGrid, ShopCategorySlider, ShopNewsletter, ShopSocialSection)
-   │  ├─ cart      (MiniCart, Cart components)
-   │  ├─ checkout  (BillingAddress, ShippingAddressForm, ContactInfo, PaymentMethods, OrderSummary, DeliveryMethodSelector, CheckoutStep, CheckoutInput, PickupLocationSelect)
-   │  ├─ single-product (ProductGallery, ProductPrice, ProductAddToCart, ProductTabs, ProductMeta, RelatedProducts, PayflexWidget, ProductBreadcrumbs, ProductRating, ProductSummary, ProductTitle, ReviewsTab, StoreNotices)
+   │  ├─ cart      (MiniCart)
+   │  ├─ checkout  (BillingAddress, BillingAddressForm, Checkbox, CheckoutInput, CheckoutStep, ContactInfo, DeliveryMethodSelector, FloatingLabelInput, OrderSummary, PaymentMethods, PickupLocationSelect, RadioButton, ShippingAddress, ShippingAddressForm, ShippingMethod)
+   │  ├─ common    (ProductCard)
+   │  ├─ home      (ShopBrandGrid, ShopCategorySlider, ShopHero, ShopNewsletter, ShopSocialSection)
    │  ├─ layout    (ShopInfoFooter, ShopSidebar)
-   │  └─ order     (OrderSummary, OrderStatusHeader, AccountCreation, AdditionalFields, AdditionalInformation, AddressDetails, DownloadsSection, OrderDetails)
+   │  ├─ order     (AccountCreation, AdditionalFields, AdditionalInformation, AddressDetails, DownloadsSection, OrderDetails, OrderStatusHeader)
+   │  └─ single-product (PayflexWidget, ProductAddToCart, ProductBreadcrumbs, ProductGallery, ProductMeta, ProductPrice, ProductRating, ProductSummary, ProductTabs, ProductTitle, RelatedProducts, ReviewsTab, StoreNotices)
    ├─ experiences  (ExperiencePageLayout)
    ├─ figma        (ImageWithFallback)
    └─ ui           (Radix/Shadcn UI primitives)
@@ -1099,3 +1100,45 @@ Every template, pattern and component should be validated against:
 
 Accessibility rules in section 1 are mandatory and must be respected in all outputs from Figma Make.  
 This `Guidelines.md` is the shared source-of-truth for the KWV Figma file, the React app and the WordPress/WooCommerce build.
+
+---
+
+## 13\. Checkout Flow Patterns
+
+The Checkout flow uses a specific architecture to ensure flexibility and consistency:
+
+### 13.1 Form Architecture
+- **Wrapper vs. Form:** Complex sections use a "Wrapper" component (e.g., `BillingAddress`) to handle state/logic, which renders a "Form" component (e.g., `BillingAddressForm`) for the UI.
+- **Floating Labels:** All text inputs in the checkout flow must use the `CheckoutInput` component to ensure consistent floating label behavior and error styling.
+- **Step Layout:** Each main section (Contact, Billing, Shipping, Payment) must be wrapped in the `CheckoutStep` component to maintain the numbered timeline layout.
+
+### 13.2 State Management
+- **Validation:** Form components should expose `touched` and `error` states for fields.
+- **Local State:** For the prototype, forms manage their own local state. In production, this would lift to a global CheckoutContext.
+- **Conditional Rendering:** `ShippingMethod` controls the visibility of `ShippingAddress` based on the selected method (Dispatch vs Pickup).
+
+---
+
+## 14. Atomic Design Patterns
+
+### 14.1 Single Product Architecture
+The Single Product page (`Product.tsx`) is built using an atomic approach, where each piece of product information is a standalone component. This allows for maximum flexibility in layout adjustments without rewriting logic.
+
+**Key Atoms:**
+- **`ProductTitle`**: Handles brand kicker and main H1.
+- **`ProductPrice`**: Manages sale price display and currency formatting.
+- **`ProductGallery`**: Responsive image slider/grid.
+- **`ProductAddToCart`**: Encapsulates the complex logic of quantity, variations (e.g., vouchers), and subscription toggles.
+- **`ProductTabs`**: Manages content switching for Description/Reviews/Attributes.
+
+### 14.2 Order Confirmation Patterns
+The Order Confirmation page (`OrderConfirmation.tsx`) is composed of specialized "dumb" components that simply render data passed to them or static content.
+
+- **Header:** `OrderStatusHeader` (Success message, Order #, Date).
+- **Upsell:** `AccountCreation` (Prompts guest users to register).
+- **Summary:** `OrderDetails` (Table of items), `AddressDetails` (Billing/Shipping).
+- **Digital:** `DownloadsSection` (Only appears for virtual products).
+
+### 14.3 Service Assurance
+- **`ServiceFeaturesSection`**: A reusable block displaying the "Trust Signals" (Nationwide Delivery, Secure Payment, Easy Returns, Gift Wrapping). This should be placed above the footer on all Shop-related utility pages (FAQ, Cart, etc.) to reinforce trust.
+- **`ContactFollowSection`**: A specialized contact strip for support pages, distinct from the main footer.

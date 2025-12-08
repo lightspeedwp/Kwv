@@ -2,6 +2,16 @@ import React from 'react';
 import { Container } from '../common/Container';
 import { Link } from 'react-router-dom';
 
+/**
+ * CheckoutFooter Component
+ * 
+ * A minimalist footer designed specifically for the Checkout flow.
+ * 
+ * Features:
+ * - Reduced navigation options to minimize distractions.
+ * - Links to critical policies (Privacy, Terms, Returns).
+ * - Visual indicators for secure payment methods (Visa, Mastercard, SSL).
+ */
 export const CheckoutFooter: React.FC = () => {
   return (
     <footer className="bg-white border-t border-gray-200 py-8 mt-auto">

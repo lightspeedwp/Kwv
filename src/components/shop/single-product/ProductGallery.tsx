@@ -21,6 +21,18 @@ interface ProductGalleryProps {
  * 
  * @param {ProductGalleryProps} props - Array of image URLs and product name.
  */
+/**
+ * ProductGallery Component
+ * 
+ * Displays the product images.
+ * Features:
+ * - Main large image display.
+ * - Thumbnail strip for selecting the active image.
+ * - Responsive layout (stack on mobile, side-by-side on desktop).
+ * 
+ * @param {string[]} images - Array of image URLs.
+ * @param {string} productName - Alt text for accessibility.
+ */
 export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productName }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);

@@ -8,6 +8,17 @@ interface ContactFollowSectionProps {
   className?: string;
 }
 
+/**
+ * ContactFollowSection Component
+ * 
+ * A reusable section displaying contact details and social media links.
+ * Used in Shop FAQ and potentially other support pages.
+ * 
+ * Features:
+ * - Social Media Icons (Instagram, Facebook, Twitter).
+ * - Direct contact links (Email, Phone).
+ * - Centered layout.
+ */
 export const ContactFollowSection: React.FC<ContactFollowSectionProps> = ({ className = '' }) => {
   return (
     <section className={`bg-white text-center ${className}`}>

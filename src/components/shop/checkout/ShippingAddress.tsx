@@ -3,6 +3,16 @@ import { CheckoutInput } from './CheckoutInput';
 import { ChevronDown } from 'lucide-react';
 import { Typography } from '../../common/Typography';
 
+/**
+ * ShippingAddress Component
+ * 
+ * A specific form section for managing the shipping address state.
+ * Displays the address form fields within a styled container.
+ * Features:
+ * - Local state management for form fields.
+ * - Validation logic (demonstration).
+ * - "Fade-in" animation on mount.
+ */
 export const ShippingAddress: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '',

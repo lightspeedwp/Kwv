@@ -33,6 +33,11 @@ const CATEGORIES = [
  * Displays a grid of product category cards (Wines, Spirits, RTD, Non-Alc).
  * Acts as a high-level navigation component for the Corporate "Our Brands" section
  * or the "Shop" entry point.
+ * 
+ * Features:
+ * - Responsive grid layout.
+ * - Hover effects on cards.
+ * - Gold header bar for category titles.
  */
 export const BrandGrid = () => {
   return (

@@ -20,6 +20,17 @@ interface ProductBreadcrumbsProps {
  * 
  * @param {ProductBreadcrumbsProps} props - List of breadcrumb items.
  */
+/**
+ * ProductBreadcrumbs Component
+ * 
+ * Breadcrumb navigation specifically for the Single Product page.
+ * Features:
+ * - Links back to Shop home and Category archives.
+ * - Current product name (non-clickable).
+ * - Styled with chevrons and hover effects.
+ * 
+ * @param {BreadcrumbItem[]} items - Array of breadcrumb links.
+ */
 export const ProductBreadcrumbs: React.FC<ProductBreadcrumbsProps> = ({ items }) => {
   return (
     <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">

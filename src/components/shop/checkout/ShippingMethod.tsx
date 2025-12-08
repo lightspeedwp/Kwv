@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
 import { ShippingAddress } from './ShippingAddress';
 
+/**
+ * ShippingMethod Component
+ * 
+ * Allows the user to select their preferred shipping method.
+ * Features:
+ * - Toggle between "Dispatch" (Delivery) and "Local Pickup".
+ * - Conditionally renders the `ShippingAddress` form if "Dispatch" is selected.
+ * - Displays pickup location details if "Pickup" is selected.
+ */
 export const ShippingMethod: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState('dispatch');
 

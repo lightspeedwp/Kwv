@@ -20,6 +20,17 @@ interface ProductTabsProps {
  * 
  * @param {ProductTabsProps} props - Array of tab objects (label + content).
  */
+/**
+ * ProductTabs Component
+ * 
+ * Tabbed interface for detailed product information.
+ * Features:
+ * - Tabs: Description, Additional Information (Attributes), Reviews.
+ * - Smooth switching between content sections.
+ * - Responsive layout (stack or accordion on mobile if needed, but currently tabs).
+ * 
+ * @param {TabItem[]} tabs - Array of tab objects { label, content }.
+ */
 export const ProductTabs: React.FC<ProductTabsProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 

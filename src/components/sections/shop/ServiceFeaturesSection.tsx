@@ -2,6 +2,16 @@ import React from 'react';
 import { Container } from '../../common/Container';
 import { Truck, ShieldCheck, RefreshCw, Gift } from 'lucide-react';
 
+/**
+ * ServiceFeaturesSection Component
+ * 
+ * Displays a row of service guarantees/features (Delivery, Security, Returns, Gifting).
+ * Typically placed above the footer on Shop pages.
+ * 
+ * Features:
+ * - 4-column grid.
+ * - Icon + Title + Description format.
+ */
 export const ServiceFeaturesSection: React.FC = () => {
   return (
     <div className="bg-[#F9F9F9] py-16 border-t border-gray-200">

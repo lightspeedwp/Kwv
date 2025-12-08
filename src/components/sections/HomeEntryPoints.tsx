@@ -41,7 +41,10 @@ const ENTRY_POINTS = [
  * 2. Shop Online (Commerce)
  * 3. Experiences (Visit Us)
  * 
- * Uses interactive cards with hover effects.
+ * Features:
+ * - Interactive cards with hover zoom effects.
+ * - Overlay text and buttons.
+ * - Responsive grid (1 column mobile, 3 columns desktop).
  */
 export const HomeEntryPoints: React.FC = () => {
   return (

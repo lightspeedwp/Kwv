@@ -9,11 +9,12 @@ import { Link } from 'react-router-dom';
  * WineClubCTA Component
  * 
  * A promotional section driving users to join the Wine Club.
+ * 
  * Features:
- * - Split layout (Text + Image).
- * - Bulleted list of benefits.
- * - "Join the Club" CTA.
- * - Distinctive beige background (`#F5F5DC`).
+ * - Split layout (Text content + Full-height image).
+ * - Bulleted list of membership benefits.
+ * - "Join the Club" primary CTA.
+ * - Distinctive beige background (`#F5F5DC`) to differentiate from other sections.
  */
 export const WineClubCTA = () => {
   return (

@@ -14,6 +14,18 @@ interface ProductPriceProps {
  * 
  * @param {ProductPriceProps} props - Regular price and optional sale price.
  */
+/**
+ * ProductPrice Component
+ * 
+ * Displays the product's price.
+ * Features:
+ * - Handles Sale Price logic (strikethrough original).
+ * - Formats currency (R - ZAR).
+ * - Consistent large typography.
+ * 
+ * @param {number} price - Current/Active price.
+ * @param {number} [salePrice] - Optional sale price (if present, `price` is treated as original).
+ */
 export const ProductPrice: React.FC<ProductPriceProps> = ({ price, salePrice }) => {
   return (
     <div className="flex items-center gap-3 mb-6">

@@ -14,6 +14,17 @@ interface ProductMetaProps {
  * 
  * @param {ProductMetaProps} props - SKU, categories array, tags array.
  */
+/**
+ * ProductMeta Component
+ * 
+ * Displays metadata about the product.
+ * Features:
+ * - SKU (Stock Keeping Unit).
+ * - Categories list (linked).
+ * - Tags list (linked).
+ * 
+ * @param {ProductMetaProps} props - SKU, categories, and tags arrays.
+ */
 export const ProductMeta: React.FC<ProductMetaProps> = ({ sku, categories, tags }) => {
   return (
     <div className="space-y-2 text-sm text-gray-500 mb-8">
