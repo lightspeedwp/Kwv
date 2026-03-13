@@ -1,7 +1,7 @@
 
-  # KWV
+  # Handcrafted Wines
 
-  This is a code bundle for KWV. The original project is available at https://www.figma.com/design/wvxIALM2KoZdr7qSVG4Lt9/KWV.
+  This is a code bundle for Handcrafted Wines. The original project is available at https://www.figma.com/design/wvxIALM2KoZdr7qSVG4Lt9/Handcrafted-Wines.
 
   ## Running the code
 

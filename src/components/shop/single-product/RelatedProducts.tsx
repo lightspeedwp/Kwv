@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '../../common/Typography';
-import { ProductCard } from '../ProductCard'; // Assuming existing component
+import { ProductCard } from '../common/ProductCard';
 
 // Reusing the type from ProductCard if possible, or defining a compatible one
 interface Product {

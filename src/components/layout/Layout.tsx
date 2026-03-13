@@ -1,9 +1,8 @@
 import React from 'react';
 import { Header } from './Header';
-import { BreadcrumbsBar } from './BreadcrumbsBar';
 import { Footer } from './Footer';
 import { AgeVerificationModal } from '../common/AgeVerificationModal';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { BackToTopButton } from '../common/BackToTopButton';
 
@@ -20,7 +19,7 @@ interface LayoutProps {
  * Features:
  * - Determines the active "variant" based on the current route URL (Corporate, Shop, Experiences, etc.).
  * - Renders the appropriate Header and Footer variants.
- * - Includes global utilities: `AgeVerificationModal`, `BackToTopButton`, `BreadcrumbsBar`.
+ * - Includes global utilities: `AgeVerificationModal`, `BackToTopButton`.
  * - Accessibility features ("Skip to main content").
  * 
  * @param {LayoutProps} props - Children and optional variant override.
@@ -52,7 +51,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, variant: propsVariant 
       <BackToTopButton />
       <Header variant={variant} />
       <main id="main-content" className="flex-grow relative" tabIndex={-1}>
-        <BreadcrumbsBar />
         {children}
       </main>
       <Footer variant={variant} />

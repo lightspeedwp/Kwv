@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Search, X, ChevronDown, ChevronRight } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';

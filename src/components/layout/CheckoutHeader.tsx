@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '../common/Container';
 import { KWVShopLogo } from '../common/Logo';
 import { Lock, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 /**
  * CheckoutHeader Component

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { FAQSection } from '../../components/sections/FAQSection';

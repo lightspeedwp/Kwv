@@ -1,8 +1,8 @@
-# KWV – Accessibility-First Figma Make Prototype & WordPress/Woo Guidelines (v3.2 – Integrated)
+# Handcrafted Wines – Accessibility-First Figma Make Prototype & E-Commerce Guidelines (v4.0 – Craft Edition)
 
 **IMPORTANT DEVELOPMENT NOTE:** It is a high priority to add JSDoc inline documentation to all JavaScript/TypeScript files to explain component props, complex logic, and utility functions.
 
-Accessibility is the **first and non-negotiable requirement** for all KWV designs and implementations.  
+Accessibility is the **first and non-negotiable requirement** for all Handcrafted Wines designs and implementations.  
 Figma Make **must** treat accessibility (including WCAG 2.1 AA contrast, keyboard access and screen-reader support) as a hard constraint, not an optional enhancement.
 
 ---
@@ -136,7 +136,7 @@ If these constraints conflict with aesthetics or a proposed layout, accessibilit
 
 ## 2\. Project overview
 
-KWV (Koöperatieve Wijnbouwers Vereeniging) is a South African wine and spirits producer with more than a century of history. The digital experience has two tightly-linked contexts:
+Handcrafted Wines is a South African wine and spirits producer with more than a century of history. The digital experience has two tightly-linked contexts:
 
 1. **Corporate (“main”) site** – brand story, heritage, brands, sustainability, awards, careers, experiences, news, etc.
 2. **Shop (WooCommerce)** – online sales for wine, spirits, mixers and gifts, plus account, cart, checkout and order flows.
@@ -145,7 +145,7 @@ There is also a focused **Wine Club** experience (Winemakers Club 11th Edition) 
 
 ### 2.1 Experience goals
 
-- Present **one KWV brand** across corporate and shop, but with clearly different intent and emphasis.
+- Present **one Handcrafted Wines brand** across corporate and shop, but with clearly different intent and emphasis.
 - Allow visitors to move easily between **story content** (brands, experiences, news) and **shopping flows**.
 - Ensure editors can maintain everything via **structured content and block patterns**, not custom hard-coded layouts.
 - Treat **accessibility and performance** as first-class requirements, not later fixes.
@@ -159,22 +159,30 @@ The visual system should be fully tokenised so Figma styles map cleanly into `th
 
 ### 3.1 Colour tokens
 
-Suggested tokens (names are illustrative – final palette is driven by brand):
+**Craft Winery Palette** – Earthy, organic, and hand-drawn aesthetic:
 
-| Token         | Hex       | Typical usage                                     |
-| :------------ | :-------- | :------------------------------------------------ |
-| `color.wine`  | `#8B0000` | Primary action colour, key headings, highlights   |
-| `color.gold`  | `#DAA520` | Secondary accents, icons, badges on dark surfaces |
-| `color.brown` | `#2C1810` | Deep backgrounds: header, footer, overlays        |
-| `color.grey`  | `#333333` | Main body text and dividers on light backgrounds  |
-| `color.beige` | `#F5F5DC` | Warm light panels, content blocks                 |
-| `color.white` | `#FFFFFF` | Text and cards on dark backgrounds                |
+| Token            | Hex       | Typical usage                                          |
+| :--------------- | :-------- | :----------------------------------------------------- |
+| `color.burgundy` | `#6B2737` | Primary action colour, wine-inspired headings          |
+| `color.vineyard` | `#4A5D3F` | Secondary green, earthy accents, organic elements      |
+| `color.terracotta` | `#D4856A` | Warm accents, badges, hand-drawn elements            |
+| `color.cream`    | `#F9F5F0` | Warm light backgrounds, content panels                 |
+| `color.charcoal` | `#3C3C3C` | Body text, dark overlays                               |
+| `color.gold`     | `#C9A961` | Premium accents, awards, special callouts              |
+
+**Hand-Drawn Design Elements:**
+- Use wavy, organic borders instead of straight lines
+- Apply subtle SVG sketch textures to section dividers
+- Add hand-drawn underlines to headings (using `border-image` or pseudo-elements)
+- Use organic shapes for buttons and cards (slightly irregular border-radius)
+- Implement brush stroke effects for CTAs and highlights
 
 Guidelines:
 
-- Prefer **shades and tints** of these tokens (e.g. `color.wine.700`, `color.wine.500`) instead of introducing random new colours.
-- Avoid using yellow/gold for body text on light backgrounds.
-- Any new colour must match the warm, heritage-driven palette – no neon or high-saturation “techy” tones.
+- Embrace organic, imperfect aesthetics – no pixel-perfect grids
+- Use **shades and tints** naturally occurring in wine and vineyard imagery
+- Avoid digital, synthetic colours – keep everything rooted in nature
+- Hand-drawn elements should feel authentic, not gimmicky
 
 ### 3.2 Typography
 
@@ -202,7 +210,7 @@ All typography must still honour the accessibility rules in section 1\.
 
 ### 3.3 Imagery
 
-- Prioritise authentic KWV images (vineyards, cellars, products, locations).
+- Prioritise authentic Handcrafted Wines images (vineyards, cellars, products, locations).
 - Hero imagery should be high resolution but optimised for weight.
 - Use overlays/gradients where needed to maintain legibility of text.
 
@@ -215,17 +223,15 @@ Use `clamp()` for spacing to ensure layouts breathe on large screens but remain 
 - **Container Side Padding:** `clamp(1rem, 4vw, 3rem)`
 - **Grid Gaps:** `clamp(1rem, 2vw, 2rem)`
 
-Standard container widths (conceptual):
+**Container Usage Guidelines:**
+We use a strict set of container variants to control line length and visual rhythm.
 
-- `container.site` – full layout width (roughly `clamp(320px, 95vw, 1440px)`).
-- `container.content` – narrower reading width for articles (`clamp(320px, 85vw, 960px)`).
-- `container.wide` – wide treatments such as hero content (`clamp(320px, 98vw, 1280px)`).
-- `container.full` – full-bleed sections spanning viewport width.
-
-Behaviour:
-
-- Mobile: predominantly single-column with comfortable vertical spacing.
-- Tablet/desktop: 2–4 column grids for cards (news, products, brands, experiences) with consistent gutters.
+| Variant | Width Rule | Use Case |
+| :--- | :--- | :--- |
+| `container.site` | `max-w-[1440px]` | Default wrapper for Navbar, Footer, and standard grids. |
+| `container.content` | `max-w-[960px]` | Text-heavy sections, Articles, Terms & Conditions to maintain readable line length (60-80 chars). |
+| `container.wide` | `max-w-[1280px]` | Hero content, Feature grids, or visual-heavy sections that need more breathing room than content but less than full site. |
+| `container.full` | `w-full` | Full-width background images or colored bands (inner content must still use a constrained container). |
 
 ### 3.5 Token architecture
 
@@ -261,6 +267,69 @@ All Hero sections (Corporate, Shop, Experiences) must adhere to these standard d
 5.  **Call to Actions (Buttons):**
     *   Primary hero buttons must use `variant="hero"` or `variant="heroGold"` which implements specific uppercase tracking and `shadow-lg` styles.
 
+### 3.7 Breakpoint Strategy & Mobile-First Standards
+
+We strictly adhere to a **Mobile-First** design methodology. All CSS must be written for the smallest screen first, with overrides for larger screens using Tailwind breakpoints.
+
+**Breakpoint Tokens:**
+- **Default (Mobile):** 0px - 767px (Single column, stacked layouts, hamburger menus).
+- **`md` (Tablet):** 768px - 1023px (Two-column grids, simplified header, comfortable touch targets).
+- **`lg` (Desktop):** 1024px - 1279px (Standard navigation, 3-4 column grids, hover states enabled).
+- **`xl` (Wide):** 1280px+ (Max-width containers, expansive hero imagery).
+
+**Mobile Breakpoint Behavior:**
+- **Padding:** Mobile side padding is fixed at `1rem` (16px) or `1.5rem` (24px).
+- **Stacking:** Flex containers must default to `flex-col` on mobile and switch to `flex-row` on `md` or `lg`.
+- **Typography:** Headings must not overflow the viewport. Use `break-words` or fluid typography (Section 3.2).
+- **Touch Targets:** All interactive elements must be at least 44x44px on touch devices.
+
+**Viewport Scaling Examples:**
+| Element | Mobile (375px) | Tablet (768px) | Desktop (1440px) |
+| :--- | :--- | :--- | :--- |
+| **H1 Size** | 2.4rem (38px) | ~3.5rem (56px) | 4.5rem (72px) |
+| **Section Pad** | 3rem (48px) | ~5rem (80px) | 8rem (128px) |
+| **Grid Cols** | 1 | 2 | 3 or 4 |
+
+### 3.8 Brand Identity: Voice & Tone
+
+**Handcrafted Wines** is a boutique, artisanal winery rooted in passion, craftsmanship, and authenticity.
+
+**Core Values:**
+- **Handcrafted Quality:** Every bottle tells a story of meticulous care and attention
+- **Approachable Expertise:** We're wine lovers first, experts second
+- **Authentic Connection:** Real people making real wine for real moments
+- **Sustainable Passion:** Respect for the land, the vines, and the community
+
+**Voice & Tone Guidelines:**
+
+- **Tone:** Casual, approachable, warm, and genuinely passionate about winemaking
+- **Voice Characteristics:**
+  - **Conversational, not corporate:** "We're obsessed with getting every detail just right" not "We maintain rigorous quality standards"
+  - **Storytelling, not selling:** Share the journey, the process, the people behind each bottle
+  - **Passionate, not pretentious:** "This Cab Sauv is absolutely killer" not "A sophisticated expression of terroir"
+  - **Personal, not generic:** Use "we," "our winemaker," "our vineyard" to create connection
+  - **Friendly expertise:** Share knowledge without talking down to customers
+
+**Voice by Context:**
+- **Corporate/About:** Personal storytelling, heritage with heart. "We've been perfecting our craft for over a century, and honestly? We're still learning something new with every vintage."
+- **Shop:** Sensory, enticing, helpful. "Imagine dark cherry, a hint of vanilla, and that perfect velvety finish. Yeah, it's as good as it sounds."
+- **Experiences:** Warm invitation, hospitable. "Come hang out in our cellar, taste some incredible wine, and hear the stories behind each bottle. We can't wait to meet you!"
+- **Product Descriptions:** Vivid, sensory, accessible. Skip the jargon, focus on the experience: "Bursting with berry flavours and a smooth, easy-drinking finish—perfect for pizza night or a lazy Sunday."
+
+**Specific Language Rules:**
+- **Use:** "Hey," "You'll love," "We're pretty proud of," "Can't wait to," "Let's," "Honestly," "Absolutely"
+- **Avoid:** "Leveraging," "Solutions," "Premium offering," "Utilize," "Facilitate," "State-of-the-art"
+- **Embrace imperfection:** "We tried something a little wild with this blend" (shows authenticity)
+- **Celebrate craft:** "Hand-picked at sunrise," "Aged in oak barrels we've been using for 20 years"
+
+**Micro-copy Examples:**
+- Button CTAs: "Grab a bottle," "Let's taste," "Join the club," "Come visit us"
+- Empty states: "Your cart's looking a little lonely. Let's fix that!"
+- Errors: "Oops! Something went sideways. Give it another shot or drop us a line."
+- Success: "Nice! Your order's on its way. We think you're going to love it."
+
+**Language:** South African English with universal appeal (e.g., "Colour," "Flavour," but avoid overly local idioms that might confuse international visitors).
+
 ---
 
 ## 4\. Site structure & page blueprints
@@ -270,7 +339,7 @@ This section is the **canonical sitemap** for the prototype, the block theme, an
 ### 4.1 High-level sitemap
 
 ```
-KWV.co.za
+HandcraftedWines.co.za
 ├─ Home (Main site)
 │  ├─ About (hub)
 │  │  ├─ About Us
@@ -319,7 +388,7 @@ KWV.co.za
 │  ├─ My Account
 │  ├─ Shop FAQ
 │  ├─ Coming Soon
-���  └─ Shop Legal (Returns, Terms, Privacy)
+  └─ Shop Legal (Returns, Terms, Privacy)
 │
 └─ Join our Wine Club
    └─ Winemakers Club 11th Edition landing (direct to Checkout)
@@ -338,7 +407,7 @@ Below, each page lists:
 
 - **URL:** `/`
 - **Template:** `front-page`
-- **Goals:** Introduce KWV, surface key pathways (brands, experiences, news, Wine Club, shop), and drive newsletter sign-ups.
+- **Goals:** Introduce Handcrafted Wines, surface key pathways (brands, experiences, news, Wine Club, shop), and drive newsletter sign-ups.
 - **Sections (patterns):**
   - Campaign / hero (flagship brand or seasonal focus).
   - “Our Brands” logo/cards grid.
@@ -696,7 +765,35 @@ This section maps the specific mega menus to their parent header template parts.
 **Template Part: `footer-shop`**
 - `footer-shop-links`
 
-### 5.6 Pattern families (for block patterns & Figma sections)
+### 5.6 Reusable Sections (Organisms)
+
+"Sections" are distinct from "Template Parts" in that they are content-agnostic layout organisms designed to be reused across different page templates. In Figma Make, these are located in `components/sections`.
+
+**Core Reusable Sections:**
+1.  **`Hero`:** Highly configurable (Title, Subtitle, Image, 2 Buttons, Height variants). Used on Home, About, Contact.
+2.  **`FullWidthSection`:** Split layout (50/50) with Image and Text. Supports `align="left"|"right"` and `variant="light"|"dark"`.
+3.  **`BrandGrid`:** Grid of card links to product categories. Used on Corporate Home and About.
+4.  **`FAQSection`:** Accordion wrapper. Accepts a list of Q&A objects.
+5.  **`Newsletter`:** Full-width signup strip with background image/pattern.
+6.  **`LatestNews`:** 3-column grid fetching the latest posts.
+7.  **`WineClubCTA`:** Dedicated conversion block for the Wine Club.
+8.  **`ServiceFeaturesSection`:** (Shop) 4-column trust signals (Delivery, Returns, etc.).
+9.  **`ContactFollowSection`:** (Shop/Support) Centered social links and contact info.
+10. **`HomeEntryPoints`:** (Home) Three-column navigation cards (About, Shop, Experiences) with hover zoom effects.
+
+**Template Parts (Global Layout):**
+These components persist across multiple pages and define the shell of the application.
+- `Header` (Switcher for Corporate/Shop/Experiences)
+- `Footer` (Switcher for Corporate/Shop)
+- `BreadcrumbsBar` (Context-aware navigation strip)
+- `MiniCart` (Slide-out drawer for Shop)
+- `AgeVerificationModal` (Global overlay)
+
+**Pattern Usage Rule:**
+- If a UI element appears on *one* page, it can be local to that page.
+- If it appears on *two* pages, it must be elevated to `components/sections` or `components/common`.
+
+### 5.7 Pattern families (for block patterns & Figma sections)
 
 **Global patterns**
 
@@ -1028,6 +1125,48 @@ These are shared expectations for Figma Make, React and the block theme.
 - **File Headers:** Every component file must start with a JSDoc block explaining the component's purpose, key features, and available props/variants.
 - **Import Rules:** Always use explicit relative paths (e.g., `../../components/common/Button`) for internal imports. Never use aliases like `@/` as they are not supported in this build environment.
 
+### 10.1 JSDoc & Inline Documentation Standards (Mandatory)
+
+Documentation is not optional. It is a critical part of the codebase for maintainability and AI-assist capability.
+
+**Standard File Header:**
+Every React component file must begin with a JSDoc block:
+```typescript
+/**
+ * ComponentName
+ * 
+ * Brief description of what the component does.
+ * 
+ * Features:
+ * - Key feature 1
+ * - Key feature 2
+ * 
+ * @param {PropsType} props - Description of props
+ */
+```
+
+**Inline Logic:**
+- Complex functions (e.g., cart calculations, filter logic) must have comments explaining the *why*, not just the *how*.
+- Interfaces must be exported and well-named (e.g., `interface HeroProps`).
+
+### 10.2 Testing Strategy
+- **Unit Tests:** Focus on utility functions (e.g., currency formatting, cart total calculations) and dumb UI components.
+- **Integration Tests:** Test critical flows like "Add to Cart", "Checkout Step Navigation", and "Filter Application".
+- **Visual Regression:** Ensure critical sections (Hero, ProductGrid) maintain layout stability across breakpoints.
+
+### 10.3 Build Tools & Environment
+- **Bundler:** Vite (Fast, ESM-based).
+- **Styling:** Tailwind CSS v4.0 (Utility-first).
+- **Animation:** Motion (formerly Framer Motion).
+- **Icons:** Lucide React (Check availability before use).
+- **State Management:** React Context (for Cart/Auth in prototype), Query (for data).
+
+### 10.4 Interactive Features & Micro-interactions
+- **Hover States:** All interactive elements must have a visual `hover` state (color change, underline, lift).
+- **Focus States:** visible `focus-visible:ring` for keyboard users.
+- **Transitions:** Use `transition-all duration-300` for smooth state changes.
+- **Feedback:** Buttons should show loading states; Forms should show inline validation.
+
 ---
 
 ## 11\. Acceptance criteria – examples
@@ -1099,7 +1238,7 @@ Every template, pattern and component should be validated against:
      - My Account (login vs dashboard).
 
 Accessibility rules in section 1 are mandatory and must be respected in all outputs from Figma Make.  
-This `Guidelines.md` is the shared source-of-truth for the KWV Figma file, the React app and the WordPress/WooCommerce build.
+This `Guidelines.md` is the shared source-of-truth for the Handcrafted Wines Figma file, the React app and the WordPress/WooCommerce build.
 
 ---
 
@@ -1142,3 +1281,24 @@ The Order Confirmation page (`OrderConfirmation.tsx`) is composed of specialized
 ### 14.3 Service Assurance
 - **`ServiceFeaturesSection`**: A reusable block displaying the "Trust Signals" (Nationwide Delivery, Secure Payment, Easy Returns, Gift Wrapping). This should be placed above the footer on all Shop-related utility pages (FAQ, Cart, etc.) to reinforce trust.
 - **`ContactFollowSection`**: A specialized contact strip for support pages, distinct from the main footer.
+
+---
+
+## 15. UI Component Library (Atoms)
+
+We utilize **Radix UI** primitives styled with **Tailwind CSS** (shadcn/ui pattern) located in `components/ui`.
+
+**Core UI Components:**
+- **`Button`**: Variants (Primary, Secondary, Outline, Ghost, Hero).
+- **`Typography`**: Wrapper for H1-H6, Body, Caption with standardized font families.
+- **`Container`**: Layout wrappers (Site, Content, Wide, Full).
+- **`Accordion`**: For FAQs and mobile menus.
+- **`Sheet`**: Off-canvas drawers (Mobile Menu, Mini Cart).
+- **`Tabs`**: Content switching (Product Details, My Account).
+- **`Input` / `Select`**: Form controls.
+- **`ImageWithFallback`**: Mandatory wrapper for all `<img>` tags to handle loading errors gracefully.
+
+**Iconography:**
+- **Library:** `lucide-react`.
+- **Usage:** Import specific icons. Do not import the entire library.
+- **Verification:** Always check icon existence before implementation.

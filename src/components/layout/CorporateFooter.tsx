@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container } from '../common/Container';
-import { Typography } from '../common/Typography';
+import { Typography } from '../common/Typography'
+;
 import { COLORS } from '../../constants/theme';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 
 /**

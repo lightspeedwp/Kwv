@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '../common/Typography';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 /**
  * ShopFooter Component

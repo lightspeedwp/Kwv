@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { Hero } from '../../components/sections/Hero';
-import { BrandGrid } from '../../components/sections/BrandGrid';
-import { Newsletter } from '../../components/sections/Newsletter';
-import { FAQSection } from '../../components/sections/FAQSection';
-import { WineClubCTA } from '../../components/sections/WineClubCTA';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
-import { ProductCard } from '../../components/shop/common/ProductCard';
-import { COLORS } from '../../constants/theme';
+import { Hero } from '../../components/sections/Hero';
+import { BrandGrid } from '../../components/sections/BrandGrid';
+import { HomeEntryPoints } from '../../components/sections/HomeEntryPoints';
+import { Newsletter } from '../../components/sections/Newsletter';
+import { WineClubCTA } from '../../components/sections/WineClubCTA';
+import { ArrowRight, ExternalLink, Award, Users, Droplet, Leaf, TrendingUp, MapPin } from 'lucide-react';
 import { Button } from '../../components/common/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { LatestNews } from '../../components/sections/LatestNews';
 import heroImage from 'figma:asset/41b3d8ee458f4aa234b644392aeceaf24abdff91.png';
-
-import { HomeEntryPoints } from '../../components/sections/HomeEntryPoints';
 
 // Mock data for featured products
 const FEATURED_WINES = [

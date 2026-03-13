@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../common/Container';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 /**
  * CheckoutFooter Component

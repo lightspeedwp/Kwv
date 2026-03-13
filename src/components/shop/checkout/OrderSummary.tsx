@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
-import { FloatingLabelInput } from '../../common/FloatingLabelInput';
+import { FloatingLabelInput } from './FloatingLabelInput';
 import { Button } from '../../common/Button';
 
 const MOCK_ITEMS = [
