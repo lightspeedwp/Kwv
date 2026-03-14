@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router';
 import { Button } from '../../components/common/Button';
 import { Search } from 'lucide-react';
 

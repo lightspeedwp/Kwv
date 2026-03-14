@@ -10,7 +10,7 @@ import { Button } from '../common/Button';
  * Displays a modal dialog to verify the user's age.
  * 
  * Features:
- * - Checks localStorage for previous verification ('kwv_age_verified').
+ * - Checks localStorage for previous verification ('handcrafted_wines_age_verified').
  * - If not verified, shows a modal blocking access to the site.
  * - If user confirms age > 18, saves to localStorage and closes modal.
  * - If user denies, redirects to Google.
@@ -22,7 +22,7 @@ export const AgeVerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const hasVerified = localStorage.getItem('kwv_age_verified');
+    const hasVerified = localStorage.getItem('handcrafted_wines_age_verified');
     if (!hasVerified) {
       setIsVisible(true);
     }
@@ -34,7 +34,7 @@ export const AgeVerificationModal = () => {
    */
   const handleVerify = (isOver18: boolean) => {
     if (isOver18) {
-      localStorage.setItem('kwv_age_verified', 'true');
+      localStorage.setItem('handcrafted_wines_age_verified', 'true');
       setIsVisible(false);
     } else {
       window.location.href = 'https://www.google.com'; // Redirect away
@@ -56,7 +56,7 @@ export const AgeVerificationModal = () => {
             className="bg-white max-w-md w-full p-8 md:p-12 text-center shadow-2xl"
             style={{ borderTop: `4px solid ${COLORS.wineRed}` }}
           >
-            <Typography variant="h2" className="mb-2" color={COLORS.darkBrown}>KWV</Typography>
+            <Typography variant="h2" className="mb-2" color={COLORS.darkBrown}>Handcrafted Wines</Typography>
             <div className="w-16 h-1 bg-[#DAA520] mx-auto mb-8"></div>
             
             <Typography variant="h3" className="mb-4">Are you over 18?</Typography>

@@ -8,28 +8,35 @@ import { Link } from 'react-router';
  * A minimalist footer designed specifically for the Checkout flow.
  * 
  * Features:
- * - Reduced navigation options to minimize distractions.
- * - Links to critical policies (Privacy, Terms, Returns).
- * - Visual indicators for secure payment methods (Visa, Mastercard, SSL).
+ * - Reduced navigation options to minimize distractions
+ * - Links to critical policies (Privacy, Terms, Returns)
+ * - Visual indicators for secure payment methods (Visa, Mastercard, SSL)
+ * - Dark mode support via CSS variables
+ * - Design token system integration
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
  */
 export const CheckoutFooter: React.FC = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 py-8 mt-auto">
+    <footer className="bg-[var(--twb-color-bg-primary)] border-t border-[var(--twb-border-primary)] py-[var(--twb-spacing-8)] mt-auto">
       <Container variant="site">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} KWV. All rights reserved.</p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-[var(--twb-spacing-4)] text-xs text-[var(--twb-color-text-secondary)]">
+          <p>&copy; {new Date().getFullYear()} Handcrafted Wines. All rights reserved.</p>
           
-          <div className="flex gap-6">
-            <Link to="/policies" className="hover:text-gray-900 underline">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-gray-900 underline">Terms & Conditions</Link>
-            <Link to="/returns-policy" className="hover:text-gray-900 underline">Returns Policy</Link>
+          <div className="flex gap-[var(--twb-spacing-6)]">
+            <Link to="/policies" className="hover:text-[var(--twb-color-text-primary)] underline transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[var(--twb-color-text-primary)] underline transition-colors">Terms & Conditions</Link>
+            <Link to="/returns-policy" className="hover:text-[var(--twb-color-text-primary)] underline transition-colors">Returns Policy</Link>
           </div>
 
-          <div className="flex items-center gap-2 grayscale opacity-60">
+          <div className="flex items-center gap-[var(--twb-spacing-2)] opacity-60">
              {/* Simple visual representation of secure payment icons text if images aren't available */}
-             <span>Visa</span>
-             <span>Mastercard</span>
-             <span>Secure SSL</span>
+             <span className="text-[var(--twb-color-text-secondary)]">Visa</span>
+             <span className="text-[var(--twb-color-text-secondary)]">•</span>
+             <span className="text-[var(--twb-color-text-secondary)]">Mastercard</span>
+             <span className="text-[var(--twb-color-text-secondary)]">•</span>
+             <span className="text-[var(--twb-color-text-secondary)]">Secure SSL</span>
           </div>
         </div>
       </Container>

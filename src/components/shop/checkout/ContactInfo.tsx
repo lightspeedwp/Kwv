@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { CheckoutInput } from './CheckoutInput';
 import { Checkbox } from './Checkbox';
 

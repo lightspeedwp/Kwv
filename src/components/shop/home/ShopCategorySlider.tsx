@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Container } from '../../common/Container';
 import { Typography } from '../../common/Typography';
 import { ChevronRight, ChevronLeft } from 'lucide-react';

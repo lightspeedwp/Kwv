@@ -1,59 +1,126 @@
-import React from 'react';
-import { Container } from '../../common/Container';
-import { Truck, ShieldCheck, RefreshCw, Gift } from 'lucide-react';
-
 /**
  * ServiceFeaturesSection Component
  * 
- * Displays a row of service guarantees/features (Delivery, Security, Returns, Gifting).
- * Typically placed above the footer on Shop pages.
+ * Service guarantees and features section for shop pages.
+ * Displays trust badges and key shopping benefits.
  * 
  * Features:
- * - 4-column grid.
- * - Icon + Title + Description format.
+ * - Configurable service features with icons
+ * - 4-column responsive grid (1 col mobile, 2 col tablet, 4 col desktop)
+ * - Icon + Title + Description format
+ * - Design token integration (colors, spacing, shadows)
+ * - WCAG AA accessible
+ * - Dark mode support
+ * - Mobile-first responsive layout
+ * 
+ * Props:
+ * @param {ServiceFeature[]} features - Array of service features (optional)
+ * @param {string} variant - Background variant: 'light' | 'dark' (default: 'light')
+ * @param {string} className - Additional CSS classes
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
  */
-export const ServiceFeaturesSection: React.FC = () => {
+
+import React from 'react';
+import { Container } from '../../common/Container';
+import { Truck, ShieldCheck, RefreshCw, Gift, LucideIcon } from 'lucide-react';
+
+export interface ServiceFeature {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+interface ServiceFeaturesSectionProps {
+  features?: ServiceFeature[];
+  variant?: 'light' | 'dark';
+  className?: string;
+}
+
+const DEFAULT_FEATURES: ServiceFeature[] = [
+  {
+    id: 'delivery',
+    icon: Truck,
+    title: 'Free Delivery',
+    description: 'Free delivery on orders over R1000 to Paarl & Stellenbosch. Nationwide shipping available.'
+  },
+  {
+    id: 'secure',
+    icon: ShieldCheck,
+    title: 'Secure Payment',
+    description: '100% secure checkout with card, EFT, and Payflex payment options.'
+  },
+  {
+    id: 'returns',
+    icon: RefreshCw,
+    title: 'Easy Returns',
+    description: 'Not happy? Contact us within 48 hours for replacements or refunds.'
+  },
+  {
+    id: 'gifting',
+    icon: Gift,
+    title: 'Gift Wrapping',
+    description: 'Beautiful gift packaging available for all our wines, spirits, and cheese.'
+  }
+];
+
+export const ServiceFeaturesSection: React.FC<ServiceFeaturesSectionProps> = ({
+  features = DEFAULT_FEATURES,
+  variant = 'light',
+  className = ''
+}) => {
+  const bgClass = variant === 'dark' 
+    ? 'bg-[var(--twb-color-ink)]' 
+    : 'bg-[var(--twb-color-bg-secondary)]';
+
+  const textPrimaryClass = variant === 'dark'
+    ? 'text-white'
+    : 'text-[var(--twb-color-text-primary)]';
+
+  const textSecondaryClass = variant === 'dark'
+    ? 'text-white/80'
+    : 'text-[var(--twb-color-text-secondary)]';
+
   return (
-    <div className="bg-[#F9F9F9] py-16 border-t border-gray-200">
+    <section 
+      className={`${bgClass} py-[var(--twb-spacing-12)] border-t border-[var(--twb-color-border-primary)] ${className}`}
+    >
       <Container variant="site">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Feature 1 */}
-          <div className="flex flex-col items-center text-center">
-             <div className="mb-4 text-[#DAA520]">
-                <Truck size={40} strokeWidth={1.5} />
-             </div>
-             <h4 className="text-[#2C1810] font-bold uppercase tracking-wider text-sm mb-2">Nationwide Delivery</h4>
-             <p className="text-gray-500 text-sm">Reliable delivery to your door across South Africa.</p>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--twb-spacing-8)]">
+          {features.map((feature) => {
+            const Icon = feature.icon;
+            
+            return (
+              <div 
+                key={feature.id} 
+                className="flex flex-col items-center text-center group"
+              >
+                {/* Icon */}
+                <div 
+                  className="mb-[var(--twb-spacing-4)] text-[var(--twb-color-gold)] transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                >
+                  <Icon size={40} strokeWidth={1.5} />
+                </div>
 
-          {/* Feature 2 */}
-          <div className="flex flex-col items-center text-center">
-             <div className="mb-4 text-[#DAA520]">
-                <ShieldCheck size={40} strokeWidth={1.5} />
-             </div>
-             <h4 className="text-[#2C1810] font-bold uppercase tracking-wider text-sm mb-2">Secure Payment</h4>
-             <p className="text-gray-500 text-sm">100% secure checkout with multiple payment options.</p>
-          </div>
+                {/* Title */}
+                <h4 
+                  className={`${textPrimaryClass} font-bold uppercase tracking-wider text-sm mb-[var(--twb-spacing-2)]`}
+                >
+                  {feature.title}
+                </h4>
 
-          {/* Feature 3 */}
-          <div className="flex flex-col items-center text-center">
-             <div className="mb-4 text-[#DAA520]">
-                <RefreshCw size={40} strokeWidth={1.5} />
-             </div>
-             <h4 className="text-[#2C1810] font-bold uppercase tracking-wider text-sm mb-2">Easy Returns</h4>
-             <p className="text-gray-500 text-sm">Hassle-free returns within 30 days of purchase.</p>
-          </div>
-
-          {/* Feature 4 */}
-          <div className="flex flex-col items-center text-center">
-             <div className="mb-4 text-[#DAA520]">
-                <Gift size={40} strokeWidth={1.5} />
-             </div>
-             <h4 className="text-[#2C1810] font-bold uppercase tracking-wider text-sm mb-2">Gift Wrapping</h4>
-             <p className="text-gray-500 text-sm">Add a personal touch with our premium gift wrapping service.</p>
-          </div>
+                {/* Description */}
+                <p className={`${textSecondaryClass} text-sm leading-relaxed`}>
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </Container>
-    </div>
+    </section>
   );
 };

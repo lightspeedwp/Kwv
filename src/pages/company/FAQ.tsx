@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { FAQSection } from '../../components/sections/FAQSection';
-import { Hero } from '../../components/sections/Hero';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
+import { Hero } from '../../components/sections/Hero';
+import { FAQSection } from '../../components/sections/FAQSection';
+import { Newsletter } from '../../components/sections/Newsletter';
 import { Button } from '../../components/common/Button';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { COLORS } from '../../constants/theme';
 
 const faqItems = [
@@ -78,6 +79,19 @@ export const FAQ: React.FC = () => {
           <Link to="/contact">
             <Button variant="primary">Contact Us</Button>
           </Link>
+        </Container>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 bg-gray-100">
+        <Container variant="content" className="text-center">
+          <Typography variant="h3" className="mb-4" color={COLORS.darkBrown}>
+            Subscribe to our Newsletter
+          </Typography>
+          <Typography variant="body" className="mb-8 text-gray-600">
+            Stay updated with the latest news and promotions from KWV.
+          </Typography>
+          <Newsletter />
         </Container>
       </section>
     </Layout>

@@ -2,9 +2,9 @@ import React from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
-import { Button } from '../../components/common/Button';
+import { COLORS } from '../../constants/theme';
 import { ProductCard } from '../../components/shop/common/ProductCard';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Tag } from 'lucide-react';
 
 const PROMO_PRODUCTS = [

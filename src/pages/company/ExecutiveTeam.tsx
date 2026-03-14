@@ -2,9 +2,10 @@ import React from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
-import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
+import { Hero } from '../../components/sections/Hero';
 import { Button } from '../../components/common/Button';
-import { useNavigate } from 'react-router-dom';
+import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
+import { useNavigate } from 'react-router';
 
 // Data derived from the user request
 const TEAM_MEMBERS = [

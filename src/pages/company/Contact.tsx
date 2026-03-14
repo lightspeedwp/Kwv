@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { Hero } from '../../components/sections/Hero';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
-import { COLORS } from '../../constants/theme';
+import { Hero } from '../../components/sections/Hero';
+import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 import { Facebook, Instagram, Twitter, CheckCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import imageHero from 'figma:asset/0d66fde5a857cd4f72ee552088528c9472e9d423.png';
 
 /**

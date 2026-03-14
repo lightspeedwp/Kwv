@@ -1,8 +1,25 @@
+/**
+ * BreadcrumbsBar Component
+ * 
+ * Context-aware breadcrumb navigation for Handcrafted Wines.
+ * 
+ * Features:
+ * - Auto-generates crumbs based on URL path
+ * - Hero page detection (transparent overlay with white text)
+ * - Standard page styling (light background with dark text)
+ * - Custom path-to-label mapping
+ * - Hides on home and product pages
+ * - WCAG AA accessible keyboard navigation
+ * - Design token integration
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
+ */
+
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router';
 import { ChevronRight, Home } from 'lucide-react';
 import { Container } from '../common/Container';
-import { COLORS } from '../../constants/theme';
 
 // Helper to format path segments
 const formatSegment = (segment: string) => {
@@ -117,13 +134,13 @@ export const BreadcrumbsBar: React.FC = () => {
   return (
     <div className={hasHero 
       ? "absolute top-0 left-0 w-full z-20 pt-6 pb-2 bg-transparent pointer-events-none" 
-      : "w-full bg-[#f9f9f9] py-3 border-b border-gray-200 relative z-10"
+      : "w-full bg-[var(--twb-color-bg-secondary)] dark:bg-[var(--twb-color-bg-primary)] py-3 border-b border-gray-200 dark:border-gray-700 relative z-10"
     }>
       <Container variant="site">
         <nav aria-label="Breadcrumb" className="pointer-events-auto">
-          <ol className={`flex items-center text-xs md:text-sm flex-wrap ${hasHero ? 'text-white/90 drop-shadow-sm' : 'text-gray-500'}`}>
+          <ol className={`flex items-center text-xs md:text-sm flex-wrap ${hasHero ? 'text-white/90 drop-shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
             <li className="flex items-center">
-              <Link to="/" className={`${hasHero ? 'hover:text-white' : 'hover:text-[#8B0000]'} transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-sm p-0.5`} aria-label="Home">
+              <Link to="/" className={`${hasHero ? 'hover:text-white' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`} aria-label="Home">
                 <Home size={14} className="mr-1" />
                 <span className="sr-only">Home</span>
               </Link>
@@ -149,17 +166,17 @@ export const BreadcrumbsBar: React.FC = () => {
                 <li key={to} className="flex items-center">
                   <ChevronRight size={14} className={`mx-2 ${hasHero ? 'text-white/60' : 'text-gray-400'}`} />
                   {isLast ? (
-                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-white drop-shadow-md' : 'text-[#333333]'}`} aria-current="page">
+                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-white drop-shadow-md' : 'text-[var(--twb-color-text-primary)] dark:text-[var(--twb-color-text-on-dark)]'}`} aria-current="page">
                       {name}
                     </span>
                   ) : isNonClickable ? (
-                    <span className={hasHero ? 'text-white/60' : 'text-gray-500'}>
+                    <span className={hasHero ? 'text-white/60' : 'text-gray-500 dark:text-gray-400'}>
                       {name}
                     </span>
                   ) : (
                     <Link 
                       to={to} 
-                      className={`${hasHero ? 'hover:text-white' : 'hover:text-[#8B0000]'} transition-colors focus:outline-none focus:ring-2 focus:ring-[#DAA520] rounded-sm p-0.5`}
+                      className={`${hasHero ? 'hover:text-white' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`}
                     >
                       {name}
                     </Link>

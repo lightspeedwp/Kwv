@@ -1,0 +1,149 @@
+/**
+ * themes-light.css
+ * 
+ * Light mode color palette for The Wire Brand.
+ * Warm, organic, handcrafted aesthetic with paper/ink foundation.
+ * Uses WordPress-aligned color naming (--wp-preset-color-*).
+ * 
+ * @package TheWireBrand
+ * @version 2.0
+ */
+
+:root {
+  /* ============================================
+     BRAND PALETTE
+     WordPress-aligned with --wp-preset-color-* pattern
+     ============================================ */
+  
+  /* Primary Brand Colors */
+  --wp-preset-color-paper: #f5efe4;      /* Warm parchment background */
+  --wp-preset-color-ink: #1e1a17;        /* Deep charcoal text */
+  --wp-preset-color-vine: #5c6b4f;       /* Vineyard green accent */
+  --wp-preset-color-clay: #b86b4b;       /* Terracotta warm accent */
+  --wp-preset-color-plum: #5a2d3b;       /* Wine-inspired primary */
+  --wp-preset-color-gold: #c8a96b;       /* Muted premium gold */
+  
+  /* TWB Aliases (for component usage) */
+  --twb-color-paper: var(--wp-preset-color-paper);
+  --twb-color-ink: var(--wp-preset-color-ink);
+  --twb-color-vine: var(--wp-preset-color-vine);
+  --twb-color-clay: var(--wp-preset-color-clay);
+  --twb-color-plum: var(--wp-preset-color-plum);
+  --twb-color-gold: var(--wp-preset-color-gold);
+
+  /* ============================================
+     SEMANTIC BACKGROUND TOKENS
+     ============================================ */
+  
+  --twb-color-bg-primary: var(--twb-color-paper);        /* Main page background */
+  --twb-color-bg-secondary: #faf7f2;                     /* Subtle sections */
+  --twb-color-bg-tertiary: #ffffff;                      /* Cards, elevated surfaces */
+  --twb-color-bg-muted: #f0ebe0;                         /* Muted backgrounds */
+  --twb-color-bg-accent: #fdf8f0;                        /* Accent backgrounds */
+  
+  /* ============================================
+     SEMANTIC TEXT TOKENS
+     ============================================ */
+  
+  --twb-color-text-primary: var(--twb-color-ink);        /* Primary body text */
+  --twb-color-text-secondary: var(--twb-color-vine);     /* Secondary text, labels */
+  --twb-color-text-muted: #6b6461;                       /* Subtle text, metadata */
+  --twb-color-text-on-dark: var(--twb-color-paper);      /* Text on dark backgrounds */
+  --twb-color-text-on-accent: #ffffff;                   /* Text on colored backgrounds */
+  
+  /* ============================================
+     SEMANTIC ACCENT TOKENS
+     ============================================ */
+  
+  --twb-color-accent-primary: var(--twb-color-plum);     /* Primary CTAs, links */
+  --twb-color-accent-secondary: var(--twb-color-clay);   /* Secondary actions */
+  --twb-color-accent-premium: var(--twb-color-gold);     /* Premium indicators */
+  --twb-color-accent-success: var(--twb-color-vine);     /* Success states */
+  --twb-color-accent-error: #d4183d;                     /* Error states */
+  --twb-color-accent-warning: #e8a946;                   /* Warning states */
+  --twb-color-accent-info: #4a7ba7;                      /* Info states */
+  
+  /* ============================================
+     INTERACTIVE STATE TOKENS
+     ============================================ */
+  
+  /* Links */
+  --twb-color-link: var(--twb-color-plum);
+  --twb-color-link-hover: #7a3d4b;
+  --twb-color-link-visited: #4a1d2b;
+  --twb-color-link-active: #3a1521;
+  
+  /* Focus States */
+  --twb-color-focus-ring: var(--twb-color-vine);
+  --twb-color-focus-bg: rgba(92, 107, 79, 0.1);
+  
+  /* Hover States */
+  --twb-color-hover-bg: rgba(30, 26, 23, 0.05);
+  --twb-color-hover-border: rgba(30, 26, 23, 0.25);
+  
+  /* Active/Pressed States */
+  --twb-color-active-bg: rgba(30, 26, 23, 0.1);
+  --twb-color-active-border: rgba(30, 26, 23, 0.35);
+  
+  /* Disabled States */
+  --twb-color-disabled-bg: #e8e4db;
+  --twb-color-disabled-text: #9a8d7f;
+  --twb-color-disabled-border: rgba(30, 26, 23, 0.1);
+  
+  /* ============================================
+     BORDER TOKENS
+     ============================================ */
+  
+  --twb-border-primary: rgba(30, 26, 23, 0.15);          /* Standard borders */
+  --twb-border-secondary: rgba(92, 107, 79, 0.25);       /* Accent borders */
+  --twb-border-tertiary: rgba(30, 26, 23, 0.08);         /* Subtle dividers */
+  --twb-border-strong: rgba(30, 26, 23, 0.3);            /* Emphasized borders */
+  --twb-border-error: var(--twb-color-accent-error);     /* Error validation */
+  --twb-border-success: var(--twb-color-accent-success); /* Success validation */
+  --twb-border-focus: var(--twb-color-focus-ring);       /* Focus indicators */
+
+  /* ============================================
+     LEGACY RADIX/SHADCN COMPATIBILITY
+     Ensures UI components work with existing code
+     ============================================ */
+  
+  --background: var(--twb-color-bg-primary);
+  --foreground: var(--twb-color-text-primary);
+  --card: var(--twb-color-bg-tertiary);
+  --card-foreground: var(--twb-color-text-primary);
+  --popover: var(--twb-color-bg-tertiary);
+  --popover-foreground: var(--twb-color-text-primary);
+  --primary: var(--twb-color-plum);
+  --primary-foreground: #ffffff;
+  --secondary: var(--twb-color-vine);
+  --secondary-foreground: #ffffff;
+  --muted: var(--twb-color-bg-secondary);
+  --muted-foreground: var(--twb-color-text-muted);
+  --accent: var(--twb-color-clay);
+  --accent-foreground: #ffffff;
+  --destructive: var(--twb-color-accent-error);
+  --destructive-foreground: #ffffff;
+  --border: var(--twb-border-tertiary);
+  --input: transparent;
+  --input-background: #faf7f2;
+  --switch-background: #cbced4;
+  --ring: var(--twb-color-focus-ring);
+  --radius: var(--twb-radius-md);
+  
+  /* Chart Colors */
+  --chart-1: var(--twb-color-plum);
+  --chart-2: var(--twb-color-vine);
+  --chart-3: var(--twb-color-clay);
+  --chart-4: var(--twb-color-gold);
+  --chart-5: #8a6d5b;
+  
+  /* Sidebar (Admin/Dashboard) */
+  --sidebar: var(--twb-color-bg-secondary);
+  --sidebar-foreground: var(--twb-color-text-primary);
+  --sidebar-primary: var(--twb-color-plum);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--twb-color-bg-tertiary);
+  --sidebar-accent-foreground: var(--twb-color-text-secondary);
+  --sidebar-border: var(--twb-border-tertiary);
+  --sidebar-ring: var(--twb-color-focus-ring);
+}

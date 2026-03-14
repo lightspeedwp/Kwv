@@ -1,0 +1,189 @@
+/**
+ * themes-dark.css
+ * 
+ * Dark mode color palette for The Wire Brand.
+ * Inverted paper/ink palette with warm, muted accents.
+ * Uses WordPress-aligned color naming (--wp-preset-color-*).
+ * 
+ * @package TheWireBrand
+ * @version 2.0
+ */
+
+.dark {
+  /* ============================================
+     BRAND PALETTE (Dark Mode Variations)
+     ============================================ */
+  
+  /* Inverted paper/ink colors remain the same for reference */
+  --wp-preset-color-paper: #f5efe4;      /* Used sparingly as text */
+  --wp-preset-color-ink: #1e1a17;        /* Used as backgrounds */
+  --wp-preset-color-vine: #7a8c6f;       /* Lightened for dark mode */
+  --wp-preset-color-clay: #d4856a;       /* Lightened for dark mode */
+  --wp-preset-color-plum: #7a3d4b;       /* Lightened for dark mode */
+  --wp-preset-color-gold: #d4b87f;       /* Lightened for dark mode */
+  
+  /* TWB Aliases (dark mode overrides) */
+  --twb-color-paper: var(--wp-preset-color-paper);
+  --twb-color-ink: var(--wp-preset-color-ink);
+  --twb-color-vine: var(--wp-preset-color-vine);
+  --twb-color-clay: var(--wp-preset-color-clay);
+  --twb-color-plum: var(--wp-preset-color-plum);
+  --twb-color-gold: var(--wp-preset-color-gold);
+
+  /* ============================================
+     SEMANTIC BACKGROUND TOKENS
+     ============================================ */
+  
+  --twb-color-bg-primary: #1e1a17;       /* Main page background (inverted ink) */
+  --twb-color-bg-secondary: #2a2420;     /* Slightly lighter sections */
+  --twb-color-bg-tertiary: #332f2a;      /* Cards, elevated surfaces */
+  --twb-color-bg-muted: #3d3833;         /* Muted backgrounds */
+  --twb-color-bg-accent: #2e2723;        /* Accent backgrounds */
+  
+  /* ============================================
+     SEMANTIC TEXT TOKENS
+     ============================================ */
+  
+  --twb-color-text-primary: #f5efe4;     /* Primary body text (inverted paper) */
+  --twb-color-text-secondary: #d4b87f;   /* Secondary text (gold) */
+  --twb-color-text-muted: #9a8d7f;       /* Subtle text, metadata */
+  --twb-color-text-on-dark: #f5efe4;     /* Text on dark backgrounds */
+  --twb-color-text-on-accent: #1e1a17;   /* Text on colored backgrounds */
+  
+  /* ============================================
+     SEMANTIC ACCENT TOKENS
+     ============================================ */
+  
+  --twb-color-accent-primary: #8a4d5b;   /* Primary CTAs (lighter plum) */
+  --twb-color-accent-secondary: #d4856a; /* Secondary actions (lighter clay) */
+  --twb-color-accent-premium: #d4b87f;   /* Premium indicators (lighter gold) */
+  --twb-color-accent-success: #7a8c6f;   /* Success states (lighter vine) */
+  --twb-color-accent-error: #ef4444;     /* Error states (brighter red) */
+  --twb-color-accent-warning: #f59e0b;   /* Warning states (brighter orange) */
+  --twb-color-accent-info: #60a5fa;      /* Info states (brighter blue) */
+  
+  /* ============================================
+     INTERACTIVE STATE TOKENS
+     ============================================ */
+  
+  /* Links */
+  --twb-color-link: #8a4d5b;             /* Lighter plum for contrast */
+  --twb-color-link-hover: #a36070;       /* Even lighter on hover */
+  --twb-color-link-visited: #6a3d4b;     /* Darker for visited */
+  --twb-color-link-active: #9a5565;      /* Active state */
+  
+  /* Focus States */
+  --twb-color-focus-ring: var(--twb-color-gold);
+  --twb-color-focus-bg: rgba(212, 184, 127, 0.15);
+  
+  /* Hover States */
+  --twb-color-hover-bg: rgba(245, 239, 228, 0.08);
+  --twb-color-hover-border: rgba(245, 239, 228, 0.2);
+  
+  /* Active/Pressed States */
+  --twb-color-active-bg: rgba(245, 239, 228, 0.12);
+  --twb-color-active-border: rgba(245, 239, 228, 0.3);
+  
+  /* Disabled States */
+  --twb-color-disabled-bg: #2a2420;
+  --twb-color-disabled-text: #5d5450;
+  --twb-color-disabled-border: rgba(245, 239, 228, 0.08);
+  
+  /* ============================================
+     BORDER TOKENS
+     ============================================ */
+  
+  --twb-border-primary: rgba(245, 239, 228, 0.15);    /* Standard borders */
+  --twb-border-secondary: rgba(212, 184, 127, 0.25);  /* Accent borders (gold) */
+  --twb-border-tertiary: rgba(245, 239, 228, 0.08);   /* Subtle dividers */
+  --twb-border-strong: rgba(245, 239, 228, 0.3);      /* Emphasized borders */
+  --twb-border-error: var(--twb-color-accent-error);  /* Error validation */
+  --twb-border-success: var(--twb-color-accent-success); /* Success validation */
+  --twb-border-focus: var(--twb-color-focus-ring);    /* Focus indicators */
+
+  /* ============================================
+     SHADOW OVERRIDES (Darker shadows for dark mode)
+     ============================================ */
+  
+  --twb-shadow-none: none;
+  --twb-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --twb-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --twb-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --twb-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  --twb-shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
+  --twb-shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.5), 0 12px 24px rgba(0, 0, 0, 0.3);
+  
+  /* Specialty Shadows (Dark Mode) */
+  --twb-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  --twb-shadow-glow-plum: 0 0 16px rgba(90, 45, 59, 0.5);
+  --twb-shadow-glow-gold: 0 0 24px rgba(200, 169, 107, 0.6);
+  --twb-shadow-paper: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(92, 107, 79, 0.15);
+  --twb-shadow-card-hover: 0 12px 24px rgba(0, 0, 0, 0.5), 0 6px 12px rgba(0, 0, 0, 0.3);
+  
+  /* ============================================
+     LEGACY RADIX/SHADCN COMPATIBILITY
+     ============================================ */
+  
+  --background: var(--twb-color-bg-primary);
+  --foreground: var(--twb-color-text-primary);
+  --card: var(--twb-color-bg-secondary);
+  --card-foreground: var(--twb-color-text-primary);
+  --popover: var(--twb-color-bg-secondary);
+  --popover-foreground: var(--twb-color-text-primary);
+  --primary: #8a4d5b;                     /* Lighter plum */
+  --primary-foreground: #ffffff;
+  --secondary: #7a8c6f;                   /* Lighter vine */
+  --secondary-foreground: #ffffff;
+  --muted: var(--twb-color-bg-tertiary);
+  --muted-foreground: var(--twb-color-text-muted);
+  --accent: #d4856a;                      /* Lighter clay */
+  --accent-foreground: #1e1a17;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(245, 239, 228, 0.15);
+  --input: rgba(245, 239, 228, 0.1);
+  --input-background: var(--twb-color-bg-tertiary);
+  --switch-background: #4a4540;
+  --ring: var(--twb-color-gold);
+  --radius: var(--twb-radius-md);
+  
+  /* Chart Colors (Dark Mode) */
+  --chart-1: #8a4d5b;
+  --chart-2: #7a8c6f;
+  --chart-3: #d4856a;
+  --chart-4: var(--twb-color-gold);
+  --chart-5: #a58872;
+  
+  /* Sidebar (Admin/Dashboard) */
+  --sidebar: var(--twb-color-bg-secondary);
+  --sidebar-foreground: var(--twb-color-text-primary);
+  --sidebar-primary: #8a4d5b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--twb-color-bg-tertiary);
+  --sidebar-accent-foreground: var(--twb-color-text-secondary);
+  --sidebar-border: rgba(245, 239, 228, 0.15);
+  --sidebar-ring: var(--twb-color-gold);
+}
+
+/* ============================================
+   PREFERS-COLOR-SCHEME SUPPORT
+   Auto-switch based on OS preference
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Apply dark mode variables when no explicit theme is set */
+    --twb-color-bg-primary: #1e1a17;
+    --twb-color-bg-secondary: #2a2420;
+    --twb-color-bg-tertiary: #332f2a;
+    --twb-color-text-primary: #f5efe4;
+    --twb-color-text-secondary: #d4b87f;
+    --twb-color-text-muted: #9a8d7f;
+    
+    /* Add other critical dark mode overrides */
+    --background: #1e1a17;
+    --foreground: #f5efe4;
+    --card: #2a2420;
+    --border: rgba(245, 239, 228, 0.15);
+  }
+}

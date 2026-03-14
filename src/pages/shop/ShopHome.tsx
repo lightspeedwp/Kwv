@@ -1,117 +1,339 @@
+/**
+ * Shop Home Landing Page Component
+ * 
+ * Main shop landing page for Handcrafted Wines.
+ * 
+ * Features:
+ * - Hero with shop intro
+ * - Product categories (Wines, Spirits, Cheese, Gifts)
+ * - Featured products showcase
+ * - Farm-to-bottle story
+ * - Shipping & guarantee info
+ * - CTA to browse or visit
+ * 
+ * Data source: products.ts
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
+ */
+
 import React from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { ShopHero } from '../../components/shop/home/ShopHero';
-import { ShopCategorySlider } from '../../components/shop/home/ShopCategorySlider';
-import { ShopBrandGrid } from '../../components/shop/home/ShopBrandGrid';
-import { ShopNewsletter } from '../../components/shop/home/ShopNewsletter';
-import { ShopSocialSection } from '../../components/shop/home/ShopSocialSection';
-import { ProductCard } from '../../components/shop/common/ProductCard';
-import { Button } from '../../components/common/Button';
-import { Link } from 'react-router-dom';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
+import { Hero } from '../../components/sections/Hero';
+import { Grape, FlaskConical, Heart, Gift, Truck, ShieldCheck, MapPin, ArrowRight } from 'lucide-react';
+import { Button } from '../../components/common/Button';
+import { Link } from 'react-router';
+import { products, featuredProducts, productCategories } from '../../data/products';
+import { farmStory } from '../../data/farmStory';
+import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
+import { OrganicBorder } from '../../components/decorative/OrganicBorder';
+import heroImage from 'figma:asset/dfa0e54405c973969c9c003c1ae5ef0e7a16880c.png';
 
-/**
- * ShopHome Page Component
- * 
- * The homepage for the E-commerce section of the site.
- * Features:
- * - Hero Carousel with promotions.
- * - Category Slider.
- * - Featured/Awarded Products grid.
- * - Brand Grid.
- * - Newsletter signup.
- */
 export const ShopHome: React.FC = () => {
+  const categoryIcons = {
+    wine: Grape,
+    spirit: FlaskConical,
+    cheese: Heart,
+    gift: Gift
+  };
+
   return (
-    <Layout variant="shop">
-      {/* 1. Hero Carousel */}
-      <ShopHero />
+    <Layout>
+      <Hero 
+        title="Shop Our Farm"
+        subtitle="Every bottle, every wheel of cheese, every spirit—handcrafted with four generations of passion. Order online and we'll ship our family's work straight to your door."
+        imageSrc={heroImage}
+        height="medium"
+      />
 
-      {/* 2. Text Section */}
-      <div id="shop-about-section" className="bg-white py-16 text-center">
-        <Container variant="content" className="max-w-4xl mx-auto px-6">
-           <Typography variant="h2" className="text-[#2C1810] font-serif text-3xl mb-8 uppercase tracking-wide">
-             KWV Online Shop
-           </Typography>
-           <Typography variant="body" className="text-gray-600 mb-6 leading-relaxed">
-             KWV Online Shop - Get your wine, brandy and spirit products delivered to your door or choose our click and collect option. Our range of brands include Roodeberg, The Mentors, KWV Brandy, Laborie, Cathedral Cellar, Classic Collection, Cruxland, Imagin, Wild Africa Cream and so much more spirits & wine.
-           </Typography>
-           <Typography variant="body" className="text-gray-600 mb-6 leading-relaxed">
-             Our brands can be purchased on our online shop or at the KWV Emporium in Paarl and in addition to this, visitors can also enjoy our famous destination experiences. These not to be missed experiences include House of Fire, Cathedral Cellar and KWV Emporium for tastings and pairings.
-           </Typography>
-           <Typography variant="body" className="text-gray-600 leading-relaxed">
-             The ability to source from such a diverse landscape of sites undoubtedly gives KWV its award-winning edge, an advantage which starts in the vineyard. Guided by an ethos to give consumers only the absolute best, KWV continues to build on its reputation as a pioneer and innovator, and with a mantra that puts the consumer first, KWV continues its lead into the next century.
-           </Typography>
+      {/* Introduction */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+        <Container variant="content">
+          <div className="text-center mb-12">
+            <Typography variant="h2" className="mb-6 text-[var(--twb-color-plum)]">
+              From Our Farm to Your Table
+            </Typography>
+            <div className="prose prose-lg max-w-3xl mx-auto dark:prose-invert">
+              <p className="text-[var(--twb-color-text-primary)] leading-relaxed text-lg">
+                We're a small farm, so we can't make millions of bottles. What we can do is pour 
+                everything we've learned over 100+ years into every single product. No mass production. 
+                No cutting corners. Just honest, handcrafted quality.
+              </p>
+              <p className="text-[var(--twb-color-text-primary)] leading-relaxed text-lg">
+                When you order from us, you're supporting a family farm and getting products made 
+                with genuine care. That's a promise.
+              </p>
+            </div>
+          </div>
         </Container>
-      </div>
+      </section>
 
-      {/* 3. Promotions CTA */}
-      <div className="bg-[#2C1810] py-20 text-center bg-[url('https://images.unsplash.com/photo-1597652392437-01389779df53?auto=format&fit=crop&q=80')] bg-cover bg-fixed bg-center relative">
-         <div className="absolute inset-0 bg-black/60"></div>
-         <Container variant="content" className="relative z-10">
-            <Typography variant="h2" className="text-white mb-6">Current Promotions</Typography>
-            <p className="text-gray-200 text-lg mb-8 max-w-2xl mx-auto">
-               Discover exceptional value on our award-winning wines and spirits. From seasonal bundles to limited-time offers.
+      {/* Shop by Category */}
+      <section className="py-20 bg-[var(--twb-color-plum)]/5">
+        <Container>
+          <div className="text-center mb-16">
+            <div className="relative inline-block">
+              <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
+                Shop by Category
+              </Typography>
+              <HandDrawnUnderline 
+                variant="scribble" 
+                color="var(--twb-color-plum)" 
+                width={80}
+                offset={-3}
+              />
+            </div>
+            <p className="text-[var(--twb-color-text-muted)] text-lg">
+              Everything we make, right here
             </p>
-            <Link to="/shop/promotions">
-               <Button className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none h-14 px-10 text-lg">
-                  View All Specials
-               </Button>
-            </Link>
-         </Container>
-      </div>
+          </div>
 
-      {/* 4. Featured Products */}
-      <div className="bg-[#F9F9F9] py-20">
-         <Container variant="site">
-             <div className="text-center mb-12">
-                 <Typography variant="h2" className="text-[#2C1810] mb-4">Shop Our Awarded Selection</Typography>
-                 <Typography variant="body" className="text-gray-600 max-w-2xl mx-auto">
-                     Explore the finest wines, brandies and spirits that have earned us our reputation as a world-class producer.
-                 </Typography>
-             </div>
-             
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                 <ProductCard product={{
-                    id: '1', name: 'The Mentors Orchestra 2020', brand: 'The Mentors', price: 429.00, 
-                    image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true, badges: ['Award Winner']
-                 }} />
-                 <ProductCard product={{
-                    id: '5', name: 'Cruxland Gin', brand: 'Cruxland', price: 349.00, 
-                    image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: true, badges: ['Double Gold']
-                 }} />
-                 <ProductCard product={{
-                    id: '6', name: 'KWV 10 Year Old Brandy', brand: 'KWV Brandy', price: 299.00, 
-                    image: 'https://images.unsplash.com/photo-1757694907428-5ef2f3ff7854?auto=format&fit=crop&q=80', inStock: true, badges: ['Best in Class']
-                 }} />
-                 <ProductCard product={{
-                    id: '3', name: 'Laborie Merlot 2022', brand: 'Laborie', price: 85.00, 
-                    image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true
-                 }} />
-             </div>
-             
-             <div className="text-center mt-12">
-                <Link to="/shop/all">
-                   <Button variant="outline" className="border-[#2C1810] text-[#2C1810] hover:bg-[#2C1810] hover:text-white px-8">
-                      View All Products
-                   </Button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {(Object.keys(productCategories) as Array<keyof typeof productCategories>).map((key) => {
+              const category = productCategories[key];
+              const IconComponent = categoryIcons[key];
+              const productCount = products.filter(p => p.category === key).length;
+
+              return (
+                <Link 
+                  key={key}
+                  to={`/shop/${key}`}
+                  className="group"
+                >
+                  <OrganicBorder
+                    variant="card"
+                    bgColor="var(--twb-color-bg-tertiary)"
+                    borderColor="var(--twb-border-tertiary)"
+                    className="p-8 hover:shadow-xl transition-shadow h-full flex flex-col"
+                  >
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-plum)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-plum)]/20 transition-colors">
+                      <IconComponent size={40} className="text-[var(--twb-color-plum)]" />
+                    </div>
+                    <h3 className="font-serif text-2xl mb-3 text-center text-[var(--twb-color-plum)] group-hover:text-[var(--twb-color-plum)]/80 transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-[var(--twb-color-text-muted)] text-center mb-4 flex-grow">
+                      {category.description}
+                    </p>
+                    <div className="text-center">
+                      <span className="text-sm text-[var(--twb-color-gold)] font-medium">
+                        {productCount} {productCount === 1 ? 'product' : 'products'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 mt-4 text-[var(--twb-color-plum)] group-hover:gap-3 transition-all">
+                      <span className="text-sm font-semibold">Browse</span>
+                      <ArrowRight size={16} />
+                    </div>
+                  </OrganicBorder>
                 </Link>
-             </div>
-         </Container>
-      </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
 
-      {/* 5. Category Slider */}
-      <ShopCategorySlider />
+      {/* Featured Products */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+        <Container>
+          <div className="text-center mb-16">
+            <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
+              Our Favorites
+            </Typography>
+            <p className="text-[var(--twb-color-text-muted)] text-lg">
+              The products we're most proud of (and drink ourselves)
+            </p>
+          </div>
 
-      {/* 6. Brand Grid */}
-      <ShopBrandGrid />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.slice(0, 6).map((product) => (
+              <Link 
+                key={product.id}
+                to={`/shop/product/${product.id}`}
+                className="group"
+              >
+                <div className="bg-white dark:bg-[var(--twb-color-bg-secondary)] rounded-lg border border-[var(--twb-border-tertiary)] overflow-hidden hover:shadow-xl transition-all">
+                  {/* Product Image */}
+                  <div className="aspect-square overflow-hidden bg-[var(--twb-color-plum)]/5">
+                    <img 
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  
+                  {/* Product Info */}
+                  <div className="p-6">
+                    {product.awards && product.awards.length > 0 && (
+                      <span className="inline-block px-3 py-1 bg-[var(--twb-color-gold)]/20 text-[var(--twb-color-gold)] text-xs font-bold rounded-full mb-3">
+                        AWARD WINNER
+                      </span>
+                    )}
+                    <h3 className="font-serif text-xl mb-2 text-[var(--twb-color-text-primary)] group-hover:text-[var(--twb-color-plum)] transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm text-[var(--twb-color-text-muted)] mb-4 line-clamp-2">
+                      {product.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xl text-[var(--twb-color-plum)]">
+                        R{product.price}
+                      </span>
+                      <span className="text-sm text-[var(--twb-color-gold)] font-medium flex items-center gap-1">
+                        View Details
+                        <ArrowRight size={14} />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
 
-      {/* 7. Newsletter */}
-      <ShopNewsletter />
+          <div className="text-center mt-12">
+            <Link to="/shop/wine">
+              <Button variant="primary" size="large">
+                Browse All Products
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </section>
 
-      {/* 8. Social Section */}
-      <ShopSocialSection />
+      {/* Why Shop With Us */}
+      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+        <Container>
+          <div className="text-center mb-16">
+            <Typography variant="h2" className="mb-6 text-[var(--twb-color-gold)]">
+              Why Shop With Us
+            </Typography>
+            <p className="text-white/90 text-lg max-w-2xl mx-auto">
+              When you buy from us, you're getting more than just a product
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                <Truck size={40} className="text-[var(--twb-color-gold)]" />
+              </div>
+              <h3 className="font-serif text-xl mb-3 text-white">Free Shipping</h3>
+              <p className="text-white/70 leading-relaxed">
+                Free delivery on all orders over R500. We pack everything carefully and 
+                ship within 2 business days.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                <ShieldCheck size={40} className="text-[var(--twb-color-gold)]" />
+              </div>
+              <h3 className="font-serif text-xl mb-3 text-white">Quality Guarantee</h3>
+              <p className="text-white/70 leading-relaxed">
+                If you're not 100% happy with your purchase, we'll make it right. 
+                That's our family promise.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                <Heart size={40} className="text-[var(--twb-color-gold)]" />
+              </div>
+              <h3 className="font-serif text-xl mb-3 text-white">Made with Love</h3>
+              <p className="text-white/70 leading-relaxed">
+                Every product is handcrafted by our family on our Paarl Mountain farm. 
+                No middlemen, no mass production.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Farm Story */}
+      <section className="py-20 bg-[var(--twb-color-plum)]/10">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Typography variant="h2" className="mb-6 text-[var(--twb-color-plum)]">
+                Four Generations in Every Bottle
+              </Typography>
+              <div className="prose prose-lg dark:prose-invert">
+                <p className="text-[var(--twb-color-text-primary)] leading-relaxed">
+                  Since 1918, our family has been farming this land on Paarl Mountain. We've learned 
+                  what works, what doesn't, and what makes truly exceptional wine, spirits, and cheese.
+                </p>
+                <p className="text-[var(--twb-color-text-primary)] leading-relaxed">
+                  When you order from our shop, you're getting products made by people who genuinely 
+                  care. Pieter tastes every barrel. Annelie makes cheese by hand every morning. 
+                  Hennie personally checks every distillation run.
+                </p>
+                <p className="text-[var(--twb-color-text-primary)] leading-relaxed">
+                  We're not trying to be the biggest. We're trying to be the best at what we do. 
+                  And we think you'll taste the difference.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <Link to="/about">
+                  <Button variant="secondary" size="large">
+                    Our Story
+                  </Button>
+                </Link>
+                <Link to="/visit">
+                  <Button variant="outline" size="large">
+                    Visit the Farm
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <img 
+                src={heroImage}
+                alt="Handcrafted Wines farm"
+                className="w-full rounded-lg shadow-xl"
+              />
+              <div className="absolute -bottom-6 -right-6 bg-[var(--twb-color-gold)] text-white p-6 rounded-lg shadow-xl max-w-xs">
+                <MapPin size={32} className="mb-2" />
+                <p className="font-serif text-lg mb-1">Paarl Mountain</p>
+                <p className="text-sm text-white/90">Cape Winelands, South Africa</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+        <Container variant="content">
+          <div className="text-center">
+            <Typography variant="h2" className="mb-6 text-white">
+              Ready to Taste?
+            </Typography>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Start exploring our handcrafted wines, spirits, and cheese. 
+              We'll ship straight from our farm to your door.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/shop/wine">
+                <Button variant="secondary" size="large">
+                  Shop Wines
+                </Button>
+              </Link>
+              <Link to="/shop/spirit">
+                <Button variant="outline" size="large">
+                  Shop Spirits
+                </Button>
+              </Link>
+              <Link to="/shop/cheese">
+                <Button variant="outline" size="large">
+                  Shop Cheese
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
     </Layout>
   );
 };

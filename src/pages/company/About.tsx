@@ -1,142 +1,278 @@
+/**
+ * About Page Component
+ * 
+ * Main "About Us" page for Handcrafted Wines family farm.
+ * 
+ * Features:
+ * - Family story and heritage (1918-2026)
+ * - Links to sub-pages (Farm, Team, Awards, Sustainability)
+ * - 4-generation legacy
+ * - What makes us different
+ * - Family values
+ * 
+ * Voice: Warm, personal, family-oriented
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
+ */
+
 import React from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
 import { FullWidthSection } from '../../components/sections/FullWidthSection';
-import { BrandGrid } from '../../components/sections/BrandGrid';
+import { Heart, Users, Mountain, Award, Leaf, ArrowRight } from 'lucide-react';
+import { Button } from '../../components/common/Button';
+import { Link } from 'react-router';
+import { farmStory } from '../../data/farmStory';
+import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
+import { PaperTexture } from '../../components/decorative/PaperTexture';
+import { OrganicBorder } from '../../components/decorative/OrganicBorder';
 import heroImage from 'figma:asset/fe3c1c394bedc4c207970e159acb3d745653037f.png';
 
-// Images from Unsplash
-const IMG_HISTORY = "https://images.unsplash.com/photo-1710041387800-22f1e14d0682?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
-const IMG_AWARDS = "https://images.unsplash.com/photo-1754300681803-61eadeb79d10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
-const IMG_EXEC = "https://images.unsplash.com/photo-1760346546771-a81d986459ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
-const IMG_SUSTAINABILITY = "https://images.unsplash.com/photo-1623056739101-c561cb40c18f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
-const IMG_CAREERS = "https://images.unsplash.com/photo-1657569748925-308b0690dcc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
-
-/**
- * About Page Component
- * 
- * "About Us" page detailing the history, quality, and legacy of KWV.
- * Uses `FullWidthSection` components for alternating layout blocks.
- * Includes a `BrandGrid` to showcase product portfolio.
- */
 export const About: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  const yearsInBusiness = currentYear - farmStory.established;
+
   return (
     <Layout>
       <Hero 
-        title="About Us"
-        subtitle="KWV played a major role to unite wine producers during the industry’s fledgling years. KWV is privileged to feature prominently in the pages of South Africa’s history."
+        title="Our Family Story"
+        subtitle={`${yearsInBusiness} years of winemaking, four generations of family, and one timeless passion: handcrafting exceptional wines, spirits, and cheese on Paarl Mountain.`}
         imageSrc={heroImage}
         height="large"
       />
 
-      {/* Introduction Content */}
-      <section className="py-20 bg-white">
+      {/* Introduction - The Full Story */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
         <Container variant="content">
-          <div className="space-y-12">
-            <div>
-              <Typography variant="h2" className="text-[#2C1810] font-bold mb-6">
-                KWV was founded in 1918. This is the same year South Africa’s first democratically elected president, Nelson Mandela, was born.
+          <div className="space-y-8">
+            <div className="text-center mb-12">
+              <Typography variant="caption" className="uppercase tracking-widest text-[var(--twb-color-accent-primary)] mb-4">
+                Since {farmStory.established}
               </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed mb-6">
-                In the space of just over a century, the country, along with its wine industry, has seen many changes. KWV played a major role to unite wine producers during the industry’s fledgling years. KWV is privileged to feature prominently in the pages of South Africa’s history.
-              </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed mb-6">
-                Today South Africa is a global player in the world of wine. KWV remains an industry leader when it comes to innovation and quality. It also remains committed to its original objective of showcasing the quality of South Africa’s wine products to the world. This is evidenced by its numerous award-winning wines and spirits.
-              </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed">
-                KWV celebrated its centenary in 2018 and, while firmly rooted in South Africa, it has penetrated international markets. KWV now now boasts a global footprint with a portfolio of brands in over 100 markets.
+              <Typography variant="h2" className="text-[var(--twb-color-plum)] mb-6">
+                Four Generations, One Farm, Endless Passion
               </Typography>
             </div>
 
-            <div className="border-t border-gray-100 pt-12">
-              <Typography variant="h3" className="text-[#2C1810] font-bold mb-6">
-                Quality Grapes
-              </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed mb-6">
-                With access to grapes from more than 50 farms and 400 vineyard sites across the Western Cape’s Paarl, Stellenbosch, Swartland, Perdeberg, Malmesbury, Darling, Elgin, Robertson and Wellington regions, KWV’s ability as a commercial producer to source the finest quality grapes for a premium expression of the Cape Winelands is unrivalled. The winemaking team takes meticulous care when selecting grapes to ensure they meet KWV’s exact, quality standards.
-              </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed mb-6">
-                KWV expertly handles and transport grapes to KWV’s cellar facilities in Paarl. This is an impressive site which covers nearly 32 hectares, at the heart of which stands KWV’s imposing Cathedral Cellar, built in 1930.
-              </Typography>
-              <Typography variant="body" className="text-gray-600 leading-relaxed">
-                The ability to source from such a diverse landscape of sites undoubtedly gives KWV its award-winning edge. This is an advantage which starts in the vineyard. Guided by an ethos to give consumers only the absolute best, KWV continues to build on its reputation as a pioneer and innovator. Furthermore, with a mantra that puts the consumer first, KWV continues its lead into the next century.
-              </Typography>
+            <div className="prose prose-lg max-w-4xl mx-auto dark:prose-invert">
+              {farmStory.story.full.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="text-[var(--twb-color-text-primary)] leading-relaxed mb-6">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </Container>
       </section>
 
-      {/* 1. Our History */}
-      <FullWidthSection
-        title="Our History"
-        description="Tracing our roots back to 1918, discover the milestones that shaped KWV into a global icon."
-        linkText="Read More"
-        linkTo="/history"
-        imageSrc={IMG_HISTORY}
-        align="left"
-        variant="light"
-      />
-
-      {/* 2. Awards & Accolades */}
-      <FullWidthSection
-        title="Awards & Accolades"
-        description="A testament to our quality, view our recent achievements on the international stage."
-        linkText="Read More"
-        linkTo="/awards"
-        imageSrc={IMG_AWARDS}
-        align="right"
-        variant="dark"
-      />
-
-      {/* 3. Our Brands (Reusable Grid) */}
-      <BrandGrid />
-
-      {/* 4. Executive Team */}
-      <FullWidthSection
-        title="Executive Team"
-        description="Meet the leadership team driving our vision and strategy forward."
-        linkText="Read More"
-        linkTo="/executive-team"
-        imageSrc={IMG_EXEC}
-        align="left"
-        variant="light"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-gray-50 p-4 border-l-4 border-[#8B0000]">
-            <Typography variant="caption" className="uppercase tracking-widest text-gray-500 mb-1">CHIEF EXECUTIVE OFFICER</Typography>
-            <Typography variant="h4" className="font-serif text-[#2C1810]">John Loomes</Typography>
+      {/* Timeline Visual */}
+      <section className="py-20 bg-[var(--twb-color-plum)]/5">
+        <Container>
+          <div className="text-center mb-16">
+            <div className="relative inline-block">
+              <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
+                Our Timeline
+              </Typography>
+              <HandDrawnUnderline 
+                variant="wave" 
+                color="var(--twb-color-plum)" 
+                width={85}
+                offset={-2}
+              />
+            </div>
+            <p className="text-[var(--twb-color-text-muted)] text-lg">
+              Five milestones that shaped who we are today
+            </p>
           </div>
-          <div className="bg-gray-50 p-4 border-l-4 border-[#DAA520]">
-            <Typography variant="caption" className="uppercase tracking-widest text-gray-500 mb-1">DIRECTOR</Typography>
-            <Typography variant="h4" className="font-serif text-[#2C1810]">Daniël Smit</Typography>
-            <Typography variant="caption" className="text-gray-500 mt-1">Finance and Group Services</Typography>
+
+          <div className="max-w-4xl mx-auto space-y-12">
+            {farmStory.story.timeline.map((milestone, index) => (
+              <div 
+                key={milestone.year}
+                className="flex gap-8 items-start group"
+              >
+                {/* Year Badge */}
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-24 rounded-full bg-[var(--twb-color-gold)] flex flex-col items-center justify-center text-[var(--twb-color-ink)] group-hover:scale-110 transition-transform shadow-lg">
+                    <span className="text-2xl font-bold">{milestone.year}</span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <OrganicBorder
+                  variant="card"
+                  bgColor="var(--twb-color-bg-tertiary)"
+                  borderColor="var(--twb-border-tertiary)"
+                  className="flex-1 p-8 group-hover:shadow-lg transition-shadow"
+                >
+                  <h3 className="font-serif text-2xl mb-3 text-[var(--twb-color-plum)]">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-[var(--twb-color-text-muted)] leading-relaxed">
+                    {milestone.description}
+                  </p>
+                </OrganicBorder>
+              </div>
+            ))}
           </div>
-        </div>
-      </FullWidthSection>
+        </Container>
+      </section>
 
-      {/* 5. Sustainability */}
-      <FullWidthSection
-        title="Sustainability"
-        description="Our commitment to the environment, ethical farming, and community development."
-        linkText="Read More"
-        linkTo="/sustainability"
-        imageSrc={IMG_SUSTAINABILITY}
-        align="right"
-        variant="dark"
-      />
+      {/* What Makes Us Different */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+        <Container>
+          <div className="text-center mb-16">
+            <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
+              What Makes Us Different
+            </Typography>
+            <p className="text-[var(--twb-color-text-muted)] text-lg max-w-2xl mx-auto">
+              We're not a corporation. We're a family that happens to make really great wine.
+            </p>
+          </div>
 
-      {/* 6. Careers */}
-      <FullWidthSection
-        title="Careers"
-        description="Join our team and be a part of our legacy of excellence."
-        linkText="Read More"
-        linkTo="/careers"
-        imageSrc={IMG_CAREERS}
-        align="left"
-        variant="light"
-      />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {farmStory.values.map((value) => {
+              const iconMap: Record<string, any> = {
+                heart: Heart,
+                users: Users,
+                leaf: Leaf,
+                award: Award
+              };
+              const IconComponent = iconMap[value.icon] || Heart;
+
+              return (
+                <div 
+                  key={value.title}
+                  className="text-center group"
+                >
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-plum)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-plum)]/20 transition-colors">
+                    <IconComponent size={40} className="text-[var(--twb-color-plum)]" />
+                  </div>
+                  <h3 className="font-serif text-xl mb-3 text-[var(--twb-color-text-primary)]">
+                    {value.title}
+                  </h3>
+                  <p className="text-[var(--twb-color-text-muted)] text-sm leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Sub-Pages Grid */}
+      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+        <Container>
+          <div className="text-center mb-16">
+            <Typography variant="h2" className="mb-4 text-[var(--twb-color-gold)]">
+              Learn More About Us
+            </Typography>
+            <p className="text-white/80 text-lg">
+              Dive deeper into our story
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* The Farm */}
+            <Link 
+              to="/about/farm"
+              className="group bg-white/10 hover:bg-white/20 p-8 rounded-lg border border-white/20 hover:border-[var(--twb-color-gold)] transition-all"
+            >
+              <Mountain size={40} className="text-[var(--twb-color-gold)] mb-4" />
+              <h3 className="font-serif text-2xl mb-3 text-white">
+                The Farm
+              </h3>
+              <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                Our vineyard, distillery, goat dairy, and the mountain we call home.
+              </p>
+              <div className="flex items-center text-[var(--twb-color-gold)] text-sm group-hover:translate-x-2 transition-transform">
+                Explore the Farm <ArrowRight size={16} className="ml-2" />
+              </div>
+            </Link>
+
+            {/* Our Team */}
+            <Link 
+              to="/about/team"
+              className="group bg-white/10 hover:bg-white/20 p-8 rounded-lg border border-white/20 hover:border-[var(--twb-color-gold)] transition-all"
+            >
+              <Users size={40} className="text-[var(--twb-color-gold)] mb-4" />
+              <h3 className="font-serif text-2xl mb-3 text-white">
+                Our Team
+              </h3>
+              <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                Meet Pieter, Annelie, Hennie, and Liezl—the family behind every bottle.
+              </p>
+              <div className="flex items-center text-[var(--twb-color-gold)] text-sm group-hover:translate-x-2 transition-transform">
+                Meet the Family <ArrowRight size={16} className="ml-2" />
+              </div>
+            </Link>
+
+            {/* Awards */}
+            <Link 
+              to="/about/awards"
+              className="group bg-white/10 hover:bg-white/20 p-8 rounded-lg border border-white/20 hover:border-[var(--twb-color-gold)] transition-all"
+            >
+              <Award size={40} className="text-[var(--twb-color-gold)] mb-4" />
+              <h3 className="font-serif text-2xl mb-3 text-white">
+                Awards
+              </h3>
+              <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                {farmStory.awards.total}+ awards and counting. Quality recognized worldwide.
+              </p>
+              <div className="flex items-center text-[var(--twb-color-gold)] text-sm group-hover:translate-x-2 transition-transform">
+                View Awards <ArrowRight size={16} className="ml-2" />
+              </div>
+            </Link>
+
+            {/* Sustainability */}
+            <Link 
+              to="/about/sustainability"
+              className="group bg-white/10 hover:bg-white/20 p-8 rounded-lg border border-white/20 hover:border-[var(--twb-color-gold)] transition-all"
+            >
+              <Leaf size={40} className="text-[var(--twb-color-gold)] mb-4" />
+              <h3 className="font-serif text-2xl mb-3 text-white">
+                Sustainability
+              </h3>
+              <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                How we care for our land, animals, and the planet for generations to come.
+              </p>
+              <div className="flex items-center text-[var(--twb-color-gold)] text-sm group-hover:translate-x-2 transition-transform">
+                Our Practices <ArrowRight size={16} className="ml-2" />
+              </div>
+            </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA - Visit Us */}
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+        <Container variant="content">
+          <div className="text-center">
+            <Typography variant="h2" className="mb-6 text-white">
+              Stories Are Better in Person
+            </Typography>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Come visit our farm on Paarl Mountain. Taste our wines, meet the family, tour the vineyard, and see where the magic happens.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/visit">
+                <Button variant="secondary" size="large">
+                  Plan Your Visit
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="large">
+                  Get in Touch
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
     </Layout>
   );

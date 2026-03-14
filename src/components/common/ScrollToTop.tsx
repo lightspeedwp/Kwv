@@ -2,22 +2,40 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 /**
- * ScrollToTop Component
+ * useScrollToTop Hook
  * 
- * A utility component that automatically scrolls the window to the top (0, 0)
+ * A custom hook that automatically scrolls the window to the top (0, 0)
  * whenever the React Router location path changes.
  * 
  * Usage:
- * Place this component inside `<BrowserRouter>` but outside `<Routes>`.
+ * Call this hook in any component that has access to React Router context.
+ * Typically used in the Layout component.
  * 
- * @returns {null} This component does not render anything.
+ * @example
+ * ```tsx
+ * export const Layout = () => {
+ *   useScrollToTop();
+ *   return <div>...</div>;
+ * }
+ * ```
  */
-export const ScrollToTop = () => {
+export const useScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+};
 
+/**
+ * ScrollToTop Component (Deprecated)
+ * 
+ * @deprecated Use the Layout component's built-in scroll behavior instead.
+ * This component is kept for backward compatibility but should not be used.
+ * 
+ * @returns {null} This component does not render anything.
+ */
+export const ScrollToTop = () => {
+  useScrollToTop();
   return null;
 };

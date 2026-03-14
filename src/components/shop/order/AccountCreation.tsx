@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography } from '../../common/Typography';
 import { Button } from '../../common/Button';
 import { Check } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 interface AccountCreationProps {
   email: string;

@@ -5,7 +5,7 @@ import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { ScrollDownArrow } from '../common/ScrollDownArrow';
 
 export interface PricingItem {

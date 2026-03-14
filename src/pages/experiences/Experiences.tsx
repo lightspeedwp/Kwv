@@ -1,261 +1,393 @@
-import React from 'react';
-import { Container } from '../../components/common/Container';
-import { Typography } from '../../components/common/Typography';
-import { Button } from '../../components/common/Button';
-import { Layout } from '../../components/layout/Layout';
-import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { KWVExperiencesLogo } from '../../components/common/Logo';
-
-const EXPERIENCE_CARDS = [
-  {
-    id: 'emporium',
-    title: 'KWV EMPORIUM',
-    cta: 'BOOK A TASTING',
-    link: '/experiences/emporium',
-    desc: "Visit the KWV Emporium for a cellar tour and experience our winemaking process. Don't forget to enjoy a wine or brandy tasting and pairing. Experience KWV!",
-    image: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    logoText: "KWV EMPORIUM"
-  },
-  {
-    id: 'cellar',
-    title: 'CATHEDRAL CELLAR',
-    cta: 'BOOK A TOUR',
-    link: '/experiences/cathedral-cellar',
-    desc: "Visit our historical Cathedral Cellar. This walking tour will take you on a storytelling journey through the cellar with an opportunity to taste some of KWV's best and award-winning wines. Experience KWV!",
-    image: 'https://images.unsplash.com/photo-1597843797221-e0e1f74dd7e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    logoText: "CATHEDRAL CELLAR",
-    subText: "A Legacy Engraved"
-  },
-  {
-    id: 'hof',
-    title: 'HOUSE OF FIRE',
-    cta: 'VISIT HOF',
-    link: '/experiences/house-of-fire',
-    desc: "The House of Fire celebrates the creation of brandy. We invite you to join us on a journey that will ignite the senses.",
-    image: 'https://images.unsplash.com/photo-1613325245242-1c5069a82383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600',
-    logoText: "H°F",
-    subText: "HOUSE OF FIRE BY KWV"
-  },
-  {
-    id: 'kitchen',
-    title: 'CATHEDRAL CELLAR KITCHEN',
-    cta: 'DISCOVER',
-    link: '/experiences/cathedral-cellar-kitchen',
-    desc: "Experience culinary excellence in our historic Cathedral Cellar Kitchen venue.",
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80',
-    logoText: "KITCHEN",
-    subText: "CATHEDRAL CELLAR VENUE"
-  }
-];
-
-const GALLERY_IMAGES = [
-  "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1559563362-c667ba5f5480?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1561053720-76cd737463d3?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1528823872057-9c018a7a7553?auto=format&fit=crop&w=600&q=80"
-];
-
 /**
  * Experiences Landing Page Component
  * 
- * The main hub for all "Visit Us" activities.
- * Lists the primary sub-experiences: Emporium, Cathedral Cellar, House of Fire, Kitchen.
- * Features a hero section, grid of experience cards, events teaser, and voucher promotion.
+ * Main landing page for farm visits and experiences.
+ * 
+ * Features:
+ * - 5 farm experiences (Wine Tasting, Cheese Pairing, Farm Tour, Harvest, Private)
+ * - Booking information
+ * - Hours and policies
+ * - Contact CTAs
+ * - Family hospitality voice
+ * 
+ * Data source: farmStory.experiences
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
  */
-export const Experiences: React.FC = () => {
-  const navigate = useNavigate();
 
+import React from 'react';
+import { Layout } from '../../components/layout/Layout';
+import { Container } from '../../components/common/Container';
+import { Typography } from '../../components/common/Typography';
+import { Hero } from '../../components/sections/Hero';
+import { Grape, Heart, Map, Clock, Calendar, Users, Phone, Mail, Check } from 'lucide-react';
+import { Button } from '../../components/common/Button';
+import { Link } from 'react-router';
+import { farmStory } from '../../data/farmStory';
+import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
+import { OrganicBorder } from '../../components/decorative/OrganicBorder';
+import { PaperTexture } from '../../components/decorative/PaperTexture';
+import heroImage from 'figma:asset/fe3c1c394bedc4c207970e159acb3d745653037f.png';
+
+export const Experiences: React.FC = () => {
   return (
     <Layout>
-      {/* Header Section - Converted to Dark Hero for Breadcrumb Consistency */}
-      <section className="bg-black pt-24 pb-16 text-center relative">
-         <Container variant="content">
-            <Typography variant="h1" className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-wide">
-               THE KWV EXPERIENCE
-            </Typography>
-            <Typography variant="body" className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
-               KWV is situated in the heart of the Cape Winelands, in the picturesque town of Paarl, where it offers a range of products and experiences. Join us for a memorable experience!
-            </Typography>
-         </Container>
-         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white animate-bounce cursor-pointer" onClick={() => {
-            const nextSection = document.getElementById('experiences-grid');
-            if (nextSection) {
-               nextSection.scrollIntoView({ behavior: 'smooth' });
-            }
-         }}>
-            <ChevronDown size={32} />
-         </div>
+      <Hero 
+        title="Visit Our Farm"
+        subtitle={farmStory.experiences.intro}
+        imageSrc={heroImage}
+        height="large"
+      />
+
+      {/* Introduction */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)] relative">
+        <PaperTexture opacity={0.03} />
+        <Container variant="content">
+          <div className="text-center mb-12">
+            <div className="relative inline-block">
+              <Typography variant="h2" className="mb-6 text-[var(--twb-color-plum)]">
+                Experience Handcrafted Hospitality
+              </Typography>
+              <HandDrawnUnderline variant="wave" color="var(--twb-color-gold)" className="bottom-0" />
+            </div>
+            <div className="prose prose-lg max-w-3xl mx-auto dark:prose-invert">
+              <p className="text-[var(--twb-color-text-primary)] leading-relaxed text-lg">
+                We're not a fancy winery with velvet ropes and stuffy tasting notes. We're a working farm 
+                where real people make real wine, cheese, and spirits. When you visit, you'll meet the family, 
+                walk the vineyard, and see exactly where your bottle comes from.
+              </p>
+              <p className="text-[var(--twb-color-text-primary)] leading-relaxed text-lg">
+                Come for the wine. Stay for the stories. Leave feeling like family.
+              </p>
+            </div>
+          </div>
+        </Container>
       </section>
 
       {/* Experiences Grid */}
-      <section id="experiences-grid" className="bg-white pb-20 pt-16">
-         <Container variant="site">
-            <div className="text-center mb-12">
-               <Typography variant="h2" className="text-[#2C1810] mb-4 uppercase tracking-widest">
-                  Our Experiences
-               </Typography>
-               <Typography variant="body" className="text-gray-600 max-w-2xl mx-auto">
-                  Immerse yourself in the heritage of KWV with our world-class tastings, tours, and venues.
-               </Typography>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {EXPERIENCE_CARDS.map((card) => (
-                  <div key={card.id} className="flex flex-col">
-                     {/* Image Card */}
-                     <div className="relative aspect-[3/5] w-full overflow-hidden mb-0 group cursor-pointer">
-                        <ImageWithFallback 
-                           src={card.image} 
-                           alt={card.title} 
-                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                        />
-                        {/* Logo Overlay Simulation */}
-                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                            <div className="bg-white/90 backdrop-blur-sm p-6 text-center min-w-[140px] shadow-lg">
-                               <span className={`block text-[#2C1810] font-serif font-bold ${card.id === 'hof' ? 'text-4xl' : 'text-xl uppercase tracking-widest'} leading-none mb-1`}>
-                                  {card.logoText}
-                               </span>
-                               <span className="block text-[10px] uppercase tracking-widest text-[#8B0000] mt-2 border-t border-[#8B0000] pt-2">
-                                  {card.subText || 'TASTINGS & TOURS'}
-                               </span>
-                            </div>
-                         </div>
-                     </div>
-                     
-                     {/* Button */}
-                     <Link to={card.link} className="block">
-                        <Button 
-                           fullWidth 
-                           className="bg-[#C5A059] hover:bg-[#b08d4a] text-white font-bold uppercase tracking-widest rounded-none py-4 text-sm mb-6"
-                        >
-                           {card.cta}
-                        </Button>
-                     </Link>
-                     
-                     {/* Description */}
-                     <p className="text-center text-gray-600 text-sm leading-relaxed px-2">
-                        {card.desc}
-                     </p>
-                  </div>
-               ))}
-            </div>
-         </Container>
-      </section>
-
-      {/* Events Full Width Section */}
-      <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
-         <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1519671482538-eb2335b9ea9d?auto=format&fit=crop&q=80" 
-            alt="KWV Events" 
-            className="absolute inset-0 w-full h-full object-cover"
-         />
-         <div className="absolute inset-0 bg-black/40" />
-         <div className="relative z-10 text-center text-white px-4">
-            <Typography variant="h2" className="text-4xl md:text-5xl font-bold mb-4 uppercase tracking-widest text-white">
-               KWV Events
+      <section className="py-20 bg-[var(--twb-color-plum)]/5">
+        <Container>
+          <div className="text-center mb-16">
+            <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
+              Choose Your Experience
             </Typography>
-            <Typography variant="bodyLarge" className="max-w-xl mx-auto mb-8 text-gray-100">
-               Join us for unforgettable moments. From intimate tastings to grand festivals, discover what's happening at KWV.
-            </Typography>
-            <Link to="/events">
-               <Button className="bg-[#DAA520] text-[#2C1810] hover:bg-white border-none px-8 py-3 text-sm tracking-widest uppercase font-bold">
-                  View Calendar
-               </Button>
-            </Link>
-         </div>
-      </section>
+            <p className="text-[var(--twb-color-text-muted)] text-lg">
+              All experiences include personal time with our family and lots of laughs
+            </p>
+          </div>
 
-      {/* Voucher Banner */}
-      <section className="bg-[#EBEBEB] py-16">
-         <Container variant="site">
-            <div className="flex flex-col md:flex-row items-stretch bg-[#E5E5E5]">
-               {/* Left Image (Distillery/Copper) */}
-               <div className="w-full md:w-1/4 min-h-[200px] relative">
-                  <ImageWithFallback 
-                     src="https://images.unsplash.com/photo-1613325245242-1c5069a82383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
-                     alt="Distillery" 
-                     className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/90 p-2 shadow-lg">
-                      <div className="w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-gray-100 rounded-full">
-                          <ChevronLeft size={16} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {farmStory.experiences.offerings.map((experience, index) => {
+              const iconMap: Record<string, any> = {
+                'wine-tasting': Grape,
+                'cheese-pairing': Heart,
+                'farm-tour': Map,
+                'harvest-experience': Calendar,
+                'private-tasting': Users
+              };
+              const IconComponent = iconMap[experience.id] || Grape;
+
+              return (
+                <OrganicBorder
+                  key={experience.id}
+                  variant="subtle"
+                  className="bg-white dark:bg-[var(--twb-color-bg-secondary)] p-8 hover:shadow-xl transition-all"
+                >
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[var(--twb-color-plum)]/10 flex items-center justify-center">
+                      <IconComponent size={32} className="text-[var(--twb-color-plum)]" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="relative inline-block">
+                        <h3 className="font-serif text-2xl mb-1 text-[var(--twb-color-plum)]">
+                          {experience.title}
+                        </h3>
+                        <HandDrawnUnderline variant="scribble" color="var(--twb-color-plum)" width="80%" className="-bottom-1" />
                       </div>
+                      <p className="text-[var(--twb-color-gold)] italic text-sm">
+                        {experience.tagline}
+                      </p>
+                      {experience.seasonal && (
+                        <span className="inline-block mt-2 px-3 py-1 bg-[var(--twb-color-gold)]/20 text-[var(--twb-color-gold)] text-xs font-bold rounded-full">
+                          SEASONAL
+                        </span>
+                      )}
+                    </div>
                   </div>
-               </div>
 
-               {/* Middle Content */}
-               <div className="w-full md:w-1/2 p-8 md:p-12 text-center flex flex-col justify-center items-center bg-[#EBEBEB]">
-                  <div className="border border-[#C5A059] p-4 inline-block mb-4">
-                     <span className="block text-2xl font-bold text-[#C5A059] leading-none">H°F</span>
-                     <span className="block text-[8px] uppercase tracking-widest mt-1">HOUSE OF FIRE</span>
-                  </div>
-                  
-                  <Typography variant="h2" className="font-handwriting text-[#C5A059] text-5xl md:text-6xl mb-2 rotate-[-2deg]" style={{ fontFamily: 'cursive' }}>
-                     Gift a Voucher
-                  </Typography>
-                  
-                  <Typography variant="h3" className="uppercase tracking-widest font-bold text-[#2C1810] text-xl md:text-2xl mb-2">
-                     A BRANDY BLENDING SESSION
-                  </Typography>
-                  
-                  <p className="uppercase text-sm tracking-wider text-gray-600 mb-6">
-                     WITH OUR BRANDY EXPERT AT KWV HOUSE OF FIRE!
+                  {/* Description */}
+                  <p className="text-[var(--twb-color-text-muted)] leading-relaxed mb-6">
+                    {experience.description}
                   </p>
-                  
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                     Blend and bottle your own KWV brandy with a <span className="underline">personalised</span> label.
-                  </p>
-                  
-                  <Button 
-                     className="bg-[#A0522D] hover:bg-[#8B4513] text-white uppercase tracking-widest px-8 py-3 rounded-sm text-sm"
-                     onClick={() => navigate('/contact')}
-                  >
-                     BOOK YOUR VOUCHER
-                  </Button>
-               </div>
 
-               {/* Right Image (Brandy Glass) */}
-               <div className="w-full md:w-1/4 min-h-[200px] relative">
-                  <ImageWithFallback 
-                     src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
-                     alt="Brandy Glass" 
-                     className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-1/2 right-4 -translate-y-1/2 text-center">
-                       <div className="w-8 h-8 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white shadow ml-auto">
-                          <ChevronRight size={16} />
-                       </div>
+                  {/* Details Grid */}
+                  <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-[var(--twb-border-tertiary)]">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Clock size={16} className="text-[var(--twb-color-plum)]" />
+                      <span className="text-[var(--twb-color-text-muted)]">{experience.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="font-bold text-[var(--twb-color-plum)]">{experience.price}</span>
+                    </div>
                   </div>
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-                      <KWVExperiencesLogo className="h-8 w-auto drop-shadow-md" />
+
+                  {/* Includes */}
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-sm uppercase tracking-wide text-[var(--twb-color-text-primary)] mb-3">
+                      Includes:
+                    </h4>
+                    <ul className="space-y-2">
+                      {experience.includes.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[var(--twb-color-text-muted)]">
+                          <Check size={16} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-               </div>
-            </div>
-         </Container>
+
+                  {/* Availability */}
+                  <div className="bg-[var(--twb-color-plum)]/5 p-4 rounded-lg mb-6">
+                    <p className="text-sm text-[var(--twb-color-text-muted)]">
+                      <strong>Availability:</strong> {experience.availability}
+                    </p>
+                    {experience.minGuests && (
+                      <p className="text-sm text-[var(--twb-color-text-muted)] mt-1">
+                        <strong>Minimum:</strong> {experience.minGuests} guests
+                      </p>
+                    )}
+                  </div>
+
+                  {/* CTA */}
+                  <Link to="/contact">
+                    <Button variant="primary" className="w-full">
+                      Book This Experience
+                    </Button>
+                  </Link>
+                </OrganicBorder>
+              );
+            })}
+          </div>
+        </Container>
       </section>
 
-      {/* Image Gallery */}
-      <section className="bg-white py-20">
-         <Container variant="site">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-               {GALLERY_IMAGES.map((img, i) => (
-                  <div key={i} className="aspect-square overflow-hidden cursor-pointer group">
-                     <ImageWithFallback 
-                        src={img} 
-                        alt={`Gallery ${i}`} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                     />
+      {/* Hours & Policies */}
+      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Hours */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <Clock size={32} className="text-[var(--twb-color-plum)]" />
+                <Typography variant="h3" className="text-[var(--twb-color-plum)]">
+                  Visiting Hours
+                </Typography>
+              </div>
+              <div className="bg-[var(--twb-color-plum)]/5 p-6 rounded-lg border border-[var(--twb-border-tertiary)]">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-[var(--twb-color-text-primary)] mb-2">
+                      Tasting Room
+                    </h4>
+                    <p className="text-[var(--twb-color-text-muted)] text-sm">
+                      {farmStory.hours.tastingRoom.weekdays}
+                    </p>
+                    <p className="text-[var(--twb-color-text-muted)] text-sm">
+                      {farmStory.hours.tastingRoom.weekend}
+                    </p>
+                    <p className="text-[var(--twb-color-text-muted)] text-sm italic mt-2">
+                      {farmStory.hours.tastingRoom.holidays}
+                    </p>
                   </div>
-               ))}
+                  <div className="border-t border-[var(--twb-border-tertiary)] pt-4">
+                    <h4 className="font-semibold text-[var(--twb-color-text-primary)] mb-2">
+                      Farm Tours
+                    </h4>
+                    <p className="text-[var(--twb-color-text-muted)] text-sm">
+                      {farmStory.hours.tours.schedule}
+                    </p>
+                    <p className="text-[var(--twb-color-text-muted)] text-sm">
+                      {farmStory.hours.tours.duration}
+                    </p>
+                    <p className="text-[var(--twb-color-gold)] text-sm font-medium mt-2">
+                      {farmStory.hours.tours.booking}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex justify-between items-center mt-8">
-                <button className="p-2 hover:bg-gray-100 rounded-full"><ChevronLeft /></button>
-                <button className="p-2 hover:bg-gray-100 rounded-full"><ChevronRight /></button>
+
+            {/* Policies */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <Check size={32} className="text-[var(--twb-color-plum)]" />
+                <Typography variant="h3" className="text-[var(--twb-color-plum)]">
+                  Good to Know
+                </Typography>
+              </div>
+              <div className="bg-[var(--twb-color-plum)]/5 p-6 rounded-lg border border-[var(--twb-border-tertiary)]">
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <Calendar size={20} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-[var(--twb-color-text-primary)] text-sm">
+                        Booking Required
+                      </p>
+                      <p className="text-[var(--twb-color-text-muted)] text-sm">
+                        {farmStory.experiences.policies.booking}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check size={20} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-[var(--twb-color-text-primary)] text-sm">
+                        Cancellation Policy
+                      </p>
+                      <p className="text-[var(--twb-color-text-muted)] text-sm">
+                        {farmStory.experiences.policies.cancellation}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Users size={20} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-[var(--twb-color-text-primary)] text-sm">
+                        Children Welcome
+                      </p>
+                      <p className="text-[var(--twb-color-text-muted)] text-sm">
+                        {farmStory.experiences.policies.children}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Heart size={20} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-[var(--twb-color-text-primary)] text-sm">
+                        Accessibility
+                      </p>
+                      <p className="text-[var(--twb-color-text-muted)] text-sm">
+                        {farmStory.experiences.policies.accessibility}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Users size={20} className="text-[var(--twb-color-vine)] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-[var(--twb-color-text-primary)] text-sm">
+                        Group Rates
+                      </p>
+                      <p className="text-[var(--twb-color-text-muted)] text-sm">
+                        {farmStory.experiences.policies.groups}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-         </Container>
+          </div>
+        </Container>
       </section>
+
+      {/* Contact & Directions */}
+      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact */}
+            <div>
+              <Typography variant="h3" className="mb-6 text-[var(--twb-color-gold)]">
+                Book Your Visit
+              </Typography>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <Phone size={24} className="text-[var(--twb-color-gold)]" />
+                  <div>
+                    <p className="text-sm text-white/70">Phone</p>
+                    <a href={`tel:${farmStory.contact.phone}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                      {farmStory.contact.phone}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone size={24} className="text-[var(--twb-color-gold)]" />
+                  <div>
+                    <p className="text-sm text-white/70">WhatsApp</p>
+                    <a href={`https://wa.me/${farmStory.contact.whatsapp.replace(/\s/g, '')}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                      {farmStory.contact.whatsapp}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail size={24} className="text-[var(--twb-color-gold)]" />
+                  <div>
+                    <p className="text-sm text-white/70">Email</p>
+                    <a href={`mailto:${farmStory.contact.reservations}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                      {farmStory.contact.reservations}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <Link to="/contact">
+                <Button variant="secondary" size="large" className="w-full lg:w-auto">
+                  Send Us a Message
+                </Button>
+              </Link>
+            </div>
+
+            {/* Directions */}
+            <div>
+              <Typography variant="h3" className="mb-6 text-[var(--twb-color-gold)]">
+                How to Find Us
+              </Typography>
+              <div className="space-y-4 text-white/90">
+                <p className="leading-relaxed">
+                  <strong>Address:</strong><br />
+                  {farmStory.location.address}
+                </p>
+                <p className="leading-relaxed">
+                  {farmStory.location.directions}
+                </p>
+                <div className="bg-white/10 p-4 rounded-lg border border-white/20">
+                  <p className="text-sm text-white/70 mb-1">GPS Coordinates</p>
+                  <p className="font-mono text-[var(--twb-color-gold)]">
+                    {farmStory.location.gps.lat}, {farmStory.location.gps.lng}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+        <Container variant="content">
+          <div className="text-center">
+            <Typography variant="h2" className="mb-6 text-white">
+              We Can't Wait to Meet You
+            </Typography>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Whether you're a wine connoisseur or just looking for a beautiful day in the countryside, 
+              our farm has something special for everyone. Book your visit today and become part of our story.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
+                <Button variant="secondary" size="large">
+                  Book Now
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button variant="outline" size="large">
+                  Learn Our Story
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
     </Layout>
   );
 };

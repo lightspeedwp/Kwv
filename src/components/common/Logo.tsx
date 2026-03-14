@@ -1,215 +1,181 @@
-import React from 'react';
-import { COLORS } from '../../constants/theme';
+/**
+ * Logo Component
+ * 
+ * Primary brand logo for Handcrafted Wines - family-owned boutique wine farm.
+ * SVG-based scalable logo with hand-drawn organic elements.
+ * 
+ * Features:
+ * - Multiple size variants (sm, md, lg)
+ * - Multiple color variants (primary, white, monochrome)
+ * - Decorative grape vine accent
+ * - Organic hand-drawn bottom line
+ * - Responsive sizing using design tokens
+ * - Dark mode support via CSS variables
+ * - Accessible with ARIA label
+ * - WordPress theme.json aligned
+ * - WCAG AA compliant
+ * 
+ * Usage:
+ * ```tsx
+ * <Logo size="md" variant="primary" />
+ * <Logo size="sm" variant="white" /> // For dark backgrounds
+ * <Logo size="lg" variant="monochrome" />
+ * ```
+ * 
+ * Variants:
+ * - `primary` - Default brand colors (plum text, gold accents)
+ * - `white` - White logo for dark backgrounds
+ * - `monochrome` - Single color (plum throughout)
+ * 
+ * Sizes:
+ * - `sm` - Small (header, footer) - 140px width
+ * - `md` - Medium (default) - 210px width
+ * - `lg` - Large (hero sections) - 280px width
+ * 
+ * Props:
+ * @param {'sm' | 'md' | 'lg'} size - Logo size variant (default: 'md')
+ * @param {'primary' | 'white' | 'monochrome'} variant - Color variant (default: 'primary')
+ * @param {string} className - Additional CSS classes
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
+ */
 
-interface LogoProps {
-  color?: string;
+import React from 'react';
+
+export interface LogoProps {
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'white' | 'monochrome';
   className?: string;
 }
 
-/**
- * KWV Main Logo
- * 
- * The primary KWV emblem with the roof/pediment structure.
- * 
- * @param {LogoProps} props - Color and ClassName overrides.
- */
-export const KWVLogo: React.FC<LogoProps> = ({ color = COLORS.wineRed, className }) => {
+export const Logo: React.FC<LogoProps> = ({ 
+  size = 'md', 
+  variant = 'primary', 
+  className = '' 
+}) => {
+  // Size configurations
+  const sizes = {
+    sm: { width: '140px', viewBox: '0 0 280 100', textMain: 18, textSub: 24, textTag: 7 },
+    md: { width: '210px', viewBox: '0 0 280 100', textMain: 20, textSub: 28, textTag: 8 },
+    lg: { width: '280px', viewBox: '0 0 280 100', textMain: 22, textSub: 32, textTag: 9 }
+  };
+
+  const sizeConfig = sizes[size];
+
+  // Color configurations using design tokens
+  const colors = {
+    primary: {
+      main: 'var(--twb-color-plum)',
+      accent: 'var(--twb-color-gold)'
+    },
+    white: {
+      main: 'white',
+      accent: 'white'
+    },
+    monochrome: {
+      main: 'var(--twb-color-plum)',
+      accent: 'var(--twb-color-plum)'
+    }
+  };
+
+  const colorConfig = colors[variant];
+
   return (
     <svg 
-      viewBox="0 0 240 140" 
+      width={sizeConfig.width}
+      viewBox={sizeConfig.viewBox}
       fill="none" 
       xmlns="http://www.w3.org/2000/svg" 
       className={className}
-      aria-label="KWV Logo"
+      aria-label="Handcrafted Wines Logo - Family Farm, Paarl Mountain"
+      role="img"
     >
-       {/* Roof / Pediment Structure */}
-       {/* Top heavy line */}
-       <path 
-         d="M120 10 L220 45 L220 52 L120 18 L20 52 L20 45 L120 10Z" 
-         fill={COLORS.gold} 
-       />
-       {/* Inner lighter line - creating a double roof effect */}
-       <path 
-         d="M120 25 L205 55 L120 32 L35 55 L120 25Z" 
-         fill="none" 
-         stroke={COLORS.gold} 
-         strokeWidth="1.5"
-       />
+      {/* Decorative grape vine accent (left side) */}
+      <circle cx="15" cy="15" r="4" fill={colorConfig.accent} opacity="0.7" />
+      <circle cx="25" cy="12" r="3.5" fill={colorConfig.accent} opacity="0.6" />
+      <circle cx="20" cy="22" r="3" fill={colorConfig.accent} opacity="0.5" />
+      <path 
+        d="M 30 15 Q 35 10, 40 15" 
+        stroke={colorConfig.accent}
+        strokeWidth="1.5" 
+        fill="none"
+        opacity="0.6"
+      />
 
-       {/* KWV Text */}
-       {/* Using standard text element assuming Playfair Display is loaded globally */}
-       <text 
-         x="120" 
-         y="100" 
-         textAnchor="middle" 
-         fill={color} 
-         fontFamily="'Playfair Display', serif" 
-         fontSize="72" 
-         fontWeight="700" 
-         letterSpacing="4"
-       >
-         KWV
-       </text>
+      {/* Main Logo Text - HANDCRAFTED */}
+      <text 
+        x="140" 
+        y="34" 
+        textAnchor="middle" 
+        fill={colorConfig.main}
+        fontFamily="var(--twb-font-serif)"
+        fontSize={sizeConfig.textMain}
+        fontWeight="600" 
+        letterSpacing="1"
+      >
+        HANDCRAFTED
+      </text>
 
-       {/* Bottom structure */}
-       <line x1="20" y1="115" x2="220" y2="115" stroke={COLORS.gold} strokeWidth="2" />
-       <text 
-         x="120" 
-         y="132" 
-         textAnchor="middle" 
-         fill={COLORS.gold} 
-         fontFamily="'Open Sans', sans-serif" 
-         fontSize="11" 
-         fontWeight="600" 
-         letterSpacing="3"
-       >
-         ESTABLISHED 1918
-       </text>
-       <line x1="20" y1="138" x2="220" y2="138" stroke={COLORS.gold} strokeWidth="1" />
+      {/* Main Logo Text - WINES */}
+      <text 
+        x="140" 
+        y="60" 
+        textAnchor="middle" 
+        fill={colorConfig.main}
+        fontFamily="var(--twb-font-serif)"
+        fontSize={sizeConfig.textSub}
+        fontWeight="700" 
+        letterSpacing="2"
+      >
+        WINES
+      </text>
+
+      {/* Bottom decorative line with organic feel */}
+      <path 
+        d="M 20 75 Q 140 73, 260 75" 
+        stroke={colorConfig.accent}
+        strokeWidth="1.5" 
+        fill="none"
+      />
+      
+      {/* Tagline */}
+      <text 
+        x="140" 
+        y="88" 
+        textAnchor="middle" 
+        fill={colorConfig.accent}
+        fontFamily="var(--twb-font-sans)"
+        fontSize={sizeConfig.textTag}
+        fontWeight="600" 
+        letterSpacing="2"
+      >
+        FAMILY FARM • PAARL MOUNTAIN
+      </text>
     </svg>
   );
 };
 
-/**
- * KWV Shop Logo
- * 
- * Variant of the logo for the Online Shop header.
- * Includes the vertical divider and "SHOP ONLINE" text.
- * 
- * @param {LogoProps} props - Color and ClassName overrides.
- */
-export const KWVShopLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
-  return (
-    <div className={`flex flex-row items-center gap-3 ${className}`}>
-        {/* Use the main logo but slightly smaller */}
-        <KWVLogo color={color} className="h-12 w-auto" />
-        
-        {/* Vertical Divider */}
-        <div className="h-10 w-[1px] bg-white/20"></div>
-        
-        {/* SHOP Text */}
-        <div className="flex flex-col justify-center">
-            <span 
-                className="text-2xl font-serif tracking-widest leading-none"
-                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
-            >
-                SHOP
-            </span>
-            <span 
-                className="text-[10px] uppercase tracking-[0.3em] leading-none mt-1 opacity-80"
-                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
-            >
-                ONLINE
-            </span>
-        </div>
-    </div>
-  );
-};
-
-/**
- * KWV Experiences Logo
- * 
- * Variant of the logo for the Experiences section.
- * Includes "EXPERIENCES - VISIT US" text.
- * 
- * @param {LogoProps} props - Color and ClassName overrides.
- */
-export const KWVExperiencesLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
-  return (
-    <div className={`flex flex-row items-center gap-3 ${className}`}>
-        {/* Use the main logo but slightly smaller */}
-        <KWVLogo color={color} className="h-12 w-auto" />
-        
-        {/* Vertical Divider */}
-        <div className="h-10 w-[1px] bg-white/20"></div>
-        
-        {/* EXPERIENCES Text */}
-        <div className="flex flex-col justify-center">
-            <span 
-                className="text-xl font-serif tracking-widest leading-none uppercase"
-                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
-            >
-                EXPERIENCES
-            </span>
-            <span 
-                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
-                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
-            >
-                VISIT US
-            </span>
-        </div>
-    </div>
-  );
-};
-
-/**
- * KWV Events Logo
- * 
- * Variant of the logo for the Events section.
- * Includes "EVENTS - CALENDAR" text.
- * 
- * @param {LogoProps} props - Color and ClassName overrides.
- */
-export const KWVEventsLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
-  return (
-    <div className={`flex flex-row items-center gap-3 ${className}`}>
-        {/* Use the main logo but slightly smaller */}
-        <KWVLogo color={color} className="h-12 w-auto" />
-        
-        {/* Vertical Divider */}
-        <div className="h-10 w-[1px] bg-white/20"></div>
-        
-        {/* EVENTS Text */}
-        <div className="flex flex-col justify-center">
-            <span 
-                className="text-xl font-serif tracking-widest leading-none uppercase"
-                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
-            >
-                EVENTS
-            </span>
-            <span 
-                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
-                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
-            >
-                CALENDAR
-            </span>
-        </div>
-    </div>
-  );
-};
-
-/**
- * KWV Wine Club Logo
- * 
- * Variant of the logo for the Wine Club section.
- * Includes "WINE CLUB - MEMBERSHIP" text.
- * 
- * @param {LogoProps} props - Color and ClassName overrides.
- */
-export const KWVWineClubLogo: React.FC<LogoProps> = ({ color = COLORS.white, className }) => {
-  return (
-    <div className={`flex flex-row items-center gap-3 ${className}`}>
-        {/* Use the main logo but slightly smaller */}
-        <KWVLogo color={color} className="h-12 w-auto" />
-        
-        {/* Vertical Divider */}
-        <div className="h-10 w-[1px] bg-white/20"></div>
-        
-        {/* WINE CLUB Text */}
-        <div className="flex flex-col justify-center">
-            <span 
-                className="text-xl font-serif tracking-widest leading-none uppercase whitespace-nowrap"
-                style={{ color: COLORS.gold, fontFamily: '"Playfair Display", serif' }}
-            >
-                WINE CLUB
-            </span>
-            <span 
-                className="text-[10px] uppercase tracking-[0.2em] leading-none mt-1 opacity-80"
-                style={{ color: color, fontFamily: '"Open Sans", sans-serif' }}
-            >
-                MEMBERSHIP
-            </span>
-        </div>
-    </div>
-  );
-};
+// Backward compatibility aliases (DEPRECATED - will be removed in future version)
+/** @deprecated Use Logo component instead */
+export const TheWireBrandLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const HandcraftedWinesLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const HandcraftedWinesShopLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const HandcraftedWinesExperiencesLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const HandcraftedWinesEventsLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const HandcraftedWinesWineClubLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const KWVLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const KWVShopLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const KWVExperiencesLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const KWVEventsLogo = Logo;
+/** @deprecated Use Logo component instead */
+export const KWVWineClubLogo = Logo;

@@ -1,84 +1,129 @@
 import React from 'react';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
-import { COLORS } from '../../constants/theme';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
+import { OrganicBorder } from '../decorative/OrganicBorder';
+import { HandDrawnUnderline } from '../decorative/HandDrawnUnderline';
 
-const CATEGORIES = [
-  {
-    title: 'WINES',
-    description: 'Our wine brands include trusted favourites such as the KWV Classic Collection (our core range), Roodeberg (an iconic South African brand launched in 1949), Laborie (wines of distinction) and Cathedral Cellar (a premium product within our celebrated portfolio).',
-    link: '/shop/wine'
-  },
-  {
-    title: 'SPIRITS',
-    description: 'Brands in our spirits category include popular choices such as Cruxland Gin, Ponchos, Wild Africa and Sally Williams Cream Liqueur. Cruxland Gin brings together the rare Kalahari truffle and nine Southern African botanicals.',
-    link: '/shop/spirits'
-  },
-  {
-    title: 'READY TO DRINK',
-    description: 'Our ready-to-drink brands range consists of Hooch, CIAO and KWV Brandy and Cola. Hooch – with its brightly coloured beverages – has outlasted countless fads and trends since 1997.',
-    link: '/shop/ready-to-drink'
-  },
-  {
-    title: 'NON-ALCOHOLIC',
-    description: 'Finally, we have two non-alcoholic brands, namely Fruit Lagoon Cocktail Base and Annabelle Cuvee Rosé Non-Alcoholic Sparkling Wine.',
-    link: '/shop/non-alcoholic'
-  }
-];
+interface BrandGridItem {
+  title: string;
+  description: string;
+  link: string;
+  imageSrc?: string;
+}
+
+interface BrandGridProps {
+  title?: string;
+  subtitle?: string;
+  items: BrandGridItem[];
+  columns?: 2 | 3 | 4;
+  showOrganicBorders?: boolean;
+  showUnderlines?: boolean;
+}
 
 /**
  * BrandGrid Component
  * 
- * Displays a grid of product category cards (Wines, Spirits, RTD, Non-Alc).
- * Acts as a high-level navigation component for the Corporate "Our Brands" section
- * or the "Shop" entry point.
+ * Displays a responsive grid of category cards for navigation.
+ * Used for Shop categories, Experience types, or any grouped navigation.
  * 
  * Features:
- * - Responsive grid layout.
- * - Hover effects on cards.
- * - Gold header bar for category titles.
+ * - Flexible grid layout (2, 3, or 4 columns)
+ * - Card-based design with organic borders
+ * - Optional hand-drawn underlines on titles
+ * - Hover effects with shadow elevation
+ * - Responsive breakpoints
+ * - Design token integration (colors, spacing, shadows, radii)
+ * - WCAG AA compliant
+ * - Dark mode support
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
+ * 
+ * @param {BrandGridProps} props - Grid configuration and items
+ * @returns {JSX.Element} Rendered brand grid section
  */
-export const BrandGrid = () => {
-  return (
-    <section className="py-20 bg-white">
-      <Container variant="site">
-        <div className="text-center mb-12 max-w-5xl mx-auto">
-          <Typography variant="caption" className="uppercase tracking-widest text-[#2C1810] mb-4">
-            OUR BRANDS
-          </Typography>
-          <Typography variant="h2" color={COLORS.darkBrown} className="mb-6 font-bold leading-tight">
-            KWV enjoys a worldwide reputation for its brands that consistently deliver exceptional enjoyment. We are proud to offer you our portfolio!
-          </Typography>
-        </div>
+export const BrandGrid: React.FC<BrandGridProps> = ({
+  title,
+  subtitle,
+  items,
+  columns = 4,
+  showOrganicBorders = true,
+  showUnderlines = false
+}) => {
+  const gridColsClass = {
+    2: 'md:grid-cols-2',
+    3: 'md:grid-cols-2 lg:grid-cols-3',
+    4: 'md:grid-cols-2 lg:grid-cols-4'
+  }[columns];
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {CATEGORIES.map((category) => (
-            <Link to={category.link} key={category.title} className="group block h-full">
-              <div className="flex flex-col h-full">
-                {/* Gold Header Bar */}
-                <div className="bg-[#BFA15F] py-3 px-2 text-center mb-6 shadow-sm group-hover:bg-[#DAA520] transition-colors">
-                  <Typography 
-                    variant="h4" 
-                    className="!text-sm font-bold uppercase tracking-widest text-white m-0"
-                  >
-                    {category.title}
+  return (
+    <section className="py-[var(--twb-spacing-section-y)] bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-primary)]">
+      <Container variant="site">
+        {(title || subtitle) && (
+          <div className="text-center mb-[var(--twb-spacing-12)] max-w-5xl mx-auto">
+            {title && (
+              <div className="relative inline-block mb-[var(--twb-spacing-4)]">
+                <Typography variant="caption" className="uppercase tracking-widest text-[var(--twb-color-text-secondary)]">
+                  {title}
+                </Typography>
+              </div>
+            )}
+            {subtitle && (
+              <Typography variant="h2" className="text-[var(--twb-color-text-primary)] mb-[var(--twb-spacing-6)] font-[number:var(--twb-font-weight-bold)] leading-tight">
+                {subtitle}
+              </Typography>
+            )}
+          </div>
+        )}
+
+        <div className={`grid grid-cols-1 ${gridColsClass} gap-[var(--twb-spacing-grid-gap)]`}>
+          {items.map((item) => (
+            <Link to={item.link} key={item.title} className="group block h-full">
+              <div className="flex flex-col h-full relative bg-[var(--twb-color-bg-primary)] rounded-[var(--twb-radius-card)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-card-hover)] transition-all duration-300 overflow-hidden">
+                
+                {/* Organic Border */}
+                {showOrganicBorders && (
+                  <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                    <OrganicBorder variant="subtle" />
+                  </div>
+                )}
+
+                {/* Optional Image */}
+                {item.imageSrc && (
+                  <div className="relative w-full aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={item.imageSrc} 
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                
+                {/* Card Content */}
+                <div className="relative z-10 p-[var(--twb-spacing-6)] flex flex-col flex-grow">
+                  <div className="mb-[var(--twb-spacing-4)]">
+                    <Typography 
+                      variant="h4" 
+                      className="text-[var(--twb-color-text-primary)] font-[number:var(--twb-font-weight-bold)] uppercase tracking-wider mb-[var(--twb-spacing-2)]"
+                    >
+                      {item.title}
+                    </Typography>
+                    
+                    {showUnderlines && (
+                      <div className="mt-[var(--twb-spacing-1)]" aria-hidden="true">
+                        <HandDrawnUnderline variant="scribble" width={80} />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <Typography variant="body" className="text-[var(--twb-color-text-secondary)] leading-relaxed text-sm">
+                    {item.description}
                   </Typography>
                 </div>
-                
-                {/* Text Content */}
-                <Typography variant="body" className="text-gray-600 leading-relaxed text-center lg:text-left text-sm md:text-base">
-                  {category.description}
-                </Typography>
               </div>
             </Link>
           ))}
-        </div>
-        
-        <div className="mt-16 text-center max-w-4xl mx-auto">
-           <Typography variant="body" className="text-gray-500 italic">
-              We currently feature 13 wine brands, 10 spirits brands, 3 ready to drink products and 2 non-alcoholic products.
-           </Typography>
         </div>
       </Container>
     </section>

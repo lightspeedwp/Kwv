@@ -1,63 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { ShopSidebar } from '../../components/shop/layout/ShopSidebar';
 import { ProductCard } from '../../components/shop/common/ProductCard';
-import { COLORS } from '../../constants/theme';
-import { ChevronDown, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lucide-react';
 import { Button } from '../../components/common/Button';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { FAQSection } from '../../components/sections/FAQSection';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription
-} from "../../components/ui/sheet";
-
-// Base products to generate from
-const BASE_PRODUCTS = [
-  { id: '1', name: 'The Mentors Orchestra 2020', brand: 'The Mentors', price: 429.00, image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true, badges: ['Award Winner'], category: 'wine' },
-  { id: '2', name: 'Roodeberg Red Blend 2021', brand: 'Roodeberg', price: 119.00, salePrice: 99.00, image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80', inStock: true, category: 'wine' },
-  { id: '3', name: 'Laborie Merlot 2022', brand: 'Laborie', price: 85.00, image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true, category: 'wine' },
-  { id: '4', name: 'Cathedral Cellar Cabernet Sauvignon', brand: 'Cathedral Cellar', price: 189.00, image: 'https://images.unsplash.com/photo-1702776095041-6b8bd4f292de?auto=format&fit=crop&q=80', inStock: true, category: 'wine' },
-  { id: '5', name: 'Cruxland Gin', brand: 'Cruxland', price: 349.00, image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: true, badges: ['Best Gin'], category: 'spirits' },
-  { id: '6', name: 'KWV 10 Year Old Brandy', brand: 'KWV Brandy', price: 299.00, image: 'https://images.unsplash.com/photo-1757694907428-5ef2f3ff7854?auto=format&fit=crop&q=80', inStock: true, category: 'spirits' },
-  { id: '7', name: 'KWV Classic Chenin Blanc', brand: 'KWV Classic', price: 65.00, image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: true, category: 'wine' },
-  { id: '8', name: 'Laborie Cap Classique', brand: 'Laborie', price: 149.00, image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: true, category: 'wine' },
-  { id: '9', name: 'The Mentors Chenin Blanc', brand: 'The Mentors', price: 399.00, image: 'https://images.unsplash.com/photo-1695048475495-6535686c473c?auto=format&fit=crop&q=80', inStock: false, category: 'wine' },
-];
-
-// Generate 100 products for pagination demo
-const PRODUCTS = Array.from({ length: 100 }, (_, i) => {
-  const template = BASE_PRODUCTS[i % BASE_PRODUCTS.length];
-  return {
-    ...template,
-    id: `${i + 1}`,
-    // Add a variation to the name so they don't look identical
-    name: `${template.name} ${Math.floor(i / BASE_PRODUCTS.length) > 0 ? `(Batch ${Math.floor(i / BASE_PRODUCTS.length) + 1})` : ''}`,
-  };
-});
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../../components/ui/sheet';
+import { products, productCategories } from '../../data/products';
 
 const ITEMS_PER_PAGE = 12;
 
 /**
  * Shop Page Component (PLP - Product Listing Page)
  * 
- * The main catalog page for the shop.
+ * Main catalog page displaying products from /data/products.ts
+ * 
  * Features:
- * - Filtering sidebar (Desktop) / Drawer (Mobile).
- * - Sorting options.
- * - Pagination.
- * - Responsive product grid.
- * - Category/Tag filtering logic based on URL params.
+ * - Dynamic product loading from data file
+ * - Category and subcategory filtering via URL params
+ * - Responsive product grid (1 col mobile, 2 col tablet, 3 col desktop)
+ * - Filtering sidebar (Desktop) / Drawer (Mobile)
+ * - Sorting options (price, name, newest)
+ * - Pagination with page numbers
+ * - Product cards with images, prices, add to cart
+ * - WCAG AA accessible
+ * - Design token integration
+ * - Dark mode support
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
  */
 export const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('default');
   const { category, subcategory, tag } = useParams();
 
   // Reset to page 1 when params change
@@ -65,34 +43,50 @@ export const Shop = () => {
     setCurrentPage(1);
   }, [category, subcategory, tag]);
 
-  // Basic filtering based on params
-  const allFilteredProducts = React.useMemo(() => {
+  // Filter products based on URL params
+  const allFilteredProducts = useMemo(() => {
+    let filtered = [...products];
+
+    // Filter by tag (if present)
     if (tag) {
-        return PRODUCTS; // In real app: filter by tag
-    }
-    
-    let filtered = PRODUCTS;
-
-    if (category && category !== 'brand') {
-        filtered = filtered.filter(p => p.category === category || p.category === category.split('/')[0]);
+      const tagLower = tag.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.awards?.some(award => award.toLowerCase().includes(tagLower)) ||
+        p.name.toLowerCase().includes(tagLower)
+      );
     }
 
-    if (category === 'brand' && subcategory) {
-         const brandId = subcategory.toLowerCase();
-         filtered = filtered.filter(p => p.brand.toLowerCase().replace(/\s+/g, '-').includes(brandId));
-    } else if (subcategory) {
-        // Mock logic: if subcategory is present (and not brand mode), try to match it against name or brand or category
-        // In a real app, products would have a subcategory field
-        const sub = subcategory.toLowerCase();
-        filtered = filtered.filter(p => 
-            p.name.toLowerCase().includes(sub) || 
-            p.brand.toLowerCase().includes(sub) ||
-            p.category.toLowerCase().includes(sub)
-        );
+    // Filter by category
+    if (category && category !== 'all') {
+      filtered = filtered.filter(p => {
+        if (category === 'wines') return p.category === 'wine';
+        if (category === 'spirits') return p.category === 'spirit';
+        if (category === 'cheese') return p.category === 'cheese';
+        if (category === 'gifts') return p.category === 'gift';
+        return p.category === category;
+      });
+    }
+
+    // Filter by subcategory
+    if (subcategory) {
+      const subLower = subcategory.toLowerCase().replace(/-/g, ' ');
+      filtered = filtered.filter(p => 
+        p.subcategory?.toLowerCase().includes(subLower) ||
+        p.subcategory?.toLowerCase().replace(/\s+/g, '-').includes(subcategory.toLowerCase())
+      );
+    }
+
+    // Sort products
+    if (sortBy === 'price-low') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-high') {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'name') {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     return filtered;
-  }, [category, subcategory, tag]);
+  }, [category, subcategory, tag, sortBy]);
 
   const pageTitle = tag 
     ? `Tag: ${tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ')}`
@@ -161,7 +155,7 @@ export const Shop = () => {
             
             {/* Header Top: Title and Breadcrumbs */}
             <div>
-              <Typography variant="h1" color={COLORS.darkBrown}>
+              <Typography variant="h1" className="text-[var(--twb-color-text-primary)]">
                 {pageTitle}
               </Typography>
             </div>
@@ -206,12 +200,13 @@ export const Shop = () => {
               <div className="flex items-center gap-3 w-full lg:w-auto order-2 lg:order-none">
                 <span className="text-base text-gray-500 whitespace-nowrap min-w-fit">Sort by</span>
                 <div className="relative group w-full lg:min-w-[180px]">
-                  <select className="w-full appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 text-base font-medium hover:border-[#8B0000] focus:border-[#8B0000] outline-none cursor-pointer">
-                    <option>Default</option>
-                    <option>Featured</option>
-                    <option>Price Low to High</option>
-                    <option>Price High to Low</option>
-                    <option>Latest</option>
+                  <select className="w-full appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 text-base font-medium hover:border-[#8B0000] focus:border-[#8B0000] outline-none cursor-pointer"
+                          value={sortBy}
+                          onChange={(e) => setSortBy(e.target.value)}>
+                    <option value="default">Default</option>
+                    <option value="price-low">Price Low to High</option>
+                    <option value="price-high">Price High to Low</option>
+                    <option value="name">Name</option>
                   </select>
                   <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500" />
                 </div>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container } from '../../common/Container';
 import { Typography } from '../../common/Typography';
+import { Container } from '../../common/Container';
 import { Button } from '../../common/Button';
 import { ScrollDownArrow } from '../../common/ScrollDownArrow';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 /**
  * ShopHero Component

@@ -1,15 +1,16 @@
 import React from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
-import { Layout } from '../../components/layout/Layout';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
-import { ArrowRight, ChevronRight } from 'lucide-react';
-import { KWVLogo } from '../../components/common/Logo';
-import { ShopCategorySlider } from '../../components/shop/home/ShopCategorySlider';
+import { Check, Gift, Truck, Star, ChevronRight } from 'lucide-react';
+import { COLORS } from '../../constants/theme';
 import { ScrollDownArrow } from '../../components/common/ScrollDownArrow';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { FAQSection } from '../../components/sections/FAQSection';
+import { ShopCategorySlider } from '../../components/shop/home/ShopCategorySlider';
+import { KWVLogo } from '../../components/common/Logo';
 
 // Reusing images or placeholders similar to the design
 const IMAGES = {

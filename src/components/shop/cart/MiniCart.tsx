@@ -1,18 +1,18 @@
-import React, { useState } from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  SheetDescription,
-  SheetClose,
 } from "../../ui/sheet";
 import { Button } from "../../common/Button";
 import { Typography } from "../../common/Typography";
+import { useState } from "react";
 import { ShoppingBag, X, Minus, Plus } from "lucide-react";
 import { COLORS } from "../../../constants/theme";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
 import { Separator } from "../../ui/separator";
 

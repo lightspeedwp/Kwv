@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Layout } from '../../components/layout/Layout';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { ArrowLeft, Calendar, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 import { FAQSection } from '../../components/sections/FAQSection';

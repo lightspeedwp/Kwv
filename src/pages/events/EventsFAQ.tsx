@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layout } from '../../components/layout/Layout';
-import { FAQSection } from '../../components/sections/FAQSection';
 import { Container } from '../../components/common/Container';
+import { FAQSection } from '../../components/sections/FAQSection';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { COLORS } from '../../constants/theme';
 
 const faqItems = [

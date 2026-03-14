@@ -1,0 +1,104 @@
+* **Value:** I created a reusable Figma Make prompt pack with `cleanup`, `continue`, a report orchestrator, a full guideline-audit prompt, template files, and a starter design-tokens guideline set wired for your wine-led brand direction.
+* **Risk:** I could not access the attached repository in this environment, so I did **not** pretend to audit `/tasks/`, `/reports/`, or sync tokens to the live codebase. The files are written to do that safely when run inside the project.
+* **Next step:** Drop these files into the repo, add the trigger-word snippet to `Guidelines.md`, then run `cleanup` inside Make.
+
+1. **Files created**
+
+   * Full pack: [make-prompt-pack.zip](sandbox:/mnt/data/make-prompt-pack.zip)
+   * Cleanup prompt: [cleanup.md](sandbox:/mnt/data/make-prompt-pack/prompts/cleanup.md)
+   * Continue prompt: [continue.md](sandbox:/mnt/data/make-prompt-pack/prompts/continue.md)
+   * Reports orchestrator: [orchestrate-reports.md](sandbox:/mnt/data/make-prompt-pack/prompts/orchestrate-reports.md)
+   * Guidelines audit prompt: [audit-guidelines.md](sandbox:/mnt/data/make-prompt-pack/prompts/audit-guidelines.md)
+   * Template usage guide: [guidelines/_templates.md](sandbox:/mnt/data/make-prompt-pack/guidelines/_templates.md)
+
+2. **What’s inside**
+
+   * `/prompts/cleanup.md`
+     A single-session audit prompt that:
+
+     * audits routes and broken imports
+     * cleans the root safely
+     * reviews `/tasks/` and `/reports/`
+     * updates task statuses in the master list
+     * updates guidelines, sitemap, devtools, and changelog
+     * ends with a clean closing summary
+   * `/prompts/continue.md`
+     A stripped-back reusable prompt that:
+
+     * reads `/tasks/task-list.md`
+     * picks the next highest-value incomplete task
+     * continues execution without restarting the whole audit
+     * always stays Figma Make aware
+   * `/prompts/orchestrate-reports.md`
+     A dedicated prompt to:
+
+     * review all reports
+     * decide keep / merge / delete
+     * convert unresolved findings into task lists
+     * update the master task list
+   * `/prompts/audit-guidelines.md`
+     A systematic audit prompt for **every** guideline file, starting with `Guidelines.md`, with the extraction-first guardrail you asked for.
+
+3. **Template set included**
+   In `/guidelines/_templates/` I added:
+
+   * general guideline template
+   * component guideline template
+   * design tokens guideline template
+   * report template
+   * prompt template
+   * task list template
+   * documentation template
+
+4. **Design tokens work completed**
+   I scaffolded the minimum token guideline set you specified under `/guidelines/design-tokens/`:
+
+   * animations
+   * borders
+   * buttons
+   * colors
+   * dark-light-mode
+   * iconography
+   * radii
+   * responsive
+   * shadows
+   * spacing
+   * typography
+   * forms
+   * touch-targets
+   * navigation
+
+   I also baked in your requested direction:
+
+   * hand-drawn / hand-crafted CSS feel
+   * casual, approachable, friendly tone
+   * passionate-about-wine brand framing
+   * accessibility and readability guardrails so the styling does not become gimmicky
+
+   What I did **not** do is claim live token values, because the repo was not available to verify them.
+
+5. **Trigger-word setup**
+   I added a guideline for command routing here:
+
+   * [prompt-trigger-words.md](sandbox:/mnt/data/make-prompt-pack/guidelines/process/prompt-trigger-words.md)
+
+   Recommended mapping in `Guidelines.md`:
+
+   * `cleanup` → run `/prompts/cleanup.md` and then `/prompts/continue.md`
+   * `continue` → run `/prompts/continue.md`
+   * `orchestrate-reports` → run `/prompts/orchestrate-reports.md`
+   * `audit-guidelines` → run `/prompts/audit-guidelines.md`
+
+6. **Guidelines I added to support the process**
+
+   * Figma Make environment rules
+   * report writing rules
+   * tasks and reports cleanup rules
+   * protected files guardrails
+   * trigger-word routing
+
+Brief notes:
+
+* The strongest part of this setup is that `cleanup` is **session-complete** while `continue` stays deliberately light.
+* The design-tokens files are written as **codebase-driven canonical docs**, not static opinion docs.
+* To finish the “align with latest codebase” part properly, I need actual access to the repo contents. Attach the repo or paste the relevant files and I’ll map the token files to the real values and restructure `Guidelines.md` against the live tree.

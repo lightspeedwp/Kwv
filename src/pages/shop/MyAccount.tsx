@@ -3,7 +3,7 @@ import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { User, Eye, EyeOff } from 'lucide-react';
 import { Checkbox } from '../../components/shop/checkout/Checkbox';

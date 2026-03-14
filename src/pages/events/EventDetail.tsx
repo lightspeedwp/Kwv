@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExperiencePageLayout } from '../../components/experiences/ExperiencePageLayout';
 import { Button } from '../../components/common/Button';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { Typography } from '../../components/common/Typography';
 import { KWVEventsLogo } from '../../components/common/Logo';
 

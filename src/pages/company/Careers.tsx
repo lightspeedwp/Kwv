@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Layout } from '../../components/layout/Layout';

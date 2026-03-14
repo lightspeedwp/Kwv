@@ -25,8 +25,8 @@ export const ShopInfoFooter: React.FC = () => {
                     Contact Us
                  </Typography>
                  <p className="text-sm text-gray-400 leading-relaxed">
-                    Tel: 021 807 3007/8<br/>
-                    Email: info@kwvemporium.co.za<br/>
+                    Tel: +27 21 807 3007<br/>
+                    Email: hello@thewirebrand.co.za<br/>
                     GPS: 33°45'45.17" S, 18°57'58.42" E
                  </p>
               </div>

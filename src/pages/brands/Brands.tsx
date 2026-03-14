@@ -1,9 +1,9 @@
 import React from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
-import { Layout } from '../../components/layout/Layout';
 import { COLORS } from '../../constants/theme';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { ArrowRight, ChevronLeft, ChevronDown } from 'lucide-react';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 import { Button } from '../../components/common/Button';
