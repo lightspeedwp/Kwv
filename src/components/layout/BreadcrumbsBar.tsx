@@ -29,43 +29,33 @@ const formatSegment = (segment: string) => {
 };
 
 // Custom overrides for specific paths
-const PATH_MAP: Record<string, string> = {
-  'shop': 'Online Shop',
-  'about': 'About Us',
+const ROUTE_LABELS: Record<string, string> = {
+  'about': 'About',
+  'company': 'Company',
   'history': 'Our History',
-  'sustainability': 'Sustainability',
-  'news': 'News & Media',
   'awards': 'Awards',
+  'sustainability': 'Sustainability',
+  'news': 'News',
   'careers': 'Careers',
-  'contact': 'Contact Us',
-  'contact-us': 'Contact Us',
   'executive-team': 'Executive Team',
-  'global-distribution': 'Global Distribution',
+  'shop': 'Shop',
+  'products': 'Products',
+  'cart': 'Cart',
+  'checkout': 'Checkout',
+  'my-account': 'My Account',
+  'order-received': 'Order Confirmation',
+  'promotions': 'Promotions',
+  'faq': 'FAQ',
+  'search': 'Search Results',
   'experiences': 'Experiences',
   'visit': 'Visit Us',
-  'emporium': 'KWV Emporium',
+  'emporium': 'Estate Tasting Room',
   'cathedral-cellar': 'Cathedral Cellar',
   'house-of-fire': 'House of Fire',
   'conference-facilities': 'Conference Facilities',
   'cathedral-cellar-kitchen': 'Cathedral Cellar Kitchen',
   'events': 'Events',
-  'faq': 'FAQ',
-  'terms': 'Terms & Conditions',
-  'privacy': 'Privacy Policy',
-  'popi': 'POPI Act',
-  'paia': 'PAIA Manual',
-  'wine-club': 'Wine Club',
-  'my-account': 'My Account',
-  'account': 'My Account',
-  'cart': 'Cart',
-  'checkout': 'Checkout',
-  'order-received': 'Order Received',
-  'product': 'Product',
-  'search': 'Search Results',
-  'returns-policy': 'Returns Policy',
-  'policies': 'Policies',
-  'jobs': 'Jobs',
-  'coming-soon': 'Coming Soon',
+  'contact': 'Contact'
 };
 
 // Paths that should not be clickable (because they are not pages themselves)
@@ -148,7 +138,7 @@ export const BreadcrumbsBar: React.FC = () => {
             {pathnames.map((value, index) => {
               const to = `/${pathnames.slice(0, index + 1).join('/')}`;
               const isLast = index === pathnames.length - 1;
-              let name = PATH_MAP[value] || formatSegment(value);
+              let name = ROUTE_LABELS[value] || formatSegment(value);
 
               // Context-aware naming for FAQ
               if (value === 'faq' && index === 0) {

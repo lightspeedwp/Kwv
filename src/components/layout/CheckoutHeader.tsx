@@ -1,34 +1,24 @@
 import React from 'react';
 import { Container } from '../common/Container';
-import { KWVShopLogo } from '../common/Logo';
+import { Logo } from '../common/Logo';
 import { Lock, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router';
 
 /**
  * CheckoutHeader Component
  * 
- * A simplified header used during the Checkout process to reduce distractions.
- * 
- * Features:
- * - Isolated Logo (links back to shop)
- * - "Secure Checkout" badge
- * - "Back to Cart" link
- * - Removes standard navigation menus
- * - Dark mode support via CSS variables
- * - WordPress theme.json aligned
- * - Design token system integration
- * 
- * @package HandcraftedWines
- * @version 2.0
+ * Minimal header for checkout flow.
+ * Features secure checkout badge and logo.
  */
+
 export const CheckoutHeader: React.FC = () => {
   return (
-    <header className="bg-[var(--twb-color-ink)] dark:bg-[var(--twb-color-bg-primary)] border-b border-[var(--twb-border-secondary)] dark:border-[var(--twb-border-primary)] py-[var(--twb-spacing-4)] sticky top-0 z-50 shadow-[var(--twb-shadow-md)]">
-      <Container variant="site">
-        <div className="flex items-center justify-between">
+    <header className="bg-[var(--twb-color-plum)] dark:bg-[var(--twb-color-bg-primary)] border-b border-[var(--twb-border-primary)] sticky top-0 z-50">
+      <Container variant="wide">
+        <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-[var(--twb-spacing-6)]">
             <Link to="/shop">
-              <KWVShopLogo className="h-10 w-auto" />
+              <Logo className="h-10 w-auto" />
             </Link>
             <div className="hidden md:flex items-center gap-[var(--twb-spacing-2)] text-white/60 dark:text-[var(--twb-color-text-secondary)] border-l border-white/20 dark:border-[var(--twb-border-primary)] pl-[var(--twb-spacing-6)] py-1">
               <Lock size={16} />

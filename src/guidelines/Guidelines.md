@@ -1,16 +1,46 @@
-# Handcrafted Wines – Brand Guidelines (v6.1)
+# Handcrafted Wines – Brand Guidelines (v7.0)
 
 **IMPORTANT DEVELOPMENT NOTE:** JSDoc inline documentation is mandatory for all JavaScript/TypeScript files.
 
 **PROJECT STATUS:** Boutique wine farm website with hand-drawn design aesthetic. Historic family farm established 1918.
 
-**PROMPT SYSTEM:** Use trigger words to activate orchestrated workflows:
-- `cleanup` → System audit and cleanup (`/prompts/cleanup.md`)
-- `continue` → Execute next task from master task list (`/prompts/continue.md`)
-- `audit guidelines` → Reorganize guidelines system (`/prompts/audit-guidelines.md`)
-- `process reports` → Convert analysis reports to tasks (`/prompts/process-reports.md`)
+---
 
-See `/prompts/PROMPT-SYSTEM-GUIDELINES.md` for full orchestration system documentation.
+## 🎯 Trigger Word System
+
+Use trigger words to activate automated prompts. Type any trigger to execute its workflow.
+
+**Quick Reference (18 Triggers):**
+
+### Workflow Triggers
+- `cleanup` → System audit and cleanup
+- `continue` → Execute next task from master list
+- `status` → Generate project status report
+- `changelog` → Update CHANGELOG.md from git commits
+- `sitemap` → Regenerate sitemap
+- `process reports` → Convert reports to task lists
+- `release` → Automate version bump and release
+
+### Audit Triggers
+- `audit tokens` → Audit design token usage
+- `audit css` → Audit CSS architecture
+- `audit a11y` → WCAG accessibility audit
+- `audit data` → Audit data file sizes
+- `audit responsive` → Audit responsive patterns
+- `audit styles` → Audit hardcoded styles
+- `audit guidelines` → Verify guideline compliance
+
+### Scaffold Triggers
+- `new template` → Create documentation template
+- `new pattern` → Create design pattern guideline
+- `new block` → Create atomic block component
+
+### Guidelines Triggers
+- `update guidelines` → Update guideline frontmatter and compliance
+- `cleanup guidelines` → Reorganize and restructure guidelines
+
+**Complete Registry:** `/guidelines/PROMPT-TRIGGERS.md`  
+**Prompt System Documentation:** `/prompts/PROMPT-SYSTEM-GUIDELINES.md`
 
 ---
 
@@ -36,6 +66,9 @@ See `/prompts/PROMPT-SYSTEM-GUIDELINES.md` for full orchestration system documen
 - **Accessibility:** `/guidelines/accessibility/wcag-compliance.md` ⚠️ **MANDATORY**
 - **Color Tokens:** `/guidelines/design-tokens/colors.md`
 - **Typography Tokens:** `/guidelines/design-tokens/typography.md`
+- **Dark/Light Mode:** `/guidelines/design-tokens/dark-light-mode.md` ⚠️ **MANDATORY**
+- **WordPress CSS Variables:** `/guidelines/development/wordpress-css-variables.md` ⚠️ **MANDATORY**
+- **File Organization:** `/guidelines/development/file-organization.md` ⚠️ **MANDATORY**
 - **Sitemap:** `/guidelines/architecture/sitemap.md`
 - **Component Structure:** `/guidelines/architecture/component-structure.md`
 - **JSDoc Standards:** `/guidelines/development/jsdoc-standards.md` ⚠️ **MANDATORY**
@@ -208,7 +241,7 @@ See `/guidelines/design-tokens/` for complete specifications:
 - [Navigation](/guidelines/design-tokens/navigation.md)
 - [Touch Targets](/guidelines/design-tokens/touch-targets.md)
 - [Responsive](/guidelines/design-tokens/responsive.md)
-- [Dark/Light Mode](/guidelines/design-tokens/dark-light-mode.md) (future)
+- [Dark/Light Mode](/guidelines/design-tokens/dark-light-mode.md) ⚠️ **MANDATORY**
 
 ---
 
@@ -489,6 +522,20 @@ See `/guidelines/design-tokens/` for complete specifications:
 
 ## 10. Change Log
 
+### Version 7.0 (2024-03-15)
+- **Trigger Word System:** Complete implementation with 18 automated triggers
+- **Prompt System:** Updated with new trigger word system and prompt registry
+- **Guidelines Compliance:** Marked 4 critical guidelines as mandatory (dark mode, CSS variables, file org, accessibility)
+
+### Version 6.2 (2024-03-15)
+- **Dark/Light Mode System:** Complete implementation with explicit WordPress CSS variables
+- **WordPress CSS Variables:** Comprehensive mandatory guideline for all styling
+- **File Organization:** New guideline defining file creation patterns and size limits
+- **Redesign Orchestrator:** Updated with 3-wave execution pattern and quality gates
+- **Analysis Prompts:** All 10 redesign analysis prompts moved to `/prompts/redesign/`
+- **Design Token Guidelines:** Expanded with comprehensive variable mapping
+- **Mandatory Guidelines:** Marked 4 critical guidelines as mandatory (dark mode, CSS variables, file org, accessibility)
+
 ### Version 6.1 (2024-03-15)
 - **Demo Pages:** Created two full-width demo pages (`/handdrawn-demo`, `/handdrawn-demo/landing-page`)
 - **Component Library:** Interactive pattern library with 60+ hand-drawn components and code examples
@@ -521,7 +568,7 @@ See `/guidelines/design-tokens/` for complete specifications:
 ---
 
 **Maintained by:** The Wire Brand Development Team  
-**Last Review:** 2024-03-13  
+**Last Review:** 2024-03-15  
 **Next Review:** Monthly or after major guidelines updates
 
 ---
@@ -531,6 +578,9 @@ See `/guidelines/design-tokens/` for complete specifications:
 - [Accessibility (MANDATORY)](/guidelines/accessibility/wcag-compliance.md)
 - [Color Tokens](/guidelines/design-tokens/colors.md)
 - [Typography Tokens](/guidelines/design-tokens/typography.md)
+- [Dark/Light Mode](/guidelines/design-tokens/dark-light-mode.md)
+- [WordPress CSS Variables](/guidelines/development/wordpress-css-variables.md)
+- [File Organization](/guidelines/development/file-organization.md)
 - [Sitemap](/guidelines/architecture/sitemap.md)
 - [JSDoc Standards (MANDATORY)](/guidelines/development/jsdoc-standards.md)
 - [Master Task List](/tasks/task-list.md)

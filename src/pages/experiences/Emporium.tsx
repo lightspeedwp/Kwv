@@ -1,98 +1,40 @@
 import React from 'react';
-import { ExperiencePageLayout, PricingSection } from '../../components/experiences/ExperiencePageLayout';
+import { ExperiencePageLayout } from '../../components/experiences/ExperiencePageLayout';
+import { TASTINGS } from '../../data/tastings';
+import { SITE_CONTENT } from '../../data/site-content';
 
-const TASTINGS: PricingSection[] = [
-  {
-    title: 'TASTINGS',
-    items: [
-      {
-        name: 'YOUR ESSENTIAL TASTING',
-        price: 'R70',
-        description: 'KWV CLASSIC COLLECTION',
-        subItems: ['Sauvignon Blanc / Chardonnay', 'Merlot / Shiraz', 'Pinotage', 'Shiraz', 'Cabernet Sauvignon']
-      },
-      {
-        name: 'YOUR PREMIUM TASTING',
-        price: 'R80',
-        description: 'ROODEBERG',
-        subItems: ['Rosé', 'Red', 'Classic Red Blend', 'Reserve', 'Winemaker\'s Selection']
-      },
-      {
-        name: 'YOUR EXCLUSIVE TASTING',
-        price: 'R90',
-        description: 'KWV THE MENTORS',
-        subItems: ['Chenin Blanc', 'Grenache Blanc', 'Petit Verdot', 'Canvas', 'Orchestra']
-      },
-      {
-        name: 'WORLD\'S BEST BRANDY',
-        price: 'R110',
-        description: 'KWV BRANDY TASTING',
-        subItems: ['KWV 10 Year Old', 'KWV 12 Year Old', 'KWV 15 Year Old', 'KWV 20 Year Old']
-      }
-    ]
-  }
-];
-
-const PAIRINGS: PricingSection[] = [
-  {
-    title: 'PAIRINGS',
-    items: [
-        {
-            name: 'LABORIE CAP CLASSIQUE & MACARONS',
-            price: 'R150',
-            description: 'MCC Brut accompanied by Salted Caramel macaron. MCC Rosé accompanied by Strawberry & Cream macaron.'
-        },
-        {
-            name: 'EXCLUSIVE WINES & ARTISAN PIES',
-            price: 'R200',
-            description: 'The Mentors Chenin Blanc with Spinach & Feta Pie. The Mentors Orchestra with Lamb & Rosemary Pie. KWV Classic Cape Tawny with Apple Crumble Pie.'
-        },
-        {
-            name: 'KWV BRANDY & BELGIAN CHOCOLATES',
-            price: 'R200',
-            description: '10 Yr Brandy with Milk Chocolate. 12 Yr Brandy with Hazelnut Praline. 15 Yr Brandy with Dark Chocolate. 20 Yr Brandy with Dark Orange Chocolate.'
-        }
-    ]
-  }
-];
-
-/**
- * Emporium Page Component
- * 
- * The main tasting room and visitor center experience.
- * Lists available tastings (Classic, Premium, Exclusive, Brandy) and food pairings.
- */
 export const Emporium: React.FC = () => {
   return (
     <ExperiencePageLayout
-      title="KWV EMPORIUM"
-      subtitle="KWV EMPORIUM"
+      title="ESTATE TASTING ROOM"
+      subtitle="HANDCRAFTED WINES"
       heroImage="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&q=80"
-      heroDescription="Visit and experience KWV like never before. From cellar tours and special food and wine pairings, to simply enjoying our wide variety of wines and brandies."
+      heroDescription="Visit and experience our family farm like never before. From cellar tours and special food and wine pairings, to simply enjoying our handcrafted wines, spirits, and farmstead cheese."
       ctaText="BOOK A TASTING"
       ctaLink="/contact"
       galleryImages={[
-        "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1559563362-c667ba5f5480?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1547308464-9e0e4c46d4e5?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1569831316838-2b3e50e0f55a?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1515955853946-c6b67d959fac?auto=format&fit=crop&q=80"
       ]}
-      pricingSections={TASTINGS}
-      pairings={PAIRINGS}
       infoSection={{
-        availableFrom: ['Closed on 25th December (Christmas Day)', 'Open 7 days a week'],
-        hours: ['Monday to Saturday', '09h00 - 16h30', 'Sunday', '11h00 - 16h00'],
-        address: ['KWV Emporium', 'Kohler Street', 'Paarl, 7646']
+        availableFrom: [`Closed on ${SITE_CONTENT.hours.tastingRoom.holidays}`, 'Open 7 days a week'],
+        hours: [SITE_CONTENT.hours.tastingRoom.weekdays, SITE_CONTENT.hours.tastingRoom.sundays],
+        address: [SITE_CONTENT.brand.name, SITE_CONTENT.contact.address.street, `${SITE_CONTENT.contact.address.city}, ${SITE_CONTENT.contact.address.postalCode}`]
       }}
       mainContent={
         <>
             <p>
-                Established in 1918, KWV has a distinguished heritage and celebrated history of innovation. We invite you to experience the best of South African wine and spirits at our world-renowned Emporium.
+                Established in {SITE_CONTENT.brand.foundedYear}, our family has been handcrafting award-winning wines for over a century. We invite you to experience the best of our boutique winery at the Estate Tasting Room, nestled against Paarl Mountain in the heart of South Africa's Winelands.
             </p>
             <p>
-                Our famous Cathedral Cellar, with its high vaulted ceiling and stained glass windows, is a lasting memory of the people, stories and products that have created a legacy as one of the world's most admired wine brands.
+                Our tasting room offers a warm, welcoming atmosphere where you can sample our full range of estate wines, craft spirits from our House of Fire distillery, and artisan cheese from our own goat dairy. Whether you're a wine connoisseur or just beginning your journey, our knowledgeable staff will guide you through an unforgettable tasting experience.
             </p>
         </>
       }
+      tastingOptions={TASTINGS.wine}
+      pairingOptions={TASTINGS.pairings}
     />
   );
 };

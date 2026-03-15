@@ -1,12 +1,13 @@
 import React from 'react';
-import { Layout } from '../layout/Layout';
+import { useNavigate } from 'react-router';
+import { Instagram } from 'lucide-react';
 import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import { Layout } from '../layout/Layout';
 import { ScrollDownArrow } from '../common/ScrollDownArrow';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { SITE_CONTENT } from '../../data/site-content';
 
 export interface PricingItem {
   name: string;
@@ -30,11 +31,14 @@ export interface ExperiencePageProps {
   galleryImages: string[];
   mainContent: React.ReactNode;
   pricingSections?: PricingSection[];
-  pairings?: PricingSection[]; // Similar structure
+  tastingOptions?: PricingItem[]; // For wine tastings
+  pairings?: PricingSection[];
+  pairingOptions?: PricingItem[]; // For food/wine pairings
   infoSection?: {
     availableFrom?: string[];
     hours?: string[];
     address?: string[];
+    contact?: string[];
   };
   contact?: {
     tel?: string;
@@ -69,7 +73,9 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
   galleryImages,
   mainContent,
   pricingSections,
+  tastingOptions,
   pairings,
+  pairingOptions,
   infoSection,
   logoComponent,
 }) => {
@@ -141,9 +147,60 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
       </section>
 
       {/* Pricing / Menu Sections */}
-      {(pricingSections || pairings) && (
+      {(pricingSections || tastingOptions || pairings || pairingOptions) && (
           <section className="py-12 bg-[#FFFCF5] text-center">
               <Container variant="content">
+                  
+                  {/* Tasting Options (simplified list) */}
+                  {tastingOptions && tastingOptions.length > 0 && (
+                      <div className="mb-12">
+                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                              TASTINGS
+                          </Typography>
+                          
+                          <div className="space-y-8">
+                              {tastingOptions.map((item, itemIdx) => (
+                                  <div key={itemIdx} className="flex flex-col items-center">
+                                      <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                          {item.name} {item.price && `- ${item.price}`}
+                                      </h4>
+                                      {item.description && (
+                                          <p className="text-gray-500 uppercase text-xs tracking-wider mb-2">{item.description}</p>
+                                      )}
+                                      {item.subItems && (
+                                          <div className="text-gray-600 text-sm italic">
+                                              {item.subItems.map((sub, i) => (
+                                                  <div key={i}>{sub}</div>
+                                              ))}
+                                          </div>
+                                      )}
+                                  </div>
+                              ))}
+                          </div>
+                      </div>
+                  )}
+                  
+                  {/* Pairing Options (simplified list) */}
+                  {pairingOptions && pairingOptions.length > 0 && (
+                      <div className="mb-12">
+                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                              PAIRINGS
+                          </Typography>
+                          
+                          <div className="space-y-8">
+                              {pairingOptions.map((item, itemIdx) => (
+                                  <div key={itemIdx} className="flex flex-col items-center">
+                                      <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                          {item.name} {item.price && `- ${item.price}`}
+                                      </h4>
+                                      {item.description && (
+                                          <p className="text-gray-500 text-sm max-w-lg mx-auto mb-1">{item.description}</p>
+                                      )}
+                                  </div>
+                              ))}
+                          </div>
+                      </div>
+                  )}
                   
                   {/* Standard Pricing */}
                   {pricingSections?.map((section, idx) => (
@@ -228,6 +285,12 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                                    {infoSection.address.map((line, i) => <div key={i}>{line}</div>)}
                                </div>
                            )}
+                           
+                           {infoSection.contact && (
+                               <div className="text-sm text-gray-600 uppercase tracking-wide">
+                                   {infoSection.contact.map((line, i) => <div key={i}>{line}</div>)}
+                               </div>
+                           )}
                       </div>
                   )}
 
@@ -240,7 +303,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                           SHARE YOUR EXPERIENCES AND ADVENTURES WITH {title}
                       </Typography>
                       <p className="text-[#DAA520] text-xs font-bold uppercase tracking-widest mt-2">
-                          #KWVONLINE #KWVEXPERIENCES #{title.replace(/\s+/g, '')}
+                          {SITE_CONTENT.social.hashtagsExperiences} #{title.replace(/\s+/g, '')}
                       </p>
                   </div>
 

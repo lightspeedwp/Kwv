@@ -1,830 +1,621 @@
-# WordPress-Aligned CSS Variables & Classes
+# WordPress-Aligned CSS Variables
 
-**Status:** ✅ Active Standard  
-**Priority:** 🔴 MANDATORY for all new code  
-**Last Updated:** March 13, 2026
-
----
-
-## 📑 Table of Contents
-
-1. [Overview](#overview)
-2. [WordPress theme.json Alignment](#wordpress-themejson-alignment)
-3. [Variable Naming Convention](#variable-naming-convention)
-4. [Migration Rules](#migration-rules)
-5. [Color Variables Reference](#color-variables-reference)
-6. [Typography Variables Reference](#typography-variables-reference)
-7. [Spacing Variables Reference](#spacing-variables-reference)
-8. [BEM Class Reference](#bem-class-reference)
-9. [Migration Examples](#migration-examples)
-10. [Testing & Validation](#testing--validation)
+**Category:** Development Standards  
+**Version:** 1.0  
+**Last Updated:** 2024-03-15  
+**Status:** Mandatory
 
 ---
 
 ## Overview
 
-### Purpose
+All styling in The Wire Brand project **MUST** use WordPress-aligned CSS variables instead of inline hex colors, pixel values, or hardcoded fonts. This ensures seamless integration with WordPress `theme.json` and enables dynamic theming.
 
-All styling in The Wire Brand project must use WordPress-aligned CSS variables and BEM classes instead of inline hex colors or hardcoded values. This ensures:
-
-1. **WordPress Compatibility** - Seamless integration with WordPress theme.json
-2. **Theme Consistency** - Single source of truth for design tokens
-3. **Dark Mode Support** - Automatic theme switching via CSS variables
-4. **Maintainability** - Update colors/fonts in one place
-5. **Accessibility** - WCAG-compliant color combinations enforced
-
-### Strict Rules
-
-❌ **NEVER USE:**
-```tsx
-// Bad - Inline hex colors
-<div className="bg-[#f5efe4] text-[#1e1a17]">
-
-// Bad - Hardcoded font values
-<h1 style={{ fontSize: '48px', fontFamily: 'Playfair Display' }}>
-
-// Bad - Magic numbers
-<div style={{ padding: '24px', margin: '16px' }}>
-```
-
-✅ **ALWAYS USE:**
-```tsx
-// Good - CSS variables
-<div className="bg-[var(--twb-color-bg-primary)] text-[var(--twb-color-text-primary)]">
-
-// Good - BEM classes
-<div className="twb-section twb-section--paper">
-
-// Good - WordPress-aligned classes
-<h1 className="twb-heading twb-heading--h1">
-```
+**Why WordPress Alignment?**
+- Direct mapping to WordPress block editor
+- Single source of truth for design tokens
+- Easier theme customization
+- Better maintainability
+- Automatic dark mode support
 
 ---
 
-## WordPress theme.json Alignment
+## Critical Rules
 
-### WordPress Preset Patterns
+### ❌ NEVER Use These
 
-WordPress uses a specific pattern for CSS variables:
+```tsx
+// ❌ WRONG: Inline hex colors
+<div className="bg-[#f5efe4]">
 
-```css
-/* WordPress Standard Pattern */
---wp-preset-color-{slug}
---wp-preset-font-size-{slug}
---wp-preset-spacing-{slug}
---wp-preset-font-family-{slug}
+// ❌ WRONG: Hardcoded pixel values
+<div style={{ padding: '16px', marginBottom: '24px' }}>
+
+// ❌ WRONG: Hardcoded font families
+<h1 style={{ fontFamily: 'Playfair Display, serif' }}>
+
+// ❌ WRONG: Tailwind dark: prefix
+<div className="bg-cream dark:bg-slate-900">
+
+// ❌ WRONG: Random spacing values
+<div className="mt-[23px] mb-[17px]">
 ```
 
-### The Wire Brand Mapping
+### ✅ ALWAYS Use These
 
-We use `twb-` prefix (The Wire Brand) aligned with WordPress patterns:
+```tsx
+// ✅ CORRECT: WordPress CSS variables
+<div className="bg-[var(--twb-color-bg-primary)]">
 
-```css
-/* The Wire Brand Variables (WordPress-compatible) */
---twb-color-{semantic-name}
---twb-font-size-{scale}
---twb-spacing-{scale}
---twb-font-family-{role}
-```
+// ✅ CORRECT: Spacing variables
+<div className="p-[var(--twb-spacing-4)] mb-[var(--twb-spacing-6)]">
 
-### Future WordPress Integration
+// ✅ CORRECT: Typography variables
+<h1 className="font-[var(--twb-font-family-heading)] text-[var(--twb-font-size-h1)]">
 
-When migrating to WordPress, our variables map directly:
-
-```css
-/* Current (Development) */
---twb-color-bg-primary: #f5efe4;
-
-/* WordPress theme.json */
-{
-  "settings": {
-    "color": {
-      "palette": [
-        {
-          "slug": "bg-primary",
-          "color": "#f5efe4",
-          "name": "Background Primary"
-        }
-      ]
-    }
-  }
-}
-
-/* WordPress Output */
---wp--preset--color--bg-primary: #f5efe4;
+// ✅ CORRECT: BEM classes (recommended)
+<div className="twb-card">
+<h1 className="twb-heading twb-heading--h1">
 ```
 
 ---
 
 ## Variable Naming Convention
 
+All custom variables use the `twb-` prefix (The Wire Brand).
+
+### Format
+
+```
+--twb-{category}-{property}-{variant}
+```
+
+### Categories
+
+- `color` - All color tokens
+- `font` - Typography properties
+- `spacing` - Padding, margin, gap
+- `border` - Border styles and radii
+- `shadow` - Box shadows
+- `duration` - Animation/transition durations
+- `easing` - Animation curves
+- `icon` - Icon sizes
+
+---
+
+## Complete Variable Reference
+
 ### Color Variables
 
-**Pattern:** `--twb-color-{category}-{variant}`
-
-#### Background Colors
+**Background Colors:**
 ```css
---twb-color-bg-primary      /* Main background (paper) */
---twb-color-bg-secondary    /* Secondary background */
---twb-color-bg-tertiary     /* Tertiary background (cards) */
---twb-color-bg-inverse      /* Inverse background */
+--twb-color-bg-primary      /* Main background */
+--twb-color-bg-secondary    /* Alternate sections */
+--twb-color-bg-tertiary     /* Elevated surfaces */
+--twb-color-bg-inverse      /* Inverse backgrounds */
 ```
 
-#### Text Colors
+**Text Colors:**
 ```css
---twb-color-text-primary    /* Primary text (ink) */
---twb-color-text-secondary  /* Secondary text */
---twb-color-text-muted      /* Muted/subtle text */
---twb-color-text-inverse    /* Text on dark backgrounds */
---twb-color-text-on-dark    /* Text on dark overlays */
---twb-color-text-on-accent  /* Text on accent colors */
+--twb-color-text-primary    /* Body text, headings */
+--twb-color-text-secondary  /* Supporting text */
+--twb-color-text-tertiary   /* Muted text */
+--twb-color-text-inverse    /* Text on dark */
+--twb-color-text-disabled   /* Disabled state */
 ```
 
-#### Accent Colors
+**Accent Colors:**
 ```css
---twb-color-accent-primary    /* Primary accent (plum) */
---twb-color-accent-secondary  /* Secondary accent (clay) */
---twb-color-accent-premium    /* Premium accent (gold) */
+--twb-color-accent-plum     /* Primary CTAs */
+--twb-color-accent-vine     /* Secondary accents */
+--twb-color-accent-clay     /* Warm accents */
+--twb-color-accent-gold     /* Premium highlights */
 ```
 
-#### Semantic Colors
+**State Colors:**
 ```css
---twb-color-vine    /* Vineyard green */
---twb-color-clay    /* Terracotta */
---twb-color-plum    /* Wine-inspired plum */
---twb-color-gold    /* Premium gold */
---twb-color-paper   /* Warm parchment */
---twb-color-ink     /* Deep charcoal */
+--twb-color-state-hover     /* Hover state */
+--twb-color-state-active    /* Active/pressed */
+--twb-color-state-focus     /* Focus ring */
+--twb-color-state-disabled  /* Disabled elements */
 ```
 
-#### Interactive Colors
+**Status Colors:**
 ```css
---twb-color-link-default     /* Default link color */
---twb-color-link-hover       /* Link hover state */
---twb-color-link-visited     /* Visited link */
---twb-color-link-active      /* Active/pressed link */
+--twb-color-status-success  /* Success messages */
+--twb-color-status-error    /* Error messages */
+--twb-color-status-warning  /* Warnings */
+--twb-color-status-info     /* Info messages */
 ```
 
-#### Utility Colors
+**Border Colors:**
 ```css
---twb-color-success    /* Success state */
---twb-color-warning    /* Warning state */
---twb-color-error      /* Error state */
---twb-color-info       /* Info state */
+--twb-color-border-primary    /* Standard borders */
+--twb-color-border-secondary  /* Subtle dividers */
+--twb-color-border-focus      /* Focus borders */
+--twb-color-divider           /* Section dividers */
 ```
+
+---
 
 ### Typography Variables
 
-**Pattern:** `--twb-font-{property}-{variant}`
-
-#### Font Families
+**Font Families:**
 ```css
---twb-font-family-heading    /* Serif for headings */
---twb-font-family-body       /* Sans-serif for body */
---twb-font-family-mono       /* Monospace (optional) */
+--twb-font-family-heading   /* Serif for headings */
+--twb-font-family-body      /* Sans-serif for body */
+--twb-font-family-mono      /* Monospace for code */
 ```
 
-#### Font Sizes (Fluid Scale)
+**Font Sizes:**
 ```css
---twb-font-size-xs      /* Extra small: clamp(0.75rem, ...) */
---twb-font-size-sm      /* Small: clamp(0.875rem, ...) */
---twb-font-size-base    /* Base: clamp(1rem, ...) */
---twb-font-size-lg      /* Large: clamp(1.125rem, ...) */
---twb-font-size-xl      /* Extra large: clamp(1.25rem, ...) */
---twb-font-size-2xl     /* 2X large: clamp(1.5rem, ...) */
---twb-font-size-3xl     /* 3X large: clamp(1.875rem, ...) */
---twb-font-size-4xl     /* 4X large: clamp(2.25rem, ...) */
---twb-font-size-5xl     /* 5X large: clamp(3rem, ...) */
+--twb-font-size-h1          /* clamp(2.4rem, 5vw + 1rem, 4.5rem) */
+--twb-font-size-h2          /* clamp(2rem, 4vw + 1rem, 3.5rem) */
+--twb-font-size-h3          /* clamp(1.75rem, 3vw + 1rem, 2.5rem) */
+--twb-font-size-h4          /* clamp(1.5rem, 2.5vw + 1rem, 2rem) */
+--twb-font-size-h5          /* clamp(1.25rem, 2vw + 0.5rem, 1.5rem) */
+--twb-font-size-h6          /* clamp(1.125rem, 1.5vw + 0.5rem, 1.25rem) */
+--twb-font-size-body        /* clamp(1rem, 1vw + 0.5rem, 1.125rem) */
+--twb-font-size-sm          /* clamp(0.875rem, 0.8vw + 0.4rem, 1rem) */
+--twb-font-size-xs          /* clamp(0.75rem, 0.6vw + 0.3rem, 0.875rem) */
 ```
 
-#### Font Weights
+**Font Weights:**
 ```css
---twb-font-weight-light      /* 300 */
---twb-font-weight-normal     /* 400 */
---twb-font-weight-medium     /* 500 */
---twb-font-weight-semibold   /* 600 */
---twb-font-weight-bold       /* 700 */
+--twb-font-weight-light     /* 300 */
+--twb-font-weight-regular   /* 400 */
+--twb-font-weight-medium    /* 500 */
+--twb-font-weight-semibold  /* 600 */
+--twb-font-weight-bold      /* 700 */
 ```
 
-#### Line Heights
+**Line Heights:**
 ```css
---twb-line-height-tight      /* 1.25 */
---twb-line-height-snug       /* 1.375 */
---twb-line-height-normal     /* 1.5 */
---twb-line-height-relaxed    /* 1.625 */
---twb-line-height-loose      /* 2 */
+--twb-line-height-heading   /* 1.2 */
+--twb-line-height-body      /* 1.6 */
+--twb-line-height-relaxed   /* 1.8 */
+--twb-line-height-tight     /* 1.4 */
 ```
+
+---
 
 ### Spacing Variables
 
-**Pattern:** `--twb-spacing-{scale}`
-
+**Fixed Scale (use for precise layouts):**
 ```css
---twb-spacing-0     /* 0 */
---twb-spacing-1     /* 0.25rem (4px) */
---twb-spacing-2     /* 0.5rem (8px) */
---twb-spacing-3     /* 0.75rem (12px) */
---twb-spacing-4     /* 1rem (16px) */
---twb-spacing-6     /* 1.5rem (24px) */
---twb-spacing-8     /* 2rem (32px) */
---twb-spacing-12    /* 3rem (48px) */
---twb-spacing-16    /* 4rem (64px) */
---twb-spacing-24    /* 6rem (96px) */
+--twb-spacing-0   /* 0 */
+--twb-spacing-1   /* 0.25rem (4px) */
+--twb-spacing-2   /* 0.5rem (8px) */
+--twb-spacing-3   /* 0.75rem (12px) */
+--twb-spacing-4   /* 1rem (16px) */
+--twb-spacing-5   /* 1.25rem (20px) */
+--twb-spacing-6   /* 1.5rem (24px) */
+--twb-spacing-8   /* 2rem (32px) */
+--twb-spacing-10  /* 2.5rem (40px) */
+--twb-spacing-12  /* 3rem (48px) */
+--twb-spacing-16  /* 4rem (64px) */
+--twb-spacing-20  /* 5rem (80px) */
+--twb-spacing-24  /* 6rem (96px) */
 ```
+
+**Fluid Scale (use for responsive spacing):**
+```css
+--twb-spacing-section-y  /* clamp(3rem, 5vh + 2rem, 8rem) */
+--twb-spacing-container-x /* clamp(1rem, 4vw, 3rem) */
+--twb-spacing-grid-gap   /* clamp(1rem, 2vw, 2rem) */
+```
+
+---
 
 ### Border Variables
 
-**Pattern:** `--twb-border-{variant}`
-
+**Border Widths:**
 ```css
---twb-border-primary     /* rgba(30, 26, 23, 0.15) */
---twb-border-secondary   /* rgba(92, 107, 79, 0.25) */
---twb-border-tertiary    /* rgba(245, 239, 228, 0.15) */
---twb-border-accent      /* var(--twb-color-gold) */
+--twb-border-width-thin   /* 1px */
+--twb-border-width-medium /* 2px */
+--twb-border-width-thick  /* 3px */
 ```
+
+**Border Radius:**
+```css
+--twb-border-radius-none  /* 0 */
+--twb-border-radius-sm    /* 0.25rem (4px) */
+--twb-border-radius-md    /* 0.5rem (8px) */
+--twb-border-radius-lg    /* 0.75rem (12px) */
+--twb-border-radius-xl    /* 1rem (16px) */
+--twb-border-radius-full  /* 9999px */
+```
+
+---
 
 ### Shadow Variables
 
-**Pattern:** `--twb-shadow-{size}`
-
 ```css
---twb-shadow-sm     /* Small shadow */
---twb-shadow-md     /* Medium shadow */
---twb-shadow-lg     /* Large shadow */
---twb-shadow-xl     /* Extra large shadow */
+--twb-shadow-sm   /* Subtle elevation */
+--twb-shadow-md   /* Standard cards */
+--twb-shadow-lg   /* Elevated modals */
+--twb-shadow-xl   /* Highest elevation */
+--twb-shadow-inner /* Inset shadows */
 ```
 
 ---
 
-## Migration Rules
+### Motion Variables
 
-### Rule 1: No Inline Hex Colors
-
-❌ **NEVER:**
-```tsx
-<div className="bg-[#f5efe4]">
-<p className="text-[#1e1a17]">
-<button style={{ backgroundColor: '#5a2d3b' }}>
-```
-
-✅ **ALWAYS:**
-```tsx
-<div className="bg-[var(--twb-color-bg-primary)]">
-<p className="text-[var(--twb-color-text-primary)]">
-<button className="twb-btn twb-btn--primary">
-```
-
-### Rule 2: No Hardcoded Font Values
-
-❌ **NEVER:**
-```tsx
-<h1 style={{ fontSize: '48px' }}>
-<p className="text-[16px] font-[Inter]">
-```
-
-✅ **ALWAYS:**
-```tsx
-<h1 className="twb-heading twb-heading--h1">
-<p className="twb-text twb-text--body">
-```
-
-### Rule 3: Use BEM Classes Where Possible
-
-❌ **NEVER:**
-```tsx
-<section className="py-20 bg-white text-gray-900">
-  <div className="max-w-7xl mx-auto px-4">
-    <h2 className="text-4xl font-bold mb-6">
-```
-
-✅ **ALWAYS:**
-```tsx
-<section className="twb-section twb-section--paper">
-  <div className="twb-section__container">
-    <h2 className="twb-section__title">
-```
-
-### Rule 4: Dark Mode Support Required
-
-Every component must support dark mode via CSS variables:
-
-```tsx
-// Good - Automatic dark mode support
-<div className="bg-[var(--twb-color-bg-primary)]">
-  // Automatically switches: #f5efe4 → #1e1a17
-
-// Also acceptable - Explicit dark mode override
-<div className="bg-white dark:bg-[var(--twb-color-bg-primary)]">
-```
-
-### Rule 5: WordPress-First Thinking
-
-When choosing variable names, think "How would this map to theme.json?"
-
+**Durations:**
 ```css
-/* Good - Maps to WordPress */
---twb-color-bg-primary
-/* WordPress: --wp--preset--color--bg-primary */
+--twb-duration-fast    /* 150ms */
+--twb-duration-normal  /* 250ms */
+--twb-duration-slow    /* 400ms */
+```
 
-/* Bad - Doesn't map cleanly */
---twb-bg-main-color-light
+**Easing:**
+```css
+--twb-easing-standard  /* cubic-bezier(0.4, 0.0, 0.2, 1) */
+--twb-easing-decelerate /* cubic-bezier(0.0, 0.0, 0.2, 1) */
+--twb-easing-accelerate /* cubic-bezier(0.4, 0.0, 1, 1) */
 ```
 
 ---
 
-## Color Variables Reference
+### Icon Variables
 
-### Complete List (Light/Dark Modes)
-
-See `/styles/themes-light.css` and `/styles/themes-dark.css` for full definitions.
-
-#### Light Mode Values
-| Variable | Value | Usage |
-|----------|-------|-------|
-| `--twb-color-bg-primary` | `#f5efe4` | Main page background (paper) |
-| `--twb-color-bg-secondary` | `#faf7f2` | Secondary sections |
-| `--twb-color-bg-tertiary` | `#ffffff` | Cards, panels |
-| `--twb-color-text-primary` | `#1e1a17` | Primary text (ink) |
-| `--twb-color-text-secondary` | `#5c6b4f` | Secondary text (vine) |
-| `--twb-color-text-muted` | `#6b6461` | Subtle text |
-| `--twb-color-accent-primary` | `#5a2d3b` | Primary CTAs (plum) |
-| `--twb-color-accent-secondary` | `#b86b4b` | Secondary actions (clay) |
-| `--twb-color-accent-premium` | `#c8a96b` | Premium indicators (gold) |
-| `--twb-color-gold` | `#c8a96b` | Gold accents |
-| `--twb-color-vine` | `#5c6b4f` | Vineyard green |
-| `--twb-color-clay` | `#b86b4b` | Terracotta |
-| `--twb-color-plum` | `#5a2d3b` | Wine plum |
-| `--twb-color-paper` | `#f5efe4` | Parchment |
-| `--twb-color-ink` | `#1e1a17` | Deep charcoal |
-
-#### Dark Mode Values
-| Variable | Value | Usage |
-|----------|-------|-------|
-| `--twb-color-bg-primary` | `#1e1a17` | Main background (inverted) |
-| `--twb-color-bg-secondary` | `#2a2420` | Secondary sections |
-| `--twb-color-bg-tertiary` | `#332f2a` | Cards, panels |
-| `--twb-color-text-primary` | `#f5efe4` | Primary text (inverted) |
-| `--twb-color-text-secondary` | `#d4b87f` | Secondary text (gold) |
-| `--twb-color-text-muted` | `#9a8d7f` | Subtle text |
-| `--twb-color-accent-primary` | `#8a4d5b` | Primary CTAs (lighter plum) |
-| `--twb-color-accent-secondary` | `#d4856a` | Secondary actions (lighter clay) |
-| `--twb-color-accent-premium` | `#d4b87f` | Premium (lighter gold) |
-
----
-
-## Typography Variables Reference
-
-### Complete List
-
-See `/styles/themes-variables.css` for full definitions.
-
-#### Font Families
 ```css
---twb-font-family-heading: 'Playfair Display', Georgia, serif;
---twb-font-family-body: 'Inter', system-ui, sans-serif;
-```
-
-#### Font Sizes (Fluid with clamp)
-```css
---twb-font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
---twb-font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
---twb-font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
---twb-font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
---twb-font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
---twb-font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
---twb-font-size-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
---twb-font-size-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem);
---twb-font-size-5xl: clamp(3rem, 2rem + 5vw, 4.5rem);
-```
-
-#### Font Weights
-```css
---twb-font-weight-light: 300;
---twb-font-weight-normal: 400;
---twb-font-weight-medium: 500;
---twb-font-weight-semibold: 600;
---twb-font-weight-bold: 700;
-```
-
-#### Line Heights
-```css
---twb-line-height-tight: 1.25;
---twb-line-height-snug: 1.375;
---twb-line-height-normal: 1.5;
---twb-line-height-relaxed: 1.625;
---twb-line-height-loose: 2;
+--twb-icon-size-sm  /* 1rem (16px) */
+--twb-icon-size-md  /* 1.5rem (24px) */
+--twb-icon-size-lg  /* 2rem (32px) */
+--twb-icon-size-xl  /* 3rem (48px) */
 ```
 
 ---
 
-## BEM Class Reference
+## Usage Examples
 
-### Component Classes
+### Component with All Variable Types
 
-All BEM classes use the `twb-` namespace and are defined in `/styles/utilities.css`.
+```tsx
+/**
+ * ProductCard Component
+ * 
+ * Demonstrates proper use of all CSS variable categories.
+ */
 
-#### Button Classes
-```css
-.twb-btn                  /* Base button */
-.twb-btn--primary         /* Primary button (plum) */
-.twb-btn--secondary       /* Secondary button (gold) */
-.twb-btn--outline         /* Outline variant */
-.twb-btn--ghost           /* Ghost/transparent */
-.twb-btn--sm              /* Small size */
-.twb-btn--lg              /* Large size */
-```
-
-#### Section Classes
-```css
-.twb-section              /* Base section */
-.twb-section--paper       /* Paper background */
-.twb-section--white       /* White background */
-.twb-section--dark        /* Dark background */
-.twb-section__container   /* Section container */
-.twb-section__title       /* Section title */
-.twb-section__subtitle    /* Section subtitle */
-.twb-section__description /* Section description */
-```
-
-#### Card Classes
-```css
-.twb-card                 /* Base card */
-.twb-card--elevated       /* Card with shadow */
-.twb-card--bordered       /* Card with border */
-.twb-card__header         /* Card header */
-.twb-card__body           /* Card body */
-.twb-card__footer         /* Card footer */
-.twb-card__title          /* Card title */
-.twb-card__description    /* Card description */
-```
-
-#### Typography Classes
-```css
-.twb-heading              /* Base heading */
-.twb-heading--h1          /* H1 styling */
-.twb-heading--h2          /* H2 styling */
-.twb-heading--h3          /* H3 styling */
-.twb-heading--h4          /* H4 styling */
-.twb-text                 /* Base text */
-.twb-text--body           /* Body text */
-.twb-text--body-large     /* Large body */
-.twb-text--caption        /* Caption/small */
-.twb-text--muted          /* Muted color */
-```
-
-#### Form Classes
-```css
-.twb-form                 /* Base form */
-.twb-form__group          /* Form group */
-.twb-form__label          /* Form label */
-.twb-form__input          /* Form input */
-.twb-form__textarea       /* Form textarea */
-.twb-form__select         /* Form select */
-.twb-form__checkbox       /* Checkbox */
-.twb-form__radio          /* Radio button */
-.twb-form__error          /* Error message */
-.twb-form__help           /* Help text */
+export function ProductCard({ product }: ProductCardProps) {
+  return (
+    <article 
+      className="
+        bg-[var(--twb-color-bg-secondary)]
+        border-[var(--twb-border-width-thin)]
+        border-[var(--twb-color-border-primary)]
+        rounded-[var(--twb-border-radius-lg)]
+        p-[var(--twb-spacing-6)]
+        shadow-[var(--twb-shadow-md)]
+        transition-all
+        duration-[var(--twb-duration-normal)]
+      "
+      style={{
+        transitionTimingFunction: 'var(--twb-easing-standard)'
+      }}
+    >
+      <h3 
+        className="
+          font-[var(--twb-font-family-heading)]
+          text-[var(--twb-font-size-h3)]
+          font-[var(--twb-font-weight-semibold)]
+          leading-[var(--twb-line-height-heading)]
+          text-[var(--twb-color-text-primary)]
+          mb-[var(--twb-spacing-4)]
+        "
+      >
+        {product.title}
+      </h3>
+      
+      <p 
+        className="
+          font-[var(--twb-font-family-body)]
+          text-[var(--twb-font-size-body)]
+          leading-[var(--twb-line-height-body)]
+          text-[var(--twb-color-text-secondary)]
+          mb-[var(--twb-spacing-6)]
+        "
+      >
+        {product.description}
+      </p>
+      
+      <button 
+        className="
+          bg-[var(--twb-color-accent-plum)]
+          text-[var(--twb-color-text-inverse)]
+          px-[var(--twb-spacing-6)]
+          py-[var(--twb-spacing-3)]
+          rounded-[var(--twb-border-radius-sm)]
+          font-[var(--twb-font-weight-medium)]
+          transition-all
+          duration-[var(--twb-duration-fast)]
+          hover:bg-[var(--twb-color-state-hover)]
+        "
+      >
+        Add to Cart
+      </button>
+    </article>
+  );
+}
 ```
 
 ---
 
-## Migration Examples
+## BEM Alternative (Recommended)
 
-### Example 1: Hero Component
+Instead of inline variable references, use BEM classes for cleaner JSX:
 
-#### Before (Hardcoded)
-```tsx
-<div className="bg-black">
-  <div className="text-white">
-    <h1 style={{ fontSize: '48px', fontFamily: 'Playfair Display' }}>
-      Title
-    </h1>
-    <p className="text-gray-300">Description</p>
-    <button className="bg-[#5a2d3b] text-white px-6 py-3">
-      Click Me
-    </button>
-  </div>
-</div>
+### CSS File
+
+**File:** `/styles/utilities.css`
+
+```css
+.twb-product-card {
+  background: var(--twb-color-bg-secondary);
+  border: var(--twb-border-width-thin) solid var(--twb-color-border-primary);
+  border-radius: var(--twb-border-radius-lg);
+  padding: var(--twb-spacing-6);
+  box-shadow: var(--twb-shadow-md);
+  transition: all var(--twb-duration-normal) var(--twb-easing-standard);
+}
+
+.twb-product-card:hover {
+  box-shadow: var(--twb-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.twb-product-card__title {
+  font-family: var(--twb-font-family-heading);
+  font-size: var(--twb-font-size-h3);
+  font-weight: var(--twb-font-weight-semibold);
+  line-height: var(--twb-line-height-heading);
+  color: var(--twb-color-text-primary);
+  margin-bottom: var(--twb-spacing-4);
+}
+
+.twb-product-card__description {
+  font-family: var(--twb-font-family-body);
+  font-size: var(--twb-font-size-body);
+  line-height: var(--twb-line-height-body);
+  color: var(--twb-color-text-secondary);
+  margin-bottom: var(--twb-spacing-6);
+}
+
+.twb-product-card__button {
+  background: var(--twb-color-accent-plum);
+  color: var(--twb-color-text-inverse);
+  padding: var(--twb-spacing-3) var(--twb-spacing-6);
+  border-radius: var(--twb-border-radius-sm);
+  font-weight: var(--twb-font-weight-medium);
+  transition: all var(--twb-duration-fast) var(--twb-easing-standard);
+}
+
+.twb-product-card__button:hover {
+  background: var(--twb-color-state-hover);
+}
 ```
 
-#### After (CSS Variables + BEM)
+### Component (Clean JSX)
+
 ```tsx
-<div className="bg-black dark:bg-[var(--twb-color-bg-primary)]">
-  <div className="text-white dark:text-[var(--twb-color-text-on-dark)]">
-    <h1 className="twb-heading twb-heading--h1">
-      Title
-    </h1>
-    <p className="twb-text twb-text--body text-[var(--twb-color-text-muted)]">
-      Description
-    </p>
-    <button className="twb-btn twb-btn--primary">
-      Click Me
-    </button>
-  </div>
-</div>
-```
-
-### Example 2: Card Component
-
-#### Before (Hardcoded)
-```tsx
-<div className="bg-white shadow-md p-6 border border-gray-200">
-  <h3 className="text-2xl font-bold text-[#2C1810] mb-4">
-    Card Title
-  </h3>
-  <p className="text-gray-600 mb-6">
-    Card description text goes here.
-  </p>
-  <button className="bg-[#BFA15F] text-white px-4 py-2 rounded">
-    Learn More
-  </button>
-</div>
-```
-
-#### After (CSS Variables + BEM)
-```tsx
-<div className="twb-card twb-card--elevated">
-  <div className="twb-card__header">
-    <h3 className="twb-card__title">
-      Card Title
-    </h3>
-  </div>
-  <div className="twb-card__body">
-    <p className="twb-card__description">
-      Card description text goes here.
-    </p>
-  </div>
-  <div className="twb-card__footer">
-    <button className="twb-btn twb-btn--secondary">
-      Learn More
-    </button>
-  </div>
-</div>
-```
-
-### Example 3: Form Component
-
-#### Before (Hardcoded)
-```tsx
-<form className="max-w-md mx-auto">
-  <label className="block text-sm font-bold text-[#2C1810] mb-2">
-    Email Address
-  </label>
-  <input 
-    type="email"
-    className="w-full border border-gray-300 px-4 py-2 rounded"
-    placeholder="Enter email"
-  />
-  <button className="w-full bg-[#5a2d3b] text-white py-3 mt-4">
-    Submit
-  </button>
-</form>
-```
-
-#### After (CSS Variables + BEM)
-```tsx
-<form className="twb-form">
-  <div className="twb-form__group">
-    <label className="twb-form__label">
-      Email Address
-    </label>
-    <input 
-      type="email"
-      className="twb-form__input"
-      placeholder="Enter email"
-    />
-  </div>
-  <button className="twb-btn twb-btn--primary twb-btn--full-width">
-    Submit
-  </button>
-</form>
-```
-
-### Example 4: Section Component
-
-#### Before (Hardcoded)
-```tsx
-<section className="py-20 bg-[#f5efe4]">
-  <div className="max-w-7xl mx-auto px-4">
-    <h2 className="text-4xl font-bold text-[#2C1810] mb-6 text-center">
-      Section Title
-    </h2>
-    <p className="text-gray-600 text-center max-w-3xl mx-auto">
-      Section description
-    </p>
-  </div>
-</section>
-```
-
-#### After (CSS Variables + BEM)
-```tsx
-<section className="twb-section twb-section--paper">
-  <div className="twb-section__container">
-    <h2 className="twb-section__title">
-      Section Title
-    </h2>
-    <p className="twb-section__description">
-      Section description
-    </p>
-  </div>
-</section>
+export function ProductCard({ product }: ProductCardProps) {
+  return (
+    <article className="twb-product-card">
+      <h3 className="twb-product-card__title">{product.title}</h3>
+      <p className="twb-product-card__description">{product.description}</p>
+      <button className="twb-product-card__button">Add to Cart</button>
+    </article>
+  );
+}
 ```
 
 ---
 
-## Testing & Validation
+## WordPress theme.json Mapping
 
-### Pre-Migration Checklist
+### Variable Definition
 
-Before migrating a component:
-
-- [ ] Identify all inline hex colors
-- [ ] Identify all hardcoded font values
-- [ ] Identify all magic numbers (spacing, sizing)
-- [ ] Check if BEM classes exist for the pattern
-- [ ] Verify dark mode requirements
-
-### Migration Checklist
-
-During migration:
-
-- [ ] Replace hex colors with CSS variables
-- [ ] Replace hardcoded fonts with variable or BEM classes
-- [ ] Add dark mode support (`dark:` classes or variables)
-- [ ] Test in light mode
-- [ ] Test in dark mode
-- [ ] Verify contrast ratios (WCAG AA)
-- [ ] Test responsive behavior
-
-### Post-Migration Checklist
-
-After migration:
-
-- [ ] No inline hex colors remain
-- [ ] No hardcoded font values remain
-- [ ] All colors use CSS variables
-- [ ] BEM classes used where appropriate
-- [ ] Dark mode works correctly
-- [ ] Accessibility maintained
-- [ ] Visual regression test passed
-
-### Validation Tools
-
-#### Search for Hardcoded Values
-
-```bash
-# Find inline hex colors
-grep -r "bg-\[#" src/
-
-# Find text colors
-grep -r "text-\[#" src/
-
-# Find hardcoded font sizes
-grep -r "text-\[.*px\]" src/
-
-# Find style props
-grep -r "style={{" src/
+**React/CSS:** `/styles/themes-light.css`
+```css
+:root {
+  --twb-color-bg-primary: #f5efe4;
+}
 ```
 
-#### Contrast Checker
-
-Use WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
-
-All color combinations must meet:
-- Normal text: **4.5:1** minimum (WCAG AA)
-- Large text: **3.0:1** minimum (WCAG AA)
-
----
-
-## WordPress theme.json Future Mapping
-
-### Example theme.json Structure
-
-When we migrate to WordPress, our variables will map like this:
-
+**WordPress:** `theme.json`
 ```json
 {
-  "version": 2,
   "settings": {
-    "color": {
-      "palette": [
-        {
-          "slug": "bg-primary",
-          "color": "#f5efe4",
-          "name": "Background Primary"
-        },
-        {
-          "slug": "text-primary",
-          "color": "#1e1a17",
-          "name": "Text Primary"
-        },
-        {
-          "slug": "accent-primary",
-          "color": "#5a2d3b",
-          "name": "Accent Primary"
+    "custom": {
+      "twb": {
+        "color": {
+          "bg": {
+            "primary": "#f5efe4"
+          }
         }
-      ]
-    },
-    "typography": {
-      "fontFamilies": [
-        {
-          "slug": "heading",
-          "fontFamily": "Playfair Display, Georgia, serif",
-          "name": "Heading Font"
-        },
-        {
-          "slug": "body",
-          "fontFamily": "Inter, system-ui, sans-serif",
-          "name": "Body Font"
-        }
-      ],
-      "fontSizes": [
-        {
-          "slug": "small",
-          "size": "clamp(0.875rem, 0.8rem + 0.375vw, 1rem)",
-          "name": "Small"
-        },
-        {
-          "slug": "medium",
-          "size": "clamp(1rem, 0.9rem + 0.5vw, 1.125rem)",
-          "name": "Medium"
-        }
-      ]
-    },
-    "spacing": {
-      "spacingScale": {
-        "steps": 0
-      },
-      "spacingSizes": [
-        {
-          "slug": "small",
-          "size": "1rem",
-          "name": "Small"
-        },
-        {
-          "slug": "medium",
-          "size": "2rem",
-          "name": "Medium"
-        }
-      ]
+      }
     }
   }
 }
 ```
 
----
+### Accessing in WordPress
 
-## Enforcement
+**In PHP template:**
+```php
+<?php
+$bg_color = wp_get_global_settings()['custom']['twb']['color']['bg']['primary'];
+?>
+<div style="background-color: <?php echo $bg_color; ?>">
+```
 
-### Code Review Checklist
-
-All pull requests must pass:
-
-- ✅ No inline hex colors
-- ✅ No hardcoded font values
-- ✅ CSS variables used for all colors
-- ✅ BEM classes used where applicable
-- ✅ Dark mode support verified
-- ✅ WCAG AA contrast maintained
-
-### Automated Linting (Future)
-
-```json
-// .eslintrc.json (future rule)
-{
-  "rules": {
-    "no-hardcoded-colors": "error",
-    "no-inline-styles": "warn",
-    "require-css-variables": "error"
-  }
-}
+**In WordPress blocks:**
+```html
+<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--bg-primary)"}}} -->
+<div class="wp-block-group has-background">Content</div>
+<!-- /wp:group -->
 ```
 
 ---
 
-## References
+## Migration Checklist
 
-- **CSS Architecture Guide:** `/guidelines/development/css-architecture.md`
-- **Color Tokens:** `/guidelines/design-tokens/colors.md`
-- **Typography Tokens:** `/guidelines/design-tokens/typography.md`
-- **BEM Utilities:** `/styles/utilities.css`
-- **Theme Variables:** `/styles/themes-variables.css`
-- **Light Theme:** `/styles/themes-light.css`
-- **Dark Theme:** `/styles/themes-dark.css`
+### Audit Phase
+
+- [ ] Search codebase for hex colors: `#[0-9a-fA-F]{6}`
+- [ ] Search for pixel values: `\d+px` (excluding breakpoints)
+- [ ] Search for hardcoded fonts: `fontFamily.*['"]`
+- [ ] Search for `dark:` classes
+- [ ] List all violations by file
+
+### Replacement Phase
+
+**Colors:**
+```bash
+# Find
+className="bg-[#f5efe4]"
+
+# Replace
+className="bg-[var(--twb-color-bg-primary)]"
+```
+
+**Spacing:**
+```bash
+# Find
+className="p-[16px]"
+
+# Replace
+className="p-[var(--twb-spacing-4)]"
+```
+
+**Typography:**
+```bash
+# Find
+style={{ fontFamily: 'Playfair Display' }}
+
+# Replace
+className="font-[var(--twb-font-family-heading)]"
+```
+
+### Validation Phase
+
+- [ ] No hex colors in JSX/TSX files
+- [ ] No hardcoded pixel values (except max-width constraints)
+- [ ] No hardcoded font-family declarations
+- [ ] All components work in both light and dark modes
+- [ ] Contrast ratios verified
+
+---
+
+## Automated Migration Script
+
+**Prompt:** `/prompts/css-migration-hardcoded-to-variables.md`
+
+This prompt will:
+1. Scan all component files
+2. Identify hardcoded values
+3. Replace with appropriate CSS variables
+4. Generate report of changes
+
+---
+
+## Common Patterns
+
+### Hero Section
+
+```tsx
+<section className="
+  min-h-[calc(100dvh-90px)]
+  bg-[var(--twb-color-bg-primary)]
+  text-[var(--twb-color-text-primary)]
+  px-[var(--twb-spacing-container-x)]
+  py-[var(--twb-spacing-section-y)]
+">
+```
+
+### Container
+
+```tsx
+<div className="
+  max-w-[1440px]
+  mx-auto
+  px-[var(--twb-spacing-container-x)]
+">
+```
+
+### Card
+
+```tsx
+<div className="
+  bg-[var(--twb-color-bg-secondary)]
+  border-[var(--twb-border-width-thin)]
+  border-[var(--twb-color-border-primary)]
+  rounded-[var(--twb-border-radius-md)]
+  p-[var(--twb-spacing-6)]
+  shadow-[var(--twb-shadow-md)]
+">
+```
+
+### Button
+
+```tsx
+<button className="
+  bg-[var(--twb-color-accent-plum)]
+  text-[var(--twb-color-text-inverse)]
+  px-[var(--twb-spacing-6)]
+  py-[var(--twb-spacing-3)]
+  rounded-[var(--twb-border-radius-sm)]
+  font-[var(--twb-font-weight-medium)]
+  transition-all
+  duration-[var(--twb-duration-normal)]
+  hover:bg-[var(--twb-color-state-hover)]
+">
+```
+
+---
+
+## Exceptions
+
+### When Hardcoded Values Are Allowed
+
+1. **Max-width constraints:** `max-w-[1440px]` (design spec)
+2. **Breakpoint queries:** `@media (min-width: 768px)` (CSS only)
+3. **One-off measurements:** When no token exists and value won't repeat
+4. **Vendor libraries:** Third-party component overrides (document reason)
+
+**Always document exceptions with comments:**
+
+```tsx
+// Exception: One-off spacing for logo alignment
+<div className="ml-[3px]">
+```
+
+---
+
+## Related Guidelines
+
+- [Dark/Light Mode](/guidelines/design-tokens/dark-light-mode.md) - Theme system
+- [Colors](/guidelines/design-tokens/colors.md) - Color tokens
+- [Typography](/guidelines/design-tokens/typography.md) - Font tokens
+- [Spacing](/guidelines/design-tokens/spacing.md) - Spacing scale
+- [Borders](/guidelines/design-tokens/borders.md) - Border tokens
+- [Shadows](/guidelines/design-tokens/shadows.md) - Shadow tokens
 
 ---
 
 ## Changelog
 
-### March 13, 2026 - Initial Creation
-- Created WordPress-aligned CSS variable guidelines
-- Documented naming conventions
-- Added migration examples
-- Created validation checklist
-- Mapped future WordPress theme.json structure
+### Version 1.0 (2024-03-15)
+- Initial creation
+- Defined complete variable reference
+- Added WordPress theme.json mapping
+- Provided migration checklist
+- Included usage examples
 
 ---
 
-**Status:** ✅ **ACTIVE STANDARD**  
-**Enforcement:** 🔴 **MANDATORY for all new code**  
-**Next Review:** Monthly or after WordPress migration planning
+**Maintained by:** The Wire Brand Development Team  
+**Questions?** Reference this document in all CSS-related PRs

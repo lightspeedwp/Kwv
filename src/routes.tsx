@@ -63,6 +63,7 @@ import { FullWidthLandingPage } from './pages/handdrawn-demo/FullWidthLandingPag
 // Legal Pages
 import { Terms } from './pages/legal/Terms';
 import { Policies } from './pages/legal/Policies';
+import { ReturnsPolicy } from './pages/legal/ReturnsPolicy';
 
 /**
  * Application Router Configuration
@@ -149,6 +150,8 @@ export const router = createBrowserRouter([
   // Legal Routes
   { path: '/terms', Component: Terms },
   { path: '/policies', Component: Policies },
+  { path: '/returns-policy', Component: ReturnsPolicy },
+  { path: '/returns', Component: ReturnsPolicy },
 
   // Fallback - redirect to home
   { path: '*', Component: Home },

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Typography } from '../../common/Typography';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import { KWVShopLogo } from '../../common/Logo';
+import { Logo } from '../../common/Logo';
+import { SITE_CONTENT } from '../../../data/site-content';
 
 /**
  * ShopInfoFooter Component
@@ -25,9 +26,9 @@ export const ShopInfoFooter: React.FC = () => {
                     Contact Us
                  </Typography>
                  <p className="text-sm text-gray-400 leading-relaxed">
-                    Tel: +27 21 807 3007<br/>
-                    Email: hello@thewirebrand.co.za<br/>
-                    GPS: 33°45'45.17" S, 18°57'58.42" E
+                    Tel: {SITE_CONTENT.contact.phone}<br/>
+                    Email: {SITE_CONTENT.contact.email}<br/>
+                    {SITE_CONTENT.contact.address.full}
                  </p>
               </div>
               
@@ -60,14 +61,14 @@ export const ShopInfoFooter: React.FC = () => {
           {/* Column 3: Map */}
           <div className="lg:w-1/3 relative min-h-[300px]">
              <iframe 
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.107693214865!2d18.96402331520387!3d-33.76801668068368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcdadcf7a06a71d%3A0x521940687263680!2sKWV%20Emporium!5e0!3m2!1sen!2sza!4v1625000000000!5m2!1sen!2sza" 
+               src={SITE_CONTENT.contact.mapEmbedUrl}
                width="100%" 
                height="100%" 
                style={{ border: 0, filter: 'grayscale(0.3)' }} 
                allowFullScreen={false} 
                loading="lazy"
                className="absolute inset-0"
-               title="KWV Map"
+               title="Handcrafted Wines Location Map"
              ></iframe>
           </div>
        </div>

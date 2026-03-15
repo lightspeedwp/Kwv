@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Typography } from '../../common/Typography';
-import { Link } from 'react-router';
+import { SITE_CONTENT } from '../../../data/site-content';
 import { CheckoutInput } from './CheckoutInput';
-import { Checkbox } from './Checkbox';
 
 interface ContactInfoProps {
   isLoggedIn: boolean;
@@ -52,17 +50,19 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
              <p className="text-xs text-gray-500 mt-1 pl-1">You are currently checking out as a guest.</p>
            </div>
 
-           <div className="flex items-center gap-4 mt-2">
-             <div className="relative flex items-center">
-               <Checkbox 
-                  id="create-account" 
-                  checked={createAccount}
-                  onChange={() => setCreateAccount(!createAccount)}
-               />
-             </div>
+           <div className="flex items-start gap-3">
+             <input 
+                id="create-account" 
+                type="checkbox" 
+                className="mt-1.5 size-5 border-gray-300 rounded focus:ring-[#8B0000]"
+                checked={createAccount}
+                onChange={() => setCreateAccount(!createAccount)}
+             />
+             <div>
              <label htmlFor="create-account" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
-                Create an account with KWV
+                {SITE_CONTENT.shop.createAccountLabel}
              </label>
+             </div>
            </div>
         </div>
       )}
