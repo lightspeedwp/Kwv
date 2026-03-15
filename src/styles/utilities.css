@@ -265,7 +265,7 @@
   line-height: var(--twb-leading-normal);
   text-decoration: none;
   border: 1px solid transparent;
-  border-radius: var(--twb-radius-button);
+  border-radius: var(--twb-radius-organic-sm); /* Organic asymmetric corners */
   cursor: pointer;
   transition: background-color var(--twb-transition-fast), 
               border-color var(--twb-transition-fast),
@@ -273,6 +273,7 @@
               transform var(--twb-transition-fast),
               box-shadow var(--twb-transition-fast);
   min-height: 40px; /* WCAG touch target minimum */
+  position: relative; /* For potential hand-drawn overlays */
 }
 
 .twb-btn:focus-visible {

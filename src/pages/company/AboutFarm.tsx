@@ -24,6 +24,7 @@ import { Mountain, Grape, FlaskConical, Heart, Trees, Droplet, Sun, MapPin } fro
 import { Button } from '../../components/common/Button';
 import { Link } from 'react-router';
 import { farmStory } from '../../data/farmStory';
+import { HandDrawnOakBarrel } from '../../components/decorative/icons';
 import heroImage from 'figma:asset/fe3c1c394bedc4c207970e159acb3d745653037f.png';
 
 export const AboutFarm = () => {
@@ -127,9 +128,16 @@ export const AboutFarm = () => {
                 <p className="text-white/70 text-sm">Mountain spring water for irrigation</p>
               </div>
               <div className="bg-white/10 p-6 rounded-lg border border-white/20">
-                <Trees size={32} className="text-[var(--twb-color-gold)] mb-3" />
-                <h4 className="font-serif text-lg mb-2">Sustainable Farming</h4>
-                <p className="text-white/70 text-sm">Organic practices, no synthetic pesticides</p>
+                {/* Hand-drawn oak barrel icon */}
+                <div className="mb-3">
+                  <HandDrawnOakBarrel 
+                    size={32} 
+                    color="var(--twb-color-gold)" 
+                    showBung={true}
+                  />
+                </div>
+                <h4 className="font-serif text-lg mb-2">French Oak Aging</h4>
+                <p className="text-white/70 text-sm">70-year-old stone cellar for barrel aging</p>
               </div>
             </div>
           </div>

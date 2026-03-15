@@ -47,6 +47,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -134,7 +135,7 @@ export const ProductDetail: React.FC = () => {
   ];
 
   return (
-    <>
+    <Layout>
       {/* SEO Schema.org Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -489,7 +490,7 @@ export const ProductDetail: React.FC = () => {
           </Container>
         </section>
       )}
-    </>
+    </Layout>
   );
 };
 

@@ -45,6 +45,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -93,7 +94,7 @@ export const CheeseCategory: React.FC = () => {
   }, [filteredCheeses, sortBy]);
 
   return (
-    <>
+    <Layout>
       {/* SEO Metadata */}
       <title>Artisan Cheese - Handcrafted Wines | Goat Cheese from Paarl Mountain</title>
       <meta name="description" content="Fresh and aged goat cheeses from our family dairy. Made by hand from milk from our own goats on Paarl Mountain." />
@@ -296,7 +297,7 @@ export const CheeseCategory: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };
 

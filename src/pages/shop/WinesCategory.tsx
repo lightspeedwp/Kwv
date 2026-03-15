@@ -42,6 +42,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -50,6 +51,7 @@ import { Badge } from '../../components/ui/badge';
 import { BreadcrumbsBar } from '../../components/layout/BreadcrumbsBar';
 import { products, Product } from '../../data/products';
 import { Wine, Award, Sparkles } from 'lucide-react';
+import { HandDrawnWineBottle } from '../../components/decorative/icons';
 
 export const WinesCategory: React.FC = () => {
   // Filter and sort state
@@ -90,7 +92,7 @@ export const WinesCategory: React.FC = () => {
   }, [filteredWines, sortBy]);
 
   return (
-    <>
+    <Layout>
       {/* SEO Metadata */}
       <title>Our Wines - Handcrafted Wines | Family Farm Paarl Mountain</title>
       <meta name="description" content="Browse our selection of handcrafted wines from Paarl Mountain. Four generations of winemaking since 1918." />
@@ -108,7 +110,13 @@ export const WinesCategory: React.FC = () => {
       <section className="bg-[var(--twb-color-bg-primary)] py-[var(--twb-spacing-section-y)]">
         <Container variant="wide">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <Wine className="size-12 mx-auto mb-4 text-[var(--twb-color-plum)]" aria-hidden="true" />
+            {/* Hand-drawn wine bottle icon */}
+            <div className="flex justify-center mb-6">
+              <HandDrawnWineBottle 
+                size={64} 
+                color="var(--twb-color-plum)" 
+              />
+            </div>
             <Typography variant="h1" className="mb-4">
               Our Wines
             </Typography>
@@ -223,7 +231,7 @@ export const WinesCategory: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };
 

@@ -44,6 +44,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -124,7 +125,7 @@ export const GiftsCategory: React.FC = () => {
   }, [giftProducts, sortBy]);
 
   return (
-    <>
+    <Layout>
       {/* SEO Metadata */}
       <title>Gift Sets - Handcrafted Wines | Curated Wine, Cheese & Spirit Gifts</title>
       <meta name="description" content="Beautifully curated gift sets featuring our handcrafted wines, artisan cheeses, and aged spirits. Perfect for any occasion." />
@@ -324,7 +325,7 @@ export const GiftsCategory: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };
 

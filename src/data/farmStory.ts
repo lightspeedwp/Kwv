@@ -82,14 +82,16 @@ This isn't just our farm—it's our home. And when you visit, we want you to fee
       role: "Master Distiller (3rd Generation)",
       bio: "At 78, I'm officially retired, but you'll still find me in the distillery most mornings. I've been making grappa and brandy for nearly 40 years, and there's something magical about transforming grape pomace into liquid gold. The young folks let me tinker, and I couldn't be happier.",
       quote: "Good brandy needs time and patience. Just like family.",
-      image: "team-hennie.jpg"
+      image: "team-hennie.jpg",
+      email: "distillery@handcraftedwines.co.za"
     },
     {
       name: "Liezl van der Berg",
       role: "Vineyard Manager & Environmental Steward",
       bio: "I'm Pieter's younger sister, and while he gets all the glory for making the wine, I'm the one who grows the grapes! I studied viticulture and environmental science because I believe we have a responsibility to farm in harmony with nature. Our vines are happy, and so is Paarl Mountain.",
       quote: "Healthy soil makes healthy vines. Healthy vines make extraordinary wine.",
-      image: "team-liezl.jpg"
+      image: "team-liezl.jpg",
+      email: "vineyard@handcraftedwines.co.za"
     }
   ],
 

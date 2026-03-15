@@ -55,10 +55,13 @@ import { Events } from './pages/events/Events';
 import { EventDetail } from './pages/events/EventDetail';
 import { EventsFAQ } from './pages/events/EventsFAQ';
 
+// Demo Pages
+import { HandDrawnComponentLibrary } from './pages/handdrawn-demo/HandDrawnComponentLibrary';
+import { FullWidthLandingPage } from './pages/handdrawn-demo/FullWidthLandingPage';
+
 // Legal Pages
 import { Terms } from './pages/legal/Terms';
 import { Policies } from './pages/legal/Policies';
-import { ReturnsPolicy } from './pages/legal/ReturnsPolicy';
 
 /**
  * Application Router Configuration
@@ -137,15 +140,13 @@ export const router = createBrowserRouter([
   { path: '/events/:slug', Component: EventDetail },
   { path: '/events/faq', Component: EventsFAQ },
 
+  // Demo Routes
+  { path: '/handdrawn-demo', Component: HandDrawnComponentLibrary },
+  { path: '/handdrawn-demo/landing-page', Component: FullWidthLandingPage },
+
   // Legal Routes
   { path: '/terms', Component: Terms },
   { path: '/policies', Component: Policies },
-  { path: '/returns-policy', Component: ReturnsPolicy },
-  { path: '/privacy', Component: Policies },
-  { path: '/accessibility', Component: Policies },
-  { path: '/cookies', Component: Policies },
-  { path: '/shipping', Component: Policies },
-  { path: '/returns', Component: ReturnsPolicy },
 
   // Fallback - redirect to home
   { path: '*', Component: Home },

@@ -21,6 +21,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { Facebook, Instagram, Mail, Phone, MapPin, Heart } from 'lucide-react';
 import { Container } from '../common/Container';
+import { PaperTexture } from '../decorative/PaperTexture';
 import { farmStory } from '../../data/farmStory';
 
 export const UnifiedFooter: React.FC = () => {
@@ -84,9 +85,12 @@ export const UnifiedFooter: React.FC = () => {
   const yearsInBusiness = currentYear - farmStory.established;
 
   return (
-    <footer className="bg-[var(--twb-color-ink)] text-white border-t border-white/10">
+    <footer className="bg-[var(--twb-color-ink)] text-white border-t border-white/10 relative">
+      {/* Paper texture overlay */}
+      <PaperTexture intensity="subtle" opacity={0.04} />
+      
       {/* Newsletter Section */}
-      <div className="border-b border-white/10 py-12 bg-gradient-to-b from-[var(--twb-color-plum)]/20 to-transparent">
+      <div className="border-b border-white/10 py-12 bg-gradient-to-b from-[var(--twb-color-plum)]/20 to-transparent relative z-10">
         <Container>
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="font-serif text-3xl md:text-4xl mb-3 text-[var(--twb-color-gold)]">

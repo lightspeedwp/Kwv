@@ -3,6 +3,7 @@ import { Container } from '../common/Container';
 import { Typography } from '../common/Typography';
 import { Button } from '../common/Button';
 import { HandDrawnUnderline } from '../decorative/HandDrawnUnderline';
+import { PaperTexture } from '../decorative/PaperTexture';
 
 interface NewsletterProps {
   title?: string;
@@ -58,6 +59,9 @@ export const Newsletter: React.FC<NewsletterProps> = ({
 
   return (
     <section className={`py-[var(--twb-spacing-section-y)] bg-[var(--twb-color-ink)] dark:bg-[var(--twb-color-bg-tertiary)] text-white dark:text-[var(--twb-color-text-primary)] relative overflow-hidden border-t border-transparent dark:border-[var(--twb-border-tertiary)] ${className}`}>
+       {/* Paper texture */}
+       <PaperTexture intensity="subtle" opacity={0.06} />
+       
        {/* Background pattern */}
        <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none" 
             style={{ backgroundImage: 'radial-gradient(circle at center, #c8a96b 1px, transparent 1px)', backgroundSize: '20px 20px' }}

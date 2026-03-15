@@ -1,494 +1,404 @@
 # Keyboard Navigation Guidelines
 
-**Category:** Accessibility  
-**Domain:** Keyboard Access  
 **Version:** 1.0  
-**Last Updated:** 2024-03-13  
+**Last Updated:** March 15, 2026  
 **Status:** Active  
-**WCAG:** 2.1.1 (Level A), 2.1.3 (Level AAA), 2.4.3 (Level A), 2.4.7 (Level AA)
+**Applies To:** All Handcrafted Wines interactive components
 
 ---
 
 ## Overview
 
-All interactive elements on The Wire Brand website must be fully operable via keyboard. This ensures accessibility for users who cannot use a mouse due to motor disabilities, screen reader users, and power users who prefer keyboard navigation.
+Keyboard navigation is a critical accessibility requirement that ensures users who cannot use a mouse can still access all features of the website. This includes users with motor disabilities, power users, and screen reader users.
 
-**Key Requirements:**
-- All functionality available via keyboard
-- Logical, predictable tab order
-- Visible focus indicators (2px ring minimum)
-- No keyboard traps
-- Consistent keyboard shortcuts
+**Requirement:** All interactive functionality must be accessible using keyboard only (no mouse).
 
 ---
 
-## Keyboard Access Standards
+## Quick Reference
 
-### WCAG Requirements
+### Essential Keyboard Shortcuts
 
-**WCAG 2.1.1 Keyboard (Level A):**  
-All functionality must be available using a keyboard interface.
-
-**WCAG 2.1.3 Keyboard (No Exception) (Level AAA):**  
-All functionality must be operable through a keyboard interface without exception.
-
-**WCAG 2.4.3 Focus Order (Level A):**  
-Focusable components receive focus in an order that preserves meaning and operability.
-
-**WCAG 2.4.7 Focus Visible (Level AA):**  
-Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.
-
----
-
-## Tab Order
-
-### Tab Navigation
-
-**Tab Key:** Moves focus forward through interactive elements  
-**Shift + Tab:** Moves focus backward through interactive elements
-
-### Logical Tab Order
-
-**Tab order must follow visual order:**
-
-```tsx
-// ✅ Good: Visual order matches DOM order
-<form>
-  <input name="firstName" />  {/* Tab stop 1 */}
-  <input name="lastName" />   {/* Tab stop 2 */}
-  <input name="email" />      {/* Tab stop 3 */}
-  <button type="submit">Submit</button> {/* Tab stop 4 */}
-</form>
-
-// ❌ Bad: Visual order doesn't match DOM order
-<form>
-  <input name="firstName" style={{ order: 2 }} />  {/* Visually second, but Tab stop 1 */}
-  <input name="email" style={{ order: 3 }} />     {/* Visually third, but Tab stop 2 */}
-  <input name="lastName" style={{ order: 1 }} />  {/* Visually first, but Tab stop 3 */}
-</form>
-```
-
-### TabIndex Rules
-
-**Natural tab order (tabindex="0"):**
-```tsx
-// Default: Buttons, links, form inputs are naturally focusable
-<button>Click me</button>  {/* No tabindex needed */}
-<a href="/wines">Wines</a> {/* No tabindex needed */}
-<input type="text" />      {/* No tabindex needed */}
-```
-
-**Remove from tab order (tabindex="-1"):**
-```tsx
-// Programmatically focusable, but not in tab order
-<div tabIndex={-1} ref={skipTargetRef}>
-  {/* Content that can receive focus programmatically */}
-</div>
-```
-
-**❌ Never use positive tabindex:**
-```tsx
-// ❌ BAD: Disrupts natural tab order
-<button tabIndex={1}>First</button>
-<button tabIndex={2}>Second</button>
-<button tabIndex={3}>Third</button>
-
-// ✅ GOOD: Use DOM order
-<button>First</button>
-<button>Second</button>
-<button>Third</button>
-```
+| Key | Action | Applies To |
+|-----|--------|------------|
+| `Tab` | Move focus forward | All interactive elements |
+| `Shift + Tab` | Move focus backward | All interactive elements |
+| `Enter` | Activate | Links, buttons, form submissions |
+| `Space` | Activate/Toggle | Buttons, checkboxes, radio buttons |
+| `Esc` | Close/Cancel | Modals, dropdowns, menus |
+| `Arrow Keys` | Navigate | Menus, tabs, carousels, dropdowns |
+| `Home` | Jump to start | Long lists, text inputs |
+| `End` | Jump to end | Long lists, text inputs |
 
 ---
 
-## Focus Indicators
+## 1. Tab Order & Focus Management
 
-### Visible Focus Rings
+### 1.1 Logical Tab Order
 
-**All interactive elements MUST have visible focus indicators.**
+**Tab order must follow visual reading order:**
+1. Header (logo, navigation, search, cart)
+2. Main content (top to bottom, left to right)
+3. Sidebar (if present)
+4. Footer (links, newsletter, social)
 
-**Standard focus ring:**
-```tsx
-className="focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)] focus:ring-offset-2"
+**Example tab sequence for product page:**
+```
+1. Skip to main content link
+2. Logo link
+3. About dropdown
+4. Shop dropdown
+5. Visit dropdown
+6. Events dropdown
+7. Search button
+8. Account link
+9. Cart link
+10. [Main content starts]
+11. Product name heading (focusable if it's a link)
+12. Add to Cart button
+13. Quantity decrease button
+14. Quantity input
+15. Quantity increase button
+16. Product tabs (Description, Tasting Notes, etc.)
+17. Related products
+18. [Footer starts]
+19. Newsletter email input
+20. Newsletter submit button
+21. Footer navigation links
 ```
 
-**Focus ring contrast:**
-- Focus indicator must have 3:1 contrast against adjacent colors (WCAG 2.4.11 Level AA)
-- Use The Wire Brand plum color (`#5a2d3b`) for focus rings
+### 1.2 Focusable Elements
 
-**Implementation examples:**
+**Default focusable elements:**
+- `<a>` with `href`
+- `<button>`
+- `<input>`, `<select>`, `<textarea>`
+- `<summary>` (details element)
 
+**Custom focusable elements:**
 ```tsx
-// Button focus
-<button className="bg-[var(--twb-color-plum)] text-white px-6 py-3 rounded-twb-md focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)] focus:ring-offset-2">
-  Add to Cart
-</button>
-
-// Link focus
-<a
-  href="/wines"
-  className="text-[var(--twb-color-plum)] underline focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)] focus:ring-offset-1"
->
-  View Wines
-</a>
-
-// Input focus
-<input
-  type="text"
-  className="border border-[var(--twb-border-tertiary)] rounded-twb-sm px-4 py-2 focus:outline-none focus:border-2 focus:border-[var(--twb-border-focus)] focus:ring-2 focus:ring-[var(--twb-color-plum)] focus:ring-offset-2"
-/>
-
-// Card focus (tappable)
-<a
-  href={`/wines/${wine.id}`}
-  className="block p-6 border border-[var(--twb-border-tertiary)] rounded-twb-md focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)] focus:ring-offset-2"
->
-  {/* Card content */}
-</a>
-```
-
-### Focus Within (Parent Focus)
-
-**Highlight parent container when child receives focus:**
-
-```tsx
-<div className="border border-[var(--twb-border-tertiary)] p-4 rounded-twb-md focus-within:ring-2 focus-within:ring-[var(--twb-color-plum)]">
-  <input type="text" placeholder="Search" />
-  <button type="submit">Search</button>
-</div>
-```
-
----
-
-## Keyboard Shortcuts
-
-### Standard Keyboard Interactions
-
-| Element | Key | Action |
-|---------|-----|--------|
-| Button | Enter or Space | Activate button |
-| Link | Enter | Follow link |
-| Checkbox | Space | Toggle checked state |
-| Radio button | Space | Select radio |
-| Radio group | Arrow keys | Navigate between options |
-| Select dropdown | Space | Open dropdown |
-| Select dropdown | Arrow keys | Navigate options |
-| Select dropdown | Enter | Select option |
-| Modal/Dialog | Escape | Close modal |
-| Expandable menu | Enter or Space | Toggle expand/collapse |
-| Tabs | Arrow keys | Navigate between tabs |
-
-### Form Controls
-
-**Text Input:**
-```tsx
-<input
-  type="text"
+// Add tabindex="0" to make custom elements focusable
+<div 
+  role="button" 
+  tabIndex={0}
+  onClick={handleClick}
   onKeyDown={(e) => {
-    if (e.key === 'Enter') {
-      handleSubmit();
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
     }
   }}
-/>
-```
-
-**Checkbox:**
-```tsx
-<label>
-  <input type="checkbox" /> {/* Space toggles */}
-  <span>Subscribe to newsletter</span>
-</label>
-```
-
-**Radio Group:**
-```tsx
-<div role="radiogroup" aria-labelledby="shipping-label">
-  <p id="shipping-label">Shipping Method</p>
-  <label>
-    <input type="radio" name="shipping" value="standard" />
-    <span>Standard (3-5 days)</span>
-  </label>
-  <label>
-    <input type="radio" name="shipping" value="express" />
-    <span>Express (1-2 days)</span>
-  </label>
+>
+  Custom Button
 </div>
-{/* Arrow keys navigate between radios automatically */}
 ```
 
-### Custom Components
+**Never use `tabindex` > 0** - This disrupts natural tab order.
 
-**Dropdown Menu:**
+### 1.3 Skip Links
+
+**Provide skip links for long pages:**
+
 ```tsx
-function DropdownMenu() {
+// Place at very top of page
+<a 
+  href="#main-content" 
+  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:rounded"
+>
+  Skip to main content
+</a>
+
+// Target element
+<main id="main-content">
+  {/* Page content */}
+</main>
+```
+
+**Benefits:**
+- Keyboard users can bypass repetitive navigation
+- Screen reader users can jump to content quickly
+- Required for pages with >40 links in header
+
+---
+
+## 2. Focus Indicators
+
+### 2.1 Visible Focus Rings
+
+**All interactive elements must have a visible focus indicator.**
+
+**Handcrafted Wines Focus Standard:**
+```css
+/* Global focus style */
+*:focus-visible {
+  outline: 2px solid var(--twb-color-gold);
+  outline-offset: 2px;
+}
+
+/* Enhanced focus for buttons */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--twb-color-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(200, 169, 107, 0.2);
+}
+
+/* Focus for inputs */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--twb-color-gold);
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px rgba(200, 169, 107, 0.2);
+}
+```
+
+**Properties:**
+- **Color:** Gold (`#c8a96b`) - 4.9:1 contrast on dark backgrounds
+- **Width:** 2px minimum
+- **Offset:** 2px from element (0 for inputs)
+- **Glow:** Optional 4px shadow at 20% opacity for extra visibility
+
+### 2.2 Focus vs Focus-Visible
+
+**Use `:focus-visible` instead of `:focus`:**
+
+```css
+/* ❌ Wrong - Shows focus ring on mouse click */
+button:focus {
+  outline: 2px solid gold;
+}
+
+/* ✅ Correct - Shows focus ring only on keyboard navigation */
+button:focus-visible {
+  outline: 2px solid var(--twb-color-gold);
+}
+```
+
+**`:focus-visible` shows focus ring only for keyboard navigation, not mouse clicks.**
+
+### 2.3 Never Remove Outline
+
+**❌ Never do this:**
+```css
+button:focus {
+  outline: none;
+}
+```
+
+**✅ If you must customize, replace with visible alternative:**
+```css
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--twb-color-gold);
+}
+```
+
+---
+
+## 3. Interactive Component Patterns
+
+### 3.1 Buttons
+
+**Requirements:**
+- Activates on `Enter` and `Space`
+- Shows focus indicator
+- Clear hover and active states
+
+**Standard Button:**
+```tsx
+<button 
+  onClick={handleClick}
+  className="px-6 py-3 bg-[var(--twb-color-plum)] text-white rounded-[var(--twb-radius-button)] focus-visible:outline-2 focus-visible:outline-gold"
+>
+  Add to Cart
+</button>
+```
+
+**Icon Button:**
+```tsx
+<button 
+  onClick={handleCart}
+  aria-label="View shopping cart"
+  className="p-2 rounded-full hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-gold"
+>
+  <ShoppingCart className="size-5" aria-hidden="true" />
+</button>
+```
+
+### 3.2 Dropdowns
+
+**Keyboard behavior:**
+- `Tab` or `Enter` to open dropdown
+- `Arrow Up/Down` to navigate options
+- `Enter` to select option
+- `Esc` to close without selecting
+
+**Example:**
+```tsx
+const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const [focusedIndex, setFocusedIndex] = useState(0);
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       setIsOpen(!isOpen);
-    }
-    if (e.key === 'Escape') {
+    } else if (e.key === 'Escape') {
       setIsOpen(false);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev + 1) % options.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev - 1 + options.length) % options.length);
     }
   };
-  
+
   return (
-    <div>
+    <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        Menu
+        Select Option
       </button>
-      
       {isOpen && (
         <ul role="menu">
-          <li role="menuitem"><a href="/wines">Wines</a></li>
-          <li role="menuitem"><a href="/spirits">Spirits</a></li>
+          {options.map((option, index) => (
+            <li
+              key={option.id}
+              role="menuitem"
+              tabIndex={focusedIndex === index ? 0 : -1}
+              className={focusedIndex === index ? 'bg-gray-100' : ''}
+            >
+              {option.label}
+            </li>
+          ))}
         </ul>
       )}
     </div>
   );
-}
+};
 ```
 
-**Modal Dialog:**
+### 3.3 Modals
+
+**Requirements:**
+- **Focus trap** - Tab cycles within modal
+- **Escape key** - Closes modal
+- **Return focus** - Focus returns to trigger element on close
+
+**Modal implementation:**
 ```tsx
-function Modal({ isOpen, onClose, children }) {
+const Modal = ({ isOpen, onClose, children }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement>(document.activeElement as HTMLElement);
+
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    
     if (isOpen) {
+      // Save current focus
+      triggerRef.current = document.activeElement as HTMLElement;
+      
+      // Move focus to modal
+      modalRef.current?.focus();
+
+      // Handle Escape key
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
       document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        // Return focus to trigger element
+        triggerRef.current?.focus();
+      };
     }
   }, [isOpen, onClose]);
-  
-  // Focus trap implementation (see Focus Management section)
-}
-```
 
----
+  if (!isOpen) return null;
 
-## Focus Management
-
-### Modal/Dialog Focus Trap
-
-**When modal opens:**
-1. Focus moves to first focusable element inside modal
-2. Tab cycles through modal content only (trapped)
-3. Escape closes modal
-4. Focus returns to trigger element on close
-
-**Implementation with Radix UI:**
-```tsx
-import { Dialog, DialogContent, DialogTrigger } from './components/ui/dialog';
-
-<Dialog>
-  <DialogTrigger asChild>
-    <button>Open Modal</button>
-  </DialogTrigger>
-  
-  <DialogContent>
-    {/* Radix automatically handles focus trap */}
-    <h2>Modal Title</h2>
-    <input type="text" /> {/* Receives focus on open */}
-    <button onClick={handleClose}>Close</button>
-  </DialogContent>
-</Dialog>
-```
-
-### Skip Links
-
-**Allow keyboard users to skip to main content:**
-
-```tsx
-<a
-  href="#main-content"
-  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[var(--twb-color-plum)] text-white px-4 py-2 rounded-twb-sm z-[100] focus:outline-none focus:ring-2 focus:ring-white"
->
-  Skip to main content
-</a>
-
-{/* Later in the page */}
-<main id="main-content" tabIndex={-1}>
-  {/* Main content */}
-</main>
-```
-
-### Programmatic Focus
-
-**Moving focus programmatically:**
-
-```tsx
-function SearchResults() {
-  const resultsRef = useRef<HTMLDivElement>(null);
-  
-  const handleSearch = async (query: string) => {
-    const results = await searchWines(query);
-    setResults(results);
-    
-    // Move focus to results
-    resultsRef.current?.focus();
-  };
-  
   return (
-    <>
-      <input
-        type="search"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSearch(e.currentTarget.value);
-          }
-        }}
-      />
+    <div 
+      role="dialog" 
+      aria-modal="true"
+      ref={modalRef}
+      tabIndex={-1}
+      className="fixed inset-0 z-50"
+    >
+      {/* Backdrop */}
+      <div className="fixed inset-0 bg-black/50" onClick={onClose} />
       
-      <div
-        ref={resultsRef}
-        tabIndex={-1}
-        className="mt-8 focus:outline-none"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {results.map(wine => (
-          <WineCard key={wine.id} {...wine} />
-        ))}
+      {/* Modal content */}
+      <div className="relative bg-white p-6 rounded-lg max-w-md mx-auto mt-20">
+        {children}
+        <button onClick={onClose} className="mt-4">
+          Close
+        </button>
       </div>
-    </>
-  );
-}
-```
-
----
-
-## Keyboard Traps (Avoid)
-
-### What is a Keyboard Trap?
-
-**A keyboard trap occurs when:**
-- User can navigate into a component via Tab
-- User CANNOT navigate out via Tab/Shift+Tab
-- No Escape key to exit
-
-**❌ Bad Example:**
-```tsx
-// Custom input that prevents Tab
-<input
-  onKeyDown={(e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault(); // KEYBOARD TRAP!
-    }
-  }}
-/>
-```
-
-**✅ Good Example (Modal - Intentional Trap with Escape):**
-```tsx
-// Modal traps focus, but provides Escape to exit
-<Dialog onOpenChange={(open) => !open && handleClose()}>
-  {/* Focus trapped inside modal */}
-  {/* Escape key closes modal */}
-</Dialog>
-```
-
----
-
-## Custom Interactive Components
-
-### Accordion (Expandable Sections)
-
-```tsx
-function Accordion({ items }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setOpenIndex(openIndex === index ? null : index);
-    }
-  };
-  
-  return (
-    <div>
-      {items.map((item, index) => (
-        <div key={index}>
-          <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            aria-expanded={openIndex === index}
-            aria-controls={`panel-${index}`}
-            className="w-full text-left p-4 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)]"
-          >
-            {item.title}
-          </button>
-          
-          {openIndex === index && (
-            <div id={`panel-${index}`} className="p-4">
-              {item.content}
-            </div>
-          )}
-        </div>
-      ))}
     </div>
   );
-}
+};
 ```
 
-### Tabs
+### 3.4 Tabs
 
+**Keyboard behavior:**
+- `Tab` to focus tab list
+- `Arrow Left/Right` to switch tabs
+- `Enter` to activate tab
+- Content panel receives focus
+
+**Tab implementation:**
 ```tsx
-function Tabs({ tabs }) {
+const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  
+
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     if (e.key === 'ArrowRight') {
-      const nextIndex = (index + 1) % tabs.length;
-      setActiveTab(nextIndex);
-      tabRefs.current[nextIndex]?.focus();
-    }
-    if (e.key === 'ArrowLeft') {
-      const prevIndex = (index - 1 + tabs.length) % tabs.length;
-      setActiveTab(prevIndex);
-      tabRefs.current[prevIndex]?.focus();
+      e.preventDefault();
+      setActiveTab((index + 1) % tabs.length);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      setActiveTab((index - 1 + tabs.length) % tabs.length);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setActiveTab(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setActiveTab(tabs.length - 1);
     }
   };
-  
+
   return (
     <div>
-      <div role="tablist">
+      <div role="tablist" className="flex gap-2">
         {tabs.map((tab, index) => (
           <button
-            key={index}
-            ref={(el) => (tabRefs.current[index] = el)}
+            key={tab.id}
             role="tab"
             aria-selected={activeTab === index}
-            aria-controls={`panel-${index}`}
+            aria-controls={`panel-${tab.id}`}
+            id={`tab-${tab.id}`}
             tabIndex={activeTab === index ? 0 : -1}
             onClick={() => setActiveTab(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
-            className={cn(
-              "px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-plum)]",
-              activeTab === index && "border-b-2 border-[var(--twb-color-plum)]"
-            )}
           >
             {tab.label}
           </button>
         ))}
       </div>
-      
       {tabs.map((tab, index) => (
         <div
-          key={index}
-          id={`panel-${index}`}
+          key={tab.id}
           role="tabpanel"
+          id={`panel-${tab.id}`}
+          aria-labelledby={`tab-${tab.id}`}
           hidden={activeTab !== index}
           tabIndex={0}
         >
@@ -497,74 +407,296 @@ function Tabs({ tabs }) {
       ))}
     </div>
   );
-}
+};
 ```
+
+### 3.5 Carousels
+
+**Keyboard behavior:**
+- `Arrow Left/Right` to navigate slides
+- `Tab` to focus carousel controls
+- `Space` to pause auto-rotation
+
+**Carousel requirements:**
+- Pause button accessible via keyboard
+- Slide indicators keyboard accessible
+- Current slide announced to screen readers
 
 ---
 
-## Testing Keyboard Navigation
+## 4. Form Navigation
 
-### Manual Testing Checklist
+### 4.1 Form Field Order
 
-- [ ] Unplug mouse, navigate entire site with keyboard only
-- [ ] Tab through all interactive elements
-- [ ] Verify focus indicator is visible on all elements
-- [ ] Test forms can be filled and submitted via keyboard
-- [ ] Test modals open/close with Enter/Escape
-- [ ] Test dropdowns expand with Enter/Space
-- [ ] Verify no keyboard traps exist
-- [ ] Test skip links work
-- [ ] Verify tab order is logical
-- [ ] Test with screen reader (announces focus correctly)
-
-### Automated Testing
-
+**Tab through fields in logical order:**
 ```tsx
-// Jest + Testing Library
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+<form>
+  {/* 1. First name */}
+  <input type="text" id="firstName" />
+  
+  {/* 2. Last name */}
+  <input type="text" id="lastName" />
+  
+  {/* 3. Email */}
+  <input type="email" id="email" />
+  
+  {/* 4. Phone */}
+  <input type="tel" id="phone" />
+  
+  {/* 5. Submit button */}
+  <button type="submit">Submit</button>
+</form>
+```
 
-test('button is keyboard accessible', async () => {
-  const user = userEvent.setup();
-  const handleClick = jest.fn();
+### 4.2 Error Handling
+
+**Move focus to first error on submit:**
+```tsx
+const handleSubmit = (e) => {
+  e.preventDefault();
   
-  render(<button onClick={handleClick}>Click me</button>);
-  
-  const button = screen.getByRole('button');
-  
-  // Tab to button
-  await user.tab();
-  expect(button).toHaveFocus();
-  
-  // Activate with Enter
-  await user.keyboard('{Enter}');
-  expect(handleClick).toHaveBeenCalled();
-});
+  const errors = validateForm();
+  if (errors.length > 0) {
+    // Move focus to first error
+    const firstErrorField = document.getElementById(errors[0].fieldId);
+    firstErrorField?.focus();
+    
+    // Announce error to screen readers
+    announceError(errors[0].message);
+  }
+};
+```
+
+### 4.3 Required Fields
+
+**Mark required fields clearly:**
+```tsx
+<label htmlFor="email">
+  Email Address <span className="text-red-600" aria-label="required">*</span>
+</label>
+<input 
+  type="email" 
+  id="email" 
+  required 
+  aria-required="true"
+/>
 ```
 
 ---
 
-## Related Guidelines
+## 5. Navigation Menus
 
-- [WCAG Compliance](/guidelines/accessibility/wcag-compliance.md) - Full accessibility standards
-- [Screen Readers](/guidelines/accessibility/screen-readers.md) - Screen reader support
-- [Touch Targets](/guidelines/design-tokens/touch-targets.md) - Touch accessibility
-- [Navigation](/guidelines/design-tokens/navigation.md) - Navigation patterns
+### 5.1 Header Navigation
+
+**Keyboard behavior:**
+- `Tab` to focus menu items
+- `Enter` to activate dropdown
+- `Arrow Down` to enter submenu
+- `Arrow Up/Down` to navigate submenu items
+- `Esc` to close submenu
+- `Tab` to exit menu and continue to next element
+
+**Example menu:**
+```tsx
+const NavMenu = () => {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
+  const handleKeyDown = (e: React.KeyboardEvent, menuId: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setOpenMenu(openMenu === menuId ? null : menuId);
+    } else if (e.key === 'Escape') {
+      setOpenMenu(null);
+    } else if (e.key === 'ArrowDown' && openMenu === menuId) {
+      // Focus first submenu item
+      const firstItem = document.querySelector(`#${menuId}-submenu button`);
+      (firstItem as HTMLElement)?.focus();
+    }
+  };
+
+  return (
+    <nav>
+      <button
+        aria-expanded={openMenu === 'shop'}
+        aria-haspopup="true"
+        onKeyDown={(e) => handleKeyDown(e, 'shop')}
+      >
+        Shop
+      </button>
+      {openMenu === 'shop' && (
+        <div id="shop-submenu" role="menu">
+          <button role="menuitem">Wines</button>
+          <button role="menuitem">Spirits</button>
+          <button role="menuitem">Cheese</button>
+        </div>
+      )}
+    </nav>
+  );
+};
+```
+
+### 5.2 Mobile Menu (Hamburger)
+
+**Keyboard behavior:**
+- `Tab` to hamburger button
+- `Enter` or `Space` to open menu
+- `Tab` through menu items
+- `Esc` to close menu
+- Focus returns to hamburger button on close
 
 ---
 
-## Changelog
+## 6. Shopping Cart & Checkout
 
-### Version 1.0 (2024-03-13)
-- Keyboard navigation standards established
-- Tab order requirements documented
-- Focus indicator specifications defined
-- Keyboard shortcuts documented
-- Focus management patterns added
-- Custom component examples created
-- Testing checklist provided
+### 6.1 Cart Page
+
+**Keyboard accessible actions:**
+- Increase/decrease quantity buttons
+- Remove item button
+- Continue shopping link
+- Proceed to checkout button
+
+**Quantity controls:**
+```tsx
+<div className="flex items-center gap-2">
+  <button 
+    onClick={decreaseQty}
+    aria-label="Decrease quantity"
+    className="p-2 rounded hover:bg-gray-100"
+  >
+    <Minus className="size-4" aria-hidden="true" />
+  </button>
+  
+  <input 
+    type="number" 
+    value={quantity} 
+    min="1"
+    aria-label="Quantity"
+    className="w-16 text-center"
+  />
+  
+  <button 
+    onClick={increaseQty}
+    aria-label="Increase quantity"
+    className="p-2 rounded hover:bg-gray-100"
+  >
+    <Plus className="size-4" aria-hidden="true" />
+  </button>
+</div>
+```
+
+### 6.2 Checkout Flow
+
+**Multi-step checkout keyboard navigation:**
+1. Tab through form fields in each step
+2. Submit button to proceed to next step
+3. Back button to return to previous step
+4. All validation errors keyboard accessible
+
+**Step indicator:**
+- Not keyboard focusable (decorative)
+- Screen reader announces current step
 
 ---
 
-**Questions or Issues?**  
-Contact the accessibility team or reference [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/).
+## 7. Testing Checklist
+
+### 7.1 Manual Keyboard Test
+
+**Disconnect your mouse and test:**
+
+1. **Tab through entire page**
+   - [ ] All interactive elements reachable
+   - [ ] Tab order is logical
+   - [ ] No focus trapped anywhere
+
+2. **Test every interactive element**
+   - [ ] Buttons activate with Enter and Space
+   - [ ] Links activate with Enter
+   - [ ] Dropdowns open with Enter/Space
+   - [ ] Modals close with Esc
+   - [ ] Forms submit with Enter
+
+3. **Test focus indicators**
+   - [ ] All focused elements have visible outline
+   - [ ] Outline has sufficient contrast (3:1 minimum)
+   - [ ] Outline doesn't get cut off
+
+4. **Test navigation menus**
+   - [ ] Dropdown menus open/close with keyboard
+   - [ ] Arrow keys navigate menu items
+   - [ ] Esc closes menus
+
+5. **Test forms**
+   - [ ] Tab moves between fields logically
+   - [ ] Error messages keyboard accessible
+   - [ ] Submit button reachable
+
+### 7.2 Screen Reader Test
+
+**Test with NVDA (Windows) or VoiceOver (Mac):**
+
+1. **Navigate by headings** (H key)
+   - [ ] Heading structure is logical (h1 → h2 → h3)
+   - [ ] All sections have headings
+
+2. **Navigate by landmarks** (D key)
+   - [ ] Header, nav, main, footer present
+   - [ ] Multiple navs have labels
+
+3. **Navigate by links** (K key)
+   - [ ] All links have descriptive text
+   - [ ] "Click here" and generic links avoided
+
+4. **Test interactive elements**
+   - [ ] Buttons announced as "button"
+   - [ ] Links announced as "link"
+   - [ ] Form fields have labels
+
+---
+
+## 8. Common Issues & Solutions
+
+### 8.1 Focus Disappears
+
+**Problem:** User tabs and focus disappears (can't see what's focused).
+
+**Solution:** Ensure all interactive elements have visible `:focus-visible` styles.
+
+### 8.2 Keyboard Trap
+
+**Problem:** User tabs into element (like modal) and can't tab out.
+
+**Solution:** Implement focus trap for modals, but provide Esc key to exit.
+
+### 8.3 Illogical Tab Order
+
+**Problem:** Tab jumps around page randomly.
+
+**Solution:** Avoid `tabindex` > 0. Use logical DOM order. Reorder visually with CSS if needed.
+
+### 8.4 No Skip Link
+
+**Problem:** Keyboard users must tab through 50 header links to reach content.
+
+**Solution:** Add "Skip to main content" link at top of page.
+
+### 8.5 Custom Controls Not Keyboard Accessible
+
+**Problem:** Custom dropdown built with divs doesn't work with keyboard.
+
+**Solution:** Add proper ARIA roles, `tabindex="0"`, and keyboard event handlers.
+
+---
+
+## 9. Resources
+
+- [WebAIM Keyboard Accessibility](https://webaim.org/articles/keyboard/)
+- [WAI-ARIA Keyboard Patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
+- [A11y Project Keyboard Testing](https://www.a11yproject.com/posts/how-to-test-keyboard-accessibility/)
+
+---
+
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Review:** March 15, 2026  
+**Next Review:** Quarterly

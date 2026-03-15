@@ -101,7 +101,16 @@
   --twb-border-error: var(--twb-color-accent-error);     /* Error validation */
   --twb-border-success: var(--twb-color-accent-success); /* Success validation */
   --twb-border-focus: var(--twb-color-focus-ring);       /* Focus indicators */
-
+  
+  /* Aliases for component compatibility */
+  --twb-color-border-primary: var(--twb-border-primary);
+  --twb-color-border-secondary: var(--twb-border-secondary);
+  --twb-color-border-tertiary: var(--twb-border-tertiary);
+  --twb-color-border-strong: var(--twb-border-strong);
+  --twb-color-border-error: var(--twb-border-error);
+  --twb-color-border-success: var(--twb-border-success);
+  --twb-color-border-focus: var(--twb-border-focus);
+  
   /* ============================================
      LEGACY RADIX/SHADCN COMPATIBILITY
      Ensures UI components work with existing code

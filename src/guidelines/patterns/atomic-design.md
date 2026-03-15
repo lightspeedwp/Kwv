@@ -1,675 +1,900 @@
-# Atomic Design Patterns
+# Atomic Design Pattern Guidelines
 
-**Category:** Patterns  
-**Domain:** Design System Structure  
 **Version:** 1.0  
-**Last Updated:** 2024-03-13  
-**Status:** Active
+**Last Updated:** March 15, 2026  
+**Status:** Active  
+**Applies To:** All Handcrafted Wines components and pages
 
 ---
 
 ## Overview
 
-The Wire Brand design system follows atomic design methodology, organizing components from smallest (atoms) to most complex (pages). This creates a scalable, maintainable component library with clear hierarchy and reusability.
+Handcrafted Wines follows the Atomic Design methodology created by Brad Frost. This system organizes components into a five-level hierarchy that mirrors how molecules combine to form complex organisms.
 
-**Atomic Design Levels:**
-1. **Atoms** - Basic building blocks (buttons, inputs, labels)
-2. **Molecules** - Simple groups of atoms (search bar, product card)
-3. **Organisms** - Complex UI sections (header, footer, hero)
-4. **Templates** - Page layouts (wireframes)
-5. **Pages** - Specific instances (actual content)
-
-**Reference:** Brad Frost's [Atomic Design](https://atomicdesign.bradfrost.com/)
+**Philosophy:** Build small, reusable pieces that combine into larger, more complex components.
 
 ---
 
-## Atoms (`/components/common/`)
+## Quick Reference
 
-### Definition
+### Five Levels of Atomic Design
 
-**Atoms are the smallest, indivisible UI components.** They cannot be broken down further while maintaining their purpose.
+| Level | Description | Handcrafted Wines Examples | Directory |
+|-------|-------------|----------------------------|-----------|
+| **Atoms** | Smallest building blocks | Button, Typography, Input | `/components/common/` |
+| **Molecules** | Simple groups of atoms | ProductCard, FormField | `/components/shop/` |
+| **Organisms** | Complex UI sections | ProductGrid, Header, Footer | `/components/layout/` `/components/sections/` |
+| **Templates** | Page layouts | Layout, CheckoutLayout | `/components/layout/` |
+| **Pages** | Specific instances | HomePage, ProductDetail | `/pages/` |
 
-### Examples
+---
 
-**Button:**
+## 1. Atoms (Level 1)
+
+### 1.1 Definition
+
+**Atoms are the smallest functional units that cannot be broken down further.**
+
+- Single-purpose elements
+- No dependencies on other components
+- Highly reusable across the site
+- Pure presentational (minimal logic)
+
+### 1.2 Handcrafted Wines Atoms
+
+**Location:** `/components/common/`
+
+**List of Atoms:**
+
+1. **Button** (`Button.tsx`)
+   - Variants: primary, secondary, outline
+   - Sizes: sm, md, lg
+   - States: default, hover, active, disabled
+
+2. **Typography** (`Typography.tsx`)
+   - Variants: h1, h2, h3, h4, body, caption
+   - Purpose: Consistent text styling
+
+3. **Input** (`Input.tsx`)
+   - Types: text, email, password, number, tel
+   - States: default, focus, error, disabled
+
+4. **Select** (`Select.tsx`)
+   - Dropdown selector
+   - States: default, open, disabled
+
+5. **Badge** (`Badge.tsx`)
+   - Variants: default, success, warning, error
+   - Purpose: Status indicators, labels
+
+6. **Card** (`Card.tsx`)
+   - Base card container
+   - Variants: default, interactive, outlined
+
+7. **Container** (`Container.tsx`)
+   - Width constraints: site, content, wide, full
+   - Purpose: Consistent page widths
+
+8. **Logo** (`Logo.tsx`)
+   - Handcrafted Wines logo
+   - Variants: default, white (for dark backgrounds)
+   - Interactive: links to homepage
+
+### 1.3 Atom Example
+
 ```tsx
 /**
  * Button Atom
  * 
- * Fundamental button component with variants and sizes.
+ * Smallest interactive unit. Single-purpose button with variants.
  */
-export default function Button({
-  children,
+
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
-  size = 'medium',
+  size = 'md',
   disabled = false,
-  className,
-  ...props
-}: ButtonProps) {
+  children,
+  onClick
+}) => {
+  const variantClasses = {
+    primary: 'bg-[var(--twb-color-plum)] text-white hover:bg-[var(--twb-color-plum)]/90',
+    secondary: 'bg-[var(--twb-color-vine)] text-white hover:bg-[var(--twb-color-vine)]/90',
+    outline: 'border-2 border-[var(--twb-color-ink)] text-[var(--twb-color-ink)] hover:bg-[var(--twb-color-ink)] hover:text-white'
+  };
+
+  const sizeClasses = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg'
+  };
+
   return (
     <button
-      className={cn(
-        'button-base',
-        `button-${variant}`,
-        `button-${size}`,
-        disabled && 'button-disabled',
-        className
-      )}
+      className={`${variantClasses[variant]} ${sizeClasses[size]} rounded-[var(--twb-radius-button)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+      onClick={onClick}
       disabled={disabled}
-      {...props}
     >
       {children}
     </button>
   );
-}
+};
 ```
 
-**Typography:**
-```tsx
-/**
- * Typography Atoms
- * 
- * Semantic text components with consistent styling.
- */
-export function H1({ children, className, ...props }: TypographyProps) {
-  return (
-    <h1 className={cn('font-serif text-twb-h1 text-[var(--twb-color-ink)]', className)} {...props}>
-      {children}
-    </h1>
-  );
-}
+### 1.4 Atom Guidelines
 
-export function P({ children, className, ...props }: TypographyProps) {
-  return (
-    <p className={cn('text-base text-[var(--twb-color-ink)] leading-relaxed', className)} {...props}>
-      {children}
-    </p>
-  );
-}
-```
+**Do:**
+- Keep atoms simple and single-purpose
+- Accept props for variants and states
+- Use consistent naming (variant, size, disabled, etc.)
+- Include all necessary ARIA attributes
+- Test across all states
 
-**Input:**
-```tsx
-/**
- * Input Atom
- * 
- * Basic text input with consistent styling.
- */
-export default function Input({
-  type = 'text',
-  error,
-  className,
-  ...props
-}: InputProps) {
-  return (
-    <input
-      type={type}
-      className={cn(
-        'w-full h-11 px-4 py-3 border rounded-[var(--twb-radius-input)] text-base',
-        error
-          ? 'border-[var(--twb-border-error)]'
-          : 'border-[var(--twb-border-tertiary)]',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-```
-
-**Logo:**
-```tsx
-/**
- * Logo Atom
- * 
- * Brand logo with responsive sizing.
- */
-export default function Logo({ size = 'medium', className }: LogoProps) {
-  return (
-    <img
-      src="/logo.svg"
-      alt="The Wire Brand"
-      className={cn(
-        size === 'small' && 'h-10',
-        size === 'medium' && 'h-14',
-        size === 'large' && 'h-20',
-        className
-      )}
-    />
-  );
-}
-```
-
-### Atom Characteristics
-
-- ✅ No dependencies on other custom components
-- ✅ Highly reusable
-- ✅ Accept props for customization
-- ✅ No business logic
-- ✅ Single responsibility
-- ✅ Stateless (usually)
+**Don't:**
+- Include business logic
+- Fetch data from APIs
+- Depend on other atoms
+- Use hard-coded values (use design tokens)
 
 ---
 
-## Molecules (`/components/sections/`)
+## 2. Molecules (Level 2)
 
-### Definition
+### 2.1 Definition
 
-**Molecules are simple groups of atoms** that function together as a unit. They have a specific purpose but remain relatively simple.
+**Molecules are simple groups of atoms that function together as a unit.**
 
-### Examples
+- Combine 2-5 atoms
+- Single, focused purpose
+- Reusable in multiple contexts
+- May include light logic (form validation, state)
 
-**Search Bar:**
-```tsx
-/**
- * SearchBar Molecule
- * 
- * Combines Input atom with Search icon and Button.
- */
-export default function SearchBar({ onSearch, placeholder = 'Search wines...' }) {
-  const [query, setQuery] = useState('');
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(query);
-  };
-  
-  return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--twb-color-vine)]" />
-        <Input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={placeholder}
-          className="pl-10"
-        />
-      </div>
-      <Button type="submit">Search</Button>
-    </form>
-  );
-}
-```
+### 2.2 Handcrafted Wines Molecules
 
-**Product Card:**
+**Location:** `/components/shop/`, `/components/common/`
+
+**List of Molecules:**
+
+1. **ProductCard** (Button + Typography + Badge + img)
+   - Product image
+   - Product name (Typography h3)
+   - Price (Typography body)
+   - Category badge (Badge)
+   - "Add to Cart" button (Button)
+
+2. **CartItem** (Button + Typography + Input + img)
+   - Product thumbnail
+   - Product details (Typography)
+   - Quantity selector (Input + Buttons)
+   - Remove button (Button)
+   - Subtotal (Typography)
+
+3. **FormField** (Input + Typography)
+   - Label (Typography)
+   - Input field (Input)
+   - Error message (Typography + icon)
+   - Helper text (Typography)
+
+4. **SearchBar** (Input + Button)
+   - Search input (Input)
+   - Search button (Button with icon)
+   - Clear button (Button)
+
+5. **NewsCard** (Typography + Button)
+   - Featured image
+   - Date (Typography caption)
+   - Title (Typography h3)
+   - Excerpt (Typography body)
+   - "Read More" link (Button)
+
+### 2.3 Molecule Example
+
 ```tsx
 /**
  * ProductCard Molecule
  * 
- * Displays wine product with image, title, price, and CTA.
- * Composes: Image, H3, P, Button atoms.
+ * Combines atoms to create a product card for shop grids.
+ * Uses: img, Typography, Badge, Button atoms.
  */
-export default function ProductCard({ wine }) {
-  return (
-    <div className="border border-[var(--twb-border-tertiary)] rounded-twb-md overflow-hidden hover:shadow-twb-md transition-shadow">
-      <Link to={`/wines/${wine.id}`}>
-        <div className="aspect-[3/4] overflow-hidden">
-          <img
-            src={wine.image}
-            alt={wine.name}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-      </Link>
-      
-      <div className="p-4">
-        <H3 className="mb-2">
-          <Link to={`/wines/${wine.id}`}>{wine.name}</Link>
-        </H3>
-        <P className="text-sm text-[var(--twb-color-vine)] mb-1">{wine.vintage}</P>
-        <P className="text-lg font-semibold text-[var(--twb-color-plum)] mb-4">
-          ${wine.price}
-        </P>
-        <Button variant="primary" className="w-full">
-          Add to Cart
-        </Button>
-      </div>
-    </div>
-  );
-}
-```
 
-**Newsletter Signup:**
-```tsx
-/**
- * Newsletter Molecule
- * 
- * Email signup form with input and submit button.
- */
-export default function Newsletter() {
-  const [email, setEmail] = useState('');
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle newsletter signup
+import { Typography } from '../common/Typography';
+import { Button } from '../common/Button';
+import { Badge } from '../common/Badge';
+
+interface ProductCardProps {
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    badge?: string;
   };
-  
-  return (
-    <form onSubmit={handleSubmit} className="flex gap-3">
-      <Input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Your email"
-        required
-      />
-      <Button type="submit">Subscribe</Button>
-    </form>
-  );
+  onAddToCart: (productId: string) => void;
 }
-```
 
-### Molecule Characteristics
-
-- ✅ Compose 2-5 atoms
-- ✅ Specific, focused purpose
-- ✅ Reusable across pages
-- ✅ May have light state management
-- ✅ May have simple business logic
-- ✅ Self-contained functionality
-
----
-
-## Organisms (`/components/layout/`, `/components/sections/`)
-
-### Definition
-
-**Organisms are complex UI sections** formed by groups of molecules and/or atoms. They represent distinct sections of the interface.
-
-### Examples
-
-**Header (Organism):**
-```tsx
-/**
- * Header Organism
- * 
- * Complete site header with logo, navigation, and utility links.
- * Composes: Logo, Navigation molecule, SearchBar molecule, Cart icon.
- */
-export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+export const ProductCard: React.FC<ProductCardProps> = ({ 
+  product, 
+  onAddToCart 
+}) => {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--twb-color-plum)] h-[90px] lg:h-[100px]">
-      <Container className="h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/">
-          <Logo size="medium" />
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6" aria-label="Primary navigation">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/wines" className="nav-link">Wines</Link>
-          <Link to="/spirits" className="nav-link">Spirits</Link>
-          <Link to="/experiences" className="nav-link">Experiences</Link>
-          <Link to="/about" className="nav-link">About</Link>
-        </nav>
-        
-        {/* Utility Navigation */}
-        <div className="flex items-center gap-4">
-          <SearchBar />
-          <Link to="/account" aria-label="Account">
-            <User className="h-5 w-5 text-white" />
-          </Link>
-          <CartButton />
-        </div>
-        
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(true)}
-          className="lg:hidden"
-          aria-label="Open menu"
-        >
-          <Menu className="h-6 w-6 text-white" />
-        </button>
-      </Container>
-    </header>
-  );
-}
-```
-
-**Hero Section:**
-```tsx
-/**
- * Hero Organism
- * 
- * Full-width hero section with background image, text, and CTAs.
- */
-export default function Hero({
-  title,
-  subtitle,
-  backgroundImage,
-  primaryCTA,
-  secondaryCTA,
-  height = 'full',
-}) {
-  return (
-    <section
-      className={cn(
-        'relative flex items-center justify-center text-white',
-        height === 'full' && 'min-h-[calc(100dvh-90px)]',
-        height === 'medium' && 'min-h-[60vh]',
-        height === 'small' && 'min-h-[40vh]'
-      )}
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={backgroundImage}
-          alt=""
-          className="w-full h-full object-cover"
+    <div className="group bg-white rounded-[var(--twb-radius-card)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-lg)] transition-shadow">
+      {/* Product Image */}
+      <div className="relative aspect-square overflow-hidden rounded-t-[var(--twb-radius-card)]">
+        <img 
+          src={product.image} 
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
+        {product.badge && (
+          <div className="absolute top-4 right-4">
+            <Badge variant="success">{product.badge}</Badge>
+          </div>
+        )}
       </div>
-      
-      {/* Content */}
-      <Container className="relative z-10 text-center py-20 pb-32">
-        <H1 className="text-white mb-6">{title}</H1>
-        {subtitle && <P className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{subtitle}</P>}
+
+      {/* Product Details */}
+      <div className="p-4">
+        <Typography variant="caption" className="text-[var(--twb-color-text-secondary)] mb-1">
+          {product.category}
+        </Typography>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {primaryCTA && (
-            <Button variant="primary" size="large" onClick={primaryCTA.onClick}>
-              {primaryCTA.label}
-            </Button>
-          )}
-          {secondaryCTA && (
-            <Button variant="secondary" size="large" onClick={secondaryCTA.onClick}>
-              {secondaryCTA.label}
-            </Button>
-          )}
-        </div>
-      </Container>
-      
-      {/* Scroll Down Arrow */}
-      <ScrollDownArrow />
-    </section>
-  );
-}
-```
+        <Typography variant="h3" className="mb-2">
+          {product.name}
+        </Typography>
 
-**Footer:**
-```tsx
-/**
- * Footer Organism
- * 
- * Complete site footer with links, newsletter, and social media.
- */
-export default function Footer() {
-  return (
-    <footer className="bg-[var(--twb-color-ink)] text-white py-12">
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <Logo size="medium" />
-            <P className="text-white/80 mt-4">
-              Handcrafted wines from Paarl, South Africa.
-            </P>
-          </div>
+        <div className="flex items-center justify-between mt-4">
+          <Typography variant="body" className="font-semibold">
+            R{product.price.toFixed(2)}
+          </Typography>
           
-          {/* Quick Links */}
-          <div>
-            <H4 className="text-white mb-4">Shop</H4>
-            <nav className="space-y-2">
-              <Link to="/wines" className="block text-white/80 hover:text-white">Wines</Link>
-              <Link to="/spirits" className="block text-white/80 hover:text-white">Spirits</Link>
-              <Link to="/wine-club" className="block text-white/80 hover:text-white">Wine Club</Link>
-            </nav>
-          </div>
-          
-          {/* Company */}
-          <div>
-            <H4 className="text-white mb-4">Company</H4>
-            <nav className="space-y-2">
-              <Link to="/about" className="block text-white/80 hover:text-white">About</Link>
-              <Link to="/contact" className="block text-white/80 hover:text-white">Contact</Link>
-              <Link to="/sustainability" className="block text-white/80 hover:text-white">Sustainability</Link>
-            </nav>
-          </div>
-          
-          {/* Newsletter */}
-          <div>
-            <H4 className="text-white mb-4">Newsletter</H4>
-            <Newsletter />
-          </div>
+          <Button 
+            variant="primary" 
+            size="sm"
+            onClick={() => onAddToCart(product.id)}
+          >
+            Add to Cart
+          </Button>
         </div>
-        
-        {/* Copyright */}
-        <div className="border-t border-white/20 pt-8 text-center text-white/60">
-          <P>&copy; 2024 The Wire Brand. All rights reserved.</P>
-        </div>
-      </Container>
-    </footer>
-  );
-}
-```
-
-### Organism Characteristics
-
-- ✅ Compose multiple molecules and atoms
-- ✅ Form distinct sections of UI
-- ✅ May contain significant business logic
-- ✅ May manage complex state
-- ✅ Less reusable (more specific to context)
-- ✅ Can be standalone sections
-
----
-
-## Templates (Page Layouts)
-
-### Definition
-
-**Templates are page-level layouts** that define structure without specific content. They show how organisms fit together.
-
-### Example: Product Detail Template
-
-```tsx
-/**
- * ProductDetailTemplate
- * 
- * Layout template for product detail pages.
- */
-export default function ProductDetailTemplate({
-  breadcrumbs,
-  productGallery,
-  productInfo,
-  description,
-  reviews,
-  relatedProducts,
-}) {
-  return (
-    <div>
-      {/* Breadcrumbs */}
-      <Container>
-        {breadcrumbs}
-      </Container>
-      
-      {/* Product Section */}
-      <Container className="py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>{productGallery}</div>
-          <div>{productInfo}</div>
-        </div>
-      </Container>
-      
-      {/* Tabs: Description, Reviews */}
-      <Container className="py-12">
-        <Tabs>
-          <TabPanel label="Description">{description}</TabPanel>
-          <TabPanel label="Reviews">{reviews}</TabPanel>
-        </Tabs>
-      </Container>
-      
-      {/* Related Products */}
-      <Container className="py-12">
-        {relatedProducts}
-      </Container>
+      </div>
     </div>
   );
+};
+```
+
+### 2.4 Molecule Guidelines
+
+**Do:**
+- Combine atoms with a clear purpose
+- Keep molecules focused (single responsibility)
+- Pass data via props
+- Include event handlers (onClick, onChange)
+- Make molecules reusable
+
+**Don't:**
+- Combine too many atoms (>5 becomes organism)
+- Include complex business logic
+- Fetch data directly (receive via props)
+- Hard-code content
+
+---
+
+## 3. Organisms (Level 3)
+
+### 3.1 Definition
+
+**Organisms are complex UI sections composed of atoms, molecules, and other organisms.**
+
+- Major sections of the interface
+- May include complex logic and state
+- Often specific to one area of the site
+- Can fetch data or manage state
+
+### 3.2 Handcrafted Wines Organisms
+
+**Location:** `/components/sections/`, `/components/layout/`, `/components/shop/`
+
+**List of Organisms:**
+
+1. **UnifiedHeader** (Logo + Navigation + SearchBar + Button + Badge)
+   - Site logo (Logo atom)
+   - Main navigation (dropdown menus)
+   - Search button (Button)
+   - Account button (Button)
+   - Cart button with count (Button + Badge)
+   - Theme toggle (Button)
+
+2. **UnifiedFooter** (Typography + Button + Input)
+   - 5-column link sections
+   - Newsletter signup (FormField molecule)
+   - Social media links (Button atoms)
+   - Copyright info (Typography)
+
+3. **ProductGrid** (array of ProductCard molecules)
+   - Grid layout
+   - Filtering logic
+   - Sorting logic
+   - Pagination
+
+4. **Hero** (Typography + Button + img)
+   - Hero image/video background
+   - Headline (Typography h1)
+   - Subheadline (Typography body)
+   - CTA buttons (Button atoms)
+   - Scroll-down arrow
+
+5. **BrandGrid** (Card + Typography + Button)
+   - 4 category cards
+   - Category image
+   - Category title
+   - Product count
+   - "Shop Now" button
+
+6. **Newsletter** (FormField + Button)
+   - Newsletter heading
+   - Email input field
+   - Submit button
+   - Success/error messaging
+
+### 3.3 Organism Example
+
+```tsx
+/**
+ * ProductGrid Organism
+ * 
+ * Complex section that displays multiple ProductCard molecules.
+ * Includes filtering, sorting, and pagination logic.
+ */
+
+import { useState } from 'react';
+import { ProductCard } from '../shop/ProductCard';
+import { Select } from '../common/Select';
+import { Typography } from '../common/Typography';
+
+interface ProductGridProps {
+  products: Product[];
+  category?: string;
 }
+
+export const ProductGrid: React.FC<ProductGridProps> = ({ 
+  products,
+  category 
+}) => {
+  const [sortBy, setSortBy] = useState<'name' | 'price'>('name');
+  const [filterType, setFilterType] = useState<string>('all');
+
+  // Filter products
+  const filteredProducts = products.filter(p => 
+    filterType === 'all' || p.type === filterType
+  );
+
+  // Sort products
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    return a.price - b.price;
+  });
+
+  return (
+    <div>
+      {/* Filters & Sorting */}
+      <div className="flex justify-between items-center mb-8">
+        <Typography variant="body">
+          {sortedProducts.length} products
+        </Typography>
+
+        <div className="flex gap-4">
+          {/* Filter */}
+          <Select 
+            value={filterType} 
+            onChange={(e) => setFilterType(e.target.value)}
+          >
+            <option value="all">All Types</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+          </Select>
+
+          {/* Sort */}
+          <Select 
+            value={sortBy} 
+            onChange={(e) => setSortBy(e.target.value as 'name' | 'price')}
+          >
+            <option value="name">Sort by Name</option>
+            <option value="price">Sort by Price</option>
+          </Select>
+        </div>
+      </div>
+
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {sortedProducts.map(product => (
+          <ProductCard 
+            key={product.id} 
+            product={product}
+            onAddToCart={handleAddToCart}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+```
+
+### 3.4 Organism Guidelines
+
+**Do:**
+- Combine molecules and atoms into complex sections
+- Include necessary business logic
+- Manage local state (filtering, sorting, etc.)
+- Fetch data if needed
+- Make organisms reusable where possible
+
+**Don't:**
+- Create overly complex organisms (break into smaller ones)
+- Duplicate logic (extract to hooks)
+- Hard-code content (use props or data files)
+
+---
+
+## 4. Templates (Level 4)
+
+### 4.1 Definition
+
+**Templates are page-level structures that define layout but not content.**
+
+- Define page structure and layout
+- Combine organisms into cohesive layouts
+- Reusable across multiple pages
+- Content-agnostic (use placeholders)
+
+### 4.2 Handcrafted Wines Templates
+
+**Location:** `/components/layout/`
+
+**List of Templates:**
+
+1. **Layout** (UnifiedHeader + main + UnifiedFooter)
+   - Standard page layout
+   - Header organism
+   - Main content area (children)
+   - Footer organism
+
+2. **CheckoutLayout** (CheckoutHeader + main + CheckoutFooter)
+   - Simplified checkout layout
+   - Minimal header (logo + cart)
+   - Main content area
+   - Minimal footer (legal links only)
+
+### 4.3 Template Example
+
+```tsx
+/**
+ * Layout Template
+ * 
+ * Standard page layout template used across most pages.
+ * Combines header, main content area, and footer.
+ */
+
+import { UnifiedHeader } from './UnifiedHeader';
+import { UnifiedFooter } from './UnifiedFooter';
+
+interface LayoutProps {
+  children: React.ReactNode;
+  showBreadcrumbs?: boolean;
+  breadcrumbs?: Array<{ label: string; href?: string }>;
+}
+
+export const Layout: React.FC<LayoutProps> = ({ 
+  children,
+  showBreadcrumbs = false,
+  breadcrumbs = []
+}) => {
+  return (
+    <div className="min-h-screen flex flex-col bg-[var(--twb-color-bg-primary)]">
+      {/* Header Organism */}
+      <UnifiedHeader />
+
+      {/* Breadcrumbs (optional) */}
+      {showBreadcrumbs && breadcrumbs.length > 0 && (
+        <BreadcrumbsBar items={breadcrumbs} />
+      )}
+
+      {/* Main Content Area */}
+      <main 
+        id="main-content" 
+        className="flex-1"
+        tabIndex={-1}
+      >
+        {children}
+      </main>
+
+      {/* Footer Organism */}
+      <UnifiedFooter />
+    </div>
+  );
+};
+```
+
+### 4.4 Template Guidelines
+
+**Do:**
+- Define consistent page structure
+- Use `children` prop for content flexibility
+- Include semantic HTML (`<header>`, `<main>`, `<footer>`)
+- Make templates reusable
+
+**Don't:**
+- Include specific content (use children)
+- Include page-specific logic
+- Hard-code data
+
+---
+
+## 5. Pages (Level 5)
+
+### 5.1 Definition
+
+**Pages are specific instances of templates with real content.**
+
+- Highest level of atomic design
+- Combine template with actual data
+- One page per route
+- Fetch data, handle state
+
+### 5.2 Handcrafted Wines Pages
+
+**Location:** `/pages/`
+
+**List of Pages (by section):**
+
+**Company Pages** (`/pages/company/`)
+- HomePage, About, AboutFarm, AboutTeam, Awards, Sustainability, News, NewsPost, Contact
+
+**Shop Pages** (`/pages/shop/`)
+- ShopHome, WinesCategory, SpiritsCategory, CheeseCategory, GiftsCategory, Shop, ProductDetail, Cart, Checkout, OrderConfirmation
+
+**Experience Pages** (`/pages/experiences/`)
+- Experiences, WineTasting, CheesePairing, FarmTour, HarvestExperience, PrivateTasting
+
+**Event Pages** (`/pages/events/`)
+- Events, Weddings, CorporateEvents, PrivateEvents
+
+### 5.3 Page Example
+
+```tsx
+/**
+ * ProductDetail Page
+ * 
+ * Specific instance of Layout template with product detail content.
+ * Fetches product data and displays product information.
+ */
+
+import { useParams } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
+import { Hero } from '../../components/sections/Hero';
+import { ProductTabs } from '../../components/shop/ProductTabs';
+import { RelatedProducts } from '../../components/shop/RelatedProducts';
+import { products } from '../../data/products';
+
+export const ProductDetail: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  
+  // Fetch product data
+  const product = products.find(p => p.id === id);
+  
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  // Breadcrumbs
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Shop', href: '/shop' },
+    { label: product.category, href: `/shop/${product.category}` },
+    { label: product.name }
+  ];
+
+  return (
+    <Layout showBreadcrumbs breadcrumbs={breadcrumbs}>
+      {/* Hero Organism */}
+      <Hero 
+        title={product.name}
+        subtitle={product.description}
+        image={product.image}
+        variant="product"
+      />
+
+      {/* Product Tabs Organism */}
+      <ProductTabs 
+        description={product.fullDescription}
+        tastingNotes={product.tastingNotes}
+        pairing={product.pairing}
+        reviews={product.reviews}
+      />
+
+      {/* Related Products Organism */}
+      <RelatedProducts 
+        category={product.category}
+        currentProductId={product.id}
+      />
+    </Layout>
+  );
+};
+
+export default ProductDetail;
+```
+
+### 5.4 Page Guidelines
+
+**Do:**
+- Use templates for consistent structure
+- Fetch data in pages (not templates)
+- Pass data down to organisms
+- Handle page-specific state
+- Include SEO meta tags
+
+**Don't:**
+- Repeat layout code (use templates)
+- Fetch data in lower-level components
+- Include complex logic (extract to hooks)
+
+---
+
+## 6. Atomic Design Benefits
+
+### 6.1 Consistency
+
+**All components follow the same hierarchy:**
+- Predictable structure
+- Easy to find components
+- Clear naming conventions
+- Consistent styling
+
+### 6.2 Reusability
+
+**Build once, use everywhere:**
+- Button atom used in 50+ places
+- ProductCard molecule used on 10+ pages
+- Layout template used on 30+ pages
+- Reduce code duplication
+
+### 6.3 Maintainability
+
+**Easy to update:**
+- Change button style in one place → Updates everywhere
+- Add new variant → All users get it
+- Fix bug → Fixed everywhere
+
+### 6.4 Scalability
+
+**Grow the system:**
+- Add new atoms as needed
+- Combine existing atoms into new molecules
+- Create new organisms from existing molecules
+- Build new pages quickly
+
+### 6.5 Collaboration
+
+**Clear communication:**
+- Designers and developers speak the same language
+- New team members understand structure quickly
+- Easy to document and onboard
+
+---
+
+## 7. Decision Tree
+
+### 7.1 "What Level is This Component?"
+
+```
+Is it a single, indivisible UI element?
+  → ATOM (Button, Input, Typography)
+
+Does it combine 2-5 atoms for a simple purpose?
+  → MOLECULE (ProductCard, FormField, SearchBar)
+
+Is it a complex section with multiple molecules?
+  → ORGANISM (Header, Footer, ProductGrid, Hero)
+
+Is it a reusable page structure?
+  → TEMPLATE (Layout, CheckoutLayout)
+
+Is it a specific page with real content?
+  → PAGE (HomePage, ProductDetail, Cart)
+```
+
+### 7.2 "Where Should I Put This Component?"
+
+```
+Is it a basic UI element used everywhere?
+  → `/components/common/` (Atom)
+
+Is it shop-specific?
+  → `/components/shop/` (Molecule/Organism)
+
+Is it a major section used on 2+ pages?
+  → `/components/sections/` (Organism)
+
+Is it a layout structure?
+  → `/components/layout/` (Organism/Template)
+
+Is it a complete page?
+  → `/pages/` (Page)
 ```
 
 ---
 
-## Pages (Specific Instances)
+## 8. Handcrafted Wines Inventory
 
-### Definition
+### 8.1 Complete Component List
 
-**Pages are specific instances** of templates with real content. They represent actual URLs users visit.
+**Atoms (8):** `/components/common/`
+- Button, Typography, Input, Select, Badge, Card, Container, Logo
 
-### Example: Cabernet Sauvignon 2021 Page
+**Molecules (5+):** `/components/shop/`, `/components/common/`
+- ProductCard, CartItem, FormField, SearchBar, NewsCard
 
+**Organisms (10+):** `/components/sections/`, `/components/layout/`
+- UnifiedHeader, UnifiedFooter, ProductGrid, Hero, BrandGrid, Newsletter, LatestNews, FAQSection, WineClubCTA, ContactFollowSection
+
+**Templates (2):** `/components/layout/`
+- Layout, CheckoutLayout
+
+**Pages (37+):** `/pages/`
+- HomePage, About, AboutFarm, AboutTeam, Awards, Sustainability, ShopHome, ProductDetail, Cart, Checkout, etc.
+
+### 8.2 Dependency Graph
+
+```
+Pages (37+)
+  ↓ use
+Templates (2)
+  ↓ use
+Organisms (10+)
+  ↓ use
+Molecules (5+)
+  ↓ use
+Atoms (8)
+```
+
+---
+
+## 9. Best Practices
+
+### 9.1 Naming Conventions
+
+**Follow PascalCase:**
+- Atoms: `Button`, `Typography`, `Input`
+- Molecules: `ProductCard`, `FormField`, `SearchBar`
+- Organisms: `ProductGrid`, `UnifiedHeader`, `Hero`
+- Templates: `Layout`, `CheckoutLayout`
+- Pages: `HomePage`, `ProductDetail`, `Cart`
+
+### 9.2 File Organization
+
+**One component per file:**
+```
+/components/common/Button.tsx       (Atom)
+/components/shop/ProductCard.tsx    (Molecule)
+/components/sections/Hero.tsx       (Organism)
+/components/layout/Layout.tsx       (Template)
+/pages/HomePage.tsx                 (Page)
+```
+
+### 9.3 Props Flow
+
+**Data flows down:**
+```
+Page (fetches data)
+  ↓ passes props
+Template (structure)
+  ↓ passes props
+Organism (complex logic)
+  ↓ passes props
+Molecule (simple logic)
+  ↓ passes props
+Atom (presentation only)
+```
+
+---
+
+## 10. Common Mistakes
+
+### 10.1 Atom Too Complex
+
+**❌ Wrong:**
 ```tsx
-/**
- * CabernetSauvignon2021 Page
- * 
- * Specific product page instance using ProductDetailTemplate.
- */
-export default function CabernetSauvignon2021() {
-  const wine = {
-    id: 'cab-sauv-2021',
-    name: 'Cabernet Sauvignon 2021',
-    price: 45,
-    vintage: 2021,
-    // ... more data
+// Atom with too much logic
+const Button = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
+  
+  const handleClick = async () => {
+    setIsLoading(true);
+    await api.saveData(user.id);
+    setIsLoading(false);
   };
   
+  return <button onClick={handleClick}>Save</button>;
+};
+```
+
+**✅ Correct:**
+```tsx
+// Atom is simple, logic lives in parent
+const Button = ({ onClick, isLoading, children }) => {
   return (
-    <ProductDetailTemplate
-      breadcrumbs={<Breadcrumbs items={['Home', 'Wines', 'Red Wines', wine.name]} />}
-      productGallery={<ProductGallery images={wine.images} />}
-      productInfo={<ProductInfo wine={wine} />}
-      description={<ProductDescription wine={wine} />}
-      reviews={<ProductReviews productId={wine.id} />}
-      relatedProducts={<RelatedProducts category="red-wines" exclude={wine.id} />}
-    />
+    <button onClick={onClick} disabled={isLoading}>
+      {isLoading ? 'Loading...' : children}
+    </button>
   );
-}
+};
+```
+
+### 10.2 Molecule Doing Too Much
+
+**❌ Wrong:**
+```tsx
+// Molecule fetching data
+const ProductCard = ({ productId }) => {
+  const [product, setProduct] = useState(null);
+  
+  useEffect(() => {
+    fetch(`/api/products/${productId}`).then(setProduct);
+  }, [productId]);
+  
+  // ...
+};
+```
+
+**✅ Correct:**
+```tsx
+// Molecule receives data via props
+const ProductCard = ({ product }) => {
+  // No data fetching, just presentation
+  return <div>...</div>;
+};
 ```
 
 ---
 
-## Component Promotion/Demotion
+## 11. Migration Guide
 
-### When to Promote (Move Up a Level)
+### 11.1 Converting Existing Components
 
-**Atom → Molecule:** When atom is always used with other atoms in same pattern
-```tsx
-// Before: Input atom always used with Label atom
-<Label>Email</Label>
-<Input type="email" />
+**Step 1: Identify the level**
+- Is it an atom, molecule, organism, template, or page?
 
-// After: Create FormField molecule
-<FormField label="Email" type="email" />
-```
+**Step 2: Move to correct directory**
+- `/components/common/` (atoms)
+- `/components/shop/` or `/components/sections/` (molecules/organisms)
+- `/components/layout/` (organisms/templates)
+- `/pages/` (pages)
 
-**Molecule → Organism:** When molecule is combined with other molecules to form complex section
-```tsx
-// Before: ProductCard + ProductFilters used together
-<ProductFilters />
-<ProductCard />
-<ProductCard />
+**Step 3: Refactor if needed**
+- Extract complex logic to hooks
+- Break down large components
+- Combine small components
 
-// After: Create ProductGrid organism
-<ProductGrid filters={filters} products={products} />
-```
-
-### When to Demote (Move Down a Level)
-
-**Too complex for current level:** If component is too simple for its level
-
-```tsx
-// Before: ButtonGroup as organism (too simple)
-<ButtonGroup>
-  <Button>Primary</Button>
-  <Button>Secondary</Button>
-</ButtonGroup>
-
-// After: Demote to molecule
-```
+**Step 4: Update imports**
+- Update import paths in all consuming components
 
 ---
 
-## Best Practices
+## 12. Resources
 
-### 1. Start with Atoms
-
-**Build from smallest pieces upward:**
-```tsx
-// 1. Create atoms
-Button, Input, Label, Typography
-
-// 2. Combine into molecules  
-FormField (Label + Input), SearchBar (Input + Button)
-
-// 3. Build organisms
-ContactForm (FormField + FormField + Button)
-
-// 4. Create templates
-ContactPage (Header + ContactForm + Footer)
-```
-
-### 2. Keep Components Focused
-
-**One responsibility per component:**
-```tsx
-// ❌ Bad: ProductCard does too much
-function ProductCard({ wine, onAddToCart, onAddToWishlist, onShare }) {
-  // Too many responsibilities
-}
-
-// ✅ Good: Split into focused components
-function ProductCard({ wine, children }) {
-  return (
-    <div>
-      <ProductImage image={wine.image} />
-      <ProductInfo wine={wine} />
-      {children} {/* Allow custom actions */}
-    </div>
-  );
-}
-
-function ProductActions({ onAddToCart, onAddToWishlist, onShare }) {
-  return <div>{/* Action buttons */}</div>;
-}
-```
-
-### 3. Compose, Don't Duplicate
-
-**Reuse existing components:**
-```tsx
-// ❌ Bad: Duplicate styling
-function PrimaryButton() { return <button className="bg-plum text-white">...</button>; }
-function SecondaryButton() { return <button className="border border-plum">...</button>; }
-
-// ✅ Good: Compose with variants
-function Button({ variant = 'primary' }) {
-  return <button className={`button-${variant}`}>...</button>;
-}
-```
+- [Atomic Design Book (Brad Frost)](https://atomicdesign.bradfrost.com/)
+- [Pattern Lab](https://patternlab.io/)
+- [Component-Driven Development](https://www.componentdriven.org/)
 
 ---
 
-## Related Guidelines
-
-- [Component Structure](/guidelines/architecture/component-structure.md) - File organization
-- [Layout Patterns](/guidelines/patterns/layout-patterns.md) - Layout compositions
-
----
-
-## Changelog
-
-### Version 1.0 (2024-03-13)
-- Atomic design methodology documented
-- Atom, Molecule, Organism examples provided
-- Template and Page patterns established
-- Component promotion/demotion guidelines added
-- Best practices documented
-
----
-
-**Questions or Issues?**  
-Reference Brad Frost's [Atomic Design](https://atomicdesign.bradfrost.com/) or contact the design system team.
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Review:** March 15, 2026  
+**Next Review:** Quarterly

@@ -5,6 +5,8 @@ import { Typography } from '../../common/Typography';
 import { Button } from '../../common/Button';
 import { COLORS } from '../../../constants/theme';
 import { ImageWithFallback } from '../../figma/ImageWithFallback';
+import { BrushStrokeBorder } from '../../decorative/BrushStrokeBorder';
+import { PaperTexture } from '../../decorative/PaperTexture';
 
 export interface Product {
   id: string;
@@ -34,9 +36,20 @@ interface ProductCardProps {
  */
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div className="group relative bg-white border border-gray-100 hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <div className="group relative bg-[var(--twb-color-bg-tertiary)] rounded-[var(--twb-radius-organic-md)] overflow-hidden shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-lg)] transition-all duration-300 flex flex-col h-full">
+      {/* Hand-drawn border overlay */}
+      <BrushStrokeBorder 
+        variant="wine-label" 
+        color="var(--twb-color-plum)" 
+        opacity={0.3}
+        strokeWidth={1.5}
+      />
+      
+      {/* Subtle paper texture */}
+      <PaperTexture intensity="subtle" opacity={0.03} />
+      
       {/* Image Container */}
-      <Link to={`/product/${product.id}`} className="relative aspect-[3/4] overflow-hidden bg-gray-50">
+      <Link to={`/product/${product.id}`} className="relative aspect-[3/4] overflow-hidden bg-[var(--twb-color-bg-muted)]">
         <ImageWithFallback
           src={product.image}
           alt={product.name}
@@ -46,12 +59,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Badges */}
         <div className="absolute top-2 left-2 flex flex-col gap-2">
           {product.badges?.map(badge => (
-            <span key={badge} className="bg-[#DAA520] text-[#2C1810] text-xs font-bold px-2 py-1 uppercase tracking-wider">
+            <span 
+              key={badge} 
+              className="relative bg-[var(--twb-color-gold)] text-[var(--twb-color-ink)] text-xs font-bold px-3 py-1.5 uppercase tracking-wider rounded-[4px_8px_6px_9px] shadow-sm"
+            >
               {badge}
             </span>
           ))}
           {product.salePrice && (
-            <span className="bg-[#8B0000] text-white text-xs font-bold px-2 py-1 uppercase tracking-wider">
+            <span className="relative bg-[var(--twb-color-plum)] text-white text-xs font-bold px-3 py-1.5 uppercase tracking-wider rounded-[4px_8px_6px_9px] shadow-sm">
               Sale
             </span>
           )}
@@ -71,31 +87,37 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </Link>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-grow">
-        <Typography variant="caption" className="uppercase tracking-wider mb-1 text-gray-500">
+      <div className="p-[var(--twb-spacing-4)] flex flex-col flex-grow relative z-10">
+        <Typography variant="caption" className="uppercase tracking-wider mb-1 text-[var(--twb-color-text-muted)]">
           {product.brand}
         </Typography>
         
-        <Link to={`/product/${product.id}`} className="hover:text-[#8B0000] transition-colors mb-2">
-          <Typography variant="h3" className="!text-lg line-clamp-2">
+        <Link to={`/product/${product.id}`} className="hover:text-[var(--twb-color-plum)] dark:hover:text-[var(--twb-color-gold)] transition-colors mb-2">
+          <Typography variant="h3" className="!text-lg line-clamp-2 text-[var(--twb-color-text-primary)]">
             {product.name}
           </Typography>
         </Link>
 
-        <div className="mt-auto pt-4 flex items-baseline gap-2">
+        <div className="mt-auto pt-[var(--twb-spacing-4)] flex items-baseline gap-2">
           {product.salePrice ? (
             <>
-              <span className="text-[#8B0000] font-bold text-lg">R {product.salePrice.toFixed(2)}</span>
-              <span className="text-gray-400 line-through text-sm">R {product.price.toFixed(2)}</span>
+              <span className="text-[var(--twb-color-plum)] dark:text-[var(--twb-color-gold)] font-bold text-lg">
+                R {product.salePrice.toFixed(2)}
+              </span>
+              <span className="text-[var(--twb-color-text-muted)] line-through text-sm">
+                R {product.price.toFixed(2)}
+              </span>
             </>
           ) : (
-            <span className="text-[#2C1810] font-bold text-lg">R {product.price.toFixed(2)}</span>
+            <span className="text-[var(--twb-color-text-primary)] font-bold text-lg">
+              R {product.price.toFixed(2)}
+            </span>
           )}
         </div>
         
         {/* Mobile Add Button */}
         <button 
-          className="lg:hidden mt-4 w-full flex items-center justify-center gap-2 bg-gray-100 py-3 text-sm font-medium text-gray-900 active:bg-gray-200"
+          className="lg:hidden mt-[var(--twb-spacing-4)] w-full flex items-center justify-center gap-2 bg-[var(--twb-color-bg-secondary)] py-3 text-sm font-medium text-[var(--twb-color-text-primary)] hover:bg-[var(--twb-color-bg-muted)] active:bg-[var(--twb-color-plum)] active:text-white rounded-[var(--twb-radius-sm)] transition-colors disabled:opacity-50"
           disabled={!product.inStock}
         >
           <ShoppingCart size={16} />

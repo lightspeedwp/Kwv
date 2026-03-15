@@ -5,6 +5,10 @@ import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
 import { Hero } from '../../components/sections/Hero';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
+import { HandDrawnTextInput } from '../../components/forms/HandDrawnTextInput';
+import { HandDrawnTextarea } from '../../components/forms/HandDrawnTextarea';
+import { PaperTexture } from '../../components/decorative/PaperTexture';
+import { BrushStrokeBorder } from '../../components/decorative/BrushStrokeBorder';
 import { Facebook, Instagram, Twitter, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import imageHero from 'figma:asset/0d66fde5a857cd4f72ee552088528c9472e9d423.png';
@@ -81,8 +85,19 @@ export const Contact = () => {
             </div>
 
             {/* Right Column: Contact Form */}
-            <div className="bg-[#F9F9F9] p-8 md:p-10 rounded-sm border border-gray-100 relative h-fit">
-              <Typography variant="h3" className="mb-6">Send us a message</Typography>
+            <div className="relative bg-[var(--twb-color-bg-tertiary)] p-8 md:p-10 rounded-[var(--twb-radius-organic-md)] h-fit">
+              {/* Hand-drawn border */}
+              <BrushStrokeBorder 
+                variant="wine-label" 
+                color="var(--twb-color-plum)" 
+                opacity={0.25}
+                strokeWidth={1.5}
+              />
+              
+              {/* Paper texture */}
+              <PaperTexture intensity="subtle" opacity={0.03} />
+              
+              <Typography variant="h3" className="relative z-10 mb-6">Send us a message</Typography>
               
               {submitted ? (
                 <div className="bg-green-50 border border-green-200 rounded-sm p-8 text-center flex flex-col items-center justify-center min-h-[300px]">
@@ -94,54 +109,42 @@ export const Contact = () => {
                   </Button>
                 </div>
               ) : (
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                      <input 
-                        type="text" 
-                        id="name" 
-                        required
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-sm focus:border-[#2C1810] focus:ring-0 outline-none transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                      <input 
-                        type="email" 
-                        id="email" 
-                        required
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-sm focus:border-[#2C1810] focus:ring-0 outline-none transition-colors"
-                        placeholder="your@email.com"
-                      />
-                    </div>
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <HandDrawnTextInput 
+                      name="name"
+                      label="Name"
+                      type="text" 
+                      placeholder="Your name"
+                      required
+                    />
+                    <HandDrawnTextInput 
+                      name="email"
+                      label="Email"
+                      type="email" 
+                      placeholder="your@email.com"
+                      required
+                    />
                   </div>
                   
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
-                    <input 
-                      type="text" 
-                      id="subject" 
-                      required
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-sm focus:border-[#2C1810] focus:ring-0 outline-none transition-colors"
-                      placeholder="How can we help?"
-                    />
-                  </div>
+                  <HandDrawnTextInput 
+                    name="subject"
+                    label="Subject"
+                    type="text" 
+                    placeholder="How can we help?"
+                    required
+                  />
 
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                    <textarea 
-                      id="message" 
-                      rows={5}
-                      required
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-sm focus:border-[#2C1810] focus:ring-0 outline-none transition-colors"
-                      placeholder="Write your message here..."
-                    />
-                  </div>
+                  <HandDrawnTextarea 
+                    name="message"
+                    label="Message"
+                    rows={5}
+                    placeholder="Write your message here..."
+                    required
+                  />
 
                   <div className="pt-2">
-                    <Button type="submit" fullWidth>
+                    <Button type="submit" variant="primary" fullWidth>
                       Send Message
                     </Button>
                   </div>

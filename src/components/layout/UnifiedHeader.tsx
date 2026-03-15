@@ -126,6 +126,11 @@ export const UnifiedHeader: React.FC = () => {
           ? 'bg-[var(--twb-color-ink)]/95 backdrop-blur-md shadow-lg'
           : 'bg-[var(--twb-color-ink)]'
       }`}
+      style={{
+        // Ensure header always has proper background and minimum height
+        minHeight: '90px',
+        backgroundColor: isScrolled ? 'rgba(30, 26, 23, 0.95)' : '#1e1a17'
+      }}
     >
       {/* Top Bar */}
       <div className="border-b border-white/10">
@@ -232,36 +237,77 @@ export const UnifiedHeader: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navigation.main.map((item) => (
-              <div key={item.href} className="relative group">
-                <Link
-                  to={item.href}
-                  className={`text-white hover:text-[var(--twb-color-gold)] transition-colors font-medium flex items-center gap-1 ${
-                    location.pathname === item.href ? 'text-[var(--twb-color-gold)]' : ''
-                  }`}
-                >
-                  {item.label}
-                  {item.submenu && <ChevronDown size={16} className="opacity-70" />}
-                </Link>
+            {navigation.main.map((item) => {
+              const isActive = location.pathname === item.href || 
+                              (item.submenu && item.submenu.some(sub => location.pathname === sub.href));
+              
+              return (
+                <div key={item.href} className="relative group">
+                  <Link
+                    to={item.href}
+                    className={`text-white hover:text-[var(--twb-color-gold)] transition-colors font-medium flex items-center gap-1 relative pb-1 ${
+                      isActive ? 'text-[var(--twb-color-gold)]' : ''
+                    }`}
+                  >
+                    {item.label}
+                    {item.submenu && <ChevronDown size={16} className="opacity-70" />}
+                    
+                    {/* Hand-drawn underline for active state */}
+                    {isActive && (
+                      <svg
+                        className="absolute -bottom-1 left-0 w-full h-[6px] pointer-events-none"
+                        viewBox="0 0 100 6"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <defs>
+                          <filter id="sketch-underline">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
+                            <feDisplacementMap in="SourceGraphic" scale="0.8" />
+                          </filter>
+                        </defs>
+                        <path
+                          d="M2,3 Q25,2 50,3 T98,3"
+                          stroke="var(--twb-color-gold)"
+                          strokeWidth="2"
+                          fill="none"
+                          opacity="0.7"
+                          filter="url(#sketch-underline)"
+                        />
+                        {/* Double line for hand-drawn effect */}
+                        <path
+                          d="M1,4 Q25,3.5 50,4 T99,4"
+                          stroke="var(--twb-color-gold)"
+                          strokeWidth="1"
+                          fill="none"
+                          opacity="0.4"
+                          filter="url(#sketch-underline)"
+                        />
+                      </svg>
+                    )}
+                  </Link>
 
-                {/* Dropdown Menu */}
-                {item.submenu && (
-                  <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                    <div className="bg-[var(--twb-color-ink)] border border-white/10 rounded-lg shadow-xl min-w-[220px] py-2">
-                      {item.submenu.map((subItem) => (
-                        <Link
-                          key={subItem.href}
-                          to={subItem.href}
-                          className="block px-4 py-2 text-white/90 hover:text-[var(--twb-color-gold)] hover:bg-white/5 transition-colors"
-                        >
-                          {subItem.label}
-                        </Link>
-                      ))}
+                  {/* Dropdown Menu */}
+                  {item.submenu && (
+                    <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                      <div className="bg-[var(--twb-color-ink)] border border-white/10 rounded-lg shadow-xl min-w-[220px] py-2">
+                        {item.submenu.map((subItem) => (
+                          <Link
+                            key={subItem.href}
+                            to={subItem.href}
+                            className="block px-4 py-2 text-white/90 hover:text-[var(--twb-color-gold)] hover:bg-white/5 transition-colors"
+                          >
+                            {subItem.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}

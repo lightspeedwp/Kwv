@@ -6,6 +6,8 @@ import { Button } from '../common/Button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { OrganicBorder } from '../decorative/OrganicBorder';
 import { HandDrawnUnderline } from '../decorative/HandDrawnUnderline';
+import { BrushStrokeBorder } from '../decorative/BrushStrokeBorder';
+import { PaperTexture } from '../decorative/PaperTexture';
 
 export interface NewsItem {
   id: number;
@@ -76,14 +78,18 @@ export const LatestNews: React.FC<LatestNewsProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[var(--twb-spacing-grid-gap)] mb-[var(--twb-spacing-12)]">
           {items.map((item) => (
             <Link key={item.id} to={item.link} className="group block h-full">
-              <div className="bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-tertiary)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-lg)] transition-shadow h-full flex flex-col rounded-[var(--twb-radius-card)] overflow-hidden border border-transparent dark:border-[var(--twb-border-tertiary)] relative">
+              <div className="bg-[var(--twb-color-bg-tertiary)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-lg)] transition-shadow h-full flex flex-col rounded-[var(--twb-radius-organic-md)] overflow-hidden relative">
                 
-                {/* Organic Border */}
-                {showOrganicBorders && (
-                  <div className="absolute inset-0 pointer-events-none z-10" aria-hidden="true">
-                    <OrganicBorder variant="subtle" />
-                  </div>
-                )}
+                {/* Hand-drawn border */}
+                <BrushStrokeBorder 
+                  variant="smooth" 
+                  color="var(--twb-color-plum)" 
+                  opacity={0.35}
+                  strokeWidth={1.5}
+                />
+                
+                {/* Paper texture */}
+                <PaperTexture intensity="subtle" opacity={0.04} />
 
                 {/* Image */}
                 <div className="aspect-[4/3] overflow-hidden relative">

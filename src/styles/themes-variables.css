@@ -105,7 +105,25 @@
   --twb-space-16: 4rem;    /* 64px */
   --twb-space-20: 5rem;    /* 80px */
   --twb-space-24: 6rem;    /* 96px */
-
+  
+  /* Aliases for component compatibility */
+  --twb-spacing-0: var(--twb-space-0);
+  --twb-spacing-1: var(--twb-space-1);
+  --twb-spacing-2: var(--twb-space-2);
+  --twb-spacing-3: var(--twb-space-3);
+  --twb-spacing-4: var(--twb-space-4);
+  --twb-spacing-5: var(--twb-space-5);
+  --twb-spacing-6: var(--twb-space-6);
+  --twb-spacing-8: var(--twb-space-8);
+  --twb-spacing-10: var(--twb-space-10);
+  --twb-spacing-12: var(--twb-space-12);
+  --twb-spacing-16: var(--twb-space-16);
+  --twb-spacing-20: var(--twb-space-20);
+  --twb-spacing-24: var(--twb-space-24);
+  --twb-spacing-section-y: var(--twb-space-section-y);
+  --twb-spacing-grid-gap: var(--twb-space-grid-gap);
+  --twb-spacing-container-x: var(--twb-space-container-x);
+  
   /* ============================================
      BORDER RADIUS
      Organic, irregular values for handcrafted aesthetic
@@ -141,6 +159,7 @@
   --twb-radius-stamp: 0 8px 0 8px;
   
   /* Contextual Radius */
+  --twb-radius-button: 8px;
   --twb-radius-button-primary: 8px;
   --twb-radius-button-secondary: 6px;
   --twb-radius-card: 12px;

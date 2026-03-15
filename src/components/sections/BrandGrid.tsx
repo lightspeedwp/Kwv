@@ -4,6 +4,8 @@ import { Typography } from '../common/Typography';
 import { Link } from 'react-router';
 import { OrganicBorder } from '../decorative/OrganicBorder';
 import { HandDrawnUnderline } from '../decorative/HandDrawnUnderline';
+import { BrushStrokeBorder } from '../decorative/BrushStrokeBorder';
+import { PaperTexture } from '../decorative/PaperTexture';
 
 interface BrandGridItem {
   title: string;
@@ -80,14 +82,18 @@ export const BrandGrid: React.FC<BrandGridProps> = ({
         <div className={`grid grid-cols-1 ${gridColsClass} gap-[var(--twb-spacing-grid-gap)]`}>
           {items.map((item) => (
             <Link to={item.link} key={item.title} className="group block h-full">
-              <div className="flex flex-col h-full relative bg-[var(--twb-color-bg-primary)] rounded-[var(--twb-radius-card)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-card-hover)] transition-all duration-300 overflow-hidden">
+              <div className="flex flex-col h-full relative bg-[var(--twb-color-bg-tertiary)] rounded-[var(--twb-radius-organic-md)] shadow-[var(--twb-shadow-md)] hover:shadow-[var(--twb-shadow-card-hover)] transition-all duration-300 overflow-hidden">
                 
-                {/* Organic Border */}
-                {showOrganicBorders && (
-                  <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    <OrganicBorder variant="subtle" />
-                  </div>
-                )}
+                {/* Hand-drawn brush stroke border */}
+                <BrushStrokeBorder 
+                  variant="rough" 
+                  color="var(--twb-color-vine)" 
+                  opacity={0.4}
+                  strokeWidth={1.5}
+                />
+                
+                {/* Paper texture overlay */}
+                <PaperTexture intensity="subtle" opacity={0.05} />
 
                 {/* Optional Image */}
                 {item.imageSrc && (

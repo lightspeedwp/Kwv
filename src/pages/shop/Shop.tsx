@@ -8,6 +8,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lu
 import { Button } from '../../components/common/Button';
 import { useParams } from 'react-router';
 import { FAQSection } from '../../components/sections/FAQSection';
+import { BrushStrokeDivider } from '../../components/decorative/BrushStrokeDivider';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../../components/ui/sheet';
 import { products, productCategories } from '../../data/products';
 
@@ -287,6 +288,7 @@ export const Shop = () => {
         </div>
       </Container>
       
+      <BrushStrokeDivider />
       <FAQSection items={[
         { question: "Do you deliver nationwide?", answer: "Yes, we deliver to all major centers and regional areas within South Africa." },
         { question: "How can I track my order?", answer: "Once your order is dispatched, you will receive an email with a tracking number to follow your shipment." },

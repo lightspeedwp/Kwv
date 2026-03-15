@@ -33,7 +33,9 @@ import { farmStory } from '../../data/farmStory';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { PaperTexture } from '../../components/decorative/PaperTexture';
 import { WineLabelStamp } from '../../components/decorative/WineLabelStamp';
+import { WaxSealStamp } from '../../components/decorative/WaxSealStamp';
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
+import { BrushStrokeDivider } from '../../components/decorative/BrushStrokeDivider';
 import heroImage from 'figma:asset/41b3d8ee458f4aa234b644392aeceaf24abdff91.png';
 
 export const Home = () => {
@@ -103,133 +105,14 @@ export const Home = () => {
         </Container>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
-        <Container>
-          <div className="text-center mb-16">
-            <Typography variant="h2" className="mb-4 text-[var(--twb-color-gold)]">
-              Our Family Timeline
-            </Typography>
-            <p className="text-white/80 text-lg">
-              Four generations, one passion
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {farmStory.story.timeline.map((milestone, index) => (
-              <div 
-                key={milestone.year}
-                className="relative text-center group"
-              >
-                {/* Timeline connector (not on last item for mobile, not on desktop) */}
-                {index < farmStory.story.timeline.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-1/2 w-full h-0.5 bg-[var(--twb-color-gold)]/30" />
-                )}
-
-                {/* Year circle */}
-                <div className="relative z-10 w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--twb-color-gold)] flex items-center justify-center font-bold text-[var(--twb-color-ink)] group-hover:scale-110 transition-transform">
-                  {milestone.year}
-                </div>
-
-                <h3 className="font-serif text-xl mb-2 text-[var(--twb-color-gold)]">
-                  {milestone.title}
-                </h3>
-                <p className="text-sm text-white/70 leading-relaxed">
-                  {milestone.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* What We Make */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
-        <Container>
-          <div className="text-center mb-16">
-            <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
-              What We Handcraft
-            </Typography>
-            <p className="text-[var(--twb-color-text-muted)] text-lg max-w-2xl mx-auto">
-              Small batches. Big heart. Every product made with care on our family farm.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Wines */}
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-plum)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-plum)]/20 transition-colors">
-                <Grape size={40} className="text-[var(--twb-color-plum)]" />
-              </div>
-              <h3 className="font-serif text-2xl mb-4 text-[var(--twb-color-plum)]">
-                {farmStory.products.wines.title}
-              </h3>
-              <p className="text-[var(--twb-color-text-muted)] mb-6 leading-relaxed">
-                {farmStory.products.wines.description}
-              </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-6">
-                {farmStory.products.wines.varieties.map((variety) => (
-                  <span 
-                    key={variety}
-                    className="px-3 py-1 bg-[var(--twb-color-plum)]/10 text-[var(--twb-color-plum)] text-sm rounded-full"
-                  >
-                    {variety}
-                  </span>
-                ))}
-              </div>
-              <Link to="/shop/wines">
-                <Button variant="outline">Shop Wines</Button>
-              </Link>
-            </div>
-
-            {/* Spirits */}
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-clay)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-clay)]/20 transition-colors">
-                <Award size={40} className="text-[var(--twb-color-clay)]" />
-              </div>
-              <h3 className="font-serif text-2xl mb-4 text-[var(--twb-color-clay)]">
-                {farmStory.products.spirits.title}
-              </h3>
-              <p className="text-[var(--twb-color-text-muted)] mb-6 leading-relaxed">
-                {farmStory.products.spirits.description}
-              </p>
-              <div className="space-y-2 mb-6">
-                {farmStory.products.spirits.offerings.map((offering) => (
-                  <div key={offering} className="text-sm text-[var(--twb-color-text-primary)]">
-                    • {offering}
-                  </div>
-                ))}
-              </div>
-              <Link to="/shop/spirits">
-                <Button variant="outline">Shop Spirits</Button>
-              </Link>
-            </div>
-
-            {/* Cheese */}
-            <div className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-gold)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-gold)]/20 transition-colors">
-                <Heart size={40} className="text-[var(--twb-color-gold)]" />
-              </div>
-              <h3 className="font-serif text-2xl mb-4 text-[var(--twb-color-gold)]">
-                {farmStory.products.cheese.title}
-              </h3>
-              <p className="text-[var(--twb-color-text-muted)] mb-6 leading-relaxed">
-                {farmStory.products.cheese.description}
-              </p>
-              <div className="space-y-2 mb-6">
-                {farmStory.products.cheese.offerings.map((offering) => (
-                  <div key={offering} className="text-sm text-[var(--twb-color-text-primary)]">
-                    • {offering}
-                  </div>
-                ))}
-              </div>
-              <Link to="/shop/cheese">
-                <Button variant="outline">Shop Cheese</Button>
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
+      {/* Hand-drawn divider - grape cluster */}
+      <BrushStrokeDivider 
+        variant="grape-cluster" 
+        color="var(--twb-color-plum)" 
+        width="narrow"
+        spacing="lg"
+        showAccents={true}
+      />
 
       {/* Values */}
       <section className="py-20 bg-[var(--twb-color-plum)]/5">
@@ -306,6 +189,14 @@ export const Home = () => {
       <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
         <Container variant="content">
           <div className="text-center">
+            {/* Wax Seal Badge */}
+            <div className="flex justify-center mb-6">
+              <WaxSealStamp 
+                text="Members Only" 
+                variant="gold" 
+                size="lg"
+              />
+            </div>
             <Typography variant="h2" className="mb-6 text-white">
               Join Our Wine Club
             </Typography>

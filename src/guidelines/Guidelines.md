@@ -1,4 +1,4 @@
-# Handcrafted Wines – Brand Guidelines (v6.0)
+# Handcrafted Wines – Brand Guidelines (v6.1)
 
 **IMPORTANT DEVELOPMENT NOTE:** JSDoc inline documentation is mandatory for all JavaScript/TypeScript files.
 
@@ -460,7 +460,27 @@ See `/guidelines/design-tokens/` for complete specifications:
 **Tasks:** `/tasks/` (Implementation tracking)
 - Master Task List (`/tasks/task-list.md`)
 
-### 9.4 Templates
+### 9.4 Demo Pages
+
+**Hand-Drawn Aesthetic Showcase:** Two full-width demo pages showcasing the complete hand-drawn design system.
+
+**Component Library** (`/handdrawn-demo`)
+- Interactive pattern library with code examples
+- All 60+ hand-drawn components showcased
+- Copy-to-clipboard code snippets
+- Preview/code toggle for each component
+- Developer-focused technical reference
+
+**Landing Page Demo** (`/handdrawn-demo/landing-page`)
+- Full-width marketing landing page
+- Complete customer journey (awareness → conversion)
+- Real Handcrafted Wines content
+- WebGL particle effects
+- Motion animations throughout
+
+**Documentation:** `/docs/HANDDRAWN-DEMO-PAGES.md`
+
+### 9.5 Templates
 
 **Documentation Templates:** `/guidelines/_templates/` (6 templates)
 - See `/guidelines/_templates.md` for usage documentation
@@ -468,6 +488,19 @@ See `/guidelines/design-tokens/` for complete specifications:
 ---
 
 ## 10. Change Log
+
+### Version 6.1 (2024-03-15)
+- **Demo Pages:** Created two full-width demo pages (`/handdrawn-demo`, `/handdrawn-demo/landing-page`)
+- **Component Library:** Interactive pattern library with 60+ hand-drawn components and code examples
+- **Landing Page Demo:** Complete marketing page with WebGL particles and motion animations
+- **Sitemap Updates:** Added Developer Resources section with demo page links
+- **Architecture Documentation:** Updated sitemap.md with new routes
+- **Documentation:** Created comprehensive `/docs/HANDDRAWN-DEMO-PAGES.md` guide
+
+### Version 6.0 (2024-03-14)
+- **Hand-Drawn Aesthetic:** Complete implementation of organic design system
+- **Decorative Components:** All section dividers, wax seals, hand-drawn icons deployed
+- **About Pages:** All 8 About section routes verified and documented
 
 ### Version 5.0 (2024-03-13)
 - **Major reorganization:** Reduced main Guidelines.md from 1309 lines to <400 lines

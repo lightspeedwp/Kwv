@@ -45,6 +45,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -53,6 +54,7 @@ import { Badge } from '../../components/ui/badge';
 import { BreadcrumbsBar } from '../../components/layout/BreadcrumbsBar';
 import { products, Product } from '../../data/products';
 import { Flame, Award, Clock, ChevronDown } from 'lucide-react';
+import { HandDrawnWineBottle } from '../../components/decorative/icons';
 
 export const SpiritsCategory: React.FC = () => {
   // Filter and sort state
@@ -118,7 +120,7 @@ export const SpiritsCategory: React.FC = () => {
   }, [filteredSpirits, sortBy]);
 
   return (
-    <>
+    <Layout>
       {/* SEO Metadata */}
       <title>Craft Spirits - Handcrafted Wines | Grappa & Brandy from Paarl Mountain</title>
       <meta name="description" content="Small-batch grappa and aged brandy from our family distillery. Handcrafted on Paarl Mountain since 1918." />
@@ -136,7 +138,13 @@ export const SpiritsCategory: React.FC = () => {
       <section className="bg-[var(--twb-color-bg-primary)] py-[var(--twb-spacing-section-y)]">
         <Container variant="wide">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <Flame className="size-12 mx-auto mb-4 text-[var(--twb-color-clay)]" aria-hidden="true" />
+            {/* Hand-drawn wine bottle icon */}
+            <div className="flex justify-center mb-6">
+              <HandDrawnWineBottle 
+                size={64} 
+                color="var(--twb-color-clay)" 
+              />
+            </div>
             <Typography variant="h1" className="mb-4">
               Craft Spirits
             </Typography>
@@ -325,7 +333,7 @@ export const SpiritsCategory: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };
 

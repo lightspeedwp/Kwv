@@ -28,6 +28,8 @@ import { farmStory } from '../../data/farmStory';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
 import { PaperTexture } from '../../components/decorative/PaperTexture';
+import { BrushStrokeDivider } from '../../components/decorative/BrushStrokeDivider';
+import { HandDrawnGrapeCluster, HandDrawnWineBottle } from '../../components/decorative/icons';
 import heroImage from 'figma:asset/fe3c1c394bedc4c207970e159acb3d745653037f.png';
 
 export const Experiences: React.FC = () => {
@@ -79,14 +81,27 @@ export const Experiences: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {farmStory.experiences.offerings.map((experience, index) => {
-              const iconMap: Record<string, any> = {
-                'wine-tasting': Grape,
-                'cheese-pairing': Heart,
-                'farm-tour': Map,
-                'harvest-experience': Calendar,
-                'private-tasting': Users
-              };
-              const IconComponent = iconMap[experience.id] || Grape;
+              // Custom icon components for different experience types
+              let IconComponent: React.ComponentType<any>;
+              
+              if (experience.id === 'wine-tasting' || experience.id === 'private-tasting') {
+                // Use hand-drawn grape cluster for wine tastings
+                IconComponent = () => (
+                  <HandDrawnGrapeCluster 
+                    size={32} 
+                    color="var(--twb-color-plum)" 
+                    showLeaf={true}
+                  />
+                );
+              } else {
+                // Fallback to lucide icons for other experiences
+                const iconMap: Record<string, any> = {
+                  'cheese-pairing': Heart,
+                  'farm-tour': Map,
+                  'harvest-experience': Calendar,
+                };
+                IconComponent = iconMap[experience.id] || Map;
+              }
 
               return (
                 <OrganicBorder
@@ -172,6 +187,14 @@ export const Experiences: React.FC = () => {
           </div>
         </Container>
       </section>
+
+      {/* Decorative Divider */}
+      <BrushStrokeDivider 
+        variant="grape-cluster" 
+        color="var(--twb-color-plum)" 
+        spacing="lg"
+        showAccents={true}
+      />
 
       {/* Hours & Policies */}
       <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">

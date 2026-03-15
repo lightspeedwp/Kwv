@@ -29,6 +29,8 @@ import { farmStory } from '../../data/farmStory';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { PaperTexture } from '../../components/decorative/PaperTexture';
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
+import { BrushStrokeDivider } from '../../components/decorative/BrushStrokeDivider';
+import { WaxSealStamp } from '../../components/decorative/WaxSealStamp';
 import heroImage from 'figma:asset/fe3c1c394bedc4c207970e159acb3d745653037f.png';
 
 export const About: React.FC = () => {
@@ -49,6 +51,15 @@ export const About: React.FC = () => {
         <Container variant="content">
           <div className="space-y-8">
             <div className="text-center mb-12">
+              {/* Wax Seal Badge */}
+              <div className="flex justify-center mb-6">
+                <WaxSealStamp 
+                  text="Since 1918" 
+                  variant="plum" 
+                  size="lg"
+                />
+              </div>
+              
               <Typography variant="caption" className="uppercase tracking-widest text-[var(--twb-color-accent-primary)] mb-4">
                 Since {farmStory.established}
               </Typography>
@@ -68,101 +79,12 @@ export const About: React.FC = () => {
         </Container>
       </section>
 
-      {/* Timeline Visual */}
-      <section className="py-20 bg-[var(--twb-color-plum)]/5">
-        <Container>
-          <div className="text-center mb-16">
-            <div className="relative inline-block">
-              <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
-                Our Timeline
-              </Typography>
-              <HandDrawnUnderline 
-                variant="wave" 
-                color="var(--twb-color-plum)" 
-                width={85}
-                offset={-2}
-              />
-            </div>
-            <p className="text-[var(--twb-color-text-muted)] text-lg">
-              Five milestones that shaped who we are today
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-12">
-            {farmStory.story.timeline.map((milestone, index) => (
-              <div 
-                key={milestone.year}
-                className="flex gap-8 items-start group"
-              >
-                {/* Year Badge */}
-                <div className="flex-shrink-0">
-                  <div className="w-24 h-24 rounded-full bg-[var(--twb-color-gold)] flex flex-col items-center justify-center text-[var(--twb-color-ink)] group-hover:scale-110 transition-transform shadow-lg">
-                    <span className="text-2xl font-bold">{milestone.year}</span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <OrganicBorder
-                  variant="card"
-                  bgColor="var(--twb-color-bg-tertiary)"
-                  borderColor="var(--twb-border-tertiary)"
-                  className="flex-1 p-8 group-hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="font-serif text-2xl mb-3 text-[var(--twb-color-plum)]">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-[var(--twb-color-text-muted)] leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </OrganicBorder>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* What Makes Us Different */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
-        <Container>
-          <div className="text-center mb-16">
-            <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
-              What Makes Us Different
-            </Typography>
-            <p className="text-[var(--twb-color-text-muted)] text-lg max-w-2xl mx-auto">
-              We're not a corporation. We're a family that happens to make really great wine.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {farmStory.values.map((value) => {
-              const iconMap: Record<string, any> = {
-                heart: Heart,
-                users: Users,
-                leaf: Leaf,
-                award: Award
-              };
-              const IconComponent = iconMap[value.icon] || Heart;
-
-              return (
-                <div 
-                  key={value.title}
-                  className="text-center group"
-                >
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-plum)]/10 flex items-center justify-center group-hover:bg-[var(--twb-color-plum)]/20 transition-colors">
-                    <IconComponent size={40} className="text-[var(--twb-color-plum)]" />
-                  </div>
-                  <h3 className="font-serif text-xl mb-3 text-[var(--twb-color-text-primary)]">
-                    {value.title}
-                  </h3>
-                  <p className="text-[var(--twb-color-text-muted)] text-sm leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+      {/* Decorative Divider */}
+      <BrushStrokeDivider 
+        variant="double-stroke" 
+        color="var(--twb-color-gold)" 
+        spacing="md"
+      />
 
       {/* Sub-Pages Grid */}
       <section className="py-20 bg-[var(--twb-color-ink)] text-white">
