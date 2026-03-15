@@ -1,5 +1,5 @@
 /**
- * Shopping Cart Page
+ * Shopping Cart Page (Hand-Drawn Version)
  * 
  * Complete shopping cart with item management, calculations, and checkout flow.
  * Displays cart items with quantity adjustment, removal, and price calculations.
@@ -23,7 +23,7 @@
  * 
  * Usage:
  * ```tsx
- * <Route path="/shop/cart" element={<Cart />} />
+ * <Route path="/shop/cart-handdrawn" element={<CartHanddrawn />} />
  * ```
  * 
  * Components Used:
@@ -45,7 +45,6 @@
 
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -72,7 +71,7 @@ const FREE_SHIPPING_THRESHOLD = 500;
 const SHIPPING_COST = 75;
 const TAX_RATE = 0.15; // 15% VAT
 
-export const Cart: React.FC = () => {
+export const CartHanddrawn: React.FC = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>(MOCK_CART_ITEMS);
 
@@ -127,13 +126,13 @@ export const Cart: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    navigate('/shop/checkout');
+    navigate('/shop/checkout-handdrawn');
   };
 
   // Empty cart state
   if (cartItems.length === 0) {
     return (
-      <Layout>
+      <>
         <title>Shopping Cart - Handcrafted Wines</title>
         <meta name="description" content="Your shopping cart at Handcrafted Wines" />
 
@@ -158,38 +157,15 @@ export const Cart: React.FC = () => {
             </div>
           </Container>
         </section>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
       {/* SEO Meta Tags */}
       <title>Shopping Cart ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}) - Handcrafted Wines</title>
       <meta name="description" content="Review your shopping cart and proceed to checkout" />
-
-      {/* Breadcrumbs */}
-      <section className="bg-[var(--twb-color-bg-secondary)] py-3 border-b border-[var(--twb-color-border-primary)]">
-        <Container variant="wide">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm">
-              <li>
-                <Link to="/" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
-                  Home
-                </Link>
-              </li>
-              <li className="text-[var(--twb-color-text-secondary)]">/</li>
-              <li>
-                <Link to="/shop" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
-                  Shop
-                </Link>
-              </li>
-              <li className="text-[var(--twb-color-text-secondary)]">/</li>
-              <li className="text-[var(--twb-color-text-primary)] font-semibold">Cart</li>
-            </ol>
-          </nav>
-        </Container>
-      </section>
 
       {/* Cart Page */}
       <section className="bg-[var(--twb-color-bg-primary)] py-[var(--twb-spacing-section-y)]">
@@ -352,7 +328,7 @@ export const Cart: React.FC = () => {
                       Free shipping on orders over R500
                     </Typography>
                   </div>
-                  <div className="flex items-start gap-3 p-3 rounded-[var(--twb-radius-sm)] bg-[var(--twb-color-bg-secondary)]">
+                  <div className="flex items-start gap-3 p-3 rounded-[var(--twb-color-bg-secondary)]">
                     <Gift className="size-5 mt-0.5 text-[var(--twb-color-vine)] shrink-0" aria-hidden="true" />
                     <Typography variant="caption">
                       Gift message available at checkout
@@ -382,7 +358,7 @@ export const Cart: React.FC = () => {
           </div>
         </Container>
       </section>
-    </Layout>
+    </>
   );
 };
 
@@ -532,4 +508,4 @@ const CartItemCard: React.FC<CartItemCardProps> = ({ item, onQuantityChange, onR
   );
 };
 
-export default Cart;
+export default CartHanddrawn;

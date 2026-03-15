@@ -53,8 +53,8 @@ export const WaxSealStamp: React.FC<WaxSealStampProps> = ({
 
   // Size configurations
   const dimensions = size === 'lg' ? { width: 140, height: 140 } : size === 'md' ? { width: 120, height: 120 } : { width: 100, height: 100 };
-  const fontSize = size === 'lg' ? '14px' : size === 'md' ? '12px' : '11px';
-  const fontSizeSecondary = size === 'lg' ? '10px' : size === 'md' ? '9px' : '8px';
+  const fontSize = size === 'lg' ? '12px' : size === 'md' ? '10px' : '9px';
+  const fontSizeSecondary = size === 'lg' ? '9px' : size === 'md' ? '8px' : '7px';
 
   // Color mapping
   const colorMap = {
@@ -172,17 +172,19 @@ export const WaxSealStamp: React.FC<WaxSealStampProps> = ({
 
       {/* Text content (centered) */}
       <div 
-        className="relative z-10 text-center px-4 flex flex-col items-center justify-center"
+        className="relative z-10 text-center px-2 flex flex-col items-center justify-center"
         style={{ 
           color: colors.text,
-          maxWidth: '80%',
+          maxWidth: '65%',
         }}
       >
         <div 
-          className="font-serif font-bold uppercase tracking-wider leading-tight"
+          className="font-serif font-bold uppercase tracking-wide leading-tight break-words"
           style={{ 
             fontSize,
             textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+            wordBreak: 'break-word',
+            hyphens: 'auto',
           }}
         >
           {text}
@@ -190,7 +192,7 @@ export const WaxSealStamp: React.FC<WaxSealStampProps> = ({
         
         {/* Decorative divider line */}
         <div 
-          className="w-12 h-px my-1"
+          className="w-8 h-px my-0.5"
           style={{ 
             backgroundColor: colors.text,
             opacity: 0.4,
@@ -199,10 +201,11 @@ export const WaxSealStamp: React.FC<WaxSealStampProps> = ({
         
         {/* Subtitle (optional - for "Handcrafted Wines") */}
         <div 
-          className="font-sans uppercase tracking-widest"
+          className="font-sans uppercase tracking-wider break-words"
           style={{ 
             fontSize: fontSizeSecondary,
             opacity: 0.7,
+            wordBreak: 'break-word',
           }}
         >
           Handcrafted

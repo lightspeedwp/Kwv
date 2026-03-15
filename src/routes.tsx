@@ -13,6 +13,7 @@ import { News } from './pages/company/News';
 import { NewsPost } from './pages/company/NewsPost';
 import { WineClub } from './pages/company/WineClub';
 import { Careers } from './pages/company/Careers';
+import { JobDetail } from './pages/company/JobDetail';
 import { ExecutiveTeam } from './pages/company/ExecutiveTeam';
 import { Sustainability } from './pages/company/Sustainability';
 import { GlobalDistribution } from './pages/company/GlobalDistribution';
@@ -86,6 +87,7 @@ export const router = createBrowserRouter([
   { path: '/news/:slug', Component: NewsPost },
   { path: '/wine-club', Component: WineClub },
   { path: '/careers', Component: Careers },
+  { path: '/careers/:id', Component: JobDetail },
   { path: '/jobs', Component: Careers },
   { path: '/our-company/jobs', Component: Careers },
   { path: '/executive-team', Component: ExecutiveTeam },

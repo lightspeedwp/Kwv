@@ -46,7 +46,8 @@
  */
 
 import React, { useMemo, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams, Link } from 'react-router';
+import { CheckoutLayout } from '../../components/layout/CheckoutLayout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -163,11 +164,34 @@ export const OrderConfirmation: React.FC = () => {
   }
 
   return (
-    <>
+    <CheckoutLayout showBackToShop={true}>
       {/* SEO Meta Tags */}
       <title>Order Confirmation #{orderNumber} - Handcrafted Wines</title>
       <meta name="description" content={`Your order #${orderNumber} has been received successfully`} />
       <meta name="robots" content="noindex,nofollow" />
+
+      {/* Breadcrumbs */}
+      <section className="bg-[var(--twb-color-bg-secondary)] py-3 border-b border-[var(--twb-color-border-primary)]">
+        <Container variant="wide">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm">
+              <li>
+                <Link to="/" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
+                  Home
+                </Link>
+              </li>
+              <li className="text-[var(--twb-color-text-secondary)]">/</li>
+              <li>
+                <Link to="/shop" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
+                  Shop
+                </Link>
+              </li>
+              <li className="text-[var(--twb-color-text-secondary)]">/</li>
+              <li className="text-[var(--twb-color-text-primary)] font-semibold">Order Confirmation</li>
+            </ol>
+          </nav>
+        </Container>
+      </section>
 
       {/* Order Confirmation Page */}
       <section className="bg-[var(--twb-color-bg-primary)] py-[var(--twb-spacing-section-y)]">
@@ -557,7 +581,7 @@ export const OrderConfirmation: React.FC = () => {
           }
         }
       `}</style>
-    </>
+    </CheckoutLayout>
   );
 };
 

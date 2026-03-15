@@ -53,7 +53,8 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
+import { CheckoutLayout } from '../../components/layout/CheckoutLayout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -261,10 +262,39 @@ export const Checkout: React.FC = () => {
   }
 
   return (
-    <>
+    <CheckoutLayout>
       {/* SEO Meta Tags */}
       <title>Checkout - Handcrafted Wines</title>
       <meta name="description" content="Complete your purchase at Handcrafted Wines" />
+
+      {/* Breadcrumbs */}
+      <section className="bg-[var(--twb-color-bg-secondary)] py-3 border-b border-[var(--twb-color-border-primary)]">
+        <Container variant="wide">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm">
+              <li>
+                <Link to="/" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
+                  Home
+                </Link>
+              </li>
+              <li className="text-[var(--twb-color-text-secondary)]">/</li>
+              <li>
+                <Link to="/shop" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
+                  Shop
+                </Link>
+              </li>
+              <li className="text-[var(--twb-color-text-secondary)]">/</li>
+              <li>
+                <Link to="/cart" className="text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-plum)]">
+                  Cart
+                </Link>
+              </li>
+              <li className="text-[var(--twb-color-text-secondary)]">/</li>
+              <li className="text-[var(--twb-color-text-primary)] font-semibold">Checkout</li>
+            </ol>
+          </nav>
+        </Container>
+      </section>
 
       {/* Checkout Page */}
       <section className="bg-[var(--twb-color-bg-primary)] py-[var(--twb-spacing-section-y)]">
@@ -388,7 +418,7 @@ export const Checkout: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </CheckoutLayout>
   );
 };
 
@@ -417,7 +447,7 @@ const CheckoutProgress: React.FC<CheckoutProgressProps> = ({ currentStep }) => {
         const isCompleted = currentStep > step.number;
 
         return (
-          <React.Fragment key={step.number}>
+          <div key={step.number} className="flex items-center flex-1">
             <div className="flex flex-col items-center flex-1">
               <div
                 className={`
@@ -445,7 +475,7 @@ const CheckoutProgress: React.FC<CheckoutProgressProps> = ({ currentStep }) => {
                 />
               </div>
             )}
-          </React.Fragment>
+          </div>
         );
       })}
     </div>
