@@ -132,7 +132,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
       <div className="w-full grid grid-cols-1 md:grid-cols-3">
           {galleryImages.slice(0, 3).map((img, idx) => (
               <div key={idx} className="aspect-[4/3] w-full relative">
-                  <ImageWithFallback src={img} alt={`Gallery ${idx}`} className="w-full h-full object-cover" />
+                  <ImageWithFallback src={img} alt={`${title} photo ${idx + 1}`} className="w-full h-full object-cover" />
               </div>
           ))}
       </div>

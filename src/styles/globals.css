@@ -7,6 +7,7 @@
  * ARCHITECTURE:
  * - themes.css: Orchestrates all theme files (variables, light, dark, utilities)
  * - Base layer: Typography and element defaults
+ * - WCAG 2.3.3: Prefers-reduced-motion support for accessibility
  * 
  * @package TheWireBrand
  * @version 2.0
@@ -148,3 +149,115 @@ html {
 .dark {
   color-scheme: dark;
 }
+
+/* ============================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   WCAG 2.3.3 Animation from Interactions
+   
+   Respects user's system preference for reduced motion.
+   Disables/reduces animations for users with motion sensitivity.
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  /**
+   * Global Reset: Remove all animations and transitions
+   * Exceptions: Essential animations (e.g., loading spinners) can override this
+   */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /**
+   * Remove specific animation properties
+   * Covers Radix UI and Tailwind animate-* classes
+   */
+  [data-state="open"],
+  [data-state="closed"],
+  .animate-in,
+  .animate-out,
+  .fade-in,
+  .fade-out,
+  .zoom-in,
+  .zoom-out,
+  .slide-in-from-top,
+  .slide-in-from-bottom,
+  .slide-in-from-left,
+  .slide-in-from-right,
+  .animate-accordion-up,
+  .animate-accordion-down {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /**
+   * Preserve instant state changes (opacity, visibility)
+   * but remove motion-based transitions
+   */
+  .hover\\:scale-\\[1\\.02\\],
+  .hover\\:shadow-\\[var\\(--twb-shadow-lg\\)\\] {
+    transition: none !important;
+  }
+
+  /**
+   * Keep focus indicators (required for accessibility)
+   * but make them instant instead of animated
+   */
+  *:focus-visible {
+    transition: none !important;
+  }
+
+  /**
+   * Smooth scroll is jarring for motion-sensitive users
+   * Force instant scrolling
+   */
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /**
+   * Dialog/Modal animations: Instant open/close
+   * Preserves functionality, removes motion
+   */
+  [data-state="open"][data-slot*="overlay"],
+  [data-state="open"][data-slot*="content"] {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  [data-state="closed"][data-slot*="overlay"],
+  [data-state="closed"][data-slot*="content"] {
+    animation: none !important;
+    opacity: 0;
+  }
+
+  /**
+   * Preserve color/opacity changes (instant)
+   * These are not motion-based and are safe
+   */
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/**
+ * Developer Note:
+ * To create essential animations that should NOT be disabled:
+ * - Use data-motion-essential="true" attribute
+ * - Add specific override below the global reset
+ * 
+ * Example:
+ * [data-motion-essential="true"] {
+ *   animation-duration: revert !important;
+ *   transition-duration: revert !important;
+ * }
+ */

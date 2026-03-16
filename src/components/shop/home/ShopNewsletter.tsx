@@ -12,6 +12,7 @@ import { SITE_CONTENT } from '../../../data/site-content';
  * - Background image with blur/overlay.
  * - Centered headline and form.
  * - Email input + submit button.
+ * - WCAG 1.3.5 autocomplete attribute for email field.
  */
 
 export const ShopNewsletter = () => {
@@ -43,6 +44,7 @@ export const ShopNewsletter = () => {
                 placeholder="email" 
                 className="flex-1 bg-white/90 border-none p-4 text-[#2C1810] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DAA520] lowercase"
                 aria-label="Email"
+                autoComplete="email"
              />
              <button type="submit" className="bg-[#333] text-white uppercase font-bold tracking-widest px-8 py-4 hover:bg-[#DAA520] hover:text-[#2C1810] transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#DAA520] focus:ring-offset-2">
                 Submit

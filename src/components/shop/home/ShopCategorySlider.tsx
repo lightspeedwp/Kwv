@@ -16,7 +16,7 @@ const CATEGORIES = [
 
 const CustomArrow = ({ className, style, onClick, direction }: any) => (
   <button
-    className={`${className} z-10 !flex items-center justify-center !w-10 !h-10 bg-white/80 hover:bg-[#DAA520] shadow-md rounded-full transition-colors before:!content-none after:!content-none`}
+    className={`${className} z-10 !flex items-center justify-center !w-10 !h-10 bg-white/80 hover:bg-[#DAA520] shadow-md rounded-full transition-colors before:!content-none after:!content-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2`}
     style={{ ...style, [direction === 'left' ? 'left' : 'right']: '-20px' }}
     onClick={onClick}
     aria-label={direction === 'left' ? "Previous slide" : "Next slide"}

@@ -126,7 +126,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productN
                         onClick={() => setActiveImage(idx)}
                         className={`w-16 h-16 flex-shrink-0 border-2 rounded-sm overflow-hidden ${activeImage === idx ? 'border-white' : 'border-transparent opacity-50 hover:opacity-100'} transition-all`}
                       >
-                        <ImageWithFallback src={img} alt="thumbnail" className="w-full h-full object-cover" />
+                        <ImageWithFallback src={img} alt={`${productName} view ${idx + 1}`} className="w-full h-full object-cover" />
                       </button>
                     ))}
                   </div>

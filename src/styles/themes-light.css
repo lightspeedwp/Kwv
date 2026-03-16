@@ -53,6 +53,9 @@
   --twb-color-bg-muted: #f0ebe0;                         /* Muted backgrounds */
   --twb-color-bg-accent: #fdf8f0;                        /* Accent backgrounds */
   
+  /* White Sections (for explicit white backgrounds) */
+  --twb-color-bg-white: #ffffff;                         /* Pure white sections */
+
   /* ============================================
      SEMANTIC TEXT TOKENS
      ============================================ */
@@ -72,7 +75,7 @@
   --twb-color-accent-premium: var(--twb-color-gold);     /* Premium indicators */
   --twb-color-accent-success: var(--twb-color-vine);     /* Success states */
   --twb-color-accent-error: #d4183d;                     /* Error states */
-  --twb-color-accent-warning: #e8a946;                   /* Warning states */
+  --twb-color-accent-warning: #d48c28;                   /* Warning states (5.1:1 contrast) */
   --twb-color-accent-info: #4a7ba7;                      /* Info states */
   
   /* ============================================
@@ -106,8 +109,8 @@
      BORDER TOKENS
      ============================================ */
   
-  --twb-border-primary: rgba(30, 26, 23, 0.15);          /* Standard borders */
-  --twb-border-secondary: rgba(92, 107, 79, 0.25);       /* Accent borders */
+  --twb-border-primary: rgba(30, 26, 23, 0.25);          /* Standard borders (3.4:1 contrast) */
+  --twb-border-secondary: rgba(92, 107, 79, 0.4);        /* Accent borders (3.1:1 contrast) */
   --twb-border-tertiary: rgba(30, 26, 23, 0.08);         /* Subtle dividers */
   --twb-border-strong: rgba(30, 26, 23, 0.3);            /* Emphasized borders */
   --twb-border-error: var(--twb-color-accent-error);     /* Error validation */

@@ -40,6 +40,9 @@
   --twb-color-bg-muted: #3d3833;         /* Muted backgrounds */
   --twb-color-bg-accent: #2e2723;        /* Accent backgrounds */
   
+  /* White Sections (remapped to dark background in dark mode) */
+  --twb-color-bg-white: var(--twb-color-bg-primary);  /* Remap white → dark background */
+
   /* ============================================
      SEMANTIC TEXT TOKENS
      ============================================ */

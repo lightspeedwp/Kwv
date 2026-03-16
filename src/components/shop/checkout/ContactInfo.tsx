@@ -14,6 +14,7 @@ interface ContactInfoProps {
  * - Toggle between "Guest" (Email input) and "Logged In" states.
  * - "Create an account" checkbox for guests.
  * - Email validation.
+ * - WCAG 1.3.5 compliance via autocomplete attribute
  * 
  * @param {ContactInfoProps} props - Logged in state.
  */
@@ -47,6 +48,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
                 error={validateEmail(email)}
                 touched={touched}
                 required
+                autocomplete="email"
              />
              <p className="text-xs text-gray-500 mt-1 pl-1">You are currently checking out as a guest.</p>
            </div>

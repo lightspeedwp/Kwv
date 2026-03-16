@@ -207,7 +207,7 @@
 }
 
 .twb-section--white {
-  background-color: #ffffff;
+  background-color: var(--twb-color-bg-white);
 }
 
 .twb-section--muted {
@@ -565,17 +565,17 @@
 
 .twb-badge--primary {
   background-color: var(--twb-color-accent-primary);
-  color: #ffffff;
+  color: var(--twb-color-text-on-accent);
 }
 
 .twb-badge--success {
   background-color: var(--twb-color-accent-success);
-  color: #ffffff;
+  color: var(--twb-color-text-on-accent);
 }
 
 .twb-badge--error {
   background-color: var(--twb-color-accent-error);
-  color: #ffffff;
+  color: var(--twb-color-text-on-accent);
 }
 
 .twb-badge--premium {

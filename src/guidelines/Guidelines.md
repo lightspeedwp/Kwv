@@ -98,7 +98,7 @@
 
 Use trigger words to activate automated prompts. Type any trigger to execute its workflow.
 
-**Quick Reference (26 Triggers):**
+**Quick Reference (27 Triggers):**
 
 ### Master Orchestration (2)
 - `audit` → Run ALL audit triggers (9 audits, 9 reports)
@@ -135,6 +135,9 @@ Use trigger words to activate automated prompts. Type any trigger to execute its
 
 ### Release Triggers (1)
 - `release` → Automate version bump and release
+
+### Code Quality Triggers (1)
+- `apply bem` → BEM compliance audit + auto-fix workflow
 
 **Complete Registry:** `/guidelines/PROMPT-TRIGGERS.md`  
 **Prompt System Documentation:** `/prompts/PROMPT-SYSTEM-GUIDELINES.md`

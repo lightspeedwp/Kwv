@@ -73,13 +73,11 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="absolute inset-0 z-0">
           <ImageWithFallback 
             src={imageSrc} 
-            alt={title} 
+            alt="" 
             className="w-full h-full object-cover"
+            loading="eager"
           />
-          <div 
-            className="absolute inset-0 bg-gradient-to-b from-[var(--twb-color-ink)]/40 to-[var(--twb-color-ink)]/60" 
-            style={{ opacity: overlayOpacity }}
-          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
       )}
 

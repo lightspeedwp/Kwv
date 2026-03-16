@@ -93,6 +93,7 @@ export const HandDrawnCheckbox: React.FC<HandDrawnCheckboxProps> = ({
           htmlFor={checkboxId}
           className={`
             relative flex-shrink-0 w-6 h-6 cursor-pointer 
+            peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--twb-color-focus-ring)] peer-focus-visible:ring-offset-2 peer-focus-visible:rounded-sm
             ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
         >

@@ -30,6 +30,7 @@ interface NewsletterProps {
  * - WCAG AA compliant focus states
  * - Mobile-optimized layout (stacked on mobile)
  * - Dark mode support
+ * - WCAG 1.3.5 autocomplete attributes for form fields
  * 
  * @package HandcraftedWines
  * @version 2.0
@@ -64,7 +65,10 @@ export const Newsletter: React.FC<NewsletterProps> = ({
        
        {/* Background pattern */}
        <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none" 
-            style={{ backgroundImage: 'radial-gradient(circle at center, var(--twb-color-gold) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+            style={{ 
+              backgroundImage: 'radial-gradient(circle at center, var(--twb-color-gold) 1px, transparent 1px)', 
+              backgroundSize: 'var(--twb-pattern-dot-spacing) var(--twb-pattern-dot-spacing)' 
+            }}
             aria-hidden="true">
        </div>
 
@@ -101,6 +105,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                placeholder="First Name" 
                className="w-full bg-white/10 dark:bg-[var(--twb-color-bg-secondary)] border border-white/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-white dark:text-[var(--twb-color-text-primary)] placeholder-white/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
                required
+               autoComplete="given-name"
              />
            </div>
            <div className="flex-1 w-full text-left">
@@ -118,6 +123,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                placeholder="your@email.com" 
                className="w-full bg-white/10 dark:bg-[var(--twb-color-bg-secondary)] border border-white/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-white dark:text-[var(--twb-color-text-primary)] placeholder-white/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
                required
+               autoComplete="email"
              />
            </div>
            <Button 

@@ -34,6 +34,7 @@ const INITIAL_DATA: AddressData = {
  * The form component for capturing billing address information.
  * Can function standalone or as part of the checkout flow.
  * Includes validation logic and state management for fields.
+ * WCAG 1.3.5 compliance via autocomplete attributes for all fields.
  */
 export const BillingAddressForm: React.FC = () => {
   const [data, setData] = useState<AddressData>(INITIAL_DATA);
@@ -73,6 +74,7 @@ export const BillingAddressForm: React.FC = () => {
                 value={data.country}
                 onChange={(e) => handleChange('country', e.target.value)}
                 aria-label="Country / Region"
+                autoComplete="country"
             >
                 <option value="South Africa">South Africa</option>
                 <option value="Namibia">Namibia</option>
@@ -92,6 +94,7 @@ export const BillingAddressForm: React.FC = () => {
           error={errors.firstName}
           touched={touched.firstName}
           required
+          autoComplete="given-name"
         />
         <CheckoutInput 
           label="Last name" 
@@ -101,6 +104,7 @@ export const BillingAddressForm: React.FC = () => {
           error={errors.lastName}
           touched={touched.lastName}
           required
+          autoComplete="family-name"
         />
       </div>
 
@@ -110,6 +114,7 @@ export const BillingAddressForm: React.FC = () => {
           value={data.company}
           onChange={(e) => handleChange('company', e.target.value)}
           onBlur={() => handleBlur('company')}
+          autoComplete="organization"
         />
       </div>
 
@@ -122,6 +127,7 @@ export const BillingAddressForm: React.FC = () => {
           error={errors.street}
           touched={touched.street}
           required
+          autoComplete="street-address"
         />
       </div>
 
@@ -140,6 +146,7 @@ export const BillingAddressForm: React.FC = () => {
           error={errors.city}
           touched={touched.city}
           required
+          autoComplete="address-level2"
         />
         <div className="relative group">
             <select 
@@ -148,6 +155,7 @@ export const BillingAddressForm: React.FC = () => {
                 value={data.province}
                 onChange={(e) => handleChange('province', e.target.value)}
                 aria-label="Province"
+                autoComplete="address-level1"
             >
                 <option value="Western Cape">Western Cape</option>
                 <option value="Gauteng">Gauteng</option>
@@ -167,6 +175,7 @@ export const BillingAddressForm: React.FC = () => {
           error={errors.postcode}
           touched={touched.postcode}
           required
+          autoComplete="postal-code"
         />
         <CheckoutInput 
           label="Phone (optional)" 
@@ -175,6 +184,7 @@ export const BillingAddressForm: React.FC = () => {
           onBlur={() => handleBlur('phone')}
           error={errors.phone}
           touched={touched.phone}
+          autoComplete="tel"
         />
       </div>
     </div>

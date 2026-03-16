@@ -23,7 +23,7 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 
 ---
 
-## Trigger Registry (26 Total)
+## Trigger Registry (27 Total)
 
 ### 🎯 Master Orchestration Triggers (2)
 
@@ -94,6 +94,46 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 | Trigger | Prompt File | Purpose | Outputs |
 |---------|-------------|---------|---------|
 | `release` | `/prompts/release.md` | Automate version bump and changelog release | CHANGELOG.md, version tags |
+
+---
+
+### Code Quality Triggers (2)
+
+| Trigger | Prompt File | Purpose | Outputs |
+|---------|-------------|---------|---------|
+| `apply bem` | `/prompts/apply-bem.md` | BEM compliance audit + auto-fix workflow | Violation report, fixed components, CSS updates |
+
+**Behavior:**
+- **Phase 1:** Inventory existing BEM classes and CSS variables
+- **Phase 2:** Scan all `.tsx` files for violations (inline styles, missing BEM, orphan classes)
+- **Phase 3:** Analyze violations by severity (Critical/High/Medium/Low)
+- **Phase 4:** Map inline values to CSS variables
+- **Phase 5:** Apply fixes automatically (remove inline styles, add BEM classes)
+- **Phase 6:** Validate WCAG 2.2 AA/AAA contrast ratios (light + dark mode)
+- **Recommends:** `audit tokens` or `audit css` when design system needs expansion
+
+**Violation Types:**
+- 🔴 **Missing BEM blocks** - Core components without `.twb-*` classes
+- 🔴 **Inline styles** - `style={{}}` with hardcoded values
+- 🟡 **Orphan BEM classes** - Classes used in TSX but undefined in CSS
+- 🟡 **Inconsistent naming** - Wrong casing, separators, or namespace
+- 🟢 **Tailwind overuse** - Complex Tailwind chains where BEM exists
+- 🔴 **Hardcoded colors** - Hex/RGB values instead of CSS variables
+
+**WCAG Compliance:**
+- Validates all color combinations (text + background)
+- Checks contrast ratios: 4.5:1 (AA), 7:1 (AAA) for normal text
+- Tests both light and dark modes
+- Reports all WCAG failures with recommended fixes
+
+**Retro Design Compliance:**
+- All BEM classes follow organic, hand-drawn aesthetic
+- Uses warm, earthy color palette (Paper, Ink, Vine, Clay, Plum, Gold)
+- Serif + Sans font pairings only
+- Fluid typography with `clamp()`
+- Natural spacing (multiples of 0.25rem)
+
+**When to use:** After component updates, before production, monthly maintenance
 
 ---
 
@@ -654,6 +694,27 @@ AI: Uses report to clean up
 - Git tag recommendation
 
 **When to use:** Before releases
+
+---
+
+### apply bem
+
+**Purpose:** BEM compliance audit + auto-fix workflow
+
+**Workflow:**
+1. **Phase 1:** Inventory existing BEM classes and CSS variables
+2. **Phase 2:** Scan all `.tsx` files for violations (inline styles, missing BEM, orphan classes)
+3. **Phase 3:** Analyze violations by severity (Critical/High/Medium/Low)
+4. **Phase 4:** Map inline values to CSS variables
+5. **Phase 5:** Apply fixes automatically (remove inline styles, add BEM classes)
+6. **Phase 6:** Validate WCAG 2.2 AA/AAA contrast ratios (light + dark mode)
+
+**Outputs:**
+- Violation report
+- Fixed components
+- CSS updates
+
+**When to use:** After component updates, before production, monthly maintenance
 
 ---
 

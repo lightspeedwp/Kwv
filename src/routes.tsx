@@ -1,3 +1,12 @@
+/**
+ * routes.tsx
+ * 
+ * Central routing configuration for Handcrafted Wines.
+ * Uses React Router v7 Data mode with createBrowserRouter.
+ * 
+ * @updated 2026-03-16 - Cache refresh after CSS token updates
+ */
+
 import { createBrowserRouter } from 'react-router';
 
 // Company Pages

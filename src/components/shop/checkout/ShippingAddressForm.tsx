@@ -44,6 +44,7 @@ const INITIAL_DATA: AddressData = {
  * - "Use same address for billing" toggle.
  * - Collapsible "Apartment" field.
  * - Standard address fields validation.
+ * - WCAG 1.3.5 compliance via autocomplete attributes for all fields.
  * 
  * @param {ShippingAddressFormProps} props - Billing toggle handlers.
  */
@@ -89,6 +90,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
                 value={data.country}
                 onChange={(e) => handleChange('country', e.target.value)}
                 aria-label="Country / Region"
+                autoComplete="country"
             >
                 <option value="South Africa">South Africa</option>
                 <option value="Namibia">Namibia</option>
@@ -108,6 +110,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           error={errors.firstName}
           touched={touched.firstName}
           required
+          autoComplete="given-name"
         />
         <CheckoutInput 
           label="Last name" 
@@ -117,6 +120,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           error={errors.lastName}
           touched={touched.lastName}
           required
+          autoComplete="family-name"
         />
       </div>
 
@@ -126,6 +130,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           value={data.company}
           onChange={(e) => handleChange('company', e.target.value)}
           onBlur={() => handleBlur('company')}
+          autoComplete="organization"
         />
       </div>
 
@@ -138,6 +143,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           error={errors.street}
           touched={touched.street}
           required
+          autoComplete="street-address"
         />
       </div>
 
@@ -155,6 +161,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
              value={data.apartment}
              onChange={(e) => handleChange('apartment', e.target.value)}
              onBlur={() => handleBlur('apartment')}
+             autoComplete="address-line2"
            />
          )}
       </div>
@@ -175,6 +182,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           error={errors.city}
           touched={touched.city}
           required
+          autoComplete="address-level2"
         />
         <div className="relative group">
             <select 
@@ -183,6 +191,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
                 value={data.province}
                 onChange={(e) => handleChange('province', e.target.value)}
                 aria-label="Province"
+                autoComplete="address-level1"
             >
                 <option value="Western Cape">Western Cape</option>
                 <option value="Gauteng">Gauteng</option>
@@ -202,6 +211,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           error={errors.postcode}
           touched={touched.postcode}
           required
+          autoComplete="postal-code"
         />
         <CheckoutInput 
           label="Phone (optional)" 
@@ -210,6 +220,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('phone')}
           error={errors.phone}
           touched={touched.phone}
+          autoComplete="tel"
         />
       </div>
 
