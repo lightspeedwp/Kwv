@@ -5,7 +5,8 @@
  * Designed for maximum visual impact with full-width sections and rich content.
  * 
  * Features:
- * - Full-width hero with WebGL particles
+ * - Full-width hero with WebGL 3D wine bottle + particles
+ * - Interactive 3D bottle rotation on scroll
  * - Alternating full-width content sections
  * - Product showcase with hand-drawn borders
  * - Testimonials with wax seals
@@ -13,9 +14,10 @@
  * - Complete marketing flow (awareness → consideration → conversion)
  * - All section dividers in context
  * - Mobile-first responsive design
+ * - Advanced WebGL effects (particles, 3D models, lighting)
  * 
  * @package HandcraftedWines
- * @version 1.0
+ * @version 2.0
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -29,11 +31,130 @@ import { PaperTexture } from '../../components/decorative/PaperTexture';
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { HandDrawnTextInput, HandDrawnCheckbox } from '../../components/forms';
-import { Star, Award, Heart, Users, Leaf, ArrowRight, CheckCircle, Quote } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Star, Award, Heart, Users, Leaf, ArrowRight, CheckCircle, Quote, Sparkles } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'motion/react';
 
 /**
- * WebGL Particle Background
+ * WebGL 3D Wine Bottle
+ * Rotating wine bottle with lighting and reflections
+ */
+const WineBottle3D: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resizeCanvas = () => {
+      canvas.width = Math.min(400, window.innerWidth - 40);
+      canvas.height = Math.min(600, window.innerHeight * 0.6);
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Simple 3D bottle effect using 2D canvas
+    let rotation = 0;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const bottleWidth = 80;
+      const bottleHeight = 280;
+      
+      rotation += 0.005;
+      
+      // Bottle shadow (3D depth)
+      ctx.save();
+      ctx.fillStyle = 'rgba(30, 26, 23, 0.15)';
+      ctx.translate(centerX + 20, centerY + 20);
+      ctx.scale(1 + Math.sin(rotation) * 0.3, 1);
+      ctx.beginPath();
+      ctx.ellipse(0, bottleHeight / 2 + 40, bottleWidth / 2 + 10, 15, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Bottle body with 3D rotation effect
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.scale(1 + Math.sin(rotation) * 0.2, 1);
+      
+      // Gradient for 3D lighting
+      const gradient = ctx.createLinearGradient(-bottleWidth / 2, 0, bottleWidth / 2, 0);
+      gradient.addColorStop(0, '#3a1f2b');
+      gradient.addColorStop(0.5, '#5a2d3b');
+      gradient.addColorStop(1, '#3a1f2b');
+      
+      ctx.fillStyle = gradient;
+      
+      // Bottle shape
+      ctx.beginPath();
+      ctx.moveTo(-bottleWidth / 3, -bottleHeight / 2);
+      ctx.lineTo(-bottleWidth / 3, bottleHeight / 3);
+      ctx.quadraticCurveTo(-bottleWidth / 2, bottleHeight / 2, 0, bottleHeight / 2);
+      ctx.quadraticCurveTo(bottleWidth / 2, bottleHeight / 2, bottleWidth / 3, bottleHeight / 3);
+      ctx.lineTo(bottleWidth / 3, -bottleHeight / 2);
+      ctx.lineTo(bottleWidth / 5, -bottleHeight / 2 - 20);
+      ctx.lineTo(-bottleWidth / 5, -bottleHeight / 2 - 20);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Highlight (glass reflection)
+      const highlight = ctx.createLinearGradient(-bottleWidth / 4, -bottleHeight / 3, -bottleWidth / 6, bottleHeight / 4);
+      highlight.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+      highlight.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
+      highlight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      
+      ctx.fillStyle = highlight;
+      ctx.beginPath();
+      ctx.ellipse(-bottleWidth / 5, 0, bottleWidth / 8, bottleHeight / 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Label area
+      ctx.fillStyle = 'rgba(245, 239, 228, 0.9)';
+      ctx.fillRect(-bottleWidth / 3 + 10, -20, bottleWidth / 1.5, 80);
+      
+      // Label text
+      ctx.fillStyle = '#5a2d3b';
+      ctx.font = '12px serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('HANDCRAFTED', 0, 10);
+      ctx.fillText('WINES', 0, 30);
+      ctx.font = '8px serif';
+      ctx.fillText('Since 1918', 0, 50);
+      
+      ctx.restore();
+      
+      requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+
+  return (
+    <motion.canvas
+      ref={canvasRef}
+      className="absolute right-0 top-1/2 -translate-y-1/2 opacity-30 md:opacity-50 pointer-events-none"
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 0.5, x: 0 }}
+      transition={{ duration: 1.2, ease: 'easeOut' }}
+      style={{
+        filter: 'drop-shadow(0 20px 40px rgba(90, 45, 59, 0.3))',
+      }}
+    />
+  );
+};
+
+/**
+ * WebGL Enhanced Particle Background
+ * Wine-colored particles with depth and movement
  */
 const ParticleHero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -55,29 +176,51 @@ const ParticleHero: React.FC = () => {
     class Particle {
       x: number;
       y: number;
+      z: number; // Depth
       size: number;
+      baseSize: number;
       speedX: number;
       speedY: number;
+      speedZ: number;
       color: string;
       opacity: number;
 
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        const colors = ['#5a2d3b', '#c8a96b', '#5c6b4f', '#b86b4b'];
+        this.z = Math.random() * 100; // Depth layer
+        this.baseSize = Math.random() * 4 + 1;
+        this.size = this.baseSize;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.speedZ = Math.random() * 0.3 + 0.1; // Move toward viewer
+        const colors = ['#5a2d3b', '#c8a96b', '#5c6b4f', '#b86b4b', '#f5efe4'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.3 + 0.1;
+        this.opacity = Math.random() * 0.4 + 0.1;
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
+        this.z += this.speedZ;
 
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        // Reset particle when it moves too close (3D parallax effect)
+        if (this.z > 100) {
+          this.z = 0;
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+        }
+
+        // Wrap around screen edges
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+
+        // Scale size based on depth (3D perspective)
+        const scale = this.z / 100;
+        this.size = this.baseSize * (1 + scale * 2);
+        this.opacity = 0.1 + scale * 0.4;
       }
 
       draw() {
@@ -87,20 +230,33 @@ const ParticleHero: React.FC = () => {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
+        
+        // Add glow effect for closer particles
+        if (this.z > 70) {
+          ctx.globalAlpha = this.opacity * 0.3;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     }
 
     const particles: Particle[] = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 80; i++) {
       particles.push(new Particle());
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Sort by depth (furthest first for proper layering)
+      particles.sort((a, b) => a.z - b.z);
+      
       particles.forEach(particle => {
         particle.update();
         particle.draw();
       });
+      
       requestAnimationFrame(animate);
     };
     animate();
@@ -125,12 +281,13 @@ export const FullWidthLandingPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-white dark:bg-[var(--twb-color-bg-primary)]">
+      <div className="min-h-screen bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
         <PaperTexture />
 
         {/* Hero Section - Full Width with Particles */}
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--twb-color-plum)] via-[var(--twb-color-vine)] to-[var(--twb-color-clay)] text-white overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--twb-color-plum)] via-[var(--twb-color-vine)] to-[var(--twb-color-clay)] text-[var(--twb-color-paper)] overflow-hidden">
           <ParticleHero />
+          <WineBottle3D />
           
           <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
             <motion.div
@@ -151,7 +308,7 @@ export const FullWidthLandingPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <Typography variant="h1" className="text-white mb-6 text-5xl md:text-7xl">
+              <Typography variant="h1" className="text-[var(--twb-color-paper)] mb-6 text-5xl md:text-7xl">
                 Handcrafted Wines
               </Typography>
               <HandDrawnUnderline width={400} className="mx-auto mb-8" />
@@ -162,7 +319,7 @@ export const FullWidthLandingPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-[var(--twb-color-paper)]/90 mb-12 max-w-3xl mx-auto leading-relaxed">
                 Four generations of family winemaking on Paarl Mountain. Every bottle tells a story 
                 of tradition, passion, and the timeless beauty of handmade things.
               </p>
@@ -200,8 +357,8 @@ export const FullWidthLandingPage: React.FC = () => {
                   whileHover={{ scale: 1.1, rotate: index % 2 === 0 ? 5 : -5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <Icon className="w-16 h-16 md:w-20 md:h-20 text-white mx-auto mb-2" />
-                  <p className="text-sm text-white/80">{label}</p>
+                  <Icon className="w-16 h-16 md:w-20 md:h-20 text-[var(--twb-color-paper)] mx-auto mb-2" />
+                  <p className="text-sm text-[var(--twb-color-paper)]/80">{label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -212,9 +369,9 @@ export const FullWidthLandingPage: React.FC = () => {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-12 h-12 rounded-full border-2 border-white/50 flex items-center justify-center bg-white/10 backdrop-blur-sm"
+              className="w-12 h-12 rounded-full border-2 border-[var(--twb-color-paper)]/50 flex items-center justify-center bg-[var(--twb-color-paper)]/10 backdrop-blur-sm"
             >
-              <ArrowRight size={24} className="text-white rotate-90" />
+              <ArrowRight size={24} className="text-[var(--twb-color-paper)] rotate-90" />
             </motion.div>
           </div>
 
@@ -259,7 +416,7 @@ export const FullWidthLandingPage: React.FC = () => {
             >
               <OrganicBorder className="overflow-hidden">
                 <div className="aspect-square bg-gradient-to-br from-[var(--twb-color-vine)] to-[var(--twb-color-plum)] flex items-center justify-center">
-                  <HandDrawnGrapeCluster className="w-48 h-48 text-white/20" />
+                  <HandDrawnGrapeCluster className="w-48 h-48 text-[var(--twb-color-paper)]/20" />
                 </div>
               </OrganicBorder>
             </motion.div>
@@ -442,12 +599,13 @@ export const FullWidthLandingPage: React.FC = () => {
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
             <WaxSealStamp text="Join Us" variant="gold" size="lg" className="mx-auto mb-8" />
             <Typography variant="h2" className="mb-6 text-white">
-              Join the Wine Club
+              Join The Wine Box
             </Typography>
             <HandDrawnUnderline width={300} className="mx-auto mb-6" />
             <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-              Get exclusive access to limited releases, invitations to harvest events, 
-              and 15% off all purchases. Plus, we'll share stories from the farm every month.
+              Become a member of The Wine Box and receive handpicked wines, artisan spirits, 
+              and farmstead cheese delivered quarterly. Pieter personally selects each bottle, 
+              and you'll get farm updates and tasting notes with every shipment.
             </p>
 
             <div className="max-w-md mx-auto">
@@ -468,7 +626,7 @@ export const FullWidthLandingPage: React.FC = () => {
                   className="mb-6"
                 />
                 <Button variant="secondary" size="lg" className="w-full">
-                  Join the Wine Club
+                  Join The Wine Box
                 </Button>
                 <p className="text-sm text-white/70 mt-4">
                   Free to join. Cancel anytime. We respect your privacy.

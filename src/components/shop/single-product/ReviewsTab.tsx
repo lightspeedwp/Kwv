@@ -32,7 +32,7 @@ export const ReviewsTab: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} size={14} fill="#DAA520" color="#DAA520" />
+                <Star key={i} size={14} fill="var(--twb-color-gold)" color="var(--twb-color-gold)" />
               ))}
             </div>
             <Typography variant="h4" className="text-sm font-bold">Great Wine!</Typography>
@@ -64,8 +64,8 @@ export const ReviewsTab: React.FC = () => {
                 >
                   <Star 
                     size={20} 
-                    fill={i <= rating ? "#DAA520" : "none"} 
-                    color={i <= rating ? "#DAA520" : "#9CA3AF"} 
+                    fill={i <= rating ? "var(--twb-color-gold)" : "none"} 
+                    color={i <= rating ? "var(--twb-color-gold)" : "#9CA3AF"} 
                   />
                 </button>
               ))}
@@ -76,7 +76,7 @@ export const ReviewsTab: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">Your review</label>
             <textarea 
               rows={4}
-              className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none"
+              className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[var(--twb-color-plum)] focus:border-[var(--twb-color-plum)] outline-none"
               placeholder="Tell us what you liked or didn't like..."
             ></textarea>
           </div>
@@ -84,11 +84,11 @@ export const ReviewsTab: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none" />
+                <input type="text" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[var(--twb-color-plum)] focus:border-[var(--twb-color-plum)] outline-none" />
              </div>
              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                <input type="email" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none" />
+                <input type="email" className="w-full border border-gray-300 rounded-sm p-3 focus:ring-1 focus:ring-[var(--twb-color-plum)] focus:border-[var(--twb-color-plum)] outline-none" />
              </div>
           </div>
 

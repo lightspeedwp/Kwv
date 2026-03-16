@@ -1,5 +1,30 @@
 /**
- * Brand Data
+ * Brand Data (DEPRECATED)
+ * 
+ * ⚠️ **DEPRECATED:** This file contains legacy KWV corporate brand data.
+ * 
+ * **Status:** Archived as of 2026-03-15
+ * **Reason:** Handcrafted Wines is a boutique family farm, not a corporate distributor.
+ *            The /brands route is orphaned (not in main navigation).
+ * 
+ * **Replacement:** Use `/data/shopBrands.ts` for product collections:
+ *   - Estate Wines
+ *   - Craft Spirits
+ *   - Farmstead Cheese
+ *   - Curated Gift Sets
+ *   - Wine Club Exclusives
+ * 
+ * **Routes:**
+ *   - /brands (DEPRECATED, not in navigation)
+ *   - /brands/:id (DEPRECATED, not in navigation)
+ * 
+ * **Replacement Routes:**
+ *   - /shop/brands (Active - uses shopBrands.ts)
+ *   - /shop/brands/:slug (Active - uses shopBrands.ts)
+ * 
+ * **Action Required:** Remove /brands routes from routes.tsx
+ * 
+ * ---
  * 
  * Central repository of all Corporate Brands.
  * Used in Brand Grid, Brand Listings, and Filtering.

@@ -31,7 +31,7 @@ export const ProductPrice: React.FC<ProductPriceProps> = ({ price, salePrice }) 
     <div className="flex items-center gap-3 mb-6">
       {salePrice ? (
         <>
-          <Typography variant="h3" className="!text-2xl text-[#2C1810]">
+          <Typography variant="h3" className="!text-2xl text-[var(--twb-color-ink)]">
             R {salePrice.toFixed(2)}
           </Typography>
           <span className="text-lg text-gray-400 line-through">
@@ -39,7 +39,7 @@ export const ProductPrice: React.FC<ProductPriceProps> = ({ price, salePrice }) 
           </span>
         </>
       ) : (
-        <Typography variant="h3" className="!text-2xl text-[#2C1810]">
+        <Typography variant="h3" className="!text-2xl text-[var(--twb-color-ink)]">
            R {price.toFixed(2)}
         </Typography>
       )}

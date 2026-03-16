@@ -24,6 +24,7 @@ export const CheckoutInput: React.FC<CheckoutInputProps> = ({
   touched,
   className = '',
   id,
+  required,
   ...props 
 }) => {
   const hasError = touched && error;
@@ -36,31 +37,35 @@ export const CheckoutInput: React.FC<CheckoutInputProps> = ({
           id={inputId}
           className={`
             peer w-full h-[58px] px-3 pt-6 pb-2 
-            bg-white border rounded-sm text-[#333333] placeholder-transparent 
+            bg-white border rounded-sm text-[var(--twb-color-text-primary)] placeholder-transparent 
             focus:outline-none focus:ring-0 text-base
-            ${hasError ? 'border-red-500' : 'border-gray-300 focus:border-[#2C1810]'}
+            ${hasError ? 'border-red-500' : 'border-gray-300 focus:border-[var(--twb-color-ink)]'}
             ${className}
           `}
           placeholder={label}
+          required={required}
+          aria-required={required}
+          aria-invalid={hasError ? 'true' : 'false'}
+          aria-describedby={hasError ? `${inputId}-error` : undefined}
           {...props}
         />
         <label
           htmlFor={inputId}
           className={`
             absolute left-3 transition-all duration-200 pointer-events-none truncate max-w-[calc(100%-24px)]
-            ${hasError ? 'text-red-500' : 'text-gray-500 peer-focus:text-[#2C1810]'}
-            peer-placeholder-shown:top-[17px] peer-placeholder-shown:text-[17px] peer-placeholder-shown:font-light
-            peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-medium
-            ${props.value ? 'top-2 text-[11px] font-medium' : ''}
+            ${hasError ? 'text-red-500' : 'text-gray-500 peer-focus:text-[var(--twb-color-ink)]'}
+            peer-placeholder-shown:top-[17px] peer-placeholder-shown:text-[length:var(--twb-text-body)] peer-placeholder-shown:font-light
+            peer-focus:top-2 peer-focus:text-[length:var(--twb-text-caption)] peer-focus:font-medium
+            ${props.value ? 'top-2 text-[length:var(--twb-text-caption)] font-medium' : ''}
           `}
         >
-          {label}
+          {label}{required && <span className="text-red-500 ml-0.5" aria-hidden="true">*</span>}
         </label>
       </div>
       
       {hasError && (
-        <div className="flex items-center gap-1 mt-1 text-red-500 text-xs">
-          <AlertCircle size={12} />
+        <div id={`${inputId}-error`} className="flex items-center gap-1 mt-1 text-red-500 text-xs" role="alert">
+          <AlertCircle size={12} aria-hidden="true" />
           <span>{error}</span>
         </div>
       )}

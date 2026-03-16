@@ -263,7 +263,7 @@ export const MyAccount: React.FC = () => {
 
               <TabsContent value="orders" className="mt-0">
                  {viewingOrder ? renderOrderDetails() : (
-                   <div className="overflow-x-auto">
+                   <div className="overflow-x-auto -mx-4 sm:mx-0">
                       <table className="w-full text-left border-collapse min-w-[600px]">
                          <thead>
                             <tr className="border-b border-gray-200">

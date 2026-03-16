@@ -1,165 +1,123 @@
 /**
  * Shop Brand Data
  * 
- * Data definitions for the Shop's brand landing pages.
- * Includes marketing copy, hero images, and navigation links.
+ * Data definitions for Handcrafted Wines product collections.
+ * As a boutique family farm, we organize our products by type (Wines, Spirits, Cheese)
+ * rather than separate "brands."
  * 
- * @typedef {Object} BrandData
- * @property {string} id - Unique identifier for the brand.
+ * @typedef {Object} CollectionData
+ * @property {string} id - Unique identifier for the collection.
  * @property {string} name - Display name.
- * @property {'wines'|'spirits'|'rtd'|'non-alcoholic'} category - Main category.
+ * @property {'wines'|'spirits'|'cheese'|'gifts'} category - Main category.
  * @property {string} tagline - Short catchy phrase.
  * @property {string} description - Brief description.
  * @property {string} heroImage - URL to high-res hero image.
- * @property {string} [logo] - Optional logo URL.
  * @property {string} story - Longer brand narrative.
  * @property {string[]} features - List of key selling points.
  * @property {string} shopLink - URL to the filtered shop page.
  */
-export interface BrandData {
+export interface CollectionData {
   id: string;
   name: string;
-  category: 'wines' | 'spirits' | 'rtd' | 'non-alcoholic';
+  category: 'wines' | 'spirits' | 'cheese' | 'gifts';
   tagline: string;
   description: string;
   heroImage: string;
-  logo?: string;
   story: string;
   features: string[];
   shopLink: string;
 }
 
-export const SHOP_BRANDS_DATA: Record<string, BrandData> = {
-  'kwv-brandy': {
-    id: 'kwv-brandy',
-    name: 'KWV Brandy',
-    category: 'spirits',
-    tagline: 'World Class. World\'s Best Brandy.',
-    description: 'Consistently crowned the best brandy in the world, KWV Brandy represents the pinnacle of South African distillation.',
-    heroImage: 'https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'For over a century, KWV has been crafting the finest brandies in the world. Our Potstill Brandies are double distilled in copper potstills and matured in small French oak barrels. The result is a range of brandies that are renowned for their quality, smoothness, and complexity.',
-    features: ['Double Distilled', 'Matured in French Oak', 'Multi-Award Winning', 'Heritage of Excellence'],
-    shopLink: '/shop/spirits/brandy?brand=kwv-brandy'
-  },
-  'bacardi': {
-    id: 'bacardi',
-    name: 'Bacardi',
-    category: 'spirits',
-    tagline: 'Do What Moves You.',
-    description: 'The world\'s most awarded rum, inspiring cocktails and good times since 1862.',
-    heroImage: 'https://images.unsplash.com/photo-1614313511387-1436a4480ebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Bacardi is more than just a rum brand; it is a legacy of passion and resilience. From the signature Bacardi Superior to the rich and complex aged rums, every bottle carries the spirit of the Bacardi family.',
-    features: ['World\'s Most Awarded Rum', 'Perfect for Cocktails', 'Aged & Unaged Varietals', 'Global Icon'],
-    shopLink: '/shop/spirits/rum?brand=bacardi'
-  },
-  'kwv-classic-collection': {
-    id: 'kwv-classic-collection',
-    name: 'Classic Collection',
+/**
+ * Handcrafted Wines Collections
+ * 
+ * Our product collections organized by category. Each collection represents
+ * a different aspect of our farm's offerings - from estate wines to artisan
+ * spirits and farmstead cheese.
+ */
+export const SHOP_BRANDS_DATA: Record<string, CollectionData> = {
+  'estate-wines': {
+    id: 'estate-wines',
+    name: 'Estate Wines',
     category: 'wines',
-    tagline: 'Wines for every occasion.',
-    description: 'A range of wines that are crafted to be enjoyed by all. Accessible, consistent, and delicious.',
+    tagline: 'Small-batch wines from our Paarl Mountain vineyard.',
+    description: 'Handcrafted wines from grapes grown on our family estate. Every bottle tells the story of our terroir.',
     heroImage: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'The KWV Classic Collection is crafted with the consumer in mind. We believe that great wine should be accessible to everyone. Our winemakers select the best grapes from the Western Cape to create wines that are fruity, soft, and easy to drink.',
-    features: ['Easy Drinking', 'Sustainable Practices', 'Wide Variety', 'Great Value'],
-    shopLink: '/shop/wine?brand=classic-collection'
+    story: 'Our vineyard has been in the family for four generations, with vines planted as early as 1918. We focus on small-batch production, allowing us to give each barrel the attention it deserves. From our flagship Shiraz to our elegant Chenin Blanc, every wine is a reflection of the Paarl Mountain terroir and our family\'s dedication to quality.',
+    features: [
+      'Estate-grown grapes',
+      'Small-batch production (500-2,000 bottles per vintage)',
+      'Minimal intervention winemaking',
+      'Family winemaking since 1918'
+    ],
+    shopLink: '/shop/wines'
   },
-  'roodeberg': {
-    id: 'roodeberg',
-    name: 'Roodeberg',
-    category: 'wines',
-    tagline: 'The Legendary Red.',
-    description: 'A true South African icon. Roodeberg has been bringing friends together for over 70 years.',
-    heroImage: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Roodeberg is the result of a secret blend that was first created in 1949. It is a wine that has stood the test of time, evolving with the palates of wine lovers while staying true to its heritage. It is the heart of any celebration.',
-    features: ['Iconic Red Blend', '70+ Years of History', 'Award Winning', 'Perfect for Gifting'],
-    shopLink: '/shop/wine/red?brand=roodeberg'
-  },
-  'laborie': {
-    id: 'laborie',
-    name: 'Laborie',
-    category: 'wines',
-    tagline: 'La Grande Vie.',
-    description: 'Celebrate the good life with Laborie\'s range of wines and Methode Cap Classique.',
-    heroImage: 'https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Situated in the heart of Paarl, Laborie Estate is as rich in history as it is in beauty. Our wines reflect the elegance and vibrancy of the estate, inviting you to enjoy every moment with style.',
-    features: ['Methode Cap Classique', 'Historic Estate', 'Elegant Wines', 'French Heritage'],
-    shopLink: '/shop/wine?brand=laborie'
-  },
-  'annabelle': {
-    id: 'annabelle',
-    name: 'Annabelle',
-    category: 'wines',
-    tagline: 'Sparkling Sweetness.',
-    description: 'A delightful range of sparkling beverages perfect for celebrating life\'s sweet moments.',
-    heroImage: 'https://images.unsplash.com/photo-1598155523122-38423bb4d693?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Annabelle is fun, flirty, and fabulous. It is designed for those who enjoy the sweeter side of life. Whether it is a brunch with friends or a sunset toast, Annabelle adds a sparkle to the occasion.',
-    features: ['Deliciously Sweet', 'Sparkling', 'Stylish Packaging', 'Party Perfect'],
-    shopLink: '/shop/wine/sparkling?brand=annabelle'
-  },
-  'the-mentors': {
-    id: 'the-mentors',
-    name: 'The Mentors',
-    category: 'wines',
-    tagline: 'Strictly Limited.',
-    description: 'Small batch, premium wines that showcase the absolute pinnacle of KWV\'s winemaking capabilities.',
-    heroImage: 'https://images.unsplash.com/photo-1559563362-c667ba5f5480?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'The Mentors range is a result of experimentation and a pursuit of perfection. Our winemakers are given the freedom to explore new terroirs and techniques. Only the very best barrels are selected for this exclusive range.',
-    features: ['Small Batch', 'Terroir Specific', 'Highly Awarded', 'Collector\'s Items'],
-    shopLink: '/shop/wine?brand=the-mentors'
-  },
-  'cathedral-cellar': {
-    id: 'cathedral-cellar',
-    name: 'Cathedral Cellar',
-    category: 'wines',
-    tagline: 'Monumental Wine.',
-    description: 'Wines with a sense of place, aged in our historic Cathedral Cellar.',
-    heroImage: 'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Built in 1930, the Cathedral Cellar is the heart of KWV. The wines that bear its name are crafted to reflect the grandeur and history of this impressive space. Complex, layered, and worthy of aging.',
-    features: ['Barrel Matured', 'Historic Significance', 'Gastronomic Wines', 'Premium Quality'],
-    shopLink: '/shop/wine?brand=cathedral-cellar'
-  },
-  'wild-africa-cream': {
-    id: 'wild-africa-cream',
-    name: 'Wild Africa Cream',
+  
+  'craft-spirits': {
+    id: 'craft-spirits',
+    name: 'Craft Spirits',
     category: 'spirits',
-    tagline: 'Untamed Elegance.',
-    description: 'A tantalizing blend of fresh cream and distilled spirit, inspired by the African leopard.',
-    heroImage: 'https://images.unsplash.com/photo-1617006506594-2cb92954c3f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Wild Africa Cream is as smooth as it is wild. Made with fresh cream and caramel, it is a luxurious treat that can be enjoyed over ice or in a decadent cocktail. Unleash your wild side.',
-    features: ['Fresh Cream', 'Caramel Notes', 'Leopard Print Bottle', 'Versatile Mixer'],
-    shopLink: '/shop/spirits/liqueurs?brand=wild-africa'
+    tagline: 'Handcrafted grappa and brandy from our on-farm distillery.',
+    description: 'Low-quantity, high-quality spirits distilled from our grape pomace and aged wine.',
+    heroImage: 'https://images.unsplash.com/photo-1599309066463-b88307db3536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
+    story: 'Our distillery is housed in a converted barn built in 1952. Hennie, our fourth-generation distiller, learned the craft from his grandfather. We produce grappa from our grape pomace after each harvest and age brandies in French oak barrels. Production is limited—we only distill what we can personally oversee.',
+    features: [
+      'On-farm copper pot still distillation',
+      'French oak barrel aging',
+      'Limited quantities (200-500 bottles annually)',
+      'Traditional family recipes'
+    ],
+    shopLink: '/shop/spirits'
   },
-  'cruxland-gin': {
-    id: 'cruxland-gin',
-    name: 'Cruxland Gin',
-    category: 'spirits',
-    tagline: 'The Taste of the Kalahari.',
-    description: 'The world\'s first gin infused with rare Kalahari truffles.',
-    heroImage: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Cruxland Gin is a journey of discovery. Our master distillers ventured into the Kalahari desert to find the rare N\'abbas truffles. Infused with 9 botanicals, this gin is an earthy, complex masterpiece.',
-    features: ['Kalahari Truffles', '100% Grape Spirit Base', 'Double Gold Winner', 'Handcrafted'],
-    shopLink: '/shop/spirits/gin?brand=cruxland'
+  
+  'farmstead-cheese': {
+    id: 'farmstead-cheese',
+    name: 'Farmstead Cheese',
+    category: 'cheese',
+    tagline: 'Artisan cheese made from milk from our own goat dairy.',
+    description: 'Award-winning chèvre crafted in small batches using milk from our Saanen goat herd.',
+    heroImage: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
+    story: 'Annelie started our goat dairy in 2003 with just six Saanen goats. Today, our herd has grown to 30, and our cheese has won awards across South Africa. We make fresh chèvre daily, and our aged varieties are matured in the same cellar where we age our wines. Every cheese is handcrafted—you might even meet the goats during your farm visit.',
+    features: [
+      'Made from our own goat milk',
+      'Handcrafted in small batches',
+      '8 Gold medals (SA Dairy Championships)',
+      'Fresh daily production'
+    ],
+    shopLink: '/shop/cheese'
   },
-  'pearly-bay': {
-    id: 'pearly-bay',
-    name: 'Pearly Bay',
+  
+  'curated-gifts': {
+    id: 'curated-gifts',
+    name: 'Curated Gift Sets',
+    category: 'gifts',
+    tagline: 'Thoughtfully paired collections for every occasion.',
+    description: 'Hand-selected combinations of our wines, spirits, and cheese—perfect for gifting or enjoying at home.',
+    heroImage: 'https://images.unsplash.com/photo-1549488497-69a0cd444a85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
+    story: 'We created these gift sets based on what we\'d want to receive ourselves. Each pairing has been carefully considered—the Tasting Trio introduces you to our core wines, while the Cheese & Wine Pairing matches our best chèvres with complementary bottles. These aren\'t corporate gift boxes; they\'re personal selections from our family to yours.',
+    features: [
+      'Hand-selected pairings',
+      'Premium gift packaging',
+      'Tasting notes included',
+      'Ships across South Africa'
+    ],
+    shopLink: '/shop/gifts'
+  },
+  
+  'wine-club-exclusive': {
+    id: 'wine-club-exclusive',
+    name: 'Wine Club Exclusives',
     category: 'wines',
-    tagline: 'A Sip of Sunshine.',
-    description: 'Unpretentious, fruity, and fun. Pearly Bay is all about easy enjoyment.',
-    heroImage: 'https://images.unsplash.com/photo-1572569666060-e79435c5c00d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Named after the white sandy beaches of the Cape, Pearly Bay wines are crisp, refreshing, and full of flavor. Available in bottles and convenient boxes, they are perfect for picnics, braais, and beach days.',
-    features: ['Great Value', 'Easy Drinking', 'Convenient Packaging', 'Fruity Styles'],
-    shopLink: '/shop/wine?brand=pearly-bay'
-  },
-  'imagin-gin': {
-    id: 'imagin-gin',
-    name: 'Imagin Gin',
-    category: 'spirits',
-    tagline: 'Imagine the Possibilities.',
-    description: 'Hand-crafted gin for the adventurous spirit.',
-    heroImage: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
-    story: 'Imagin Gin is crafted with care, using a blend of botanicals that creates a unique and refreshing taste profile. Perfect for any occasion.',
-    features: ['Hand-crafted', 'Botanical Blend', 'Smooth Finish', 'Mixable'],
-    shopLink: '/shop/spirits/gin?brand=imagin'
+    tagline: 'Limited releases available only to Wine Box members.',
+    description: 'Our smallest production runs and experimental vintages, reserved for club members.',
+    heroImage: 'https://images.unsplash.com/photo-1547595628-c61a29f496f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920',
+    story: 'As a Wine Box member, you get first access to our experimental wines and ultra-limited releases. These are the bottles we make just for fun—testing new blends, aging techniques, or vineyard blocks. Production is tiny (sometimes as few as 50 bottles), and they never make it to the general shop. It\'s our way of saying thank you to our most loyal supporters.',
+    features: [
+      'Members-only releases',
+      'Limited to 50-200 bottles',
+      'Experimental blends & techniques',
+      'First access to new vintages'
+    ],
+    shopLink: '/wine-club'
   }
 };

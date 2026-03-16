@@ -86,7 +86,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
       {/* Hero Section */}
       <div className="relative w-full bg-black text-white">
         {/* Hero Background - Solid Black as per request */}
-        <div className="relative min-h-[calc(100dvh-90px)] md:min-h-[60vh] w-full flex items-center justify-center bg-black">
+        <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[60vh] w-full flex items-center justify-center bg-black">
             
             {/* Hero Content Overlay */}
             <div className="flex flex-col items-center justify-center text-center p-6 pb-32 max-w-4xl mx-auto z-10 w-full">

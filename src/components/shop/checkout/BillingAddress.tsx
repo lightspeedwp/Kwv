@@ -46,7 +46,7 @@ export const BillingAddress: React.FC = () => {
         <div className="relative w-full h-14 bg-white border border-gray-300 rounded-sm">
            <label className="absolute left-3 top-2 text-xs text-gray-500 pointer-events-none z-10">Country/Region</label>
            <select 
-             className="w-full h-full px-3 pt-5 pb-2 bg-transparent text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810]"
+             className="w-full h-full px-3 pt-5 pb-2 bg-transparent text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-ink)]"
              defaultValue="za"
            >
               <option value="za">South Africa</option>
@@ -91,7 +91,7 @@ export const BillingAddress: React.FC = () => {
               error={getError('address', formData.address)}
               touched={touched.address}
            />
-           <button className="text-sm text-gray-500 hover:text-[#2C1810] mt-2 flex items-center gap-1 font-medium">
+           <button className="text-sm text-gray-500 hover:text-[var(--twb-color-ink)] mt-2 flex items-center gap-1 font-medium">
              + Add apartment, suite, etc.
            </button>
         </div>
@@ -109,7 +109,7 @@ export const BillingAddress: React.FC = () => {
            <div className="relative w-full h-14 bg-white border border-gray-300 rounded-sm">
               <label className="absolute left-3 top-2 text-xs text-gray-500 pointer-events-none z-10">Province</label>
               <select 
-                className="w-full h-full px-3 pt-5 pb-2 bg-transparent text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810]"
+                className="w-full h-full px-3 pt-5 pb-2 bg-transparent text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-ink)]"
                 defaultValue="wc"
               >
                  <option value="wc">Western Cape</option>

@@ -23,6 +23,13 @@
   --wp-preset-color-plum: #5a2d3b;       /* Wine-inspired primary */
   --wp-preset-color-gold: #c8a96b;       /* Muted premium gold */
   
+  /* Extended Brand Colors (for migration) */
+  --wp-preset-color-brown: #2C1810;      /* Dark chocolate brown */
+  --wp-preset-color-black: #111111;      /* Pure black for high contrast */
+  --wp-preset-color-red: #8B0000;        /* Dark red accent */
+  --wp-preset-color-cream: #FFF8E7;      /* Light cream accent */
+  --wp-preset-color-paper-light: #FDF6E3; /* Lighter parchment variant */
+  
   /* TWB Aliases (for component usage) */
   --twb-color-paper: var(--wp-preset-color-paper);
   --twb-color-ink: var(--wp-preset-color-ink);
@@ -30,6 +37,11 @@
   --twb-color-clay: var(--wp-preset-color-clay);
   --twb-color-plum: var(--wp-preset-color-plum);
   --twb-color-gold: var(--wp-preset-color-gold);
+  --twb-color-brown: var(--wp-preset-color-brown);
+  --twb-color-black: var(--wp-preset-color-black);
+  --twb-color-red: var(--wp-preset-color-red);
+  --twb-color-cream: var(--wp-preset-color-cream);
+  --twb-color-paper-light: var(--wp-preset-color-paper-light);
 
   /* ============================================
      SEMANTIC BACKGROUND TOKENS

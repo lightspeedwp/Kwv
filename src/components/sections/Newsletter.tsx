@@ -64,7 +64,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
        
        {/* Background pattern */}
        <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none" 
-            style={{ backgroundImage: 'radial-gradient(circle at center, #c8a96b 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+            style={{ backgroundImage: 'radial-gradient(circle at center, var(--twb-color-gold) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
             aria-hidden="true">
        </div>
 

@@ -18,9 +18,9 @@ import { SITE_CONTENT } from '../../../data/site-content';
 export const ShopInfoFooter: React.FC = () => {
   return (
     <div className="w-full">
-       <div className="flex flex-col lg:flex-row min-h-[400px]">
+       <div className="flex flex-col md:flex-row min-h-[400px]">
           {/* Column 1: Contact & Social (Black/Dark) */}
-          <div className="bg-[#111] text-white p-12 lg:w-1/3 flex flex-col justify-center items-center text-center">
+          <div className="bg-[#111] text-white p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
               <div className="mb-12">
                  <Typography variant="h4" className="text-[#C19B76] uppercase tracking-widest text-sm font-bold mb-6">
                     Contact Us
@@ -45,7 +45,7 @@ export const ShopInfoFooter: React.FC = () => {
           </div>
 
           {/* Column 2: Service Info (Gold/Brown) */}
-          <div className="bg-[#C19B76] text-[#2C1810] p-12 lg:w-1/3 flex flex-col justify-center items-center text-center">
+          <div className="bg-[#C19B76] text-[#2C1810] p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
              <Typography variant="h4" className="text-white uppercase tracking-widest text-sm font-bold mb-8">
                 Our Excellent Service Includes
              </Typography>
@@ -59,7 +59,7 @@ export const ShopInfoFooter: React.FC = () => {
           </div>
 
           {/* Column 3: Map */}
-          <div className="lg:w-1/3 relative min-h-[300px]">
+          <div className="md:w-1/3 relative min-h-[300px]">
              <iframe 
                src={SITE_CONTENT.contact.mapEmbedUrl}
                width="100%" 

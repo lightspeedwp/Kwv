@@ -20,9 +20,9 @@ interface DeliveryMethodSelectorProps {
 export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ method, setMethod }) => {
   return (
     <div>
-      <p className="text-[#333333] text-lg mb-4 font-light">Select how you would like to receive your order.</p>
+      <p className="text-[var(--twb-color-text-primary)] text-lg mb-4 font-light">Select how you would like to receive your order.</p>
       
-      <div className="flex bg-[#F5F5F5] p-1 rounded-sm">
+      <div className="flex bg-[var(--twb-color-bg-tertiary)] p-1 rounded-sm">
         {/* Ship Option */}
         <button
           onClick={() => setMethod('ship')}
@@ -33,10 +33,10 @@ export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ 
           }`}
         >
           <div className="flex items-center gap-3 mb-1">
-            <Truck size={20} className={method === 'ship' ? "text-[#333333]" : "text-gray-500"} />
-            <span className={`font-bold text-sm ${method === 'ship' ? "text-[#333333]" : "text-gray-500"}`}>Ship</span>
+            <Truck size={20} className={method === 'ship' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"} />
+            <span className={`font-bold text-sm ${method === 'ship' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"}`}>Ship</span>
           </div>
-          <span className={`text-xs ${method === 'ship' ? "text-[#333333]" : "text-gray-500"}`}>$20.00</span>
+          <span className={`text-xs ${method === 'ship' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"}`}>$20.00</span>
         </button>
 
         {/* Pickup Option */}
@@ -49,10 +49,10 @@ export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ 
           }`}
         >
           <div className="flex items-center gap-3 mb-1">
-            <Store size={20} className={method === 'pickup' ? "text-[#333333]" : "text-gray-500"} />
-            <span className={`font-bold text-sm ${method === 'pickup' ? "text-[#333333]" : "text-gray-500"}`}>Pickup</span>
+            <Store size={20} className={method === 'pickup' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"} />
+            <span className={`font-bold text-sm ${method === 'pickup' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"}`}>Pickup</span>
           </div>
-          <span className={`text-xs ${method === 'pickup' ? "text-[#333333]" : "text-gray-500"}`}>FREE</span>
+          <span className={`text-xs ${method === 'pickup' ? "text-[var(--twb-color-text-primary)]" : "text-gray-500"}`}>FREE</span>
         </button>
       </div>
     </div>

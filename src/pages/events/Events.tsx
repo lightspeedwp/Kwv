@@ -1,85 +1,358 @@
 import React from 'react';
-import { ExperiencePageLayout } from '../../components/experiences/ExperiencePageLayout';
+import { Hero } from '../../components/sections/Hero';
+import { Container } from '../../components/common/Container';
 import { Button } from '../../components/common/Button';
+import { Typography } from '../../components/common/Typography';
 import { useNavigate, Link } from 'react-router';
-import { KWVEventsLogo } from '../../components/common/Logo';
+import { Heart, Users, Calendar, MapPin, Phone, Mail, Wine, Utensils, Music, Camera } from 'lucide-react';
+import { farmStory } from '../../data/farmStory';
 
 /**
  * Events Page Component
  * 
- * Lists upcoming events at KWV (e.g., Concerts, Festivals, Masterclasses).
- * Uses `ExperiencePageLayout` for consistent branding.
+ * Handcrafted Wines events landing page showcasing wedding and corporate event offerings.
+ * Family farm venue with rustic charm and mountain views.
+ * 
+ * Features:
+ * - Wedding packages and venue details
+ * - Corporate event offerings
+ * - Venue capacity and facilities
+ * - Event contact and booking information
+ * - Image gallery of past events
+ * - Family-oriented hospitality voice
+ * 
+ * @package HandcraftedWines
+ * @version 2.0
  */
 export const Events: React.FC = () => {
   const navigate = useNavigate();
 
+  const eventTypes = [
+    {
+      icon: Heart,
+      title: "Weddings",
+      description: "Celebrate your special day on our family farm with Paarl Mountain as your backdrop",
+      features: ["Garden & Cellar ceremonies", "Reception for up to 120 guests", "Farm-to-table catering", "Wine tastings"],
+      link: "/events/weddings"
+    },
+    {
+      icon: Users,
+      title: "Corporate Events",
+      description: "Team-building experiences that blend wine, food, and the outdoors",
+      features: ["Wine blending workshops", "Vineyard team challenges", "Private tastings", "Catered lunches"],
+      link: "/events/corporate"
+    },
+    {
+      icon: Music,
+      title: "Private Functions",
+      description: "Birthday celebrations, anniversaries, and milestone gatherings",
+      features: ["Exclusive venue hire", "Custom menus", "Personalized wine labels", "Intimate atmosphere"],
+      link: "/events/private"
+    }
+  ];
+
+  const venueFeatures = [
+    { icon: MapPin, label: "Stunning Mountain Views", detail: "Paarl Mountain backdrop" },
+    { icon: Wine, label: "Award-Winning Wines", detail: "58+ international awards" },
+    { icon: Utensils, label: "Farm-to-Table Catering", detail: "Fresh, local ingredients" },
+    { icon: Camera, label: "Beautiful Photo Spots", detail: "Vineyard, cellar, gardens" }
+  ];
+
   return (
-    <ExperiencePageLayout
-      title="KWV EVENTS"
-      logoComponent={<KWVEventsLogo />}
-      subtitle="UNFORGETTABLE MOMENTS"
-      heroImage="https://images.unsplash.com/photo-1519671482538-eb2335b9ea9d?auto=format&fit=crop&q=80"
-      heroDescription="Join us for our upcoming events. From music concerts in the Cathedral Cellar to food and wine festivals, there is always something happening at KWV."
-      ctaText="VIEW CALENDAR"
-      ctaLink="/events"
-      galleryImages={[
-        "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1533174072545-e8d98597f47f?auto=format&fit=crop&q=80"
-      ]}
-      mainContent={
-        <div className="text-left max-w-4xl mx-auto">
-            <h3 className="text-center text-2xl font-serif font-bold mb-8 uppercase">Upcoming Events</h3>
-            
-            {/* Event List */}
-            <div className="space-y-6">
-                {/* Event 1 */}
-                <Link to="/events/classics-in-the-cellar" className="block group">
-                  <div className="flex flex-col md:flex-row gap-6 border border-gray-200 p-6 hover:shadow-md transition-all group-hover:border-[#DAA520]">
-                      <div className="w-full md:w-48 h-32 bg-gray-100 flex-shrink-0 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80" alt="Concert" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                      <div className="flex-1">
-                          <span className="text-[#DAA520] font-bold text-xs tracking-widest">DECEMBER 15, 2024</span>
-                          <h4 className="text-xl font-bold mt-1 mb-2 group-hover:text-[#8B0000] transition-colors">Classics in the Cellar</h4>
-                          <p className="text-sm text-gray-600 mb-4">Enjoy an evening of classical music performed by the Cape Philharmonic Orchestra in the acoustic perfection of our Cathedral Cellar.</p>
-                          <Button size="sm" variant="outline" className="group-hover:bg-[#2C1810] group-hover:text-white group-hover:border-[#2C1810]">View Details</Button>
-                      </div>
-                  </div>
-                </Link>
+    <>
+      {/* Hero Section */}
+      <Hero
+        title="Celebrate With Us"
+        subtitle="Weddings, Corporate Events & Private Functions"
+        description="Our family farm is more than just a venue—it's a place where memories are made. From intimate gatherings to grand celebrations, we'll help you create an unforgettable experience surrounded by vines, mountain views, and warm hospitality."
+        imageSrc="https://images.unsplash.com/photo-1519167758481-83f29da8c9f0?auto=format&fit=crop&q=80"
+        imageAlt="Wedding reception in vineyard setting"
+        primaryCTA={{
+          text: "Enquire About Your Event",
+          href: "/contact?subject=Event Enquiry"
+        }}
+        secondaryCTA={{
+          text: "View Our Venue",
+          href: "#venue-details"
+        }}
+        height="lg"
+        overlay="dark"
+      />
 
-                {/* Event 2 */}
-                <Link to="/events/harvest-festival-long-table" className="block group">
-                  <div className="flex flex-col md:flex-row gap-6 border border-gray-200 p-6 hover:shadow-md transition-all group-hover:border-[#DAA520]">
-                      <div className="w-full md:w-48 h-32 bg-gray-100 flex-shrink-0 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80" alt="Dinner" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                      <div className="flex-1">
-                          <span className="text-[#DAA520] font-bold text-xs tracking-widest">JANUARY 20, 2025</span>
-                          <h4 className="text-xl font-bold mt-1 mb-2 group-hover:text-[#8B0000] transition-colors">Harvest Festival Long Table</h4>
-                          <p className="text-sm text-gray-600 mb-4">Celebrate the start of the harvest with a traditional long table dinner under the stars.</p>
-                          <Button size="sm" variant="outline" className="group-hover:bg-[#2C1810] group-hover:text-white group-hover:border-[#2C1810]">View Details</Button>
-                      </div>
-                  </div>
-                </Link>
+      {/* Event Types Section */}
+      <section className="py-20 bg-[var(--twb-color-bg-primary)]">
+        <Container variant="wide">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Typography variant="h2" className="mb-4">
+              Events at Handcrafted Wines
+            </Typography>
+            <Typography variant="body-large" className="text-[var(--twb-color-text-muted)]">
+              Whether you're planning a wedding, corporate retreat, or private celebration, our farm offers a unique blend of rustic charm, award-winning wine, and genuine family hospitality.
+            </Typography>
+          </div>
 
-                {/* Event 3 */}
-                <Link to="/events/valentines-chocolate-wine-masterclass" className="block group">
-                  <div className="flex flex-col md:flex-row gap-6 border border-gray-200 p-6 hover:shadow-md transition-all group-hover:border-[#DAA520]">
-                      <div className="w-full md:w-48 h-32 bg-gray-100 flex-shrink-0 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?auto=format&fit=crop&q=80" alt="Masterclass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      </div>
-                      <div className="flex-1">
-                          <span className="text-[#DAA520] font-bold text-xs tracking-widest">FEBRUARY 14, 2025</span>
-                          <h4 className="text-xl font-bold mt-1 mb-2 group-hover:text-[#8B0000] transition-colors">Valentine's Chocolate & Wine Masterclass</h4>
-                          <p className="text-sm text-gray-600 mb-4">A romantic masterclass featuring our limited edition wines paired with artisanal chocolates.</p>
-                          <Button size="sm" variant="outline" className="group-hover:bg-[#2C1810] group-hover:text-white group-hover:border-[#2C1810]">View Details</Button>
-                      </div>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {eventTypes.map((event, index) => {
+              const IconComponent = event.icon;
+              return (
+                <Link
+                  key={index}
+                  to={event.link}
+                  className="group block p-8 border border-[var(--twb-border-primary)] hover:border-[var(--twb-color-gold)] hover:shadow-lg transition-all bg-white dark:bg-[var(--twb-color-bg-secondary)]"
+                >
+                  <IconComponent 
+                    size={40} 
+                    className="text-[var(--twb-color-plum)] mb-6 group-hover:text-[var(--twb-color-gold)] transition-colors" 
+                  />
+                  <Typography variant="h3" className="mb-3 group-hover:text-[var(--twb-color-plum)] transition-colors">
+                    {event.title}
+                  </Typography>
+                  <Typography variant="body" className="text-[var(--twb-color-text-muted)] mb-6">
+                    {event.description}
+                  </Typography>
+                  <ul className="space-y-2 mb-6">
+                    {event.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm">
+                        <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="group-hover:bg-[var(--twb-color-ink)] group-hover:text-[var(--twb-color-paper)] group-hover:border-[var(--twb-color-ink)]"
+                  >
+                    Learn More
+                  </Button>
                 </Link>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Venue Details Section */}
+      <section id="venue-details" className="py-20 bg-[var(--twb-color-bg-secondary)]">
+        <Container variant="content">
+          <div className="text-center mb-12">
+            <Typography variant="h2" className="mb-4">
+              Our Venue
+            </Typography>
+            <Typography variant="body-large" className="text-[var(--twb-color-text-muted)]">
+              A century-old family farm with rustic charm and modern amenities
+            </Typography>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {venueFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <div key={index} className="flex items-start gap-4">
+                  <IconComponent 
+                    size={32} 
+                    className="text-[var(--twb-color-gold)] flex-shrink-0 mt-1" 
+                  />
+                  <div>
+                    <Typography variant="h4" className="mb-1">
+                      {feature.label}
+                    </Typography>
+                    <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                      {feature.detail}
+                    </Typography>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="bg-white dark:bg-[var(--twb-color-bg-primary)] p-8 border border-[var(--twb-border-primary)] mb-8">
+            <Typography variant="h3" className="mb-6">
+              Venue Capacity
+            </Typography>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Typography variant="h4" className="text-[var(--twb-color-plum)] mb-2">
+                  Wine Cellar
+                </Typography>
+                <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                  Seated: 80 guests<br />
+                  Standing: 120 guests<br />
+                  Perfect for: Intimate weddings, wine dinners
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h4" className="text-[var(--twb-color-plum)] mb-2">
+                  Garden Venue
+                </Typography>
+                <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                  Seated: 120 guests<br />
+                  Standing: 200 guests<br />
+                  Perfect for: Large weddings, corporate events
+                </Typography>
+              </div>
             </div>
-        </div>
-      }
-    />
+          </div>
+
+          <div className="bg-[var(--twb-color-plum)]/10 p-8 border-l-4 border-[var(--twb-color-plum)]">
+            <Typography variant="h4" className="mb-3">
+              What's Included
+            </Typography>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Exclusive venue hire (6 hours)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Event coordinator assistance</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Tables, chairs & table linens</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Farm wine selection</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Secure parking for 50+ vehicles</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--twb-color-gold)] mt-1">✓</span>
+                <span>Restroom facilities</span>
+              </li>
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      {/* Contact & Booking Section */}
+      <section className="py-20 bg-[var(--twb-color-bg-primary)]">
+        <Container variant="content">
+          <div className="text-center mb-12">
+            <Typography variant="h2" className="mb-4">
+              Let's Plan Your Event
+            </Typography>
+            <Typography variant="body-large" className="text-[var(--twb-color-text-muted)]">
+              We'd love to show you around the farm and discuss how we can make your event unforgettable
+            </Typography>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center">
+              <Phone size={32} className="text-[var(--twb-color-plum)] mx-auto mb-4" />
+              <Typography variant="h4" className="mb-2">
+                Phone
+              </Typography>
+              <a 
+                href={`tel:${farmStory.contact.phone}`}
+                className="text-[var(--twb-color-gold)] hover:underline"
+              >
+                {farmStory.contact.phone}
+              </a>
+            </div>
+            <div className="text-center">
+              <Mail size={32} className="text-[var(--twb-color-plum)] mx-auto mb-4" />
+              <Typography variant="h4" className="mb-2">
+                Email
+              </Typography>
+              <a 
+                href={`mailto:${farmStory.contact.email}`}
+                className="text-[var(--twb-color-gold)] hover:underline"
+              >
+                {farmStory.contact.email}
+              </a>
+            </div>
+            <div className="text-center">
+              <Calendar size={32} className="text-[var(--twb-color-plum)] mx-auto mb-4" />
+              <Typography variant="h4" className="mb-2">
+                Book a Visit
+              </Typography>
+              <Link 
+                to="/contact?subject=Event Venue Visit"
+                className="text-[var(--twb-color-gold)] hover:underline"
+              >
+                Schedule a Tour
+              </Link>
+            </div>
+          </div>
+
+          <div className="text-center bg-white dark:bg-[var(--twb-color-bg-secondary)] p-10 border border-[var(--twb-border-primary)]">
+            <Typography variant="h3" className="mb-4">
+              Ready to Book?
+            </Typography>
+            <Typography variant="body" className="text-[var(--twb-color-text-muted)] mb-8 max-w-2xl mx-auto">
+              Contact us to check availability, discuss your vision, and receive a personalized quote for your event.
+            </Typography>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={() => navigate('/contact?subject=Event Booking Enquiry')}
+                size="lg"
+              >
+                Request a Quote
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => navigate('/events/faq')}
+                size="lg"
+              >
+                Events FAQs
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-[var(--twb-color-bg-secondary)]">
+        <Container variant="content">
+          <div className="text-center mb-12">
+            <Typography variant="h2" className="mb-4">
+              Why Choose Handcrafted Wines?
+            </Typography>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-6 bg-white dark:bg-[var(--twb-color-bg-primary)] border border-[var(--twb-border-primary)]">
+              <Typography variant="h4" className="mb-3 text-[var(--twb-color-plum)]">
+                Authentic Family Hospitality
+              </Typography>
+              <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                This isn't just our venue—it's our home. We treat every event like we're welcoming family, with warmth, care, and genuine attention to detail.
+              </Typography>
+            </div>
+
+            <div className="p-6 bg-white dark:bg-[var(--twb-color-bg-primary)] border border-[var(--twb-border-primary)]">
+              <Typography variant="h4" className="mb-3 text-[var(--twb-color-plum)]">
+                Award-Winning Wines
+              </Typography>
+              <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                Toast your celebration with wines that have won 58+ international awards. We can even create custom wine labels for your special day.
+              </Typography>
+            </div>
+
+            <div className="p-6 bg-white dark:bg-[var(--twb-color-bg-primary)] border border-[var(--twb-border-primary)]">
+              <Typography variant="h4" className="mb-3 text-[var(--twb-color-plum)]">
+                Farm-to-Table Excellence
+              </Typography>
+              <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                Our catering partners use fresh, local ingredients—including our own artisan cheese and herbs from our farm garden.
+              </Typography>
+            </div>
+
+            <div className="p-6 bg-white dark:bg-[var(--twb-color-bg-primary)] border border-[var(--twb-border-primary)]">
+              <Typography variant="h4" className="mb-3 text-[var(--twb-color-plum)]">
+                Breathtaking Setting
+              </Typography>
+              <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
+                Paarl Mountain's dramatic backdrop, century-old stone cellars, and vineyard rows create unforgettable photo opportunities.
+              </Typography>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 };

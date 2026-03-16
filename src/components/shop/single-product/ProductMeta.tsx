@@ -39,7 +39,7 @@ export const ProductMeta: React.FC<ProductMetaProps> = ({ sku, categories, tags 
           <span className="text-gray-600">
              {categories.map((cat, i) => (
                <React.Fragment key={cat}>
-                 <span className="hover:text-[#8B0000] cursor-pointer transition-colors">{cat}</span>
+                 <span className="hover:text-[var(--twb-color-plum)] cursor-pointer transition-colors">{cat}</span>
                  {i < categories.length - 1 && ", "}
                </React.Fragment>
              ))}
@@ -53,7 +53,7 @@ export const ProductMeta: React.FC<ProductMetaProps> = ({ sku, categories, tags 
           <span className="text-gray-600">
              {tags.map((tag, i) => (
                <React.Fragment key={tag}>
-                 <span className="hover:text-[#8B0000] cursor-pointer transition-colors">{tag}</span>
+                 <span className="hover:text-[var(--twb-color-plum)] cursor-pointer transition-colors">{tag}</span>
                  {i < tags.length - 1 && ", "}
                </React.Fragment>
              ))}

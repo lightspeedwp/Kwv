@@ -78,22 +78,24 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
 
   return (
     <div>
-      <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">Enter the address where you want your order delivered.</p>
+      <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[#111111] mb-6">Enter the address where you want your order delivered.</p>
 
       <div className="mb-4">
           {/* Country Select */}
           <div className="relative group">
             <select 
+                id="shipping-country"
                 className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
                 value={data.country}
                 onChange={(e) => handleChange('country', e.target.value)}
+                aria-label="Country / Region"
             >
                 <option value="South Africa">South Africa</option>
                 <option value="Namibia">Namibia</option>
                 <option value="Botswana">Botswana</option>
             </select>
-            <label className="absolute left-3 top-2 text-[11px] font-medium text-gray-500 pointer-events-none">Country / Region</label>
-            <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} />
+            <label htmlFor="shipping-country" className="absolute left-3 top-2 text-[length:var(--twb-text-caption)] font-medium text-gray-500 pointer-events-none">Country / Region</label>
+            <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} aria-hidden="true" />
           </div>
       </div>
 
@@ -105,6 +107,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('firstName')}
           error={errors.firstName}
           touched={touched.firstName}
+          required
         />
         <CheckoutInput 
           label="Last name" 
@@ -113,6 +116,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('lastName')}
           error={errors.lastName}
           touched={touched.lastName}
+          required
         />
       </div>
 
@@ -133,6 +137,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('street')}
           error={errors.street}
           touched={touched.street}
+          required
         />
       </div>
 
@@ -169,19 +174,22 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('city')}
           error={errors.city}
           touched={touched.city}
+          required
         />
         <div className="relative group">
             <select 
+                id="shipping-province"
                 className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
                 value={data.province}
                 onChange={(e) => handleChange('province', e.target.value)}
+                aria-label="Province"
             >
                 <option value="Western Cape">Western Cape</option>
                 <option value="Gauteng">Gauteng</option>
                 <option value="KwaZulu-Natal">KwaZulu-Natal</option>
             </select>
-            <label className="absolute left-3 top-2 text-[11px] font-medium text-gray-500 pointer-events-none">Province</label>
-            <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} />
+            <label htmlFor="shipping-province" className="absolute left-3 top-2 text-[length:var(--twb-text-caption)] font-medium text-gray-500 pointer-events-none">Province</label>
+            <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} aria-hidden="true" />
         </div>
       </div>
 
@@ -193,6 +201,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
           onBlur={() => handleBlur('postcode')}
           error={errors.postcode}
           touched={touched.postcode}
+          required
         />
         <CheckoutInput 
           label="Phone (optional)" 
@@ -214,7 +223,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
                   onChange={(e) => onToggleSameBilling(e.target.checked)}
                />
              </div>
-             <label htmlFor="same-billing" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
+             <label htmlFor="same-billing" className="text-[length:var(--twb-text-body-large)] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
                 Use same address for billing
              </label>
            </div>

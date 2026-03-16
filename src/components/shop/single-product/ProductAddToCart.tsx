@@ -68,10 +68,10 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
       {/* Variation Selector */}
       {variations && variations.length > 0 && (
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">{variationLabel}</label>
+          <label className="block text-sm font-medium text-[var(--twb-color-text-secondary)]">{variationLabel}</label>
           <div className="relative">
             <select
-              className="w-full appearance-none border border-gray-300 rounded-sm py-3 px-4 pr-10 focus:outline-none focus:border-[#8B0000] focus:ring-1 focus:ring-[#8B0000] bg-white text-gray-700"
+              className="w-full appearance-none border border-[var(--twb-border-tertiary)] rounded-sm py-3 px-4 pr-10 focus:outline-none focus:border-[var(--twb-color-plum)] focus:ring-1 focus:ring-[var(--twb-color-plum)] bg-[var(--twb-color-bg-primary)] text-[var(--twb-color-text-secondary)]"
               value={selectedVariation?.id || ''}
               onChange={handleVariationChange}
             >
@@ -80,17 +80,17 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
                 <option key={v.id} value={v.id}>{v.name}</option>
               ))}
             </select>
-            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--twb-color-text-secondary)] pointer-events-none" />
           </div>
         </div>
       )}
 
       <div className="flex flex-wrap gap-4">
         {/* Quantity Selector */}
-        <div className="flex items-center border border-gray-300 h-12 w-32 bg-white">
+        <div className="flex items-center border border-[var(--twb-border-tertiary)] h-12 w-32 bg-[var(--twb-color-bg-primary)]">
           <button 
             onClick={() => setQuantity(Math.max(1, quantity - 1))} 
-            className="px-3 h-full hover:bg-gray-50 text-gray-600 transition-colors"
+            className="px-3 h-full hover:bg-[var(--twb-color-bg-secondary)] text-[var(--twb-color-text-secondary)] transition-colors"
             aria-label="Decrease quantity"
           >
             <Minus size={16} />
@@ -99,11 +99,11 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
             type="number" 
             value={quantity} 
             readOnly 
-            className="w-full h-full text-center border-none focus:ring-0 font-medium text-[#2C1810]" 
+            className="w-full h-full text-center border-none focus:ring-0 font-medium text-[var(--twb-color-ink)]" 
           />
           <button 
             onClick={() => setQuantity(quantity + 1)} 
-            className="px-3 h-full hover:bg-gray-50 text-gray-600 transition-colors"
+            className="px-3 h-full hover:bg-[var(--twb-color-bg-secondary)] text-[var(--twb-color-text-secondary)] transition-colors"
             aria-label="Increase quantity"
           >
             <Plus size={16} />
@@ -113,7 +113,7 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
         {/* Add Button */}
         <Button 
           size="lg" 
-          className="flex-1 h-12 bg-[#2C1810] hover:bg-[#8B0000] text-white transition-colors"
+          className="flex-1 h-12 bg-[var(--twb-color-ink)] hover:bg-[var(--twb-color-plum)] text-[var(--twb-color-paper)] transition-colors"
           onClick={() => onAddToCart(quantity, isSubscription, selectedVariation?.id)}
           disabled={variations && !selectedVariation} // Disable if variation required but not selected
         >
@@ -123,7 +123,7 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
 
       {isSubscriptionAvailable && (
         <div 
-          className={`p-4 border rounded-sm transition-colors cursor-pointer ${isSubscription ? 'bg-[#FDF6E3] border-[#DAA520]' : 'bg-[#F9F9F9] border-gray-100'}`}
+          className={`p-4 border rounded-sm transition-colors cursor-pointer ${isSubscription ? 'bg-[var(--twb-color-cream)] border-[var(--twb-color-gold)]' : 'bg-[var(--twb-color-bg-tertiary)] border-[var(--twb-border-tertiary)]'}`}
           onClick={() => setIsSubscription(!isSubscription)}
         >
           <div className="flex items-start gap-3">
@@ -136,7 +136,7 @@ export const ProductAddToCart: React.FC<ProductAddToCartProps> = ({
              </div>
              <div>
                 <Typography variant="h4" className="!text-base mb-1">Subscribe & Save 15%</Typography>
-                <Typography variant="body" className="text-sm text-gray-600">
+                <Typography variant="body" className="text-sm text-[var(--twb-color-text-secondary)]">
                   Join the Wine Club and get this delivered automatically. Cancel anytime.
                 </Typography>
              </div>

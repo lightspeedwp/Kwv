@@ -1,5 +1,23 @@
 /**
- * Tastings & Experiences Data
+ * Tastings & Experiences Data (DEPRECATED)
+ * 
+ * ⚠️ **DEPRECATED:** This file is no longer used in the application.
+ * 
+ * **Status:** Archived as of 2026-03-15
+ * **Reason:** Replaced by farmStory.experiences in `/data/farmStory.ts`
+ * 
+ * **Replacement:** Use `/data/farmStory.ts` → `farmStory.experiences`
+ * 
+ * All tasting/experience data is now centralized in farmStory.ts:
+ * - Wine Tasting (R75)
+ * - Cheese & Wine Pairing (R120)  
+ * - Farm Tour (R150)
+ * - Harvest Experience (R250)
+ * - Private Tasting (Custom pricing)
+ * 
+ * **Action Required:** Delete this file after confirming no external dependencies
+ * 
+ * ---
  * 
  * All tasting experiences, pairings, and tour information for Handcrafted Wines.
  * 

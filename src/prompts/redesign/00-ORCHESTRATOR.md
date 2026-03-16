@@ -1,18 +1,55 @@
 # Hand‑Drawn Redesign System Orchestrator
 
-**Version:** 2.0  
-**Last Updated:** 2024-03-15  
+**Version:** 3.0  
+**Last Updated:** 2026-03-15  
 **Purpose:** Coordinates the comprehensive redesign analysis and implementation across 10 specialized prompts
 
 ---
 
 ## Executive Summary
 
+**Brand:** Handcrafted Wines (boutique family wine farm in Paarl, South Africa)  
+**Token Prefix:** `twb-*` (internal namespace - "The Wine Brand" design system)  
+**Project Type:** Demo with believable content (history/awards are invented but realistic)
+
 **Value:** Consolidates all research and execution tasks into a single controller that sequences the audit and redesign of the site. This ensures that visual, content, component, commerce, motion and accessibility reports feed into a coherent roadmap.
 
 **Risks:** Inconsistent dark‑mode behaviour and residual placeholder copy could cause confusion if left unchecked; large or poorly structured data files can hinder performance and maintainability.
 
 **Next Step:** Run each analysis prompt (01–10) in order, update the guidelines and design tokens, then generate reports and task lists following the standardized workflow.
+
+---
+
+## 🏢 Brand Context
+
+### Brand Identity
+- **Brand Name:** Handcrafted Wines
+- **Tagline:** Family wine farm since 1918
+- **Wine Club Name:** The Wine Box
+- **Token Prefix:** `twb-*` (internal design system namespace - does NOT stand for brand name)
+- **Location:** Paarl, South Africa
+
+### What We Make
+- 🍷 **Boutique Wines** - Small-batch, handcrafted wines from estate vineyard
+- 🥃 **Craft Spirits** - Low-quantity grappa and brandy from on-farm distillery
+- 🧀 **Artisan Cheese** - Farmstead cheese made from milk from own goat dairy
+
+### Shop Categories (8 Total)
+1. Wines
+2. Spirits
+3. Cheese
+4. Wine Boxes (subscription + curated gift boxes)
+5. Experiences (tastings, tours, pairings - bookable products)
+6. Events (calendar section - seasonal events with external booking)
+7. Gifts (gift cards, bundles, branded accessories)
+8. Wine Club (membership perks, subscriptions, early access)
+
+### Content Context
+**This is a DEMO project** with believable, realistic content:
+- History (1918 founding) is INVENTED but authentic-feeling
+- Awards/recognition are PLACEHOLDER but plausible
+- All content designed to showcase brand personality
+- Voice/Tone: **Balanced premium with warmth** (not too formal, not too casual)
 
 ---
 
@@ -489,6 +526,14 @@ export function Hero() {
 
 ## 📅 Changelog
 
+### Version 3.0 (2026-03-15)
+- Added brand context and content guidelines
+- Defined strict 3-wave execution pattern
+- Added file size optimization requirements
+- Created comprehensive file creation standards
+- Added quality gates and success metrics
+- Expanded troubleshooting section
+
 ### Version 2.0 (2024-03-15)
 - Added explicit WordPress CSS variable requirements
 - Defined strict 3-wave execution pattern
@@ -504,5 +549,5 @@ export function Hero() {
 
 ---
 
-**Maintained by:** The Wire Brand Development Team  
+**Maintained by:** Handcrafted Wines Development Team  
 **Next Review:** After completion of all 10 analysis prompts

@@ -155,7 +155,7 @@ export const WineClubCTA: React.FC<WineClubCTAProps> = ({
                 <Button 
                   variant="primary" 
                   size="lg" 
-                  className="min-w-[200px] shadow-[var(--twb-shadow-lg)] hover:shadow-[var(--twb-shadow-xl)] transition-shadow"
+                  className="w-full sm:w-auto sm:min-w-[200px] shadow-[var(--twb-shadow-lg)] hover:shadow-[var(--twb-shadow-xl)] transition-shadow"
                 >
                   {ctaText}
                 </Button>

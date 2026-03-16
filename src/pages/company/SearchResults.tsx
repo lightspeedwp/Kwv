@@ -39,7 +39,13 @@ export const SearchResults: React.FC = () => {
                 <Typography variant="body" className="text-gray-600 mb-4">
                   KWV is proud to launch a comprehensive sustainability program aimed at reducing water usage and promoting biodiversity across all our vineyards...
                 </Typography>
-                <Link to="/news/single" className="text-[#8B0000] font-bold hover:underline">Read More</Link>
+                <Link 
+                  to="/news/single" 
+                  className="text-[#8B0000] font-bold hover:underline"
+                  aria-label="Read more about KWV sustainability initiative"
+                >
+                  Read More<span className="sr-only"> about KWV sustainability initiative</span>
+                </Link>
               </div>
             ))}
           </div>

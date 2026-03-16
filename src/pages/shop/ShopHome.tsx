@@ -49,7 +49,7 @@ export const ShopHome: React.FC = () => {
       />
 
       {/* Introduction */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+      <section className="py-20 bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
         <Container variant="content">
           <div className="text-center mb-12">
             <Typography variant="h2" className="mb-6 text-[var(--twb-color-plum)]">
@@ -135,7 +135,7 @@ export const ShopHome: React.FC = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+      <section className="py-20 bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
         <Container>
           <div className="text-center mb-16">
             <Typography variant="h2" className="mb-4 text-[var(--twb-color-plum)]">
@@ -153,7 +153,7 @@ export const ShopHome: React.FC = () => {
                 to={`/shop/product/${product.id}`}
                 className="group"
               >
-                <div className="bg-white dark:bg-[var(--twb-color-bg-secondary)] rounded-lg border border-[var(--twb-border-tertiary)] overflow-hidden hover:shadow-xl transition-all">
+                <div className="bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)] rounded-lg border border-[var(--twb-border-tertiary)] overflow-hidden hover:shadow-xl transition-all">
                   {/* Product Image */}
                   <div className="aspect-square overflow-hidden bg-[var(--twb-color-plum)]/5">
                     <img 
@@ -202,46 +202,46 @@ export const ShopHome: React.FC = () => {
       </section>
 
       {/* Why Shop With Us */}
-      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+      <section className="py-20 bg-[var(--twb-color-ink)] text-[var(--twb-color-paper)]">
         <Container>
           <div className="text-center mb-16">
             <Typography variant="h2" className="mb-6 text-[var(--twb-color-gold)]">
               Why Shop With Us
             </Typography>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
+            <p className="text-[var(--twb-color-paper)]/90 text-lg max-w-2xl mx-auto">
               When you buy from us, you're getting more than just a product
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-paper)]/10 flex items-center justify-center">
                 <Truck size={40} className="text-[var(--twb-color-gold)]" />
               </div>
-              <h3 className="font-serif text-xl mb-3 text-white">Free Shipping</h3>
-              <p className="text-white/70 leading-relaxed">
+              <h3 className="font-serif text-xl mb-3 text-[var(--twb-color-paper)]">Free Shipping</h3>
+              <p className="text-[var(--twb-color-paper)]/70 leading-relaxed">
                 Free delivery on all orders over R500. We pack everything carefully and 
                 ship within 2 business days.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-paper)]/10 flex items-center justify-center">
                 <ShieldCheck size={40} className="text-[var(--twb-color-gold)]" />
               </div>
-              <h3 className="font-serif text-xl mb-3 text-white">Quality Guarantee</h3>
-              <p className="text-white/70 leading-relaxed">
+              <h3 className="font-serif text-xl mb-3 text-[var(--twb-color-paper)]">Quality Guarantee</h3>
+              <p className="text-[var(--twb-color-paper)]/70 leading-relaxed">
                 If you're not 100% happy with your purchase, we'll make it right. 
                 That's our family promise.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--twb-color-paper)]/10 flex items-center justify-center">
                 <Heart size={40} className="text-[var(--twb-color-gold)]" />
               </div>
-              <h3 className="font-serif text-xl mb-3 text-white">Made with Love</h3>
-              <p className="text-white/70 leading-relaxed">
+              <h3 className="font-serif text-xl mb-3 text-[var(--twb-color-paper)]">Made with Love</h3>
+              <p className="text-[var(--twb-color-paper)]/70 leading-relaxed">
                 Every product is handcrafted by our family on our Paarl Mountain farm. 
                 No middlemen, no mass production.
               </p>
@@ -292,10 +292,10 @@ export const ShopHome: React.FC = () => {
                 alt="Handcrafted Wines farm"
                 className="w-full rounded-lg shadow-xl"
               />
-              <div className="absolute -bottom-6 -right-6 bg-[var(--twb-color-gold)] text-white p-6 rounded-lg shadow-xl max-w-xs">
+              <div className="absolute -bottom-6 -right-6 bg-[var(--twb-color-gold)] text-[var(--twb-color-paper)] p-6 rounded-lg shadow-xl max-w-xs">
                 <MapPin size={32} className="mb-2" />
                 <p className="font-serif text-lg mb-1">Paarl Mountain</p>
-                <p className="text-sm text-white/90">Cape Winelands, South Africa</p>
+                <p className="text-sm text-[var(--twb-color-paper)]/90">Cape Winelands, South Africa</p>
               </div>
             </div>
           </div>
@@ -303,13 +303,13 @@ export const ShopHome: React.FC = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-[var(--twb-color-paper)]">
         <Container variant="content">
           <div className="text-center">
-            <Typography variant="h2" className="mb-6 text-white">
+            <Typography variant="h2" className="mb-6 text-[var(--twb-color-paper)]">
               Ready to Taste?
             </Typography>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-[var(--twb-color-paper)]/90 mb-8 max-w-2xl mx-auto">
               Start exploring our handcrafted wines, spirits, and cheese. 
               We'll ship straight from our farm to your door.
             </p>

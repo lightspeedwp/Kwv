@@ -193,7 +193,7 @@ export const Shop = () => {
             </div>
 
             {/* Controls Bar: Showing results + Sort */}
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-4 w-full">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
               <Typography variant="body" className="text-gray-500 whitespace-nowrap order-1 lg:order-none w-full lg:w-auto">
                 Showing {indexOfFirstItem + 1}–{Math.min(indexOfLastItem, totalResults)} of {totalResults} results
               </Typography>

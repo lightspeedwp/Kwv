@@ -47,7 +47,7 @@ export const BackToTopButton = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-3 bg-[#DAA520] text-[#2C1810] rounded-full shadow-lg hover:bg-white hover:text-[#8B0000] transition-colors focus:outline-none"
+          className="fixed bottom-8 right-8 z-50 p-3 bg-[var(--twb-color-gold)] text-[var(--twb-color-brown)] rounded-full shadow-lg hover:bg-white hover:text-[var(--twb-color-red)] transition-colors focus:outline-none min-w-[56px] min-h-[56px] flex items-center justify-center"
           aria-label="Back to top"
         >
           <ArrowUp size={24} />

@@ -154,7 +154,7 @@ export const SpiritsCategory: React.FC = () => {
           </div>
 
           {/* Filter & Sort Controls */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8 pb-6 border-b border-[var(--twb-color-border-primary)]">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-[var(--twb-color-border-primary)]">
             {/* Filter Buttons */}
             <div className="flex flex-wrap gap-2">
               <div className="flex flex-wrap gap-2 items-center">

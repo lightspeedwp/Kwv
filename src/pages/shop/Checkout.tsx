@@ -127,6 +127,7 @@ export const Checkout: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>(CheckoutStep.CUSTOMER_INFO);
   const [ageVerified, setAgeVerified] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [giftMessage, setGiftMessage] = useState('');
   const [includeGift, setIncludeGift] = useState(false);
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true);
@@ -218,7 +219,7 @@ export const Checkout: React.FC = () => {
       case CheckoutStep.PAYMENT:
         return isPaymentInfoValid();
       case CheckoutStep.REVIEW:
-        return ageVerified;
+        return ageVerified && orderConfirmed;
       default:
         return false;
     }
@@ -360,6 +361,8 @@ export const Checkout: React.FC = () => {
                   paymentInfo={paymentInfo}
                   ageVerified={ageVerified}
                   setAgeVerified={setAgeVerified}
+                  orderConfirmed={orderConfirmed}
+                  setOrderConfirmed={setOrderConfirmed}
                   setCurrentStep={setCurrentStep}
                 />
               )}
@@ -393,7 +396,7 @@ export const Checkout: React.FC = () => {
                   <Button
                     variant="primary"
                     onClick={handlePlaceOrder}
-                    disabled={!ageVerified}
+                    disabled={!ageVerified || !orderConfirmed}
                     className="order-1 sm:ml-auto"
                   >
                     <Lock className="size-4 mr-2" />
@@ -1050,7 +1053,9 @@ const PaymentMethodStep: React.FC<PaymentMethodStepProps> = ({
 /**
  * ReviewStep Component
  * 
- * Step 4: Review order details and confirm age verification.
+ * Step 4: Review order details, age verification, and order confirmation.
+ * 
+ * WCAG 3.3.4 (Error Prevention): Requires explicit confirmation before order submission.
  */
 interface ReviewStepProps {
   customerInfo: CustomerInfo;
@@ -1059,6 +1064,8 @@ interface ReviewStepProps {
   paymentInfo: PaymentInfo;
   ageVerified: boolean;
   setAgeVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  orderConfirmed: boolean;
+  setOrderConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<CheckoutStep>>;
 }
 
@@ -1069,6 +1076,8 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
   paymentInfo,
   ageVerified,
   setAgeVerified,
+  orderConfirmed,
+  setOrderConfirmed,
   setCurrentStep
 }) => {
   return (
@@ -1181,11 +1190,45 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                   onChange={(e) => setAgeVerified(e.target.checked)}
                   className="size-5 mt-1 rounded accent-[var(--twb-color-plum)] cursor-pointer"
                   required
+                  aria-required="true"
                 />
                 <label htmlFor="ageVerification" className="cursor-pointer">
                   <Typography variant="body">
                     I confirm that I am 18 years of age or older and understand that ID verification 
-                    may be required upon delivery for alcohol products. <span className="text-red-600">*</span>
+                    may be required upon delivery for alcohol products. <span className="text-red-600" aria-hidden="true">*</span>
+                  </Typography>
+                </label>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Order Confirmation (WCAG 3.3.4 - Error Prevention) */}
+      <Card variant="default" className="border-2 border-[var(--twb-color-plum)]">
+        <CardContent className="p-6">
+          <div className="flex items-start gap-3">
+            <CheckCircle2 className="size-6 mt-0.5 text-[var(--twb-color-plum)] shrink-0" aria-hidden="true" />
+            <div className="flex-1">
+              <Typography variant="h3" className="mb-4">
+                Order Confirmation
+              </Typography>
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="orderConfirmation"
+                  checked={orderConfirmed}
+                  onChange={(e) => setOrderConfirmed(e.target.checked)}
+                  className="size-5 mt-1 rounded accent-[var(--twb-color-plum)] cursor-pointer"
+                  required
+                  aria-required="true"
+                  aria-describedby="order-confirmation-description"
+                />
+                <label htmlFor="orderConfirmation" className="cursor-pointer">
+                  <Typography variant="body" id="order-confirmation-description">
+                    I have reviewed all order details above and confirm that my contact information, 
+                    shipping address, and payment method are correct. I understand this is a legally 
+                    binding purchase. <span className="text-red-600" aria-hidden="true">*</span>
                   </Typography>
                 </label>
               </div>

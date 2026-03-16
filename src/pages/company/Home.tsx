@@ -159,14 +159,14 @@ export const Home = () => {
       </section>
 
       {/* Visit CTA */}
-      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+      <section className="py-20 bg-[var(--twb-color-ink)] text-[var(--twb-color-paper)]">
         <Container variant="content">
           <div className="text-center">
             <Mountain size={64} className="mx-auto mb-6 text-[var(--twb-color-gold)]" />
             <Typography variant="h2" className="mb-6 text-[var(--twb-color-gold)]">
               Come Visit Our Farm
             </Typography>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-[var(--twb-color-paper)]/90 mb-8 max-w-2xl mx-auto leading-relaxed">
               {farmStory.location.farm}. Join us for wine tastings, farm tours, cheese pairings, and unforgettable experiences on Paarl Mountain.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -186,7 +186,7 @@ export const Home = () => {
       </section>
 
       {/* Wine Club CTA */}
-      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-[var(--twb-color-paper)]">
         <Container variant="content">
           <div className="text-center">
             {/* Wax Seal Badge */}
@@ -197,10 +197,10 @@ export const Home = () => {
                 size="lg"
               />
             </div>
-            <Typography variant="h2" className="mb-6 text-white">
+            <Typography variant="h2" className="mb-6 text-[var(--twb-color-paper)]">
               Join Our Wine Club
             </Typography>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-[var(--twb-color-paper)]/90 mb-8 max-w-2xl mx-auto">
               Get exclusive access to limited releases, family recipes, harvest updates, and special member-only events. It's like being part of the family.
             </p>
             <Link to="/wine-club">

@@ -10,6 +10,7 @@
 
 export interface Job {
   id: string;
+  slug: string;
   title: string;
   department: string;
   location: string;
@@ -28,6 +29,7 @@ export interface Job {
 export const jobs: Job[] = [
   {
     id: 'winemaker-assistant-2024',
+    slug: 'winemaker-assistant',
     title: 'Winemaker Assistant',
     department: 'Winemaking',
     location: 'Paarl, Western Cape',
@@ -73,6 +75,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'tasting-room-host-2024',
+    slug: 'tasting-room-host',
     title: 'Tasting Room Host',
     department: 'Hospitality',
     location: 'Paarl, Western Cape',
@@ -121,6 +124,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'cheesemaker-2024',
+    slug: 'cheesemaker',
     title: 'Artisan Cheesemaker',
     department: 'Dairy & Cheese Production',
     location: 'Paarl, Western Cape',
@@ -168,6 +172,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'vineyard-assistant-2024',
+    slug: 'vineyard-assistant',
     title: 'Vineyard Assistant (Seasonal)',
     department: 'Viticulture',
     location: 'Paarl, Western Cape',
@@ -211,6 +216,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'marketing-coordinator-2024',
+    slug: 'marketing-coordinator',
     title: 'Marketing & Social Media Coordinator',
     department: 'Marketing',
     location: 'Paarl, Western Cape (Hybrid)',
@@ -264,6 +270,13 @@ export const jobs: Job[] = [
  */
 export const getJobById = (id: string): Job | undefined => {
   return jobs.find(job => job.id === id);
+};
+
+/**
+ * Get a job by slug
+ */
+export const getJobBySlug = (slug: string): Job | undefined => {
+  return jobs.find(job => job.slug === slug);
 };
 
 /**

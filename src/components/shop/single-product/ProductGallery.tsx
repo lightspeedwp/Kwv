@@ -55,19 +55,19 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productN
           
           <div className="absolute top-4 right-4 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-opacity z-10">
             <button 
-              className="p-2 bg-white rounded-full shadow-md hover:text-[#8B0000] transition-colors"
+              className="p-2 bg-[var(--twb-color-bg-primary)] rounded-full shadow-md hover:text-[var(--twb-color-plum)] transition-colors"
               onClick={(e) => { e.stopPropagation(); /* Add wishlist logic */ }}
             >
               <Heart size={20} />
             </button>
             <button 
-              className="p-2 bg-white rounded-full shadow-md hover:text-[#8B0000] transition-colors"
+              className="p-2 bg-[var(--twb-color-bg-primary)] rounded-full shadow-md hover:text-[var(--twb-color-plum)] transition-colors"
               onClick={(e) => { e.stopPropagation(); /* Add share logic */ }}
             >
               <Share2 size={20} />
             </button>
             <button 
-              className="p-2 bg-white rounded-full shadow-md hover:text-[#8B0000] transition-colors"
+              className="p-2 bg-[var(--twb-color-bg-primary)] rounded-full shadow-md hover:text-[var(--twb-color-plum)] transition-colors"
               onClick={(e) => { e.stopPropagation(); setIsLightboxOpen(true); }}
             >
               <Maximize2 size={20} />
@@ -82,7 +82,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productN
               <button 
                 key={idx} 
                 onClick={() => setActiveImage(idx)}
-                className={`w-20 h-20 flex-shrink-0 border-2 rounded-sm overflow-hidden ${activeImage === idx ? 'border-[#8B0000]' : 'border-transparent'} transition-all`}
+                className={`w-20 h-20 flex-shrink-0 border-2 rounded-sm overflow-hidden ${activeImage === idx ? 'border-[var(--twb-color-plum)]' : 'border-transparent'} transition-all`}
               >
                 <ImageWithFallback src={img} alt={`${productName} thumbnail ${idx + 1}`} className="w-full h-full object-cover hover:opacity-80 transition-opacity" />
               </button>

@@ -33,11 +33,11 @@ export const ProductRating: React.FC<ProductRatingProps> = ({ rating, reviewCoun
         <Star 
           key={i} 
           size={16} 
-          fill={i <= rating ? "#DAA520" : "none"} 
-          color={i <= rating ? "#DAA520" : "#ccc"} 
+          fill={i <= rating ? "var(--twb-color-gold)" : "none"} 
+          color={i <= rating ? "var(--twb-color-gold)" : "#ccc"} 
         />
       ))}
-      <span className="text-sm text-gray-500 ml-2 font-medium border-b border-gray-300 pb-0.5 hover:text-[#8B0000] cursor-pointer transition-colors">
+      <span className="text-sm text-gray-500 ml-2 font-medium border-b border-gray-300 pb-0.5 hover:text-[var(--twb-color-plum)] cursor-pointer transition-colors">
         ({reviewCount} customer reviews)
       </span>
     </div>

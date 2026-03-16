@@ -43,7 +43,7 @@ export const Experiences: React.FC = () => {
       />
 
       {/* Introduction */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)] relative">
+      <section className="py-20 bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)] relative">
         <PaperTexture opacity={0.03} />
         <Container variant="content">
           <div className="text-center mb-12">
@@ -107,7 +107,7 @@ export const Experiences: React.FC = () => {
                 <OrganicBorder
                   key={experience.id}
                   variant="subtle"
-                  className="bg-white dark:bg-[var(--twb-color-bg-secondary)] p-8 hover:shadow-xl transition-all"
+                  className="bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)] p-8 hover:shadow-xl transition-all"
                 >
                   {/* Header */}
                   <div className="flex items-start gap-4 mb-6">
@@ -197,7 +197,7 @@ export const Experiences: React.FC = () => {
       />
 
       {/* Hours & Policies */}
-      <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-secondary)]">
+      <section className="py-20 bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Hours */}
@@ -315,7 +315,7 @@ export const Experiences: React.FC = () => {
       </section>
 
       {/* Contact & Directions */}
-      <section className="py-20 bg-[var(--twb-color-ink)] text-white">
+      <section className="py-20 bg-[var(--twb-color-ink)] text-[var(--twb-color-paper)]">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact */}
@@ -327,8 +327,8 @@ export const Experiences: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <Phone size={24} className="text-[var(--twb-color-gold)]" />
                   <div>
-                    <p className="text-sm text-white/70">Phone</p>
-                    <a href={`tel:${farmStory.contact.phone}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                    <p className="text-sm text-[var(--twb-color-paper)]/70">Phone</p>
+                    <a href={`tel:${farmStory.contact.phone}`} className="text-[var(--twb-color-paper)] hover:text-[var(--twb-color-gold)] transition-colors">
                       {farmStory.contact.phone}
                     </a>
                   </div>
@@ -336,8 +336,8 @@ export const Experiences: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <Phone size={24} className="text-[var(--twb-color-gold)]" />
                   <div>
-                    <p className="text-sm text-white/70">WhatsApp</p>
-                    <a href={`https://wa.me/${farmStory.contact.whatsapp.replace(/\s/g, '')}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                    <p className="text-sm text-[var(--twb-color-paper)]/70">WhatsApp</p>
+                    <a href={`https://wa.me/${farmStory.contact.whatsapp.replace(/\s/g, '')}`} className="text-[var(--twb-color-paper)] hover:text-[var(--twb-color-gold)] transition-colors">
                       {farmStory.contact.whatsapp}
                     </a>
                   </div>
@@ -345,8 +345,8 @@ export const Experiences: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <Mail size={24} className="text-[var(--twb-color-gold)]" />
                   <div>
-                    <p className="text-sm text-white/70">Email</p>
-                    <a href={`mailto:${farmStory.contact.reservations}`} className="text-white hover:text-[var(--twb-color-gold)] transition-colors">
+                    <p className="text-sm text-[var(--twb-color-paper)]/70">Email</p>
+                    <a href={`mailto:${farmStory.contact.reservations}`} className="text-[var(--twb-color-paper)] hover:text-[var(--twb-color-gold)] transition-colors">
                       {farmStory.contact.reservations}
                     </a>
                   </div>
@@ -364,7 +364,7 @@ export const Experiences: React.FC = () => {
               <Typography variant="h3" className="mb-6 text-[var(--twb-color-gold)]">
                 How to Find Us
               </Typography>
-              <div className="space-y-4 text-white/90">
+              <div className="space-y-4 text-[var(--twb-color-paper)]/90">
                 <p className="leading-relaxed">
                   <strong>Address:</strong><br />
                   {farmStory.location.address}
@@ -372,8 +372,8 @@ export const Experiences: React.FC = () => {
                 <p className="leading-relaxed">
                   {farmStory.location.directions}
                 </p>
-                <div className="bg-white/10 p-4 rounded-lg border border-white/20">
-                  <p className="text-sm text-white/70 mb-1">GPS Coordinates</p>
+                <div className="bg-[var(--twb-color-paper)]/10 p-4 rounded-lg border border-[var(--twb-color-paper)]/20">
+                  <p className="text-sm text-[var(--twb-color-paper)]/70 mb-1">GPS Coordinates</p>
                   <p className="font-mono text-[var(--twb-color-gold)]">
                     {farmStory.location.gps.lat}, {farmStory.location.gps.lng}
                   </p>
@@ -385,13 +385,13 @@ export const Experiences: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-white">
+      <section className="py-20 bg-gradient-to-br from-[var(--twb-color-plum)] to-[var(--twb-color-plum)]/80 text-[var(--twb-color-paper)]">
         <Container variant="content">
           <div className="text-center">
-            <Typography variant="h2" className="mb-6 text-white">
+            <Typography variant="h2" className="mb-6 text-[var(--twb-color-paper)]">
               We Can't Wait to Meet You
             </Typography>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-[var(--twb-color-paper)]/90 mb-8 max-w-2xl mx-auto">
               Whether you're a wine connoisseur or just looking for a beautiful day in the countryside, 
               our farm has something special for everyone. Book your visit today and become part of our story.
             </p>

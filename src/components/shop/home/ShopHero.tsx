@@ -19,7 +19,7 @@ export const ShopHero: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative min-h-[calc(100dvh-90px)] md:min-h-[80vh] w-full flex items-center bg-black overflow-hidden">
+    <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[80vh] w-full flex items-center bg-black overflow-hidden">
       
       {/* Content */}
       <Container variant="site" className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 py-20 pb-32">

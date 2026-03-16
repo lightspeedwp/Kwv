@@ -44,11 +44,11 @@ import { Brands } from './pages/brands/Brands';
 
 // Experience Pages
 import { Experiences } from './pages/experiences/Experiences';
-import { Emporium } from './pages/experiences/Emporium';
-import { CathedralCellar } from './pages/experiences/CathedralCellar';
-import { HouseOfFire } from './pages/experiences/HouseOfFire';
-import { ConferenceFacilities } from './pages/experiences/ConferenceFacilities';
-import { CathedralCellarKitchen } from './pages/experiences/CathedralCellarKitchen';
+import { WineTasting } from './pages/experiences/WineTasting';
+import { CheesePairing } from './pages/experiences/CheesePairing';
+import { FarmTour } from './pages/experiences/FarmTour';
+import { HarvestExperience } from './pages/experiences/HarvestExperience';
+import { PrivateTasting } from './pages/experiences/PrivateTasting';
 import { ExperiencesFAQ } from './pages/experiences/ExperiencesFAQ';
 
 // Event Pages
@@ -64,6 +64,10 @@ import { FullWidthLandingPage } from './pages/handdrawn-demo/FullWidthLandingPag
 import { Terms } from './pages/legal/Terms';
 import { Policies } from './pages/legal/Policies';
 import { ReturnsPolicy } from './pages/legal/ReturnsPolicy';
+import { Privacy } from './pages/legal/Privacy';
+import { Accessibility } from './pages/legal/Accessibility';
+import { Shipping } from './pages/legal/Shipping';
+import { Cookies } from './pages/legal/Cookies';
 
 /**
  * Application Router Configuration
@@ -98,9 +102,12 @@ export const router = createBrowserRouter([
   { path: '/search', Component: SearchResults },
   { path: '/sitemap', Component: Sitemap },
 
-  // Brand Routes
-  { path: '/brands', Component: Brands },
-  { path: '/brands/:id', Component: Brands },
+  // Brand Routes (DEPRECATED - 2026-03-15)
+  // Orphaned corporate KWV routes - not in main navigation
+  // Replaced by /shop/brands (uses shopBrands.ts)
+  // TODO: Remove after confirming no external links
+  { path: '/brands', Component: Brands }, // DEPRECATED
+  { path: '/brands/:id', Component: Brands }, // DEPRECATED
 
   // Shop Routes
   { path: '/shop', Component: ShopHome },
@@ -131,11 +138,11 @@ export const router = createBrowserRouter([
   // Experience Routes
   { path: '/experiences', Component: Experiences },
   { path: '/visit', Component: Experiences },
-  { path: '/experiences/emporium', Component: Emporium },
-  { path: '/experiences/cathedral-cellar', Component: CathedralCellar },
-  { path: '/experiences/house-of-fire', Component: HouseOfFire },
-  { path: '/experiences/conference-facilities', Component: ConferenceFacilities },
-  { path: '/experiences/cathedral-cellar-kitchen', Component: CathedralCellarKitchen },
+  { path: '/experiences/wine-tasting', Component: WineTasting },
+  { path: '/experiences/cheese-pairing', Component: CheesePairing },
+  { path: '/experiences/farm-tour', Component: FarmTour },
+  { path: '/experiences/harvest-experience', Component: HarvestExperience },
+  { path: '/experiences/private-tasting', Component: PrivateTasting },
   { path: '/experiences/faq', Component: ExperiencesFAQ },
 
   // Event Routes
@@ -152,6 +159,10 @@ export const router = createBrowserRouter([
   { path: '/policies', Component: Policies },
   { path: '/returns-policy', Component: ReturnsPolicy },
   { path: '/returns', Component: ReturnsPolicy },
+  { path: '/privacy', Component: Privacy },
+  { path: '/accessibility', Component: Accessibility },
+  { path: '/shipping', Component: Shipping },
+  { path: '/cookies', Component: Cookies },
 
   // Fallback - redirect to home
   { path: '*', Component: Home },

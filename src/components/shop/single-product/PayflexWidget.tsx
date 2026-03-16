@@ -18,7 +18,7 @@ export const PayflexWidget: React.FC<PayflexWidgetProps> = ({ price }) => {
   return (
     <div className="border border-gray-200 rounded-sm p-4 my-6 bg-white">
       <div className="flex flex-col gap-1">
-        <p className="font-bold text-[#2C1810] text-sm">
+        <p className="font-bold text-[var(--twb-color-ink)] text-sm">
           Buy now. Pay later. 0% interest.
         </p>
         <p className="text-sm text-gray-600">
@@ -28,9 +28,10 @@ export const PayflexWidget: React.FC<PayflexWidgetProps> = ({ price }) => {
           href="https://payflex.co.za/how-it-works/" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-xs text-[#8B0000] underline hover:text-black mt-1"
+          className="text-xs text-[var(--twb-color-plum)] underline hover:text-black mt-1"
+          aria-label="Learn more about Payflex payment options"
         >
-          Learn more
+          Learn more<span className="sr-only"> about Payflex payment options</span>
         </a>
       </div>
     </div>

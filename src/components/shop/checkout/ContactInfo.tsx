@@ -36,7 +36,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
         </div>
       ) : (
         <div className="space-y-6">
-           <p className="text-[19px] leading-[23px] font-light text-[#111111] mb-6">We'll use this email to send you details and updates about your order.</p>
+           <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[var(--twb-color-ink)] mb-6">We'll use this email to send you details and updates about your order.</p>
            <div>
              <CheckoutInput
                 label="Email address"
@@ -46,6 +46,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
                 onBlur={() => setTouched(true)}
                 error={validateEmail(email)}
                 touched={touched}
+                required
              />
              <p className="text-xs text-gray-500 mt-1 pl-1">You are currently checking out as a guest.</p>
            </div>
@@ -54,12 +55,12 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ isLoggedIn }) => {
              <input 
                 id="create-account" 
                 type="checkbox" 
-                className="mt-1.5 size-5 border-gray-300 rounded focus:ring-[#8B0000]"
+                className="mt-1.5 size-5 border-gray-300 rounded focus:ring-[var(--twb-color-plum)]"
                 checked={createAccount}
                 onChange={() => setCreateAccount(!createAccount)}
              />
              <div>
-             <label htmlFor="create-account" className="text-[19px] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
+             <label htmlFor="create-account" className="text-[length:var(--twb-text-body-large)] leading-[29px] font-light text-[var(--twb-color-ink)] cursor-pointer select-none">
                 {SITE_CONTENT.shop.createAccountLabel}
              </label>
              </div>

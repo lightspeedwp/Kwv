@@ -131,7 +131,7 @@ export const UnifiedFooter: React.FC = () => {
             {/* Column 1: About */}
             <div>
               <h4 className="font-serif text-lg text-[var(--twb-color-gold)] mb-4">About Us</h4>
-              <nav className="space-y-2">
+              <nav className="space-y-2" aria-label="About us">
                 {footerLinks.about.map((link) => (
                   <Link
                     key={link.href}
@@ -147,7 +147,7 @@ export const UnifiedFooter: React.FC = () => {
             {/* Column 2: Shop */}
             <div>
               <h4 className="font-serif text-lg text-[var(--twb-color-gold)] mb-4">Shop</h4>
-              <nav className="space-y-2">
+              <nav className="space-y-2" aria-label="Shop">
                 {footerLinks.shop.map((link) => (
                   <Link
                     key={link.href}
@@ -163,7 +163,7 @@ export const UnifiedFooter: React.FC = () => {
             {/* Column 3: Visit */}
             <div>
               <h4 className="font-serif text-lg text-[var(--twb-color-gold)] mb-4">Visit & Experience</h4>
-              <nav className="space-y-2">
+              <nav className="space-y-2" aria-label="Visit and experiences">
                 {footerLinks.visit.map((link) => (
                   <Link
                     key={link.href}
@@ -179,7 +179,7 @@ export const UnifiedFooter: React.FC = () => {
             {/* Column 4: Help */}
             <div>
               <h4 className="font-serif text-lg text-[var(--twb-color-gold)] mb-4">Customer Care</h4>
-              <nav className="space-y-2">
+              <nav className="space-y-2" aria-label="Customer care">
                 {footerLinks.help.map((link) => (
                   <Link
                     key={link.href}

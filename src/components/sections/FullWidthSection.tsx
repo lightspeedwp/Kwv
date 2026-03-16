@@ -54,17 +54,17 @@ export const FullWidthSection: React.FC<FullWidthSectionProps> = ({
 }) => {
   const isDark = variant === 'dark';
   const bgColor = isDark ? 'bg-[var(--twb-color-ink)]' : 'bg-[var(--twb-color-bg-primary)]';
-  const textColor = isDark ? 'text-white' : 'text-[var(--twb-color-text-primary)]';
-  const descColor = isDark ? 'text-white/80' : 'text-[var(--twb-color-text-secondary)]';
+  const textColor = isDark ? 'text-[var(--twb-color-paper)]' : 'text-[var(--twb-color-text-primary)]';
+  const descColor = isDark ? 'text-[var(--twb-color-paper)]/80' : 'text-[var(--twb-color-text-secondary)]';
   const linkColor = isDark ? 'text-[var(--twb-color-gold)]' : 'text-[var(--twb-color-plum)]';
 
   return (
     <section className={`py-[var(--twb-spacing-section-y)] ${bgColor} border-b border-[var(--twb-border-primary)] last:border-0`}>
       <Container variant="site">
-        <div className={`flex flex-col lg:flex-row items-center gap-[var(--twb-spacing-12)] lg:gap-[var(--twb-spacing-20)] ${align === 'right' ? 'lg:flex-row-reverse' : ''}`}>
+        <div className={`flex flex-col md:flex-row items-center gap-[var(--twb-spacing-12)] md:gap-[var(--twb-spacing-20)] ${align === 'right' ? 'md:flex-row-reverse' : ''}`}>
           
           {/* Image Side */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full md:w-1/2">
              {imageSrc ? (
                <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--twb-radius-card)] shadow-[var(--twb-shadow-md)]">
                  <ImageWithFallback 
@@ -81,7 +81,7 @@ export const FullWidthSection: React.FC<FullWidthSectionProps> = ({
           </div>
 
           {/* Content Side */}
-          <div className="w-full lg:w-1/2 relative">
+          <div className="w-full md:w-1/2 relative">
             {showOrganicBorder && (
               <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
                 <OrganicBorder variant="subtle" />

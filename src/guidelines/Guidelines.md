@@ -1,8 +1,96 @@
-# Handcrafted Wines – Brand Guidelines (v7.0)
+# Handcrafted Wines – Brand Guidelines (v8.0)
 
 **IMPORTANT DEVELOPMENT NOTE:** JSDoc inline documentation is mandatory for all JavaScript/TypeScript files.
 
-**PROJECT STATUS:** Boutique wine farm website with hand-drawn design aesthetic. Historic family farm established 1918.
+**PROJECT STATUS:** Demo project - Boutique wine farm website with hand-drawn design aesthetic.
+
+**BRAND:** Handcrafted Wines (family farm established 1918)  
+**TOKEN PREFIX:** `twb-*` (internal design system namespace - "The Wine Brand")  
+**WINE CLUB:** The Wine Box
+
+**CONTENT CONTEXT:** This is a **demo/prototype** with believable, realistic content. All history, awards, and farm details are **invented** but designed to feel authentic.
+
+---
+
+## ⚠️ Protected Root-Level Files
+
+**ONLY these three .md files are allowed in the project root:**
+
+1. **`/ATTRIBUTIONS.md`** - Component, library, and asset attributions (PROTECTED)
+2. **`/README.md`** - Project overview and setup instructions (PROTECTED)
+3. **`/CHANGELOG.md`** - Version history and release notes (PROTECTED)
+
+**All other .md files MUST be in designated folders:**
+- Guidelines → `/guidelines/`
+- Documentation → `/docs/`
+- Reports → `/reports/`
+- Tasks → `/tasks/`
+- Prompts → `/prompts/`
+
+**The `cleanup` trigger will:**
+- Move important guidelines to `/guidelines/`
+- Archive or delete other root-level .md files
+- Ensure only the 3 protected files remain in root
+
+**Reference:** `/guidelines/development/file-organization.md`
+
+---
+
+## 🔒 Protected Task List Files
+
+**These task list files in `/tasks/` are PROTECTED and never deleted during cleanup:**
+
+1. **`/tasks/task-list.md`** - Master task list (tracks all other task lists)
+2. **`/tasks/routes-task-list.md`** - Route audit and validation tasks
+3. **`/tasks/cleanup-task-list.md`** - System cleanup tasks
+4. **`/tasks/tokens-task-list.md`** - Design token audit tasks
+5. **`/tasks/release-task-list.md`** - Release automation tasks
+6. **`/tasks/changelog-task-list.md`** - Changelog update tasks
+7. **`/tasks/reports-task-list.md`** - Report processing tasks
+8. **`/tasks/status-task-list.md`** - Project status tasks
+9. **`/tasks/data-task-list.md`** - Data file audit tasks
+10. **`/tasks/responsive-task-list.md`** - Responsive design audit tasks
+11. **`/tasks/a11y-task-list.md`** - Accessibility audit tasks
+12. **`/tasks/css-task-list.md`** - CSS architecture audit tasks
+13. **`/tasks/patterns-task-list.md`** - Design pattern tasks
+14. **`/tasks/blocks-task-list.md`** - Block component scaffold tasks
+15. **`/tasks/guidelines-task-list.md`** - All guideline-related tasks
+
+**Workflow:** When you run a standardized trigger (e.g., `audit routes`), it:
+1. Runs audit phase
+2. Creates/updates the corresponding task list file
+3. Registers status in `/tasks/task-list.md` (master)
+4. Generates report in `/reports/{trigger}/YYYY-MM-DD.md`
+
+**All task list files:**
+- Have YAML frontmatter with metadata
+- Accumulate tasks over time (completed tasks remain visible)
+- Are tracked in the master task list
+- Link to their corresponding reports
+
+---
+
+## 📝 Creating New Guidelines
+
+**MANDATORY:** All new guideline files MUST use templates from `/guidelines/_templates/`
+
+**Never create guidelines in the project root.** Always create guidelines in `/guidelines/` or a subfolder.
+
+**Available Templates:**
+- General guidelines: `/guidelines/_templates/guideline-template.md`
+- Component guidelines: `/guidelines/_templates/component-guideline-template.md`
+- Design token guidelines: `/guidelines/_templates/design-token-template.md`
+- Prompt files: `/guidelines/_templates/prompt-template.md`
+- Reports: `/guidelines/_templates/report-template.md`
+- Task lists: `/guidelines/_templates/task-list-template.md`
+
+**Guideline Creation Pattern:**
+1. Copy appropriate template from `/guidelines/_templates/`
+2. Create new file in `/guidelines/{category}/` (never in root)
+3. Fill in template sections
+4. Update `/guidelines/INDEX.md` with new guideline link
+
+**Reference:** `/guidelines/_templates.md` for template usage guide
 
 ---
 
@@ -10,18 +98,24 @@
 
 Use trigger words to activate automated prompts. Type any trigger to execute its workflow.
 
-**Quick Reference (18 Triggers):**
+**Quick Reference (26 Triggers):**
 
-### Workflow Triggers
+### Master Orchestration (2)
+- `audit` → Run ALL audit triggers (9 audits, 9 reports)
+- `audit && process reports` → Run all audits, then convert to task lists
+
+### Workflow Triggers (7)
 - `cleanup` → System audit and cleanup
 - `continue` → Execute next task from master list
+- `cleanup && continue` → Combined cleanup + continue workflow
 - `status` → Generate project status report
 - `changelog` → Update CHANGELOG.md from git commits
 - `sitemap` → Regenerate sitemap
 - `process reports` → Convert reports to task lists
-- `release` → Automate version bump and release
 
-### Audit Triggers
+### Audit Triggers (9)
+- `audit routes` → Audit routes, navigation, internal links
+- `audit sitemap` → Audit sitemap completeness
 - `audit tokens` → Audit design token usage
 - `audit css` → Audit CSS architecture
 - `audit a11y` → WCAG accessibility audit
@@ -30,14 +124,17 @@ Use trigger words to activate automated prompts. Type any trigger to execute its
 - `audit styles` → Audit hardcoded styles
 - `audit guidelines` → Verify guideline compliance
 
-### Scaffold Triggers
+### Scaffold Triggers (3)
 - `new template` → Create documentation template
 - `new pattern` → Create design pattern guideline
 - `new block` → Create atomic block component
 
-### Guidelines Triggers
+### Guidelines Triggers (2)
 - `update guidelines` → Update guideline frontmatter and compliance
 - `cleanup guidelines` → Reorganize and restructure guidelines
+
+### Release Triggers (1)
+- `release` → Automate version bump and release
 
 **Complete Registry:** `/guidelines/PROMPT-TRIGGERS.md`  
 **Prompt System Documentation:** `/prompts/PROMPT-SYSTEM-GUIDELINES.md`
@@ -91,7 +188,7 @@ Handcrafted Wines is a family-owned boutique wine farm nestled against Paarl Mou
 - Farm tours (vineyard, wine cellars, distillery, goat dairy)
 - Weddings and special event venue
 - Corporate team-building experiences
-- The Wire Box (wine club subscription)
+- The Wine Box (wine club subscription)
 
 **Core Values:**
 - Handcrafted with Care - Small-batch passion and meticulous attention
@@ -145,29 +242,36 @@ Accessibility is the **first and non-negotiable requirement** for all The Wire B
 
 ### 3.1 Voice & Tone
 
-**The Wire Brand** is casual, approachable, warm, and genuinely passionate about winemaking.
+**Handcrafted Wines** is casual, approachable, warm, and genuinely passionate about winemaking.
+
+**Target Voice/Tone:** Balanced premium with warmth (not too formal, not too casual)
 
 **Voice Characteristics:**
-- **Conversational, not corporate** - "We're obsessed with getting every detail just right"
+- **Conversational, not corporate** - "We're passionate about getting every detail just right"
 - **Storytelling, not selling** - Share the journey, the process, the people behind each bottle
-- **Passionate, not pretentious** - "This Cab Sauv is absolutely killer"
+- **Warm expertise, not pretentious** - Share knowledge in an approachable way
 - **Personal, not generic** - Use "we," "our winemaker," "our vineyard"
-- **Friendly expertise** - Share knowledge without talking down
+- **Sensory and evocative** - Appeal to senses: taste, smell, touch, sight
 
 **Voice by Context:**
 - **Corporate/About:** Personal storytelling, origin story with warmth
-- **Shop:** Sensory, enticing, helpful ("Imagine dark cherry, a hint of vanilla...")
-- **Experiences:** Warm invitation, hospitable ("Come hang out in our cellar...")
+- **Shop:** Sensory, enticing, helpful ("Notes of dark cherry with a hint of vanilla...")
+- **Experiences:** Warm invitation, hospitable ("Join us in the cellar for a tasting...")
 - **Product Descriptions:** Vivid, sensory, accessible (skip jargon, focus on experience)
 
 **Specific Language Rules:**
-- **Use:** "Hey," "You'll love," "We're pretty proud of," "Honestly," "Absolutely"
-- **Avoid:** "Leveraging," "Solutions," "Utilize," "State-of-the-art"
+- **Use:** "We're passionate about," "You'll love," "We're proud of," "Join us," "Discover"
+- **Avoid:** "Leveraging," "Solutions," "Utilize," "State-of-the-art," "Revolutionary"
+
+**Balanced Examples:**
+- ✅ GOOD: "Four generations of our family have cared for this estate"
+- ❌ TOO FORMAL: "Our estate has been meticulously tended by four generations"
+- ❌ TOO CASUAL: "We're totally obsessed with getting every detail perfect!"
 
 **Micro-copy Examples:**
-- Button CTAs: "Grab a bottle," "Let's taste," "Join the club"
-- Empty states: "Your cart's looking a little lonely. Let's fix that!"
-- Errors: "Oops! Something went sideways. Give it another shot."
+- Button CTAs: "Explore Our Wines," "Book a Tasting," "Join the Club"
+- Empty states: "Your cart is empty. Let's find something special."
+- Errors: "Something went wrong. Please try again."
 
 **Language:** South African English with universal appeal ("Colour," "Flavour").
 
@@ -522,6 +626,14 @@ See `/guidelines/design-tokens/` for complete specifications:
 
 ## 10. Change Log
 
+### Version 8.0 (2026-03-15)
+- **Brand Alignment:** Clarified brand name (Handcrafted Wines), token prefix (`twb-*`), Wine Club name (The Wine Box)
+- **Demo Context:** Explicitly documented project as demo with believable/realistic content
+- **Voice/Tone:** Defined "balanced premium with warmth" as target voice
+- **Product Categories:** Confirmed Wine + Spirits + Cheese + 8 shop categories
+- **Orchestrator Update:** Updated master orchestrator with brand context and shop categories
+- **Guidelines Restructure:** Reorganized voice/tone section with clear examples
+
 ### Version 7.0 (2024-03-15)
 - **Trigger Word System:** Complete implementation with 18 automated triggers
 - **Prompt System:** Updated with new trigger word system and prompt registry
@@ -567,8 +679,8 @@ See `/guidelines/design-tokens/` for complete specifications:
 
 ---
 
-**Maintained by:** The Wire Brand Development Team  
-**Last Review:** 2024-03-15  
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Review:** 2026-03-15  
 **Next Review:** Monthly or after major guidelines updates
 
 ---

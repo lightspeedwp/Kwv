@@ -10,6 +10,7 @@
 
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   category: 'wine' | 'spirit' | 'cheese' | 'gift';
   subcategory?: string;
@@ -32,6 +33,7 @@ export const products: Product[] = [
   // === WINES ===
   {
     id: 'estate-shiraz-2020',
+    slug: 'estate-shiraz-2020',
     name: 'Estate Shiraz 2020',
     category: 'wine',
     subcategory: 'Red Wine',
@@ -50,6 +52,7 @@ export const products: Product[] = [
   },
   {
     id: 'reserve-cabernet-2019',
+    slug: 'reserve-cabernet-2019',
     name: 'Reserve Cabernet Sauvignon 2019',
     category: 'wine',
     subcategory: 'Red Wine',
@@ -68,6 +71,7 @@ export const products: Product[] = [
   },
   {
     id: 'chenin-blanc-2022',
+    slug: 'chenin-blanc-2022',
     name: 'Chenin Blanc 2022',
     category: 'wine',
     subcategory: 'White Wine',
@@ -86,6 +90,7 @@ export const products: Product[] = [
   },
   {
     id: 'chardonnay-2021',
+    slug: 'chardonnay-2021',
     name: 'Chardonnay 2021',
     category: 'wine',
     subcategory: 'White Wine',
@@ -102,6 +107,7 @@ export const products: Product[] = [
   },
   {
     id: 'rose-2023',
+    slug: 'rose-2023',
     name: 'Rosé 2023',
     category: 'wine',
     subcategory: 'Rosé',
@@ -118,6 +124,7 @@ export const products: Product[] = [
   },
   {
     id: 'red-blend-2020',
+    slug: 'red-blend-2020',
     name: 'Mountain Red Blend 2020',
     category: 'wine',
     subcategory: 'Red Wine',
@@ -136,6 +143,7 @@ export const products: Product[] = [
   // === SPIRITS ===
   {
     id: 'estate-grappa',
+    slug: 'estate-grappa',
     name: 'Estate Grappa',
     category: 'spirit',
     subcategory: 'Grappa',
@@ -153,6 +161,7 @@ export const products: Product[] = [
   },
   {
     id: '5-year-brandy',
+    slug: '5-year-brandy',
     name: '5 Year Aged Brandy',
     category: 'spirit',
     subcategory: 'Brandy',
@@ -168,6 +177,7 @@ export const products: Product[] = [
   },
   {
     id: '10-year-brandy',
+    slug: '10-year-brandy',
     name: '10 Year Reserve Brandy',
     category: 'spirit',
     subcategory: 'Brandy',
@@ -187,6 +197,7 @@ export const products: Product[] = [
   // === CHEESE ===
   {
     id: 'fresh-chevre',
+    slug: 'fresh-chevre',
     name: 'Fresh Chèvre',
     category: 'cheese',
     subcategory: 'Fresh Cheese',
@@ -202,6 +213,7 @@ export const products: Product[] = [
   },
   {
     id: 'herbed-chevre',
+    slug: 'herbed-chevre',
     name: 'Herbed Chèvre',
     category: 'cheese',
     subcategory: 'Fresh Cheese',
@@ -216,6 +228,7 @@ export const products: Product[] = [
   },
   {
     id: 'aged-goat-cheese',
+    slug: 'aged-goat-cheese',
     name: 'Aged Goat Cheese (6 Month)',
     category: 'cheese',
     subcategory: 'Aged Cheese',
@@ -230,6 +243,7 @@ export const products: Product[] = [
   },
   {
     id: 'wine-washed-rind',
+    slug: 'wine-washed-rind',
     name: 'Wine-Washed Rind Cheese',
     category: 'cheese',
     subcategory: 'Aged Cheese',
@@ -248,6 +262,7 @@ export const products: Product[] = [
   // === GIFT SETS ===
   {
     id: 'tasting-trio',
+    slug: 'tasting-trio',
     name: 'Tasting Trio Gift Set',
     category: 'gift',
     price: 650,
@@ -259,6 +274,7 @@ export const products: Product[] = [
   },
   {
     id: 'cheese-wine-pairing-box',
+    slug: 'cheese-wine-pairing-box',
     name: 'Cheese & Wine Pairing Box',
     category: 'gift',
     price: 850,
@@ -271,6 +287,7 @@ export const products: Product[] = [
   },
   {
     id: 'brandy-chocolate-set',
+    slug: 'brandy-chocolate-set',
     name: 'Brandy & Chocolate Gift Set',
     category: 'gift',
     price: 950,
@@ -319,3 +336,5 @@ export const getProductsBySubcategory = (subcategory: string) =>
 export const getProductById = (id: string) =>
   products.find(p => p.id === id);
 
+export const getProductBySlug = (slug: string) =>
+  products.find(p => p.slug === slug);

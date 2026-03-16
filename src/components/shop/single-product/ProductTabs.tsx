@@ -46,14 +46,14 @@ export const ProductTabs: React.FC<ProductTabsProps> = ({ tabs }) => {
             onClick={() => setActiveTab(idx)}
             className={`
               px-8 py-4 font-serif text-lg whitespace-nowrap transition-colors relative
-              ${activeTab === idx ? 'text-[#2C1810] font-bold' : 'text-gray-400 hover:text-gray-600'}
+              ${activeTab === idx ? 'text-[var(--twb-color-ink)] font-bold' : 'text-gray-400 hover:text-gray-600'}
             `}
           >
             {tab.label}
             {activeTab === idx && (
               <motion.div 
                 layoutId="productTabIndicator" 
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#8B0000]" 
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--twb-color-plum)]" 
               />
             )}
           </button>

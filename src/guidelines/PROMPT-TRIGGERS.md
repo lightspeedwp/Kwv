@@ -2,8 +2,8 @@
 
 **Category:** Guidelines  
 **Domain:** Automation & Workflow  
-**Version:** 2.0.0  
-**Last Updated:** 2024-03-15  
+**Version:** 3.0.0  
+**Last Updated:** 2026-03-15  
 **Status:** Active  
 **Purpose:** Central registry of all trigger words that activate automated prompts
 
@@ -23,12 +23,23 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 
 ---
 
-## Trigger Registry (18 Total)
+## Trigger Registry (26 Total)
+
+### 🎯 Master Orchestration Triggers (2)
+
+| Trigger | Prompt File | Purpose | Outputs |
+|---------|-------------|---------|---------|
+| `audit` | `/prompts/audit.md` | **MASTER AUDIT** - Run all audit triggers | All audit reports (9 files) |
+| `audit && process reports` | `/prompts/audit-and-process-reports.md` | Run all audits, then convert to task lists | All reports + all task lists |
+
+**New in v3.0:** Master audit orchestrator runs all 9 individual audits in sequence.
+
+---
 
 ### Workflow Triggers (7)
 
 | Trigger | Prompt File | Purpose | Outputs |
-|---------|-------------|---------|---------|
+|---------|-------------|---------|------------|
 | `cleanup` | `/prompts/cleanup.md` | System audit and cleanup | Report, deletion list |
 | `continue` | `/prompts/continue.md` | Execute next task from master list | Task execution |
 | `cleanup and continue` | `/prompts/cleanup-and-continue.md` | Run cleanup, then continue | Combined workflow |
@@ -39,17 +50,23 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 
 ---
 
-### Audit Triggers (7)
+### Audit Triggers (9)
 
 | Trigger | Prompt File | Purpose | Outputs |
-|---------|-------------|---------|---------|
+|---------|-------------|---------|------------|
+| `audit routes` | `/prompts/audit-routes.md` | Audit routes, navigation, and internal links | Route audit report |
+| `audit sitemap` | `/prompts/audit-sitemap.md` | Audit sitemap completeness and accuracy | Sitemap audit report |
 | `audit tokens` | `/prompts/audit-tokens.md` | Audit design token implementation | Token audit report |
 | `audit css` | `/prompts/audit-css.md` | Audit CSS architecture and variables | CSS audit report |
 | `audit a11y` | `/prompts/audit-a11y.md` | WCAG 2.1 AA accessibility audit | A11y audit report |
 | `audit data` | `/prompts/audit-data.md` | Audit data file sizes and structure | Data audit report |
 | `audit responsive` | `/prompts/audit-responsive.md` | Audit responsive design patterns | Responsive audit report |
 | `audit styles` | `/prompts/audit-styles.md` | Audit for hardcoded styles vs. tokens | Styles audit report |
-| `audit guidelines` | `/prompts/audit-guidelines.md` | Verify guideline YAML frontmatter and structure | Guidelines audit report |
+| `audit guidelines` | `/prompts/audit-guidelines.md` | Verify guideline YAML frontmatter | Guidelines audit report |
+
+**Aliases:**
+- `routes` → `audit routes` (backward compatible)
+- `sitemap` → `audit sitemap` (backward compatible)
 
 ---
 
@@ -286,6 +303,84 @@ AI: Uses report to clean up
 
 ---
 
+### audit
+
+**Purpose:** **MASTER AUDIT** - Run all audit triggers
+
+**Workflow:**
+1. Execute `audit routes`
+2. Execute `audit sitemap`
+3. Execute `audit tokens`
+4. Execute `audit css`
+5. Execute `audit a11y`
+6. Execute `audit data`
+7. Execute `audit responsive`
+8. Execute `audit styles`
+9. Execute `audit guidelines`
+
+**Outputs:**
+- All audit reports (9 files)
+
+**When to use:** Before major releases, quarterly audits
+
+---
+
+### audit && process reports
+
+**Purpose:** Run all audits, then convert to task lists
+
+**Workflow:**
+1. Execute `audit` workflow
+2. Review all audit reports
+3. Execute `process reports` workflow
+
+**Outputs:**
+- All reports + all task lists
+
+**When to use:** Start of work session
+
+---
+
+### audit routes
+
+**Purpose:** Audit routes, navigation, and internal links
+
+**Workflow:**
+1. Load `/guidelines/architecture/routes.md`
+2. Scan all `.tsx` files for:
+   - Route definitions
+   - Navigation links
+   - Internal links
+3. Check for broken links
+4. Generate violation report
+
+**Outputs:**
+- `/reports/route-audit-report.md`
+
+**When to use:** After major route changes
+
+---
+
+### audit sitemap
+
+**Purpose:** Audit sitemap completeness and accuracy
+
+**Workflow:**
+1. Load `/guidelines/architecture/sitemap.md`
+2. Scan all `.tsx` files for:
+   - Route definitions
+   - Navigation links
+   - Internal links
+3. Check for broken links
+4. Generate violation report
+
+**Outputs:**
+- `/reports/sitemap-audit-report.md`
+
+**When to use:** After major route changes
+
+---
+
 ### audit tokens
 
 **Purpose:** Audit design token implementation
@@ -410,7 +505,7 @@ AI: Uses report to clean up
 
 ### audit guidelines
 
-**Purpose:** Verify guideline YAML frontmatter and structure
+**Purpose:** Verify guideline YAML frontmatter
 
 **Workflow:**
 1. Load `/guidelines/repository-standards.md`
@@ -682,6 +777,13 @@ If a trigger is no longer needed:
 ---
 
 ## Changelog
+
+### Version 3.0.0 (2026-03-15)
+- Expanded to 26 total triggers
+- Added 9 audit triggers
+- Added 2 master orchestration triggers
+- Created comprehensive registry
+- Added workflow patterns for each trigger
 
 ### Version 2.0.0 (2024-03-15)
 - Expanded to 18 total triggers

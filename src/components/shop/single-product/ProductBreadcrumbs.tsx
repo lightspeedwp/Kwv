@@ -34,16 +34,16 @@ interface ProductBreadcrumbsProps {
 export const ProductBreadcrumbs: React.FC<ProductBreadcrumbsProps> = ({ items }) => {
   return (
     <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-      <Link to="/" className="hover:text-[#8B0000] transition-colors">Home</Link>
+      <Link to="/" className="hover:text-[var(--twb-color-plum)] transition-colors">Home</Link>
       {items.map((item, index) => (
         <React.Fragment key={index}>
           <ChevronRight size={14} />
           {item.href ? (
-            <Link to={item.href} className="hover:text-[#8B0000] transition-colors">
+            <Link to={item.href} className="hover:text-[var(--twb-color-plum)] transition-colors">
               {item.label}
             </Link>
           ) : (
-            <span className="text-[#8B0000] font-medium">{item.label}</span>
+            <span className="text-[var(--twb-color-plum)] font-medium">{item.label}</span>
           )}
         </React.Fragment>
       ))}

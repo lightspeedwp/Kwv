@@ -61,7 +61,7 @@ function PaginationLink({
           variant: isActive ? "outline" : "ghost",
           size,
         }),
-        "font-['Open_Sans'] font-normal text-[21px] leading-[31px] text-[oklch(0.551_0.027_264.364)]",
+        "font-['Open_Sans'] font-normal text-[length:var(--twb-text-h4)] leading-[31px] text-[oklch(0.551_0.027_264.364)]",
         className,
       )}
       {...props}

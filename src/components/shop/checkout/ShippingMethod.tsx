@@ -26,11 +26,11 @@ export const ShippingMethod: React.FC = () => {
                 value="dispatch"
                 checked={selectedMethod === 'dispatch'}
                 onChange={(e) => setSelectedMethod(e.target.value)}
-                className="mt-1 mr-3 accent-[#2C1810]"
+                className="mt-1 mr-3 accent-[var(--twb-color-ink)]"
               />
               <div className="flex-1">
                 <div className="flex justify-between mb-1">
-                   <span className="font-medium text-[#333333]">Dispatch</span>
+                   <span className="font-medium text-[var(--twb-color-text-primary)]">Dispatch</span>
                    <span className="text-gray-500">FREE</span>
                 </div>
                 <p className="text-sm text-gray-500">We will deliver to your shipping address.</p>
@@ -51,10 +51,10 @@ export const ShippingMethod: React.FC = () => {
              value="pickup"
              checked={selectedMethod === 'pickup'}
              onChange={(e) => setSelectedMethod(e.target.value)}
-             className="mr-3 accent-[#2C1810]"
+             className="mr-3 accent-[var(--twb-color-ink)]"
            />
            <div className="flex-1">
-             <span className="font-medium text-[#333333] block">Local Pickup</span>
+             <span className="font-medium text-[var(--twb-color-text-primary)] block">Local Pickup</span>
              {selectedMethod === 'pickup' && (
                 <p className="text-sm text-gray-500 mt-1">46 Devon Street, Cape Town, Western Cape, 7015</p>
              )}

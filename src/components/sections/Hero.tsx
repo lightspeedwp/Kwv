@@ -57,9 +57,9 @@ export const Hero: React.FC<HeroProps> = ({
   className = '',
 }) => {
   const heightClass = {
-    full: 'min-h-[calc(100dvh-90px)] md:min-h-screen',
-    large: 'min-h-[calc(100dvh-90px)] md:min-h-[80vh]', // Landing pages
-    medium: 'min-h-[calc(100dvh-90px)] md:min-h-[60vh]', // Standard pages
+    full: 'min-h-[max(400px,calc(100dvh-90px))] md:min-h-screen',
+    large: 'min-h-[max(350px,calc(100dvh-90px))] md:min-h-[80vh]', // Landing pages
+    medium: 'min-h-[max(300px,calc(100dvh-90px))] md:min-h-[60vh]', // Standard pages
     small: 'min-h-[300px] md:min-h-[40vh]', // Utility/Legal pages
   }[height];
 
@@ -77,7 +77,7 @@ export const Hero: React.FC<HeroProps> = ({
             className="w-full h-full object-cover"
           />
           <div 
-            className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" 
+            className="absolute inset-0 bg-gradient-to-b from-[var(--twb-color-ink)]/40 to-[var(--twb-color-ink)]/60" 
             style={{ opacity: overlayOpacity }}
           />
         </div>
@@ -91,11 +91,11 @@ export const Hero: React.FC<HeroProps> = ({
       )}
 
       {/* Content */}
-      <Container variant="site" className={`relative z-10 text-white dark:text-[var(--twb-color-text-on-dark)] ${contentPadding}`}>
+      <Container variant="site" className={`relative z-10 text-[var(--twb-color-paper)] dark:text-[var(--twb-color-text-on-dark)] ${contentPadding}`}>
         <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
           <Typography 
             variant="h1" 
-            className="mb-[var(--twb-spacing-6)] drop-shadow-[var(--twb-shadow-md)] text-white"
+            className="mb-[var(--twb-spacing-6)] drop-shadow-[var(--twb-shadow-md)] text-[var(--twb-color-paper)]"
             stretchy
           >
             {title}
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({
           {subtitle && (
             <Typography 
               variant="bodyLarge" 
-              className="mb-[var(--twb-spacing-8)] opacity-90 drop-shadow-sm max-w-2xl mx-auto text-white"
+              className="mb-[var(--twb-spacing-8)] opacity-90 drop-shadow-sm max-w-2xl mx-auto text-[var(--twb-color-paper)]"
             >
               {subtitle}
             </Typography>
@@ -125,7 +125,7 @@ export const Hero: React.FC<HeroProps> = ({
               <Button 
                 variant="outline" 
                 size="lg"
-                className="w-full sm:w-auto sm:min-w-[200px] uppercase tracking-wider font-[number:var(--twb-font-weight-bold)] shadow-[var(--twb-shadow-lg)] text-white border-white hover:bg-white hover:text-[var(--twb-color-ink)] bg-black/40 transition-colors"
+                className="w-full sm:w-auto sm:min-w-[200px] uppercase tracking-wider font-[number:var(--twb-font-weight-bold)] shadow-[var(--twb-shadow-lg)] text-[var(--twb-color-paper)] border-[var(--twb-color-paper)] hover:bg-[var(--twb-color-paper)] hover:text-[var(--twb-color-ink)] bg-[var(--twb-color-ink)]/40 transition-colors"
                 onClick={secondaryAction.onClick}
               >
                 {secondaryAction.label}

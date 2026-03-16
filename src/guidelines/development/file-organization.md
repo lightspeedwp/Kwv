@@ -11,7 +11,10 @@
 
 This guideline defines where and how to create files in The Wire Brand project. Following these standards ensures consistency, discoverability, and optimal AI processing.
 
-**Critical Principle:** Files should never be too large. Always aim to break content into smaller, focused modules.
+**Critical Principles:**
+1. **Files should never be too large.** Always aim to break content into smaller, focused modules.
+2. **All new guidelines MUST use templates** from `/guidelines/_templates/`
+3. **Never create guidelines in the project root.** Always create in `/guidelines/` or a subfolder.
 
 ---
 
@@ -21,11 +24,16 @@ This guideline defines where and how to create files in The Wire Brand project. 
 
 ```
 /
-├── ATTRIBUTIONS.md  ✅ ALLOWED
-├── README.md        ✅ ALLOWED
-├── CHANGELOG.md     ✅ ALLOWED
+├── ATTRIBUTIONS.md  ✅ ALLOWED (Component, library, and asset attributions)
+├── README.md        ✅ ALLOWED (Project overview and setup instructions)
+├── CHANGELOG.md     ✅ ALLOWED (Version history and release notes)
 └── [any-other.md]   ❌ PROHIBITED
 ```
+
+**These files are PROTECTED:**
+- `/ATTRIBUTIONS.md` - Documents all third-party libraries, components, fonts, images used
+- `/README.md` - Main project documentation, setup instructions, development guide
+- `/CHANGELOG.md` - Version history following Keep a Changelog format
 
 **Examples of PROHIBITED root-level files:**
 - ❌ `/WHATS-NEXT.md` (use `/tasks/task-list.md` instead)
@@ -33,12 +41,19 @@ This guideline defines where and how to create files in The Wire Brand project. 
 - ❌ `/NOTES.md` (use `/docs/` folder instead)
 - ❌ `/PLAN.md` (use `/tasks/{feature}-task-list.md` instead)
 - ❌ `/REDESIGN-BRIEF.md` (use `/docs/` folder instead)
+- ❌ `/Attributions.md` (lowercase 'A' - use `/ATTRIBUTIONS.md` instead)
 
 **Why this restriction?**
 - Keeps root clean and scannable
 - Forces proper organization into `/tasks/`, `/docs/`, `/prompts/`, `/reports/`
 - All tasks MUST go in `/tasks/task-list.md` or `/tasks/{feature}-task-list.md`
 - AI agents process files better when organized in proper folders
+- Consistency: all caps for root-level .md files (ATTRIBUTIONS, README, CHANGELOG)
+
+**The `cleanup` trigger will:**
+- Move important guidelines to `/guidelines/`
+- Archive or delete unauthorized root-level .md files
+- Ensure only these 3 protected files remain in root
 
 ---
 
@@ -185,7 +200,7 @@ This guideline defines where and how to create files in The Wire Brand project. 
 
 **Location:** `/reports/` or `/reports/{category}/`
 
-**Naming Convention:** `{##}-{domain}-{type}-report.md`
+**Naming Convention:** `{##}-{domain}-{type}-report.md` or `YYYY-MM-DD.md` (for trigger-generated reports)
 
 **Structure:** MUST follow `/guidelines/_templates/report-template.md`
 
@@ -202,6 +217,47 @@ This guideline defines where and how to create files in The Wire Brand project. 
 /prompts/redesign/01-visual-design-analysis.md
   → /reports/redesign/01-visual-design-report.md
 ```
+
+#### Trigger-Generated Reports (organized by trigger)
+
+**Pattern:** `/reports/{trigger}/YYYY-MM-DD.md`
+
+```
+/reports/
+├── routes/
+│   ├── 2026-03-15.md (latest)
+│   ├── 2026-03-10.md
+│   └── 2026-03-05.md
+├── cleanup/
+│   ├── 2026-03-14.md
+│   └── 2026-03-12.md
+├── tokens/
+│   └── 2026-03-13.md
+├── a11y/
+│   └── 2026-03-12.md
+├── css/
+│   └── 2026-03-11.md
+└── data/
+    └── 2026-03-10.md
+```
+
+**Benefits:**
+- Reports grouped by domain/trigger
+- Easy to find latest report (most recent date)
+- Historical reports retained
+- No archive folder needed (folder IS the archive)
+
+**Trigger Report Folders:**
+- `/reports/routes/` - Route audit reports
+- `/reports/cleanup/` - Cleanup reports
+- `/reports/tokens/` - Design token audit reports
+- `/reports/release/` - Release reports
+- `/reports/changelog/` - Changelog update reports
+- `/reports/status/` - Project status reports
+- `/reports/data/` - Data audit reports
+- `/reports/responsive/` - Responsive audit reports
+- `/reports/a11y/` - Accessibility audit reports
+- `/reports/css/` - CSS architecture audit reports
 
 **Required Sections:**
 - Executive Summary
@@ -551,7 +607,7 @@ Should be: /prompts/01-visual-audit.md
 
 ### Reports
 
-**Format:** `{##}-{domain}-{type}-report.md`
+**Format:** `{##}-{domain}-{type}-report.md` or `YYYY-MM-DD.md` (for trigger-generated reports)
 
 **Examples:**
 ```

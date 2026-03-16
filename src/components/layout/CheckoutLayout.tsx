@@ -40,6 +40,14 @@ export const CheckoutLayout: React.FC<CheckoutLayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--twb-color-bg-primary)]">
+      {/* Skip to main content link for accessibility */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[var(--twb-color-ink)] focus:text-[var(--twb-color-paper)] focus:px-4 focus:py-2 focus:rounded"
+      >
+        Skip to main content
+      </a>
+
       {/* Minimal Header */}
       <header className="border-b border-[var(--twb-color-border-primary)] bg-[var(--twb-color-bg-primary)] sticky top-0 z-40">
         <Container variant="wide">
@@ -72,7 +80,7 @@ export const CheckoutLayout: React.FC<CheckoutLayoutProps> = ({
       </header>
 
       {/* Main Content */}
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         {children}
       </main>
 

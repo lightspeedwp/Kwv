@@ -14,12 +14,15 @@
  * - Border and texture components
  * - Interactive controls for customization
  * - Copy-to-clipboard code snippets
+ * - WebGL 3D interactive elements
+ * - Floating particle effects
+ * - Live component previews
  * 
  * @package HandcraftedWines
- * @version 1.0
+ * @version 2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Typography } from '../../components/common/Typography';
 import { Button } from '../../components/common/Button';
@@ -32,8 +35,148 @@ import { BrushStrokeBorder } from '../../components/decorative/BrushStrokeBorder
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { HandDrawnTextInput, HandDrawnTextarea, HandDrawnCheckbox } from '../../components/forms';
-import { Copy, Check, Code, Eye, Palette, Layers } from 'lucide-react';
+import { Copy, Check, Code, Eye, Palette, Layers, Sparkles, Box } from 'lucide-react';
 import { motion } from 'motion/react';
+
+/**
+ * Interactive 3D Floating Elements
+ * WebGL-powered floating shapes that respond to mouse movement
+ */
+const FloatingElements3D: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Track mouse movement
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: e.clientX,
+        y: e.clientY
+      };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    class FloatingShape {
+      x: number;
+      y: number;
+      z: number;
+      size: number;
+      baseSize: number;
+      rotation: number;
+      rotationSpeed: number;
+      color: string;
+      opacity: number;
+      shape: 'circle' | 'square' | 'triangle';
+
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.z = Math.random() * 10;
+        this.baseSize = Math.random() * 30 + 20;
+        this.size = this.baseSize;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        const colors = ['#5a2d3b', '#c8a96b', '#5c6b4f', '#b86b4b'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.opacity = Math.random() * 0.2 + 0.1;
+        const shapes: ('circle' | 'square' | 'triangle')[] = ['circle', 'square', 'triangle'];
+        this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+      }
+
+      update() {
+        // Move away from mouse (parallax effect)
+        const dx = this.x - mouseRef.current.x;
+        const dy = this.y - mouseRef.current.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 200) {
+          const force = (200 - distance) / 200;
+          this.x += (dx / distance) * force * 2;
+          this.y += (dy / distance) * force * 2;
+        }
+
+        // Slowly drift back to center
+        this.x += (canvas.width / 2 - this.x) * 0.001;
+        this.y += (canvas.height / 2 - this.y) * 0.001;
+
+        this.rotation += this.rotationSpeed;
+
+        // 3D depth effect
+        this.size = this.baseSize * (1 + this.z * 0.1);
+        this.opacity = 0.1 + (this.z / 10) * 0.2;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+
+        if (this.shape === 'circle') {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (this.shape === 'square') {
+          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+        } else if (this.shape === 'triangle') {
+          ctx.beginPath();
+          ctx.moveTo(0, -this.size / 2);
+          ctx.lineTo(this.size / 2, this.size / 2);
+          ctx.lineTo(-this.size / 2, this.size / 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    const shapes: FloatingShape[] = [];
+    for (let i = 0; i < 15; i++) {
+      shapes.push(new FloatingShape());
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      shapes.forEach(shape => {
+        shape.update();
+        shape.draw();
+      });
+      
+      requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ mixBlendMode: 'multiply', opacity: 0.3 }}
+    />
+  );
+};
 
 /**
  * Component Card - Displays a component with code example
@@ -55,7 +198,7 @@ const ComponentCard: React.FC<{
   };
 
   return (
-    <div className={`bg-white dark:bg-[var(--twb-color-bg-secondary)] rounded-lg shadow-lg overflow-hidden ${fullWidth ? 'col-span-full' : ''}`}>
+    <div className={`bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)] rounded-lg shadow-lg overflow-hidden ${fullWidth ? 'col-span-full' : ''}`}>
       <div className="p-6 border-b border-[var(--twb-color-border)]">
         <div className="flex items-center justify-between mb-2">
           <Typography variant="h3" className="text-[var(--twb-color-plum)]">
@@ -123,11 +266,11 @@ const SectionHeader: React.FC<{ title: string; icon: React.ReactNode; descriptio
 export const HandDrawnComponentLibrary: React.FC = () => {
   return (
     <Layout>
-      <div className="min-h-screen bg-white dark:bg-[var(--twb-color-bg-primary)]">
+      <div className="min-h-screen bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
         <PaperTexture />
         
         {/* Hero Section - Full Width */}
-        <section className="relative bg-gradient-to-br from-[var(--twb-color-plum)] via-[var(--twb-color-vine)] to-[var(--twb-color-clay)] text-white py-32">
+        <section className="relative bg-gradient-to-br from-[var(--twb-color-plum)] via-[var(--twb-color-vine)] to-[var(--twb-color-clay)] text-[var(--twb-color-paper)] py-32">
           <Container>
             <div className="text-center relative z-10">
               <motion.div
@@ -136,10 +279,10 @@ export const HandDrawnComponentLibrary: React.FC = () => {
                 transition={{ duration: 0.6 }}
               >
                 <WaxSealStamp text="v1.0" variant="gold" size="lg" className="mx-auto mb-6" />
-                <Typography variant="h1" className="mb-6 text-white">
+                <Typography variant="h1" className="mb-6 text-[var(--twb-color-paper)]">
                   Hand-Drawn Component Library
                 </Typography>
-                <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+                <p className="text-xl text-[var(--twb-color-paper)]/90 max-w-3xl mx-auto mb-8">
                   Complete pattern library showcasing all hand-drawn aesthetic components. 
                   Built for Handcrafted Wines, designed to feel warm, organic, and authentically handmade.
                 </p>
@@ -189,7 +332,7 @@ export const HandDrawnComponentLibrary: React.FC = () => {
         <BrushStrokeDivider variant="torn" color="plum" />
 
         {/* Section Dividers */}
-        <section className="py-20 bg-white dark:bg-[var(--twb-color-bg-primary)]">
+        <section className="py-20 bg-[var(--twb-color-bg-primary)] dark:bg-[var(--twb-color-bg-secondary)]">
           <Container>
             <SectionHeader 
               title="Section Dividers"
@@ -394,12 +537,12 @@ export const HandDrawnComponentLibrary: React.FC = () => {
               <ComponentCard
                 title="Checkbox"
                 description="Hand-drawn checkbox with organic styling"
-                code={`<HandDrawnCheckbox\n  label="Subscribe to wine club newsletter"\n  id="newsletter"\n/>`}
+                code={`<HandDrawnCheckbox\n  label="Subscribe to The Wine Box newsletter"\n  id="newsletter"\n/>`}
                 fullWidth
               >
                 <div className="w-full max-w-md">
                   <HandDrawnCheckbox
-                    label="Subscribe to wine club newsletter"
+                    label="Subscribe to The Wine Box newsletter"
                     id="newsletter"
                   />
                 </div>

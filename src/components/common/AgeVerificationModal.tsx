@@ -57,7 +57,7 @@ export const AgeVerificationModal = () => {
             style={{ borderTop: `4px solid ${COLORS.wineRed}` }}
           >
             <Typography variant="h2" className="mb-2" color={COLORS.darkBrown}>Handcrafted Wines</Typography>
-            <div className="w-16 h-1 bg-[#DAA520] mx-auto mb-8"></div>
+            <div className="w-16 h-1 bg-[var(--twb-color-gold)] mx-auto mb-8"></div>
             
             <Typography variant="h3" className="mb-4">Are you over 18?</Typography>
             

@@ -1,11 +1,34 @@
 /**
  * Site Content Configuration
  * 
+ * **STATUS:** ✅ ACTIVE - Centralized site-wide content management
+ * 
  * Centralized content management for Handcrafted Wines.
  * All text content, brand names, contact information, and social media details.
  * 
+ * **Used By:** (5 files)
+ * - `/components/shop/checkout/ContactInfo.tsx` - Pre-fill contact info
+ * - `/components/shop/home/ShopNewsletter.tsx` - Newsletter section
+ * - `/components/shop/home/ShopSocialSection.tsx` - Social media links
+ * - `/components/shop/layout/ShopInfoFooter.tsx` - Footer content
+ * - `/components/experiences/ExperiencePageLayout.tsx` - Contact details
+ * 
+ * **Contents:**
+ * - Brand Information (name, tagline, founding year, location)
+ * - Contact Information (phone, email, address, map embed)
+ * - Social Media (hashtags, Instagram, Facebook, Twitter)
+ * - Operating Hours
+ * - Newsletter Configuration
+ * - Shop Information
+ * 
+ * **Related Files:**
+ * - `/data/farmStory.ts` - Detailed farm history, team, awards, experiences
+ * - `/data/products.ts` - Product catalog
+ * - `/data/newsPosts.ts` - News & blog posts
+ * 
  * @package HandcraftedWines
- * @version 1.0
+ * @version 2.0
+ * @lastUpdated 2026-03-15
  */
 
 export const SITE_CONTENT = {
