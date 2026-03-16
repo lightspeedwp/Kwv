@@ -96,7 +96,6 @@ export const Hero: React.FC<HeroProps> = ({
           <Typography 
             variant="h1" 
             className="mb-[var(--twb-spacing-6)] drop-shadow-[var(--twb-shadow-md)] text-[var(--twb-color-paper)]"
-            stretchy
           >
             {title}
           </Typography>
