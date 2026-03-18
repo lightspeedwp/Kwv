@@ -48,8 +48,9 @@ import { CheeseCategory } from './pages/shop/CheeseCategory';
 import { GiftsCategory } from './pages/shop/GiftsCategory';
 import { ProductDetail } from './pages/shop/ProductDetail';
 
-// Brands Pages
-import { Brands } from './pages/brands/Brands';
+// Brands Pages - REMOVED (deprecated)
+// The /brands routes have been deprecated and replaced by /shop/brands
+// Old import: import { Brands } from './pages/brands/Brands';
 
 // Experience Pages
 import { Experiences } from './pages/experiences/Experiences';
@@ -68,6 +69,13 @@ import { EventsFAQ } from './pages/events/EventsFAQ';
 // Demo Pages
 import { HandDrawnComponentLibrary } from './pages/handdrawn-demo/HandDrawnComponentLibrary';
 import { FullWidthLandingPage } from './pages/handdrawn-demo/FullWidthLandingPage';
+
+// Dev Tools Pages
+import DevTools from './pages/dev-tools/DevTools';
+import DesignTokens from './pages/dev-tools/DesignTokens';
+import RouteInspector from './pages/dev-tools/RouteInspector';
+import DataViewer from './pages/dev-tools/DataViewer';
+import IconLibrary from './pages/dev-tools/IconLibrary';
 
 // Legal Pages
 import { Terms } from './pages/legal/Terms';
@@ -115,8 +123,8 @@ export const router = createBrowserRouter([
   // Orphaned corporate KWV routes - not in main navigation
   // Replaced by /shop/brands (uses shopBrands.ts)
   // TODO: Remove after confirming no external links
-  { path: '/brands', Component: Brands }, // DEPRECATED
-  { path: '/brands/:id', Component: Brands }, // DEPRECATED
+  // { path: '/brands', Component: Brands }, // DEPRECATED
+  // { path: '/brands/:id', Component: Brands }, // DEPRECATED
 
   // Shop Routes
   { path: '/shop', Component: ShopHome },
@@ -162,6 +170,13 @@ export const router = createBrowserRouter([
   // Demo Routes
   { path: '/handdrawn-demo', Component: HandDrawnComponentLibrary },
   { path: '/handdrawn-demo/landing-page', Component: FullWidthLandingPage },
+
+  // Dev Tools Routes
+  { path: '/dev-tools', Component: DevTools },
+  { path: '/dev-tools/tokens', Component: DesignTokens },
+  { path: '/dev-tools/routes', Component: RouteInspector },
+  { path: '/dev-tools/data', Component: DataViewer },
+  { path: '/dev-tools/icons', Component: IconLibrary },
 
   // Legal Routes
   { path: '/terms', Component: Terms },

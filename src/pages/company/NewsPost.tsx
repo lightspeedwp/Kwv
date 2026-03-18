@@ -43,15 +43,15 @@ export const NewsPost: React.FC = () => {
            alt={post.title}
            className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-[var(--twb-color-bg-inverse)]/40" />
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 bg-gradient-to-t from-black/80 to-transparent">
            <Container variant="content">
-              <div className="text-white">
+              <div className="text-[var(--twb-color-text-on-dark)]">
                  <div className="flex items-center gap-4 mb-4 text-sm font-bold uppercase tracking-widest">
-                    <span className="bg-[#DAA520] text-[#2C1810] px-3 py-1">{post.category}</span>
+                    <span className="bg-[var(--twb-color-gold)] text-[var(--twb-color-ink)] px-3 py-1">{post.category}</span>
                     <span className="flex items-center gap-2"><Calendar size={14} /> {post.date}</span>
                  </div>
-                 <Typography variant="h1" className="text-white drop-shadow-md">{post.title}</Typography>
+                 <Typography variant="h1" className="text-[var(--twb-color-text-on-dark)] drop-shadow-md">{post.title}</Typography>
               </div>
            </Container>
         </div>
@@ -62,16 +62,16 @@ export const NewsPost: React.FC = () => {
             {/* Sidebar / Social Share */}
             <div className="lg:col-span-2 hidden lg:flex flex-col gap-4 sticky top-24 h-fit">
                <Typography variant="caption" className="uppercase tracking-widest text-gray-500 font-bold mb-2">Share</Typography>
-               <button className="p-3 bg-gray-100 rounded-full hover:bg-[#3b5998] hover:text-white transition-colors"><Facebook size={20} /></button>
-               <button className="p-3 bg-gray-100 rounded-full hover:bg-[#1DA1F2] hover:text-white transition-colors"><Twitter size={20} /></button>
-               <button className="p-3 bg-gray-100 rounded-full hover:bg-[#0077b5] hover:text-white transition-colors"><Linkedin size={20} /></button>
-               <button className="p-3 bg-gray-100 rounded-full hover:bg-gray-800 hover:text-white transition-colors"><Share2 size={20} /></button>
+               <button className="p-3 bg-gray-100 rounded-full hover:bg-[var(--twb-color-plum)] hover:text-[var(--twb-color-text-on-dark)] transition-colors"><Facebook size={20} /></button>
+               <button className="p-3 bg-gray-100 rounded-full hover:bg-[var(--twb-color-plum)] hover:text-[var(--twb-color-text-on-dark)] transition-colors"><Twitter size={20} /></button>
+               <button className="p-3 bg-gray-100 rounded-full hover:bg-[var(--twb-color-plum)] hover:text-[var(--twb-color-text-on-dark)] transition-colors"><Linkedin size={20} /></button>
+               <button className="p-3 bg-gray-100 rounded-full hover:bg-gray-800 hover:text-[var(--twb-color-text-on-dark)] transition-colors"><Share2 size={20} /></button>
             </div>
 
             {/* Content */}
             <div className="lg:col-span-8">
                <div 
-                  className="prose prose-lg prose-headings:font-serif prose-headings:text-[#2C1810] prose-p:text-gray-600 prose-a:text-[#8B0000] max-w-none"
+                  className="prose prose-lg prose-headings:font-serif prose-headings:text-[var(--twb-color-ink)] prose-p:text-gray-600 prose-a:text-[var(--twb-color-plum)] max-w-none"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                />
                

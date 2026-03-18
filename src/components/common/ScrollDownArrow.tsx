@@ -45,8 +45,8 @@ export const ScrollDownArrow: React.FC<ScrollDownArrowProps> = ({ targetId, clas
       onClick={handleClick}
       aria-label="Scroll down"
     >
-      <div className="rounded-full border-2 border-white p-2 bg-black/20 hover:bg-black/40 transition-colors">
-        <ChevronDown className="text-white w-6 h-6" />
+      <div className="rounded-full border-2 border-[var(--twb-color-text-on-dark)] p-2 bg-[var(--twb-color-ink)]/20 hover:bg-[var(--twb-color-ink)]/40 transition-colors">
+        <ChevronDown className="text-[var(--twb-color-text-on-dark)] w-6 h-6" />
       </div>
     </div>
   );

@@ -19,50 +19,37 @@ import { Moon, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    // Initialize state immediately on mount
+    if (typeof window === 'undefined') return false;
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') return true;
+    if (savedTheme === 'light') return false;
+    
+    // Default to OS preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   const [mounted, setMounted] = useState(false);
 
-  // Check for saved theme preference or OS preference on mount
+  // Apply theme class on mount and when isDark changes
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      console.log('🌙 Dark mode active');
+    } else {
+      document.documentElement.classList.remove('dark');
+      console.log('☀️ Light mode active');
+    }
+  }, [isDark]);
+
+  // Mark as mounted
   useEffect(() => {
     setMounted(true);
     
-    // Check localStorage first
+    // Log initial state
     const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'dark') {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    } else if (savedTheme === 'light') {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
-    } else {
-      // No saved preference, check OS preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setIsDark(prefersDark);
-      if (prefersDark) {
-        document.documentElement.classList.add('dark');
-      }
-    }
-  }, []);
-
-  // Listen for OS theme changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only update if no saved preference
-      if (!localStorage.getItem('theme')) {
-        setIsDark(e.matches);
-        if (e.matches) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    console.log('Initial theme state:', { savedTheme, isDark, osPreference: window.matchMedia('(prefers-color-scheme: dark)').matches });
   }, []);
 
   const toggleTheme = () => {

@@ -158,7 +158,10 @@ export const MiniCart: React.FC = () => {
               </SheetTitle>
             )}
             <SheetClose asChild>
-              <button className="p-2 hover:bg-[var(--twb-color-bg-secondary)] rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close cart">
+              <button 
+                className="p-2 hover:bg-[var(--twb-color-bg-secondary)] rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2" 
+                aria-label="Close cart"
+              >
                 <X size={24} className="text-[var(--twb-color-text-secondary)]" />
               </button>
             </SheetClose>

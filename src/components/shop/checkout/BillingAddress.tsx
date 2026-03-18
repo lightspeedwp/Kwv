@@ -91,7 +91,10 @@ export const BillingAddress: React.FC = () => {
               error={getError('address', formData.address)}
               touched={touched.address}
            />
-           <button className="text-sm text-gray-500 hover:text-[var(--twb-color-ink)] mt-2 flex items-center gap-1 font-medium">
+           <button 
+             className="text-sm text-gray-500 hover:text-[var(--twb-color-ink)] mt-2 flex items-center gap-1 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2 rounded-sm"
+             aria-label="Add apartment, suite, or unit number"
+           >
              + Add apartment, suite, etc.
            </button>
         </div>

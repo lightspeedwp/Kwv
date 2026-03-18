@@ -1,433 +1,166 @@
-# Update Guidelines Prompt
+# Update Guidelines
 
-**Trigger:** `update guidelines`  
-**Version:** 1.0.0  
-**Last Updated:** 2024-03-15  
-**Purpose:** Update guideline files with current content, correct YAML frontmatter, increment versions, and ensure template compliance
-
----
-
-## Mission
-
-Systematically update all guideline files to ensure they have accurate content, proper YAML frontmatter (with current dates and versions), follow template structures, and comply with repository standards. Auto-fix violations where possible.
+**Type:** Maintenance  
+**Created:** 2026-03-18  
+**Status:** Active  
+**Trigger Word:** `update guidelines`  
+**Project:** Handcrafted Wines
 
 ---
 
-## Prerequisites
+## Prompt Purpose
 
-- `/guidelines/repository-standards.md` - Standards for YAML and structure
-- `/guidelines/_templates/*.md` - All templates must be current
-- `audit guidelines` should be run first to identify violations
+**Objective:** Update guideline files to ensure they accurately reflect the current codebase and follow standardized frontmatter/template format.
 
----
+**When to Use:** After changes to design tokens, components, CSS variables, routes, or any system documented in guidelines.
 
-## Workflow
-
-### Step 1: Identify Files to Update
-
-**Scan all guideline files:**
-```
-/guidelines/**/*.md
-```
-
-**Prioritize files with:**
-1. Outdated `last_updated` dates (>30 days old)
-2. Missing YAML fields
-3. Content changes detected (if git diff available)
-4. Version number hasn't been incremented after content changes
-
-**Create update queue:**
-```
-Priority 1 (Critical): Missing YAML, broken structure
-Priority 2 (High): Outdated dates, missing fields
-Priority 3 (Medium): Optional fields, formatting
-```
+**Reference Guidelines:**
+- `/guidelines/_templates.md`
+- `/guidelines/development/file-organization.md` ⚠️ **MANDATORY**
 
 ---
 
-### Step 2: For Each File, Update YAML Frontmatter
+## Workflow Steps
 
-#### Required Fields Check
+### Step 1: Identify Guidelines Needing Updates
 
-```yaml
----
-title: "Exact document title"
-category: "Guidelines | Prompt | Report | Task | Documentation"
-domain: "Design Tokens | Architecture | Commerce | etc."
-version: "SemVer (e.g., 1.0.0)"
-last_updated: "YYYY-MM-DD"
-status: "Active | Deprecated | Draft | Archived"
-purpose: "Single sentence describing the file's purpose"
----
-```
+Read following to determine what changed:
 
-**Update rules:**
+1. Check `/styles/` for CSS variable changes (colors, spacing, typography, borders)
+2. Check `/components/`, `/pages/` for new or modified components
+3. Check `/routes.tsx` for route changes
+4. Check `/data/` for data structure changes
+5. Check `/CHANGELOG.md` `[Unreleased]` section for recent work
 
-1. **title:** Must match H1 heading
-   ```yaml
-   # Border Design Tokens
-   title: "Border Design Tokens"
-   ```
+**Handcrafted Wines Specific:**
+- Theme CSS files (`themes-variables.css`, `themes-light.css`, `themes-dark.css`)
+- Shop components (ProductCard, Cart, Checkout)
+- UnifiedHeader/Footer changes
+- Product data structure (products.ts)
+- Farm story data (farmStory.ts)
 
-2. **category:** Must match file location
-   ```
-   /guidelines/design-tokens/ → category: "Guidelines"
-   /prompts/ → category: "Prompt"
-   ```
+### Step 2: For Each Guideline File Needing Update
 
-3. **domain:** Must be specific
-   ```
-   /guidelines/design-tokens/colors.md → domain: "Design Tokens"
-   /guidelines/components/Hero.md → domain: "Components"
-   ```
+**Read the file first.** Then apply these rules:
 
-4. **version:** Increment if content changed
-   ```
-   Content unchanged: Keep current version
-   Minor content change: 1.0.0 → 1.0.1 (PATCH)
-   New section added: 1.0.0 → 1.1.0 (MINOR)
-   Major rewrite: 1.0.0 → 2.0.0 (MAJOR)
-   ```
+1. **Update frontmatter:**
+   - Increment `Version` (patch for fixes, minor for additions, major for rewrites)
+   - Set `Last Updated` to today's date (`YYYY-MM-DD`)
+   - Verify `Status` is correct (`Active`, `Draft`, or `Deprecated`)
+   - Verify `Template Used` references correct template
 
-5. **last_updated:** Set to current date (YYYY-MM-DD)
-   ```yaml
-   last_updated: "2024-03-15"
-   ```
+2. **Verify content accuracy:**
+   - CSS variable names match what's in `/styles/` (all `--twb-*` prefixed)
+   - Component names match what's in `/components/` and `/pages/`
+   - File paths are valid
+   - Route paths match `/routes.tsx`
+   - Data structures match `/data/*.ts` files
 
-6. **status:** Verify accuracy
-   ```yaml
-   status: "Active" # Most common
-   status: "Deprecated" # If replaced by newer file
-   status: "Draft" # If work in progress
-   ```
+3. **Apply template structure:**
+   - If file doesn NOT follow template from `/guidelines/_templates/`, rewrite using appropriate template
+   - Rewriting with template produces more consistent results than patching
 
-7. **purpose:** Single sentence summary
-   ```yaml
-   purpose: "Define border design tokens for consistent UI structure"
-   ```
+4. **Check file size:**
+   - Guidelines must be under 350 lines (20kB limit per `/guidelines/development/file-organization.md`)
+   - If over, split into sub-files with parent index
 
----
+### Step 3: Update Version History
 
-#### Optional Fields (Add if Missing)
+Add row to Version History table at bottom of each updated file.
 
-```yaml
-tags: ["css", "design-tokens", "borders", "wordpress"]
-related_files:
-  - "/guidelines/design-tokens/radii.md"
-  - "/guidelines/design-tokens/shadows.md"
-ai_context: "This is a MANDATORY guideline. All borders must use tokens."
-```
+### Step 4: Update Cross-References
 
----
-
-### Step 3: Fix Heading Hierarchy
-
-**Validate:**
-- Single H1 at top (matches `title` field)
-- Sequential H2, H3, H4 (no skipping)
-- No multiple H1s
-
-**Auto-fix examples:**
-
-**Problem:** Multiple H1s
-```markdown
-# Border Design Tokens  ← H1 (correct)
-
-...content...
-
-# Implementation  ← H1 (WRONG - should be H2)
-```
-
-**Fix:**
-```markdown
-# Border Design Tokens  ← H1
-
-...content...
-
-## Implementation  ← H2 (fixed)
-```
-
----
-
-**Problem:** Skipped level
-```markdown
-## Token Definitions  ← H2
-
-#### Border Width  ← H4 (WRONG - skipped H3)
-```
-
-**Fix:**
-```markdown
-## Token Definitions  ← H2
-
-### Border Width  ← H3 (fixed)
-```
-
----
-
-### Step 4: Update Internal Links
-
-Convert relative links to absolute:
-
-**Problem:**
-```markdown
-See [Radii](../design-tokens/radii.md)
-See [Shadows](./shadows.md)
-```
-
-**Fix:**
-```markdown
-See [Radii](/guidelines/design-tokens/radii.md)
-See [Shadows](/guidelines/design-tokens/shadows.md)
-```
-
----
-
-### Step 5: Add Missing Sections (Template Compliance)
-
-**Component guidelines** should have:
-- Props API table
-- Usage examples
-- Accessibility notes
-- Related components
-
-**Design token guidelines** should have:
-- Token definitions table
-- Implementation examples
-- CSS variables section
-- Related tokens
-
-**If sections missing:** Add placeholder with TODO note:
-
-```markdown
-## Usage Examples
-
-**TODO:** Add usage examples following template.
-
-See `/guidelines/_templates/design-token-template.md` for structure.
-```
-
----
-
-### Step 6: Update Changelog Section
-
-At end of each guideline file, add/update changelog:
-
-**If file has no changelog:**
-```markdown
-## Changelog
-
-### Version 1.0.1 (2024-03-15)
-- Updated YAML frontmatter
-- Fixed heading hierarchy
-- Converted relative links to absolute paths
-```
-
-**If file has changelog:**
-```markdown
-## Changelog
-
-### Version 1.1.0 (2024-03-15)  ← New entry
-- Added missing examples
-- Updated token definitions
-- Fixed typos in implementation section
-
-### Version 1.0.0 (2024-03-10)
-- Initial version
-```
-
----
-
-### Step 7: Rewrite Non-Compliant Files
-
-**If file severely violates template:**
-
-1. Save original content
-2. Load appropriate template from `/guidelines/_templates/`
-3. Populate template with content from original
-4. Replace file with template-compliant version
-5. Add note to changelog about rewrite
-
-**Example:**
-```markdown
-## Changelog
-
-### Version 2.0.0 (2024-03-15)
-- Complete rewrite using design-token-template.md
-- Restructured sections for better organization
-- Added missing required sections
-- Note: This is a breaking change in structure
-```
+If file names or locations changed, update all files that reference them:
+- `/guidelines/Guidelines.md` (main guidelines, Quick Reference table)
+- `/guidelines/INDEX.md` (master index)
+- `/guidelines/_templates.md` (template index)
+- Any file that links to the updated guideline
 
 ---
 
 ## Success Criteria
 
-- [ ] All guideline files have complete YAML frontmatter
-- [ ] All required fields present and accurate
-- [ ] Versions incremented where content changed
-- [ ] `last_updated` dates set to current date
-- [ ] Heading hierarchy validated and fixed
-- [ ] Internal links converted to absolute paths
-- [ ] Missing template sections identified
-- [ ] Changelog section updated
-- [ ] Non-compliant files rewritten using templates
-- [ ] Report generated at `/reports/guidelines-update-report.md`
+- [ ] All updated files have current frontmatter (Version, Last Updated)
+- [ ] All CSS variable references match `/styles/` (`--twb-*` namespace)
+- [ ] All component references match `/components/`, `/pages/`
+- [ ] All route references match `/routes.tsx`
+- [ ] All files follow template structure
+- [ ] All files under 350 lines (20kB)
+- [ ] Version History tables updated
+- [ ] Cross-references valid
 
 ---
 
-## Outputs
+## Handcrafted Wines Guidelines to Check
 
-- **Updated:** All guideline files in `/guidelines/**/*.md`
-- **Report:** `/reports/guidelines-update-report.md`
+**Design Tokens (14 files):**
+- `/guidelines/design-tokens/colors.md` (Paper, Ink, Vine, Clay, Plum, Gold)
+- `/guidelines/design-tokens/typography.md` (Serif headings, Sans body)
+- `/guidelines/design-tokens/spacing.md` (fluid with clamp)
+- `/guidelines/design-tokens/dark-light-mode.md` ⚠️ **MANDATORY**
 
-**Report includes:**
-- Files updated (count)
-- Versions incremented (list)
-- Heading hierarchy fixes (count)
-- Links fixed (count)
-- Files rewritten (list)
+**Architecture (3 files):**
+- `/guidelines/architecture/sitemap.md` (all routes)
+- `/guidelines/architecture/component-structure.md` (containers)
+- `/guidelines/architecture/routing.md` (react-router usage)
 
----
+**Accessibility (3 files):**
+- `/guidelines/accessibility/wcag-compliance.md` ⚠️ **MANDATORY**
+- `/guidelines/accessibility/keyboard-navigation.md`
+- `/guidelines/accessibility/screen-readers.md`
 
-## Example Update
+**Development (6 files):**
+- `/guidelines/development/wordpress-css-variables.md` ⚠️ **MANDATORY**
+- `/guidelines/development/css-architecture.md` ⚠️ **MANDATORY**
+- `/guidelines/development/file-organization.md` ⚠️ **MANDATORY**
+- `/guidelines/development/jsdoc-standards.md` ⚠️ **MANDATORY**
 
-### Before
-
-**File:** `/guidelines/design-tokens/colors.md`
-
-```markdown
-# Color Tokens
-
-Some content about colors...
-
-## Usage
-
-Examples here...
-```
-
-**Issues:**
-- No YAML frontmatter
-- Outdated content
-- No changelog
+**Patterns (4 files):**
+- `/guidelines/patterns/hero-standards.md` (mobile height, scroll arrow)
+- `/guidelines/patterns/layout-patterns.md`
 
 ---
 
-### After
+## Common Update Scenarios
 
-**File:** `/guidelines/design-tokens/colors.md`
+### Scenario 1: New Design Token Added
 
-```yaml
----
-title: "Color Design Tokens"
-category: "Guidelines"
-domain: "Design Tokens"
-version: "1.1.0"
-last_updated: "2024-03-15"
-status: "Active"
-purpose: "Define color design tokens for consistent brand palette"
-tags: ["colors", "design-tokens", "css-variables"]
-related_files:
-  - "/guidelines/design-tokens/dark-light-mode.md"
-  - "/guidelines/accessibility/wcag-compliance.md"
----
-```
+**Example:** Added `--twb-color-rose` for limited edition wines
 
-```markdown
-# Color Design Tokens
+**Guidelines to Update:**
+1. `/guidelines/design-tokens/colors.md` - Add new token to palette table
+2. `/guidelines/development/wordpress-css-variables.md` - Add to variable reference
+3. `/styles/themes-light.css` + `/styles/themes-dark.css` - Add CSS variable
 
-**Category:** Guidelines  
-**Domain:** Design Tokens  
-**Version:** 1.1.0  
-**Last Updated:** 2024-03-15  
-**Status:** Active
+### Scenario 2: New Component Created
 
----
+**Example:** Created `WineClubCard` component
 
-## Overview
+**Guidelines to Update:**
+1. `/guidelines/architecture/component-structure.md` - Add to component inventory
+2. `/guidelines/patterns/` - Create new pattern guideline if reusable
+3. CHANGELOG.md - Add entry under `[Unreleased]` → Added
 
-[Content...]
+### Scenario 3: Route Added/Changed
 
-## Usage
+**Example:** Added `/wine-club/tiers` route
 
-[Examples...]
+**Guidelines to Update:**
+1. `/guidelines/architecture/sitemap.md` - Add route to sitemap
+2. `/guidelines/architecture/routing.md` - Update route examples if relevant
+3. CHANGELOG.md - Add entry under `[Unreleased]` → Added
 
 ---
 
-## Changelog
+## Notes
 
-### Version 1.1.0 (2024-03-15)
-- Added YAML frontmatter
-- Updated content for dark mode support
-- Added related files section
-
-### Version 1.0.0 (2024-03-10)
-- Initial version
-```
+- **Do NOT create new guideline files** unless existing files cannot cover content. Check existing files first.
+- **Prefer rewriting** non-standard files using template over patching them.
+- **This prompt does not create reports or task lists.** It is maintenance operation.
+- **Protected files:** Never modify structure of `Guidelines.md`, `INDEX.md`, `PROMPT-TRIGGERS.md`, `_templates.md`
 
 ---
 
-## Error Handling
-
-### Cannot Parse YAML
-
-**Error:**
-```
-File: /guidelines/components/Button.md
-Error: YAML frontmatter has invalid syntax
-
-Line 3: version 1.0.0  ← Missing quotes
-Should be: version: "1.0.0"
-```
-
-**Action:** Fix YAML syntax, then retry.
-
----
-
-### Version Number Ambiguity
-
-**Warning:**
-```
-File: /guidelines/design-tokens/spacing.md
-Current version: 1.0.0
-Content has changed significantly.
-
-Recommend version bump:
-1. PATCH (1.0.1) - Minor fixes
-2. MINOR (1.1.0) - New content added [RECOMMENDED]
-3. MAJOR (2.0.0) - Breaking structural changes
-
-Selection: _______
-```
-
-**Action:** Prompt user for decision.
-
----
-
-## Follow-Up Actions
-
-After updating guidelines:
-1. Run `audit guidelines` to verify all fixes applied
-2. Target: 100% compliance
-3. Commit changes with descriptive message
-4. Run `cleanup guidelines` if duplicates found
-
----
-
-## Related Prompts
-
-- `audit guidelines` - Run this BEFORE update to identify violations
-- `cleanup guidelines` - Run AFTER update to reorganize
-- `new template` - Create new templates if needed
-
----
-
-## Changelog
-
-### Version 1.0.0 (2024-03-15)
-- Initial update guidelines prompt
-- Auto-fixes YAML frontmatter
-- Increments versions where content changed
-- Fixes heading hierarchy
-- Converts relative links to absolute
-- Rewrites non-compliant files using templates
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Updated:** 2026-03-18  
+**Related Prompts:** `cleanup guidelines`, `audit guidelines`

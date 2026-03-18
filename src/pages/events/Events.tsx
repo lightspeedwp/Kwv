@@ -1,4 +1,5 @@
 import React from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Hero } from '../../components/sections/Hero';
 import { Container } from '../../components/common/Container';
 import { Button } from '../../components/common/Button';
@@ -59,7 +60,7 @@ export const Events: React.FC = () => {
   ];
 
   return (
-    <>
+    <Layout>
       {/* Hero Section */}
       <Hero
         title="Celebrate With Us"
@@ -353,6 +354,6 @@ export const Events: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };

@@ -1,334 +1,295 @@
-# Audit Guidelines Prompt
+# Audit Guidelines — Guideline File Standards Audit
 
-**Trigger:** `audit guidelines`  
-**Version:** 1.0.0  
-**Last Updated:** 2024-03-15  
-**Purpose:** Verify all guideline files conform to YAML frontmatter, heading hierarchy, and template standards
-
----
-
-## Mission
-
-Scan all files in `/guidelines/` to ensure they follow repository standards: proper YAML front matter, sequential heading hierarchy (no H2 → H4 skips), correct file sizes, and template compliance.
+**Type:** Audit  
+**Created:** 2026-03-18  
+**Status:** Active  
+**Trigger Word:** `audit guidelines`  
+**Project:** Handcrafted Wines
 
 ---
 
-## Prerequisites
+## Prompt Purpose
 
-- `/guidelines/repository-standards.md` - Markdown hierarchy and YAML requirements
-- `/guidelines/_templates/` - All templates must exist
+**Objective:** Verify all guideline files in `/guidelines/` conform to frontmatter standards, heading hierarchy rules, file size limits, and template compliance. Identify and fix non-conforming files.
 
----
+**When to Use:** After creating or updating guideline files, or periodically to enforce documentation standards.
 
-## Workflow
-
-### Step 1: Load Standards
-
-Load these guidelines:
-- `/guidelines/repository-standards.md` - YAML and heading rules
-- `/guidelines/development/file-organization.md` - File size limits
-- `/guidelines/_templates/*.md` - All template files
-
-**Key Standards:**
-- YAML front matter required (7 required fields)
-- Single H1 at top
-- Sequential H2-H6 headings (no skipping levels)
-- File size: 300-800 lines max
-- Absolute paths for all internal links
+**Reference Guidelines:**
+- `/guidelines/_templates.md`
+- `/guidelines/development/file-organization.md` ⚠️ **MANDATORY**
+- `/guidelines/_templates/guideline-template.md`
 
 ---
 
-### Step 2: Scan All Guidelines
+## Workflow Steps
 
-**Directories to scan:**
+### Step 1: Inventory All Guidelines
+
+1. List every `.md` file in `/guidelines/` and all subdirectories
+2. For each file, record: path, line count, has frontmatter (yes/no)
+3. Exclude protected templates in `/guidelines/_templates/`
+
+**Expected Structure:**
 ```
 /guidelines/
-├── accessibility/
-├── architecture/
-├── components/
-├── design-tokens/
-├── development/
-├── patterns/
-└── wordpress/
+├── INDEX.md (master index)
+├── Guidelines.md (main guidelines)
+├── PROMPT-TRIGGERS.md (trigger registry)
+├── _templates.md (template usage guide)
+├── _templates/ (6 template files - protected)
+├── accessibility/ (3 files)
+├── architecture/ (3 files)
+├── design-tokens/ (14 files)
+├── development/ (6 files)
+├── patterns/ (4 files)
+└── wordpress/ (2 files)
 ```
 
-**For each .md file, check:**
+### Step 2: Frontmatter Compliance
 
-#### 1. YAML Front Matter
-```yaml
----
-title: "Required"
-category: "Required"
-domain: "Required"
-version: "Required (SemVer)"
-last_updated: "Required (YYYY-MM-DD)"
-status: "Required (Active|Deprecated|Draft)"
-purpose: "Required (Single sentence)"
----
-```
-
-**Violations to flag:**
-- Missing YAML block
-- Missing required fields
-- Invalid version format (not SemVer)
-- Invalid date format (not YYYY-MM-DD)
-- Invalid status value
-
----
-
-#### 2. Heading Hierarchy
-```markdown
-# Title (H1 - must be single, at top)
-## Section (H2)
-### Subsection (H3)
-#### Detail (H4)
-```
-
-**Violations to flag:**
-- Multiple H1 headings
-- Skipped levels (H2 → H4, H1 → H3)
-- H1 not at document start
-
----
-
-#### 3. File Size
-```
-Max recommended: 500 lines
-Max absolute: 1000 lines
-```
-
-**Violations to flag:**
-- Files > 500 lines (recommend splitting)
-- Files > 1000 lines (critical - must split)
-
----
-
-#### 4. Internal Links
-```markdown
-✅ Correct: [Link](/guidelines/design-tokens/colors.md)
-❌ Wrong: [Link](../design-tokens/colors.md)
-❌ Wrong: [Link](colors.md)
-```
-
-**Violations to flag:**
-- Relative paths (`../`)
-- Missing paths (no leading `/`)
-
----
-
-#### 5. Template Compliance
-
-**Component guidelines** should match `/guidelines/_templates/component-guideline-template.md`:
-- Props API section
-- Usage examples
-- Accessibility notes
-
-**Design token guidelines** should match `/guidelines/_templates/design-token-template.md`:
-- Token definitions table
-- Implementation examples
-- Related tokens section
-
----
-
-### Step 3: Categorize Findings
-
-**Critical (Fix Immediately):**
-- Missing YAML front matter
-- Multiple H1 headings
-- Skipped heading levels
-- File size > 1000 lines
-
-**High (Fix This Week):**
-- Missing required YAML fields
-- Outdated version numbers
-- Relative internal links
-- File size > 500 lines
-
-**Medium (Fix This Month):**
-- Optional YAML fields missing
-- Non-standard section ordering
-- Missing examples
-
----
-
-### Step 4: Generate Fix Recommendations
-
-For each violation, provide:
-- **File path**
-- **Violation type**
-- **Current state**
-- **Fix recommendation**
-- **Auto-fix available?** (Yes/No)
-
-**Example:**
-```
-File: /guidelines/design-tokens/colors.md
-Violation: Missing YAML field "version"
-Current: YAML block exists but version field missing
-Fix: Add version: "1.0.0" to YAML front matter
-Auto-fix: Yes
-```
-
----
-
-### Step 5: Calculate Compliance Score
-
-```
-Compliance Score = (Compliant files / Total files) * 100%
-```
-
-**Breakdown by category:**
-- YAML compliance: XX%
-- Heading compliance: XX%
-- Size compliance: XX%
-- Link compliance: XX%
-
----
-
-## Report Structure
-
-**File:** `/reports/guidelines-audit-report.md`
+Every guideline file SHOULD have this metadata (not all files currently do, but new files must):
 
 ```markdown
-# Guidelines Audit Report
-
-**Date:** YYYY-MM-DD
-**Scope:** All files in /guidelines/
-**Files Scanned:** XXX
-
+---
+title: "Document Title"
+category: "Design Tokens|Architecture|Development|Patterns|WordPress|Accessibility"
+version: "X.Y.Z"
+last_updated: "YYYY-MM-DD"
+status: "Draft|Active|Deprecated"
 ---
 
-## Executive Summary
+# Document Title
 
-- **Overall Compliance:** XX%
-- **Files Fully Compliant:** XX/XXX
-- **Critical Violations:** XX
-- **Files Requiring Attention:** XX
+[Content...]
+```
 
----
+For each file, check:
+1. Has frontmatter block (YAML between `---` markers)? Flag missing.
+2. Has required fields: title, category, last_updated, status? Flag missing fields.
+3. Version follows SemVer (`X.Y.Z`)? Flag non-compliant (if present).
+4. Last Updated is a valid date? Flag missing or clearly stale dates (> 6 months old).
+5. Status is one of: Draft, Active, Deprecated? Flag other values.
 
-## Compliance Breakdown
+**Legacy Files Without Frontmatter:**
+- `/guidelines/Guidelines.md` (canonical)
+- `/guidelines/INDEX.md` (canonical)
+- `/guidelines/PROMPT-TRIGGERS.md` (canonical)
+- Most existing guideline files (grandfathered, update incrementally)
 
-### YAML Front Matter (XX%)
-- Files with YAML: XX/XXX
-- Files with all required fields: XX/XXX
-- Files with invalid formats: XX
+### Step 3: Heading Hierarchy
 
-### Heading Hierarchy (XX%)
-- Files with single H1: XX/XXX
-- Files with sequential headings: XX/XXX
-- Files with skipped levels: XX
+For each file, check:
+1. **One H1 only** — the document title. Flag files with multiple H1s.
+2. **Sequential headings** — H1 → H2 → H3 → H4. Flag skipped levels (H1 → H3).
+3. **Self-contained sections** — each H2 should be understandable independently.
+4. **Table of contents** — Complex files (> 200 lines) should have a TOC after H1.
 
-### File Size (XX%)
-- Files under 500 lines: XX/XXX
-- Files 500-1000 lines: XX
-- Files over 1000 lines: XX (CRITICAL)
+### Step 4: File Size Check
 
-### Internal Links (XX%)
-- Files using absolute paths: XX/XXX
-- Files with relative paths: XX
+Per `/guidelines/development/file-organization.md`:
 
----
+1. **Guidelines:** 20kB limit (approximately 350-400 lines)
+2. Flag any guideline file over 20kB
+3. Suggest split strategies for oversized files:
+   - Extract design token details to `/guidelines/design-tokens/[token-type].md`
+   - Extract component patterns to `/guidelines/patterns/[pattern-name].md`
+   - Extract development process to `/guidelines/development/[process-name].md`
 
-## Critical Violations (Fix Immediately)
+**Current Large Files (Acceptable):**
+- `/guidelines/Guidelines.md` (main guidelines - 18-20kB range)
+- `/guidelines/INDEX.md` (comprehensive index)
 
-### Missing YAML Front Matter
-- /guidelines/patterns/example-pattern.md
-- [List all files]
+### Step 5: Template Compliance
 
-### Multiple H1 Headings
-- /guidelines/components/Button.md (2 H1s found)
+1. Read templates in `/guidelines/_templates/`
+2. For each guideline, determine which template it should follow:
+   - General guidelines: `guideline-template.md`
+   - Design token guidelines: `design-token-template.md`
+   - Component guidelines: `component-guideline-template.md`
+3. Flag files that deviate significantly from their template structure
 
-### Skipped Heading Levels
-- /guidelines/design-tokens/shadows.md (H2 → H4 skip at line 45)
+**Template Files (6 total):**
+- guideline-template.md
+- component-guideline-template.md
+- design-token-template.md
+- prompt-template.md
+- report-template.md
+- task-list-template.md
 
-### Oversized Files (>1000 lines)
-- /guidelines/design-tokens/colors.md (1205 lines)
-  - Recommend: Split into colors-palette.md and colors-usage.md
+### Step 6: Cross-Reference Validation
 
----
+1. **Internal links:** Verify all internal links (`/guidelines/...`, `/docs/...`, `/tasks/...`) resolve to existing files
+2. **Broken links:** Flag references to non-existent files
+3. **Circular references:** Identify guidelines that reference each other (not an error, just note for context)
 
-## High Priority Violations
+### Step 7: Mandatory Guidelines Check
 
-[List high-priority items with fix recommendations]
+Verify these 4 mandatory guidelines exist and are properly marked:
 
----
+1. `/guidelines/accessibility/wcag-compliance.md` ⚠️ **MANDATORY**
+2. `/guidelines/design-tokens/dark-light-mode.md` ⚠️ **MANDATORY**
+3. `/guidelines/development/wordpress-css-variables.md` ⚠️ **MANDATORY**
+4. `/guidelines/development/file-organization.md` ⚠️ **MANDATORY**
+
+Each must:
+- Exist and be readable
+- Have "MANDATORY" marker in Guidelines.md
+- Be referenced in INDEX.md
+- Have clear success criteria
+
+### Step 8: Fix and Report
+
+1. Add missing frontmatter to new files (don't force-update legacy files)
+2. Fix heading hierarchy violations
+3. Update stale "last_updated" dates for files modified today
+4. Fix broken internal links
+5. Save report to `/reports/guidelines/guidelines-standards-audit-YYYY-MM-DD.md` with:
+
+```markdown
+# Guidelines Standards Audit - Handcrafted Wines
+
+**Date:** YYYY-MM-DD  
+**Scope:** All files in `/guidelines/`  
+**Status:** [Complete/In Progress]
+
+## Summary
+- **Total guideline files:** [count]
+- **Files with frontmatter:** [count] ([%])
+- **Files missing frontmatter:** [count]
+- **Heading violations:** [count]
+- **Oversized files:** [count]
+- **Template compliance issues:** [count]
+- **Broken links:** [count]
+- **Health score:** [0-100]
+
+## Frontmatter Compliance
+
+### Files with Complete Frontmatter ([count])
+[list]
+
+### Files Missing Frontmatter ([count])
+[list with recommendation: add frontmatter / grandfathered]
+
+### Stale Dates (> 6 months) ([count])
+[list with last updated date]
+
+## Heading Hierarchy
+
+### Multiple H1 Violations ([count])
+[list by file]
+
+### Skipped Heading Levels ([count])
+[list by file with violation]
+
+## File Size
+
+### Oversized Files (> 20kB) ([count])
+[list with size, recommended split]
+
+## Template Compliance
+
+### Files Matching Template ([count])
+[list]
+
+### Files Deviating from Template ([count])
+[list with recommended fixes]
+
+## Cross-References
+
+### Broken Internal Links ([count])
+[list by file + line]
+
+## Mandatory Guidelines
+
+- [ ] `/guidelines/accessibility/wcag-compliance.md` (exists, marked, referenced)
+- [ ] `/guidelines/design-tokens/dark-light-mode.md` (exists, marked, referenced)
+- [ ] `/guidelines/development/wordpress-css-variables.md` (exists, marked, referenced)
+- [ ] `/guidelines/development/file-organization.md` (exists, marked, referenced)
+
+## Fixes Applied
+
+[list all modifications made]
+
+## Remaining Issues
+
+[list with priority]
 
 ## Recommendations
 
-### Immediate Actions (Today)
-- [ ] Add YAML front matter to 5 files
-- [ ] Fix heading hierarchy in 3 files
-- [ ] Split oversized colors.md
-
-### Short-Term Actions (This Week)
-- [ ] Update outdated version numbers
-- [ ] Convert relative links to absolute paths
-- [ ] Add missing required fields
-
-### Long-Term Actions (This Month)
-- [ ] Add optional YAML fields
-- [ ] Standardize section ordering
-- [ ] Add more examples
-
----
-
-## Auto-Fix Script
-
-Files that can be auto-fixed:
-- /guidelines/patterns/example.md - Add YAML front matter
-- /guidelines/components/Card.md - Update version to 1.1.0
-- /guidelines/design-tokens/spacing.md - Fix relative links
-
-Run: `update guidelines` to auto-fix these files.
+[suggest next steps, maintenance schedule, template updates]
 ```
 
 ---
 
 ## Success Criteria
 
-- [ ] All guideline files scanned
-- [ ] YAML compliance checked for all files
-- [ ] Heading hierarchy validated
-- [ ] File sizes assessed
-- [ ] Internal links verified
-- [ ] Compliance score calculated
-- [ ] Report generated at `/reports/guidelines-audit-report.md`
-- [ ] Fix recommendations provided for each violation
+- [ ] All new guideline files have complete frontmatter (5 fields minimum)
+- [ ] All files have exactly one H1 (document title)
+- [ ] All files use sequential heading levels (no skipped levels)
+- [ ] All files are under 20kB (or split strategy documented)
+- [ ] Zero broken internal links
+- [ ] All 4 mandatory guidelines exist and are properly marked
+- [ ] Template files are protected and unmodified
+- [ ] INDEX.md is up to date with all guideline files
+- [ ] Report saved to `/reports/guidelines/`
 
 ---
 
-## Outputs
+## Protected Files (Do Not Modify Structure)
 
-- **Primary:** `/reports/guidelines-audit-report.md`
-- **Secondary:** Auto-fix script recommendations
+**Canonical Guidelines:**
+- `/guidelines/Guidelines.md` (main guidelines)
+- `/guidelines/INDEX.md` (master index)
+- `/guidelines/PROMPT-TRIGGERS.md` (trigger registry)
+- `/guidelines/_templates.md` (template usage guide)
 
----
+**Template Files (6):**
+- `/guidelines/_templates/guideline-template.md`
+- `/guidelines/_templates/component-guideline-template.md`
+- `/guidelines/_templates/design-token-template.md`
+- `/guidelines/_templates/prompt-template.md`
+- `/guidelines/_templates/report-template.md`
+- `/guidelines/_templates/task-list-template.md`
 
-## Follow-Up Actions
-
-After generating report:
-1. Run `update guidelines` to auto-fix simple violations
-2. Manually fix critical violations (heading hierarchy, file splits)
-3. Re-run `audit guidelines` to verify fixes
-4. Target: 100% compliance within 1 week
-
----
-
-## Related Prompts
-
-- `update guidelines` - Auto-fix violations
-- `cleanup guidelines` - Reorganize and restructure
-- `new template` - Create new templates if needed
+**These files can be updated (content), but their structure should not be changed without review.**
 
 ---
 
-## Changelog
+## Handcrafted Wines Guideline Categories
 
-### Version 1.0.0 (2024-03-15)
-- Initial guidelines audit prompt
-- YAML front matter validation
-- Heading hierarchy checks
-- File size compliance
-- Internal link verification
-- Compliance scoring system
+| Category | Count | Status |
+|----------|-------|--------|
+| Design Tokens | 14 | Active |
+| Accessibility | 3 | Active (4 mandatory) |
+| Architecture | 3 | Active |
+| Patterns | 4 | Active |
+| WordPress | 2 | Active |
+| Development | 6 | Active (3 mandatory) |
+| Templates | 6 | Protected |
+
+**Total:** 32+ guideline files (excluding templates)
+
+---
+
+## Example Frontmatter (New Files)
+
+```markdown
+---
+title: "Button Component Guidelines"
+category: "Patterns"
+version: "1.0.0"
+last_updated: "2026-03-18"
+status: "Active"
+---
+
+# Button Component Guidelines
+
+[Content...]
+```
+
+---
+
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Updated:** 2026-03-18  
+**Related Prompts:** `cleanup`, `audit data`, `update guidelines`  
+**Related Files:** `/guidelines/INDEX.md`, `/guidelines/_templates.md`

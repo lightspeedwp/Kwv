@@ -48,13 +48,13 @@ export const AgeVerificationModal = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--twb-color-ink)]/90 backdrop-blur-sm p-4"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="bg-white max-w-md w-full p-8 md:p-12 text-center shadow-2xl"
-            style={{ borderTop: `4px solid ${COLORS.wineRed}` }}
+            style={{ borderTop: '4px solid var(--twb-color-plum)' }}
           >
             <Typography variant="h2" className="mb-2" color={COLORS.darkBrown}>Handcrafted Wines</Typography>
             <div className="w-16 h-1 bg-[var(--twb-color-gold)] mx-auto mb-8"></div>

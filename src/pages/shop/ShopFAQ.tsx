@@ -15,7 +15,7 @@ export const ShopFAQ: React.FC = () => {
   return (
     <Layout>
       {/* Hero */}
-      <Container className="bg-[#F5F5F5] py-12 px-4 md:px-8">
+      <Container className="bg-[var(--twb-color-bg-tertiary)] py-12 px-4 md:px-8">
         <Typography variant="h2" className="text-center mb-4">Shop FAQ</Typography>
         <Typography variant="body1" className="text-center">Find answers to common questions about ordering, shipping, and returns.</Typography>
       </Container>

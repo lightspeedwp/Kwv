@@ -21,7 +21,7 @@ import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
-import { Leaf, Droplet, Sun, Recycle, Heart, Users, Sprout, Wind } from 'lucide-react';
+import { Sprout, Droplet, Sun, Recycle, Heart, Users, Wind } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { Link } from 'react-router';
 import { farmStory } from '../../data/farmStory';
@@ -76,7 +76,7 @@ export const Sustainability: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {farmStory.sustainability.practices.map((practice, index) => {
-              const icons = [Leaf, Droplet, Sun, Recycle, Sprout, Wind, Heart];
+              const icons = [Sprout, Droplet, Sun, Recycle, Wind, Heart];
               const IconComponent = icons[index % icons.length];
               
               return (
@@ -252,7 +252,7 @@ export const Sustainability: React.FC = () => {
 
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
-                <Leaf size={40} className="text-[var(--twb-color-gold)]" />
+                <Sprout size={40} className="text-[var(--twb-color-gold)]" />
               </div>
               <h3 className="font-serif text-xl mb-3 text-white">Local Sourcing</h3>
               <p className="text-white/70 leading-relaxed">
@@ -279,7 +279,7 @@ export const Sustainability: React.FC = () => {
       <section className="py-20 bg-[var(--twb-color-vine)]/10">
         <Container variant="content">
           <div className="text-center">
-            <Leaf size={64} className="mx-auto mb-8 text-[var(--twb-color-vine)]" />
+            <Sprout size={64} className="mx-auto mb-8 text-[var(--twb-color-vine)]" />
             <blockquote className="prose prose-lg max-w-3xl mx-auto dark:prose-invert">
               <p className="text-2xl text-[var(--twb-color-text-primary)] leading-relaxed italic mb-6">
                 "My grandfather told me: 'The land doesn't belong to us—we belong to the land.' 

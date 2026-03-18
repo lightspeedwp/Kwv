@@ -29,7 +29,7 @@ export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ 
           className={`flex-1 flex flex-col items-center justify-center py-5 rounded-sm border transition-all duration-200 ${
             method === 'ship' 
               ? 'bg-white border-black shadow-sm' 
-              : 'bg-transparent border-transparent text-gray-500 hover:bg-black/5'
+              : 'bg-transparent border-transparent text-gray-500 hover:bg-[var(--twb-color-bg-muted)]'
           }`}
         >
           <div className="flex items-center gap-3 mb-1">
@@ -45,7 +45,7 @@ export const DeliveryMethodSelector: React.FC<DeliveryMethodSelectorProps> = ({ 
           className={`flex-1 flex flex-col items-center justify-center py-5 rounded-sm border transition-all duration-200 ${
             method === 'pickup' 
               ? 'bg-white border-black shadow-sm' 
-              : 'bg-transparent border-transparent text-gray-500 hover:bg-black/5'
+              : 'bg-transparent border-transparent text-gray-500 hover:bg-[var(--twb-color-bg-muted)]'
           }`}
         >
           <div className="flex items-center gap-3 mb-1">

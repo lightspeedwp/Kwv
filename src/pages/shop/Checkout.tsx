@@ -455,8 +455,8 @@ const CheckoutProgress: React.FC<CheckoutProgressProps> = ({ currentStep }) => {
               <div
                 className={`
                   size-12 rounded-full flex items-center justify-center mb-2 transition-all
-                  ${isCompleted ? 'bg-[var(--twb-color-vine)] text-white' : ''}
-                  ${isActive ? 'bg-[var(--twb-color-plum)] text-white ring-4 ring-[var(--twb-color-plum)] ring-opacity-30' : ''}
+                  ${isCompleted ? 'bg-[var(--twb-color-vine)] text-[var(--twb-color-text-on-dark)]' : ''}
+                  ${isActive ? 'bg-[var(--twb-color-plum)] text-[var(--twb-color-text-on-dark)] ring-4 ring-[var(--twb-color-plum)] ring-opacity-30' : ''}
                   ${!isActive && !isCompleted ? 'bg-[var(--twb-color-bg-secondary)] text-[var(--twb-color-text-secondary)]' : ''}
                 `}
               >

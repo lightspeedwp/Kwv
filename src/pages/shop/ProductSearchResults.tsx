@@ -49,7 +49,7 @@ export const ProductSearchResults: React.FC = () => {
 
   return (
     <Layout>
-      <div className="bg-[#F9F9F9] border-b border-gray-200 py-8">
+      <div className="bg-[var(--twb-color-bg-tertiary)] border-b border-gray-200 py-8">
         <Container variant="site">
             <Typography variant="h2" className="mb-0">Search Results: "{query}"</Typography>
         </Container>
@@ -72,7 +72,7 @@ export const ProductSearchResults: React.FC = () => {
                         </Typography>
                         <div className="flex items-center gap-2">
                             <span className="text-sm text-gray-600">Sort by</span>
-                            <select className="border border-gray-300 rounded-sm p-2 text-sm bg-white focus:border-[#DAA520] outline-none cursor-pointer">
+                            <select className="border border-gray-300 rounded-sm p-2 text-sm bg-white focus:border-[var(--twb-color-gold)] outline-none cursor-pointer">
                                 <option>Default</option>
                                 <option>Popularity</option>
                                 <option>Average Rating</option>
@@ -101,8 +101,8 @@ export const ProductSearchResults: React.FC = () => {
                     
                     <div className="max-w-md mx-auto">
                         <div className="relative">
-                           <input type="text" placeholder="Search for products..." className="w-full p-3 border border-gray-300 rounded-sm pr-12 focus:border-[#DAA520] outline-none" />
-                           <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#DAA520]">
+                           <input type="text" placeholder="Search for products..." className="w-full p-3 border border-gray-300 rounded-sm pr-12 focus:border-[var(--twb-color-gold)] outline-none" />
+                           <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[var(--twb-color-gold)]">
                               <Search size={20} />
                            </button>
                         </div>

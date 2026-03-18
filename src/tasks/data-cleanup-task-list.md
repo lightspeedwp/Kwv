@@ -96,21 +96,26 @@ This task list tracks data file cleanup and organization based on the data audit
 
 ## Medium Priority Tasks (Next Sprint)
 
-- [ ] **Add JSDoc headers to all data files** (1 hour)
-  - Document file purpose
-  - Document exported interfaces
-  - Add usage examples
-  - **Files:** All 9 data files
-  - **Impact:** Better developer experience
-  - **Current coverage:** ~50% of data files have comprehensive JSDoc
+- [x] **Add JSDoc headers to all data files** (1 hour) ✅ COMPLETE
+  - ✅ All 9 active data files already have comprehensive JSDoc headers
+  - ✅ Verified farmStory.ts, products.ts, newsPosts.ts, faqData.ts, demoContent.ts, shopBrands.ts, shop-faq.ts, jobs.ts, site-content.ts
+  - ✅ All deprecated files (brands.ts, tastings.ts) have deprecation notices in headers
+  - **Files:** All `/data/*.ts` files
+  - **Impact:** 100% JSDoc coverage across all data files
+  - **Completed:** 2026-03-17
 
-- [ ] **Create data file organization guidelines** (30 minutes)
-  - When to create new data file
-  - File naming conventions
-  - Size limits and splitting strategies
-  - Maximum complexity per file
-  - **File:** Create `/guidelines/development/data-organization.md`
-  - **Impact:** Prevent future organization drift
+- [x] **Create data file organization guidelines** (30 minutes) ✅ COMPLETE
+  - ✅ Created comprehensive guideline at `/guidelines/development/data-organization.md`
+  - ✅ Documented when to create new data file (5 clear criteria)
+  - ✅ Documented file naming conventions (3 patterns with examples)
+  - ✅ Documented size limits and splitting strategies (3 strategies with code examples)
+  - ✅ Created data quality checklist (6-point validation)
+  - ✅ Documented current data files inventory (9 active, 2 deprecated)
+  - ✅ Added JSDoc template with complete examples
+  - ✅ Updated `/guidelines/INDEX.md` with new guideline link
+  - **File:** Created `/guidelines/development/data-organization.md` (13 KB)
+  - **Impact:** Clear standards prevent future data organization drift
+  - **Completed:** 2026-03-17
 
 ---
 

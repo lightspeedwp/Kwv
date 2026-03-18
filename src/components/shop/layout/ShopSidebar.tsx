@@ -11,7 +11,7 @@ interface FilterGroupProps {
 const FilterGroup: React.FC<FilterGroupProps> = ({ title, children }) => {
   return (
     <div className="mb-8">
-      <Typography variant="h4" className="!text-xl font-normal mb-4 text-[#333333]">{title}</Typography>
+      <Typography variant="h4" className="!text-xl font-normal mb-4 text-[var(--twb-color-text-primary)]">{title}</Typography>
       <div className="space-y-3">
         {children}
       </div>
@@ -50,7 +50,7 @@ export const ShopSidebar = () => {
   return (
     <div className="w-full">
       <div className="mb-8">
-        <Typography variant="h3" className="mb-6 !text-4xl font-normal text-[#333333]">Filters</Typography>
+        <Typography variant="h3" className="mb-6 !text-4xl font-normal text-[var(--twb-color-text-primary)]">Filters</Typography>
         
         {activeFilters.length > 0 && (
            <div className="mb-8">
@@ -58,14 +58,18 @@ export const ShopSidebar = () => {
                  {activeFilters.map((filter, idx) => (
                     <div key={idx} className="flex items-center gap-2 border border-gray-200 px-3 py-1 bg-white text-sm text-gray-600 rounded-sm">
                        <span>{filter.type}: {filter.value}</span>
-                       <button onClick={() => removeFilter(filter.value)} className="hover:text-black">
+                       <button 
+                          onClick={() => removeFilter(filter.value)} 
+                          className="hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-1 rounded-sm"
+                          aria-label={`Remove ${filter.type} filter: ${filter.value}`}
+                        >
                           <X size={14} />
                        </button>
                     </div>
                  ))}
               </div>
               <button 
-                 className="w-full border border-gray-300 py-2 rounded-full text-gray-600 hover:border-gray-800 hover:text-black transition-colors text-sm"
+                 className="w-full border border-gray-300 py-2 rounded-full text-gray-600 hover:border-gray-800 hover:text-black transition-colors text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2"
                  onClick={() => setActiveFilters([])}
               >
                  Clear filters
@@ -91,9 +95,9 @@ export const ShopSidebar = () => {
         <div className="px-1">
            {/* Slider */}
            <div className="relative h-2 bg-gray-200 rounded-full mb-6">
-              <div className="absolute top-0 left-0 h-full bg-black rounded-full" style={{ left: '0%', right: '0%' }}></div>
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 w-4 h-4 bg-white border-2 border-black rounded-full cursor-pointer hover:scale-110 transition-transform"></div>
-              <div className="absolute top-1/2 -translate-y-1/2 right-0 w-4 h-4 bg-white border-2 border-black rounded-full cursor-pointer hover:scale-110 transition-transform"></div>
+              <div className="absolute top-0 left-0 h-full bg-[var(--twb-color-text-primary)] rounded-full" style={{ left: '0%', right: '0%' }}></div>
+              <div className="absolute top-1/2 -translate-y-1/2 left-0 w-4 h-4 bg-white border-2 border-[var(--twb-color-text-primary)] rounded-full cursor-pointer hover:scale-110 transition-transform"></div>
+              <div className="absolute top-1/2 -translate-y-1/2 right-0 w-4 h-4 bg-white border-2 border-[var(--twb-color-text-primary)] rounded-full cursor-pointer hover:scale-110 transition-transform"></div>
            </div>
            
            {/* Inputs */}
@@ -104,7 +108,7 @@ export const ShopSidebar = () => {
                  type="text" 
                  defaultValue="0" 
                  aria-label="Minimum Price"
-                 className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[#DAA520]"
+                 className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[var(--twb-color-accent-gold)]"
                />
              </div>
              <div className="relative flex-1">
@@ -113,7 +117,7 @@ export const ShopSidebar = () => {
                  type="text" 
                  defaultValue="5000" 
                  aria-label="Maximum Price"
-                 className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[#DAA520]"
+                 className="w-full pl-7 pr-3 py-2 border border-gray-900 rounded-sm text-sm font-medium text-gray-900 focus:outline-none focus:border-[var(--twb-color-accent-gold)]"
                />
              </div>
            </div>

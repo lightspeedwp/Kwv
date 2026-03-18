@@ -31,7 +31,7 @@ import { PaperTexture } from '../../components/decorative/PaperTexture';
 import { OrganicBorder } from '../../components/decorative/OrganicBorder';
 import { HandDrawnUnderline } from '../../components/decorative/HandDrawnUnderline';
 import { HandDrawnTextInput, HandDrawnCheckbox } from '../../components/forms';
-import { Star, Award, Heart, Users, Leaf, ArrowRight, CheckCircle, Quote, Sparkles } from 'lucide-react';
+import { Star, Award, Heart, Users, Sprout, ArrowRight, CheckCircle, Quote, Sparkles } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 
 /**
@@ -506,7 +506,7 @@ export const FullWidthLandingPage: React.FC = () => {
               {[
                 { icon: Heart, title: 'Made with Love', description: 'Every bottle touched by hand, shaped by generations of knowledge' },
                 { icon: Users, title: 'Family Legacy', description: '4 generations, 108 years, one farm—passed down with pride' },
-                { icon: Leaf, title: 'Organic Farming', description: 'No chemicals, no shortcuts—just pure respect for the land' },
+                { icon: Sprout, title: 'Organic Farming', description: 'No chemicals, no shortcuts—just pure respect for the land' },
                 { icon: Award, title: '58+ Awards', description: 'International recognition for our obsessive attention to detail' }
               ].map((value, index) => (
                 <motion.div

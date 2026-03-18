@@ -19,14 +19,14 @@ export const ShopHero: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[80vh] w-full flex items-center bg-black overflow-hidden">
+    <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[80vh] w-full flex items-center bg-[var(--twb-color-bg-inverse)] overflow-hidden">
       
       {/* Content */}
       <Container variant="site" className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 py-20 pb-32">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
             <Typography 
               variant="h1" 
-              className="text-white font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 drop-shadow-lg"
+              className="text-[var(--twb-color-text-on-dark)] font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 drop-shadow-lg"
               stretchy
             >
               World Class Wines & Spirits
@@ -34,7 +34,7 @@ export const ShopHero: React.FC = () => {
             
             <Typography 
               variant="body" 
-              className="text-white text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-medium"
+              className="text-[var(--twb-color-text-on-dark)] text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-medium"
             >
               From our cellar to your door. Explore our range of award-winning products.
             </Typography>
@@ -52,8 +52,7 @@ export const ShopHero: React.FC = () => {
               <Button 
                   variant="outline" 
                   size="lg"
-                  className="w-full sm:w-[200px] uppercase tracking-wider font-bold shadow-lg !text-white !border-white hover:!bg-white hover:!text-black !bg-black/40"
-                  style={{ borderColor: 'white', color: 'white' }}
+                  className="twb-btn--hero-white w-full sm:w-[200px]"
                   onClick={() => navigate('/wine-club')}
               >
                   Join Wine Club

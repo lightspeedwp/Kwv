@@ -116,46 +116,73 @@ All color tokens use the `--twb-color-{category}-{variant}` naming convention an
  * 
  * Defines all color tokens for light mode (default).
  * Maps to WordPress theme.json preset: "light"
+ * 
+ * IMPORTANT: Both :root and [data-theme="light"] must have identical values
+ * to support explicit light theme selection via theme toggle.
  */
 
 :root,
 [data-theme="light"] {
   /* Backgrounds */
-  --twb-color-bg-primary: #f5efe4;
-  --twb-color-bg-secondary: #faf7f2;
-  --twb-color-bg-tertiary: #ffffff;
-  --twb-color-bg-inverse: #1e1a17;
+  --twb-color-bg-primary: #f5efe4;       /* Warm paper - main page background */
+  --twb-color-bg-secondary: #faf7f2;     /* Lighter paper - alternate sections */
+  --twb-color-bg-tertiary: #ffffff;      /* White - cards, elevated surfaces */
+  --twb-color-bg-inverse: #1e1a17;       /* Dark ink - for dark sections in light mode */
+  --twb-color-bg-muted: #f0ebe0;         /* Muted backgrounds */
+  --twb-color-bg-accent: #fdf8f0;        /* Accent backgrounds */
+  --twb-color-bg-white: #ffffff;         /* Explicit white sections */
   
   /* Text */
-  --twb-color-text-primary: #1e1a17;
-  --twb-color-text-secondary: #5c6b4f;
-  --twb-color-text-tertiary: #7a7369;
-  --twb-color-text-inverse: #f5efe4;
-  --twb-color-text-disabled: #b3aca1;
+  --twb-color-text-primary: #1e1a17;     /* Dark ink - primary body text */
+  --twb-color-text-secondary: #5c6b4f;   /* Vine green - secondary text, labels */
+  --twb-color-text-tertiary: #7a7369;    /* Muted brown - subtle text, metadata */
+  --twb-color-text-inverse: #f5efe4;     /* Light paper - text on dark backgrounds */
+  --twb-color-text-disabled: #b3aca1;    /* Disabled state text */
+  --twb-color-text-on-dark: #f5efe4;     /* Text on inverse/dark sections */
+  --twb-color-text-on-accent: #ffffff;   /* Text on colored backgrounds (plum, clay, etc.) */
   
   /* Accents */
-  --twb-color-accent-plum: #5a2d3b;
-  --twb-color-accent-vine: #5c6b4f;
-  --twb-color-accent-clay: #b86b4b;
-  --twb-color-accent-gold: #c8a96b;
+  --twb-color-accent-plum: #5a2d3b;      /* Wine plum - primary CTAs, links */
+  --twb-color-accent-vine: #5c6b4f;      /* Vineyard green - secondary actions */
+  --twb-color-accent-clay: #b86b4b;      /* Terracotta - warm accents */
+  --twb-color-accent-gold: #c8a96b;      /* Muted gold - premium highlights */
   
   /* States */
-  --twb-color-state-hover: #4a2331;
-  --twb-color-state-active: #3a1c26;
-  --twb-color-state-focus: #5a2d3b;
-  --twb-color-state-disabled: #e5dfd4;
+  --twb-color-state-hover: #4a2331;      /* Darker plum - hover overlay */
+  --twb-color-state-active: #3a1c26;     /* Darkest plum - active/pressed state */
+  --twb-color-state-focus: #5a2d3b;      /* Plum - focus ring */
+  --twb-color-state-disabled: #e5dfd4;   /* Light muted - disabled elements */
   
   /* Status */
-  --twb-color-status-success: #4a6b3f;
-  --twb-color-status-error: #8b2c2c;
-  --twb-color-status-warning: #b8793f;
-  --twb-color-status-info: #4a6b8b;
+  --twb-color-status-success: #4a6b3f;   /* Success green */
+  --twb-color-status-error: #8b2c2c;     /* Error red */
+  --twb-color-status-warning: #b8793f;   /* Warning orange */
+  --twb-color-status-info: #4a6b8b;      /* Info blue */
   
   /* Borders */
-  --twb-color-border-primary: #d4cbc0;
-  --twb-color-border-secondary: #e5dfd4;
-  --twb-color-border-focus: #5a2d3b;
-  --twb-color-divider: #e5dfd4;
+  --twb-color-border-primary: #d4cbc0;   /* Standard borders */
+  --twb-color-border-secondary: #e5dfd4; /* Subtle dividers */
+  --twb-color-border-focus: #5a2d3b;     /* Focus borders */
+  --twb-color-divider: #e5dfd4;          /* Section dividers */
+  
+  /* Interactive (Links, Buttons) */
+  --twb-color-link: #5a2d3b;             /* Link color */
+  --twb-color-link-hover: #7a3d4b;       /* Link hover */
+  --twb-color-link-visited: #4a1d2b;     /* Visited links */
+  --twb-color-link-active: #3a1521;      /* Active links */
+  
+  /* Focus States */
+  --twb-color-focus-ring: #5c6b4f;       /* Vine green focus ring */
+  --twb-color-focus-bg: rgba(92, 107, 79, 0.1);
+  
+  /* Hover/Active/Disabled States */
+  --twb-color-hover-bg: rgba(30, 26, 23, 0.05);
+  --twb-color-hover-border: rgba(30, 26, 23, 0.25);
+  --twb-color-active-bg: rgba(30, 26, 23, 0.1);
+  --twb-color-active-border: rgba(30, 26, 23, 0.35);
+  --twb-color-disabled-bg: #e8e4db;
+  --twb-color-disabled-text: #9a8d7f;
+  --twb-color-disabled-border: rgba(30, 26, 23, 0.1);
 }
 ```
 
@@ -168,45 +195,91 @@ All color tokens use the `--twb-color-{category}-{variant}` naming convention an
  * Defines all color tokens for dark mode.
  * Maps to WordPress theme.json preset: "dark"
  * All contrast ratios verified against WCAG 2.1 AA
+ * 
+ * IMPORTANT: Uses .dark class selector (NOT [data-theme="dark"])
+ * This is the CURRENT WORKING implementation - DO NOT CHANGE
  */
 
-[data-theme="dark"] {
+.dark {
   /* Backgrounds */
-  --twb-color-bg-primary: #1a1412;
-  --twb-color-bg-secondary: #241f1c;
-  --twb-color-bg-tertiary: #2d2723;
-  --twb-color-bg-inverse: #f5efe4;
+  --twb-color-bg-primary: #1a1412;       /* Dark ink - main page background */
+  --twb-color-bg-secondary: #241f1c;     /* Lighter dark - alternate sections */
+  --twb-color-bg-tertiary: #2d2723;      /* Medium dark - cards, elevated surfaces */
+  --twb-color-bg-inverse: #f5efe4;       /* Light paper - for light sections in dark mode */
+  --twb-color-bg-muted: #3d3833;         /* Muted backgrounds */
+  --twb-color-bg-accent: #2e2723;        /* Accent backgrounds */
+  --twb-color-bg-white: #1a1412;         /* Remap white to dark in dark mode */
   
   /* Text */
-  --twb-color-text-primary: #f5efe4;
-  --twb-color-text-secondary: #98a88d;
-  --twb-color-text-tertiary: #a39c8f;
-  --twb-color-text-inverse: #1e1a17;
-  --twb-color-text-disabled: #5a544c;
+  --twb-color-text-primary: #f5efe4;     /* Light paper - primary body text */
+  --twb-color-text-secondary: #98a88d;   /* Light vine - secondary text */
+  --twb-color-text-tertiary: #a39c8f;    /* Light muted - subtle text */
+  --twb-color-text-inverse: #1e1a17;     /* Dark ink - text on light backgrounds */
+  --twb-color-text-disabled: #5a544c;    /* Disabled state text */
+  --twb-color-text-on-dark: #f5efe4;     /* Text on dark backgrounds */
+  --twb-color-text-on-accent: #1e1a17;   /* Dark text on colored backgrounds */
   
-  /* Accents */
-  --twb-color-accent-plum: #8b4560;
-  --twb-color-accent-vine: #98a88d;
-  --twb-color-accent-clay: #d48860;
-  --twb-color-accent-gold: #e0c896;
+  /* Accents (lighter for dark mode contrast) */
+  --twb-color-accent-plum: #8b4560;      /* Lighter plum */
+  --twb-color-accent-vine: #98a88d;      /* Lighter vine */
+  --twb-color-accent-clay: #d48860;      /* Lighter clay */
+  --twb-color-accent-gold: #e0c896;      /* Lighter gold */
   
   /* States */
-  --twb-color-state-hover: #9d5572;
-  --twb-color-state-active: #af6684;
-  --twb-color-state-focus: #b37790;
-  --twb-color-state-disabled: #3d3530;
+  --twb-color-state-hover: #9d5572;      /* Lighter hover */
+  --twb-color-state-active: #af6684;     /* Lighter active */
+  --twb-color-state-focus: #b37790;      /* Lighter focus */
+  --twb-color-state-disabled: #3d3530;   /* Dark disabled */
   
-  /* Status */
+  /* Status (lighter for dark mode) */
   --twb-color-status-success: #7a9b6f;
   --twb-color-status-error: #c95a5a;
   --twb-color-status-warning: #e0a56f;
   --twb-color-status-info: #7a9bbb;
   
-  /* Borders */
+  /* Borders (lighter for dark mode) */
   --twb-color-border-primary: #3d3530;
   --twb-color-border-secondary: #2d2723;
   --twb-color-border-focus: #b37790;
   --twb-color-divider: #2d2723;
+  
+  /* Interactive */
+  --twb-color-link: #8a4d5b;
+  --twb-color-link-hover: #a36070;
+  --twb-color-link-visited: #6a3d4b;
+  --twb-color-link-active: #9a5565;
+  
+  /* Focus States */
+  --twb-color-focus-ring: #e0c896;       /* Gold focus ring in dark mode */
+  --twb-color-focus-bg: rgba(212, 184, 127, 0.15);
+  
+  /* Hover/Active/Disabled States */
+  --twb-color-hover-bg: rgba(245, 239, 228, 0.08);
+  --twb-color-hover-border: rgba(245, 239, 228, 0.2);
+  --twb-color-active-bg: rgba(245, 239, 228, 0.12);
+  --twb-color-active-border: rgba(245, 239, 228, 0.3);
+  --twb-color-disabled-bg: #2a2420;
+  --twb-color-disabled-text: #5d5450;
+  --twb-color-disabled-border: rgba(245, 239, 228, 0.08);
+  
+  /* Shadow overrides for dark mode */
+  --twb-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --twb-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --twb-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --twb-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  --twb-shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
+  --twb-shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.5), 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Auto-apply dark mode based on OS preference if no explicit theme set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --twb-color-bg-primary: #1a1412;
+    --twb-color-bg-secondary: #241f1c;
+    --twb-color-text-primary: #f5efe4;
+    --background: #1a1412;
+    --foreground: #f5efe4;
+  }
 }
 ```
 

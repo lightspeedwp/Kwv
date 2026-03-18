@@ -81,8 +81,8 @@ export const WineClubCTA: React.FC<WineClubCTAProps> = ({
   // Text color classes based on variant
   const textClasses = {
     light: 'text-[var(--twb-color-text-primary)]',
-    dark: 'text-white',
-    plum: 'text-white'
+    dark: 'text-[var(--twb-color-text-on-dark)]',
+    plum: 'text-[var(--twb-color-text-on-dark)]'
   };
 
   return (
@@ -124,7 +124,7 @@ export const WineClubCTA: React.FC<WineClubCTAProps> = ({
             {/* Description */}
             <Typography 
               variant="bodyLarge" 
-              className={variant === 'light' ? 'text-[var(--twb-color-text-secondary)]' : 'text-white/90'}
+              className={variant === 'light' ? 'text-[var(--twb-color-text-secondary)]' : 'text-[var(--twb-color-text-on-dark)]/90'}
             >
               {description}
             </Typography>
@@ -142,7 +142,7 @@ export const WineClubCTA: React.FC<WineClubCTAProps> = ({
                     }`}
                     aria-hidden="true"
                   />
-                  <span className={variant === 'light' ? 'text-[var(--twb-color-text-primary)]' : 'text-white/90'}>
+                  <span className={variant === 'light' ? 'text-[var(--twb-color-text-primary)]' : 'text-[var(--twb-color-text-on-dark)]/90'}>
                     {benefit}
                   </span>
                 </li>

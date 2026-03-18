@@ -396,7 +396,7 @@ export const History: React.FC = () => {
       </div>
 
       {/* Timeline Content */}
-      <div className="bg-[#F9F9F9] py-16 md:py-24">
+      <div className="bg-[var(--twb-color-bg-tertiary)] py-16 md:py-24">
         <Container variant="content">
           <div className="space-y-24">
             {TIMELINE_ERAS.map((era) => {
@@ -406,21 +406,21 @@ export const History: React.FC = () => {
               return (
                 <div key={era.id} id={`era-${era.id}`} className="scroll-mt-40">
                   <div className="flex items-center gap-4 mb-12">
-                     <Typography variant="h2" className="text-4xl md:text-5xl font-bold text-[#DAA520] opacity-30">
+                     <Typography variant="h2" className="text-4xl md:text-5xl font-bold text-[var(--twb-color-gold)] opacity-30">
                        {era.label}
                      </Typography>
-                     <div className="h-px bg-[#DAA520] flex-1 opacity-30"></div>
+                     <div className="h-px bg-[var(--twb-color-gold)] flex-1 opacity-30"></div>
                   </div>
 
-                  <div className="relative border-l-2 border-[#DAA520]/20 ml-4 md:ml-8 space-y-16">
+                  <div className="relative border-l-2 border-[var(--twb-color-gold)]/20 ml-4 md:ml-8 space-y-16">
                     {events.map((event, index) => (
                       <div key={index} className="relative pl-8 md:pl-12">
                         {/* Dot */}
-                        <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#8B0000] border-2 border-white shadow-sm ring-4 ring-[#F9F9F9]"></div>
+                        <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[var(--twb-color-plum)] border-2 border-white shadow-sm ring-4 ring-[var(--twb-color-bg-tertiary)]"></div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
                           <div className="md:col-span-3">
-                            <Typography variant="h3" className="!text-3xl text-[#2C1810] font-bold font-serif leading-none">
+                            <Typography variant="h3" className="!text-3xl text-[var(--twb-color-ink)] font-bold font-serif leading-none">
                               {event.year}
                             </Typography>
                           </div>

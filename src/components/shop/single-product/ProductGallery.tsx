@@ -98,11 +98,11 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productN
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-[var(--twb-color-bg-inverse)]/90 flex items-center justify-center p-4"
             onClick={() => setIsLightboxOpen(false)}
           >
             <button 
-              className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors"
+              className="absolute top-6 right-6 text-[var(--twb-color-text-on-dark)] hover:text-gray-300 transition-colors"
               onClick={() => setIsLightboxOpen(false)}
             >
               <X size={32} />

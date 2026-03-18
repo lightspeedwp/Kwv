@@ -49,6 +49,10 @@
 
 ### 🔧 Development
 - [JSDoc Standards](/guidelines/development/jsdoc-standards.md) - Documentation requirements
+- [Data Organization](/guidelines/development/data-organization.md) - Data file creation and management standards
+- [File Organization](/guidelines/development/file-organization.md) - File creation patterns and size limits
+- [WordPress CSS Variables](/guidelines/development/wordpress-css-variables.md) - CSS variable standards
+- [CSS Architecture](/guidelines/development/css-architecture.md) - CSS system and methodology
 - [Testing Strategy](/guidelines/development/testing.md) - Unit, integration, and visual testing
 - [Performance Guidelines](/guidelines/development/performance.md) - Optimization standards
 

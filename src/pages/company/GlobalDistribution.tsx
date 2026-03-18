@@ -99,14 +99,14 @@ export const GlobalDistribution: React.FC = () => {
       </Hero>
 
       {/* Sticky Navigation */}
-      <div className="sticky top-[80px] z-40 bg-[#1a1a1a] text-white border-b border-gray-800 shadow-md overflow-x-auto">
+      <div className="sticky top-[80px] z-40 bg-[var(--twb-color-ink)] text-white border-b border-gray-800 shadow-md overflow-x-auto">
         <Container variant="site">
-          <div className="flex items-center justify-center gap-6 md:gap-12 min-w-max py-4">
+          <div className="flex items-center justify-start md:justify-center gap-4 md:gap-6 lg:gap-12 py-4 px-4 md:px-0">
              {SECTIONS.map((section) => (
                <button
                  key={section.id}
                  onClick={() => scrollToSection(section.id)}
-                 className="text-xs md:text-sm font-bold uppercase tracking-widest hover:text-[#DAA520] transition-colors whitespace-nowrap"
+                 className="text-xs md:text-sm font-bold uppercase tracking-widest hover:text-[var(--twb-color-gold)] transition-colors whitespace-nowrap flex-shrink-0"
                >
                  {section.title}
                </button>
@@ -119,7 +119,7 @@ export const GlobalDistribution: React.FC = () => {
         {SECTIONS.map((section, index) => (
           <section key={section.id} id={section.id} className="scroll-mt-32">
             {/* Image Banner */}
-            <div className="w-full h-[400px] md:h-[500px] relative">
+            <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative">
                <img 
                  src={section.image} 
                  alt={section.title}
@@ -129,16 +129,16 @@ export const GlobalDistribution: React.FC = () => {
             </div>
 
             {/* Content */}
-            <Container variant="content" className="py-16 md:py-24 text-center">
-              <Typography variant="h2" className="text-[#2C1810] font-bold mb-8 uppercase">
+            <Container variant="content" className="py-12 md:py-16 lg:py-24 text-center">
+              <Typography variant="h2" className="text-[var(--twb-color-ink)] font-bold mb-6 md:mb-8 uppercase text-2xl md:text-3xl lg:text-4xl">
                 {section.title}
               </Typography>
               
-              <Typography variant="bodyLarge" className="text-gray-600 mb-12 leading-relaxed max-w-4xl mx-auto">
+              <Typography variant="bodyLarge" className="text-gray-600 mb-8 md:mb-12 leading-relaxed max-w-4xl mx-auto">
                 {section.description}
               </Typography>
 
-              <div className="max-w-md mx-auto">
+              <div className="max-w-md mx-auto px-4 md:px-0">
                 <Select>
                   <SelectTrigger className="w-full h-12 border-2 border-gray-300 rounded-none text-gray-500 font-bold uppercase tracking-wider bg-white">
                     <SelectValue placeholder="Select a country" />

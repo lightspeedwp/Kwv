@@ -63,26 +63,26 @@ export const BillingAddressForm: React.FC = () => {
 
   return (
     <div>
-      <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[#111111] mb-6">Enter the billing address that matches your payment method.</p>
+      <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[var(--twb-color-text-primary)] mb-6">Enter the billing address that matches your payment method.</p>
 
       <div className="mb-4">
-          {/* Country Select */}
-          <div className="relative group">
-            <select 
-                id="billing-country"
-                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
-                value={data.country}
-                onChange={(e) => handleChange('country', e.target.value)}
-                aria-label="Country / Region"
-                autoComplete="country"
-            >
-                <option value="South Africa">South Africa</option>
-                <option value="Namibia">Namibia</option>
-                <option value="Botswana">Botswana</option>
-            </select>
-            <label htmlFor="billing-country" className="absolute left-3 top-2 text-[length:var(--twb-text-caption)] font-medium text-gray-500 pointer-events-none">Country / Region</label>
-            <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} aria-hidden="true" />
-          </div>
+        {/* Country Select */}
+        <div className="relative group">
+          <select 
+              id="billing-country"
+              className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-focus-ring)] text-base"
+              value={data.country}
+              onChange={(e) => handleChange('country', e.target.value)}
+              aria-label="Country / Region"
+              autoComplete="country"
+          >
+              <option value="South Africa">South Africa</option>
+              <option value="Namibia">Namibia</option>
+              <option value="Botswana">Botswana</option>
+          </select>
+          <label htmlFor="billing-country" className="absolute left-3 top-2 text-[length:var(--twb-text-caption)] font-medium text-gray-500 pointer-events-none">Country / Region</label>
+          <ChevronDown className="absolute right-3 top-5 text-gray-500 pointer-events-none" size={16} aria-hidden="true" />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -132,7 +132,7 @@ export const BillingAddressForm: React.FC = () => {
       </div>
 
       <div className="mb-4">
-         <div className="text-[#333333] text-lg font-light cursor-pointer hover:underline flex items-center gap-1">
+         <div className="text-[var(--twb-color-text-primary)] text-lg font-light cursor-pointer hover:underline flex items-center gap-1">
             + Add apartment, suite, etc.
          </div>
       </div>
@@ -151,7 +151,7 @@ export const BillingAddressForm: React.FC = () => {
         <div className="relative group">
             <select 
                 id="billing-province"
-                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
+                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-focus-ring)] text-base"
                 value={data.province}
                 onChange={(e) => handleChange('province', e.target.value)}
                 aria-label="Province"

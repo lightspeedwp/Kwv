@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Hero } from '../../components/sections/Hero';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
@@ -38,7 +39,7 @@ const CONTACT_SECTIONS = [
     subtitle: "General Inquiries",
     description: "For general questions, online orders, or just to say hello",
     contacts: [
-      { label: "Email", value: farmStory.contact.email, type: "email" },
+      { label: "Email", value: farmStory.contact.general, type: "email" },
       { label: "Phone", value: farmStory.contact.phone, type: "phone" },
       { label: "Hours", value: "Mon-Fri: 9am-5pm", type: "text" }
     ]
@@ -108,7 +109,7 @@ export const Contact = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Hero 
         title="Get In Touch"
         subtitle="We'd Love to Hear From You"
@@ -327,12 +328,10 @@ export const Contact = () => {
                       </Typography>
                       <Typography variant="body" className="text-[var(--twb-color-text-muted)]">
                         Handcrafted Wines<br />
-                        {farmStory.location.address.street}<br />
-                        {farmStory.location.address.city}, {farmStory.location.address.postalCode}<br />
-                        {farmStory.location.address.country}
+                        {farmStory.location.address}
                       </Typography>
                       <Typography variant="caption" className="text-[var(--twb-color-text-muted)] mt-2 block">
-                        GPS: {farmStory.location.coordinates.lat}, {farmStory.location.coordinates.lng}
+                        GPS: {farmStory.location.gps.lat}, {farmStory.location.gps.lng}
                       </Typography>
                     </div>
                   </div>
@@ -370,7 +369,7 @@ export const Contact = () => {
                     <Button
                       variant="outline"
                       className="w-full"
-                      onClick={() => window.open(`https://www.google.com/maps?q=${farmStory.location.coordinates.lat},${farmStory.location.coordinates.lng}`, '_blank')}
+                      onClick={() => window.open(`https://www.google.com/maps?q=${farmStory.location.gps.lat},${farmStory.location.gps.lng}`, '_blank')}
                     >
                       <MapPin size={18} className="mr-2" />
                       Open in Google Maps
@@ -407,7 +406,7 @@ export const Contact = () => {
                     <Instagram size={20} />
                   </a>
                   <a
-                    href={`mailto:${farmStory.contact.email}`}
+                    href={`mailto:${farmStory.contact.general}`}
                     className="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all"
                     aria-label="Email"
                   >
@@ -486,6 +485,6 @@ export const Contact = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };

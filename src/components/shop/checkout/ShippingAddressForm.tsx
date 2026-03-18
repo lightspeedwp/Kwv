@@ -79,14 +79,14 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
 
   return (
     <div>
-      <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[#111111] mb-6">Enter the address where you want your order delivered.</p>
+      <p className="text-[length:var(--twb-text-body-large)] leading-[23px] font-light text-[var(--twb-color-text-primary)] mb-6">Enter the address where you want your order delivered.</p>
 
       <div className="mb-4">
           {/* Country Select */}
           <div className="relative group">
             <select 
                 id="shipping-country"
-                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
+                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-focus-ring)] text-base"
                 value={data.country}
                 onChange={(e) => handleChange('country', e.target.value)}
                 aria-label="Country / Region"
@@ -150,7 +150,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
       <div className="mb-4">
          {!showApartment ? (
            <div 
-             className="text-[#333333] text-lg font-light cursor-pointer hover:underline flex items-center gap-1"
+             className="text-[var(--twb-color-text-primary)] text-lg font-light cursor-pointer hover:underline flex items-center gap-1"
              onClick={() => setShowApartment(true)}
            >
               + Add apartment, suite, etc.
@@ -187,7 +187,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
         <div className="relative group">
             <select 
                 id="shipping-province"
-                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[#333333] appearance-none focus:outline-none focus:border-[#2C1810] text-base"
+                className="w-full h-[58px] px-3 pt-6 pb-2 bg-white border border-gray-300 rounded-sm text-[var(--twb-color-text-primary)] appearance-none focus:outline-none focus:border-[var(--twb-color-focus-ring)] text-base"
                 value={data.province}
                 onChange={(e) => handleChange('province', e.target.value)}
                 aria-label="Province"
@@ -234,7 +234,7 @@ export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({
                   onChange={(e) => onToggleSameBilling(e.target.checked)}
                />
              </div>
-             <label htmlFor="same-billing" className="text-[length:var(--twb-text-body-large)] leading-[29px] font-light text-[#111111] cursor-pointer select-none">
+             <label htmlFor="same-billing" className="text-[length:var(--twb-text-body-large)] leading-[29px] font-light text-[var(--twb-color-text-primary)] cursor-pointer select-none">
                 Use same address for billing
              </label>
            </div>

@@ -52,16 +52,16 @@ export const ContactFollowSection: React.FC<ContactFollowSectionProps> = ({
     : 'bg-[var(--twb-color-bg-primary)]';
 
   const textPrimaryClass = variant === 'dark'
-    ? 'text-white'
+    ? 'text-[var(--twb-color-text-on-dark)]'
     : 'text-[var(--twb-color-text-primary)]';
 
   const textSecondaryClass = variant === 'dark'
-    ? 'text-white/80'
+    ? 'text-[var(--twb-color-text-on-dark)]/80'
     : 'text-[var(--twb-color-text-secondary)]';
 
   const borderClass = variant === 'dark'
-    ? 'border-white/20 hover:border-[var(--twb-color-gold)] hover:bg-[var(--twb-color-gold)] hover:text-[var(--twb-color-ink)]'
-    : 'border-[var(--twb-color-border-primary)] hover:border-[var(--twb-color-plum)] hover:bg-[var(--twb-color-plum)] hover:text-white';
+    ? 'border-[var(--twb-color-text-on-dark)]/20 hover:border-[var(--twb-color-gold)] hover:bg-[var(--twb-color-gold)] hover:text-[var(--twb-color-ink)]'
+    : 'border-[var(--twb-color-border-primary)] hover:border-[var(--twb-color-plum)] hover:bg-[var(--twb-color-plum)] hover:text-[var(--twb-color-text-on-dark)]';
 
   const socialLinks = [
     {

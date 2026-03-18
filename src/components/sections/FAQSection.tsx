@@ -51,9 +51,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
 }) => {
   const isDark = variant === 'dark';
   const bgColor = isDark ? 'bg-[var(--twb-color-ink)]' : 'bg-[var(--twb-color-bg-secondary)]';
-  const titleColor = isDark ? 'text-white' : 'text-[var(--twb-color-text-primary)]';
-  const questionColor = isDark ? 'text-white' : 'text-[var(--twb-color-text-primary)]';
-  const answerColor = isDark ? 'text-white/80' : 'text-[var(--twb-color-text-secondary)]';
+  const titleColor = isDark ? 'text-[var(--twb-color-text-on-dark)]' : 'text-[var(--twb-color-text-primary)]';
+  const questionColor = isDark ? 'text-[var(--twb-color-text-on-dark)]' : 'text-[var(--twb-color-text-primary)]';
+  const answerColor = isDark ? 'text-[var(--twb-color-text-on-dark)]/80' : 'text-[var(--twb-color-text-secondary)]';
   const questionHoverColor = isDark ? 'hover:text-[var(--twb-color-gold)]' : 'hover:text-[var(--twb-color-plum)]';
   const itemBg = isDark ? 'bg-[var(--twb-color-ink)]/80' : 'bg-[var(--twb-color-bg-primary)]';
 

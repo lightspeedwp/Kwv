@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
@@ -49,7 +50,7 @@ export const FAQ: React.FC = () => {
   const activeCategories = searchTerm ? filteredCategories : FAQ_CATEGORIES.filter(c => c.id === activeCategory);
 
   return (
-    <>
+    <Layout>
       <Hero 
         title="Frequently Asked Questions"
         subtitle="Your Questions Answered"
@@ -237,6 +238,6 @@ export const FAQ: React.FC = () => {
           <Newsletter />
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };

@@ -26,7 +26,7 @@ import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
 import { Newsletter } from '../../components/sections/Newsletter';
 import { FAQSection } from '../../components/sections/FAQSection';
-import { Heart, Award, Grape, Mountain, Users, Leaf } from 'lucide-react';
+import { Heart, Award, Grape, Mountain, Users, Sprout } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { Link, useNavigate } from 'react-router';
 import { farmStory } from '../../data/farmStory';
@@ -131,7 +131,7 @@ export const Home = () => {
               const iconMap: Record<string, any> = {
                 heart: Heart,
                 users: Users,
-                leaf: Leaf,
+                sprout: Sprout,
                 award: Award
               };
               const IconComponent = iconMap[value.icon] || Heart;

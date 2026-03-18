@@ -34,6 +34,7 @@ import {
   SheetTrigger,
   SheetClose,
   SheetTitle,
+  SheetDescription,
 } from "../ui/sheet";
 
 export const UnifiedHeader = () => {
@@ -145,7 +146,7 @@ export const UnifiedHeader = () => {
                   <Link
                     key={item.href}
                     to={item.href}
-                    className="text-white/80 hover:text-[var(--twb-color-gold)] transition-colors"
+                    className="text-[var(--twb-color-text-on-dark)]/80 hover:text-[var(--twb-color-gold)] transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -163,7 +164,7 @@ export const UnifiedHeader = () => {
                   className="p-3 hover:opacity-70 transition-opacity min-w-[44px] min-h-[44px] flex items-center justify-center"
                   aria-label="Search"
                 >
-                  <Search size={18} className="text-white" />
+                  <Search size={18} className="text-[var(--twb-color-text-on-dark)]" />
                 </button>
 
                 {/* My Account */}
@@ -172,7 +173,7 @@ export const UnifiedHeader = () => {
                   className="p-3 hover:opacity-70 transition-opacity min-w-[44px] min-h-[44px] flex items-center justify-center"
                   aria-label="My Account"
                 >
-                  <User size={18} className="text-white" />
+                  <User size={18} className="text-[var(--twb-color-text-on-dark)]" />
                 </Link>
 
                 {/* Cart */}
@@ -204,7 +205,7 @@ export const UnifiedHeader = () => {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search wines, spirits, cheese..."
-                      className="w-full px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)]"
+                      className="w-full px-6 py-3 bg-white/10 border border-white/20 rounded-full text-[var(--twb-color-text-on-dark)] placeholder:text-[var(--twb-color-text-on-dark)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)]"
                       autoFocus
                     />
                     <button
@@ -225,13 +226,13 @@ export const UnifiedHeader = () => {
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <div className="text-white">
+              <div className="text-[var(--twb-color-text-on-dark)]">
                 {/* Hand-drawn logo placeholder - replace with actual logo */}
                 <div className="flex flex-col">
                   <span className="font-serif text-2xl md:text-3xl font-bold tracking-wide text-[var(--twb-color-gold)]">
                     Handcrafted Wines
                   </span>
-                  <span className="text-xs md:text-sm text-white/70 italic -mt-1">
+                  <span className="text-xs md:text-sm text-[var(--twb-color-text-on-dark)]/70 italic -mt-1">
                     Est. 1918 · Paarl Mountain
                   </span>
                 </div>
@@ -248,7 +249,7 @@ export const UnifiedHeader = () => {
                   <div key={item.href} className="relative group">
                     <Link
                       to={item.href}
-                      className={`text-white hover:text-[var(--twb-color-gold)] transition-colors font-medium flex items-center gap-1 relative pb-1 ${
+                      className={`text-[var(--twb-color-text-on-dark)] hover:text-[var(--twb-color-gold)] transition-colors font-medium flex items-center gap-1 relative pb-1 ${
                         isActive ? 'text-[var(--twb-color-gold)]' : ''
                       }`}
                     >
@@ -300,7 +301,7 @@ export const UnifiedHeader = () => {
                             <Link
                               key={subItem.href}
                               to={subItem.href}
-                              className="block px-4 py-2 text-white/90 hover:text-[var(--twb-color-gold)] hover:bg-white/5 transition-colors"
+                              className="block px-4 py-2 text-[var(--twb-color-text-on-dark)]/90 hover:text-[var(--twb-color-gold)] hover:bg-white/5 transition-colors"
                             >
                               {subItem.label}
                             </Link>
@@ -320,17 +321,20 @@ export const UnifiedHeader = () => {
                   className="lg:hidden p-3 hover:opacity-70 transition-opacity min-w-[44px] min-h-[44px] flex items-center justify-center"
                   aria-label="Open menu"
                 >
-                  <Menu size={24} className="text-white" />
+                  <Menu size={24} className="text-[var(--twb-color-text-on-dark)]" />
                 </button>
               </SheetTrigger>
 
               <SheetContent
                 side="right"
-                className="w-full sm:w-[400px] bg-[var(--twb-color-ink)] border-l border-white/10 text-white overflow-y-auto"
+                className="w-full sm:w-[400px] bg-[var(--twb-color-ink)] border-l border-white/10 text-[var(--twb-color-text-on-dark)] overflow-y-auto"
               >
                 <SheetTitle className="text-2xl font-serif text-[var(--twb-color-gold)] mb-8">
                   Menu
                 </SheetTitle>
+                <SheetDescription className="sr-only">
+                  Main navigation menu with links to shop, visit, events, and our story
+                </SheetDescription>
 
                 {/* Mobile Top Links */}
                 <div className="mb-6 pb-6 border-b border-white/10">
@@ -338,7 +342,7 @@ export const UnifiedHeader = () => {
                     <SheetClose key={item.href} asChild>
                       <Link
                         to={item.href}
-                        className="block py-3 text-lg text-white/90 hover:text-[var(--twb-color-gold)] transition-colors"
+                        className="block py-3 text-lg text-[var(--twb-color-text-on-dark)]/90 hover:text-[var(--twb-color-gold)] transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -353,7 +357,7 @@ export const UnifiedHeader = () => {
                       <SheetClose asChild>
                         <Link
                           to={item.href}
-                          className="block py-3 text-xl font-medium text-white hover:text-[var(--twb-color-gold)] transition-colors"
+                          className="block py-3 text-xl font-medium text-[var(--twb-color-text-on-dark)] hover:text-[var(--twb-color-gold)] transition-colors"
                         >
                           {item.label}
                         </Link>
@@ -366,7 +370,7 @@ export const UnifiedHeader = () => {
                             <SheetClose key={subItem.href} asChild>
                               <Link
                                 to={subItem.href}
-                                className="block py-2 text-base text-white/70 hover:text-[var(--twb-color-gold)] transition-colors"
+                                className="block py-2 text-base text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors"
                               >
                                 {subItem.label}
                               </Link>
@@ -383,7 +387,7 @@ export const UnifiedHeader = () => {
                   <SheetClose asChild>
                     <Link
                       to="/account"
-                      className="flex items-center gap-3 text-white/90 hover:text-[var(--twb-color-gold)] transition-colors"
+                      className="flex items-center gap-3 text-[var(--twb-color-text-on-dark)]/90 hover:text-[var(--twb-color-gold)] transition-colors"
                     >
                       <User size={20} />
                       <span>My Account</span>

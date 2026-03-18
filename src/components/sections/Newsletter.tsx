@@ -59,7 +59,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
   };
 
   return (
-    <section className={`py-[var(--twb-spacing-section-y)] bg-[var(--twb-color-ink)] dark:bg-[var(--twb-color-bg-tertiary)] text-white dark:text-[var(--twb-color-text-primary)] relative overflow-hidden border-t border-transparent dark:border-[var(--twb-border-tertiary)] ${className}`}>
+    <section className={`py-[var(--twb-spacing-section-y)] bg-[var(--twb-color-ink)] dark:bg-[var(--twb-color-bg-tertiary)] text-[var(--twb-color-text-on-dark)] dark:text-[var(--twb-color-text-primary)] relative overflow-hidden border-t border-transparent dark:border-[var(--twb-border-tertiary)] ${className}`}>
        {/* Paper texture */}
        <PaperTexture intensity="subtle" opacity={0.06} />
        
@@ -84,7 +84,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
              </div>
            )}
            
-           <Typography variant="bodyLarge" className="text-white dark:text-[var(--twb-color-text-muted)] mt-[var(--twb-spacing-4)] opacity-90 max-w-xl mx-auto">
+           <Typography variant="bodyLarge" className="text-[var(--twb-color-text-on-dark)] dark:text-[var(--twb-color-text-muted)] mt-[var(--twb-spacing-4)] opacity-90 max-w-xl mx-auto">
              {description}
            </Typography>
          </div>
@@ -103,7 +103,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                value={firstName}
                onChange={(e) => setFirstName(e.target.value)}
                placeholder="First Name" 
-               className="w-full bg-white/10 dark:bg-[var(--twb-color-bg-secondary)] border border-white/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-white dark:text-[var(--twb-color-text-primary)] placeholder-white/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
+               className="w-full bg-[var(--twb-color-text-on-dark)]/10 dark:bg-[var(--twb-color-bg-secondary)] border border-[var(--twb-color-text-on-dark)]/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-[var(--twb-color-text-on-dark)] dark:text-[var(--twb-color-text-primary)] placeholder-[var(--twb-color-text-on-dark)]/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
                required
                autoComplete="given-name"
              />
@@ -121,7 +121,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                value={email}
                onChange={(e) => setEmail(e.target.value)}
                placeholder="your@email.com" 
-               className="w-full bg-white/10 dark:bg-[var(--twb-color-bg-secondary)] border border-white/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-white dark:text-[var(--twb-color-text-primary)] placeholder-white/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
+               className="w-full bg-[var(--twb-color-text-on-dark)]/10 dark:bg-[var(--twb-color-bg-secondary)] border border-[var(--twb-color-text-on-dark)]/20 dark:border-[var(--twb-border-primary)] p-[var(--twb-spacing-4)] rounded-[var(--twb-radius-input)] text-[var(--twb-color-text-on-dark)] dark:text-[var(--twb-color-text-primary)] placeholder-[var(--twb-color-text-on-dark)]/50 dark:placeholder-[var(--twb-color-text-muted)] focus:outline-none focus:border-[var(--twb-color-gold)] focus:ring-2 focus:ring-[var(--twb-color-gold)] transition-all"
                required
                autoComplete="email"
              />

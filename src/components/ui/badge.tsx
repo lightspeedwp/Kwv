@@ -64,15 +64,15 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-[var(--twb-color-plum)] text-white [a&]:hover:opacity-90",
+          "border-transparent bg-[var(--twb-color-plum)] text-[var(--twb-color-text-on-dark)] [a&]:hover:opacity-90",
         secondary:
           "border-[var(--twb-color-border-primary)] bg-transparent text-[var(--twb-color-text-primary)] [a&]:hover:bg-[var(--twb-color-bg-secondary)]",
         success:
-          "border-transparent bg-[var(--twb-color-vine)] text-white [a&]:hover:opacity-90",
+          "border-transparent bg-[var(--twb-color-vine)] text-[var(--twb-color-text-on-dark)] [a&]:hover:opacity-90",
         warning:
           "border-transparent bg-[var(--twb-color-gold)] text-[var(--twb-color-ink)] [a&]:hover:opacity-90",
         destructive:
-          "border-transparent bg-red-600 text-white [a&]:hover:bg-red-700 dark:bg-red-700 dark:[a&]:hover:bg-red-800",
+          "border-transparent bg-red-600 text-[var(--twb-color-text-on-dark)] [a&]:hover:bg-red-700",
       },
     },
     defaultVariants: {

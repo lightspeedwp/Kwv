@@ -110,6 +110,11 @@ export const Sitemap: React.FC = () => {
     {
       title: 'Developer Resources',
       links: [
+        { label: 'Developer Tools Hub', href: '/dev-tools' },
+        { label: 'Design Tokens Inspector', href: '/dev-tools/tokens' },
+        { label: 'Route Inspector', href: '/dev-tools/routes' },
+        { label: 'Data Files Viewer', href: '/dev-tools/data' },
+        { label: 'Icon Library', href: '/dev-tools/icons' },
         { label: 'Hand-Drawn Component Library', href: '/handdrawn-demo' },
         { label: 'Full-Width Landing Page Demo', href: '/handdrawn-demo/landing-page' },
         { label: 'Sitemap', href: '/sitemap' }

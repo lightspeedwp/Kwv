@@ -71,16 +71,16 @@ export const ServiceFeaturesSection: React.FC<ServiceFeaturesSectionProps> = ({
   variant = 'light',
   className = ''
 }) => {
-  const bgClass = variant === 'dark' 
-    ? 'bg-[var(--twb-color-ink)]' 
+  const bgClass = variant === 'dark'
+    ? 'bg-[var(--twb-color-ink)]'
     : 'bg-[var(--twb-color-bg-secondary)]';
 
   const textPrimaryClass = variant === 'dark'
-    ? 'text-white'
+    ? 'text-[var(--twb-color-text-on-dark)]'
     : 'text-[var(--twb-color-text-primary)]';
 
   const textSecondaryClass = variant === 'dark'
-    ? 'text-white/80'
+    ? 'text-[var(--twb-color-text-on-dark)]/80'
     : 'text-[var(--twb-color-text-secondary)]';
 
   return (

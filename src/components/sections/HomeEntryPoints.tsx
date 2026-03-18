@@ -120,7 +120,7 @@ export const HomeEntryPoints: React.FC<HomeEntryPointsProps> = ({
                   />
 
                   {/* Content Overlay */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-[var(--twb-color-text-on-dark)] z-10">
                     {/* Icon */}
                     <div className="mb-3">
                       <Icon 
@@ -143,13 +143,13 @@ export const HomeEntryPoints: React.FC<HomeEntryPointsProps> = ({
                     {/* Title */}
                     <Typography 
                       variant="h3" 
-                      className="text-2xl font-serif text-white mb-2 drop-shadow-lg"
+                      className="text-2xl font-serif text-[var(--twb-color-text-on-dark)] mb-2 drop-shadow-lg"
                     >
                       {item.title}
                     </Typography>
 
                     {/* Description */}
-                    <p className="text-sm text-white/90 line-clamp-2 mb-4">
+                    <p className="text-sm text-[var(--twb-color-text-on-dark)]/90 line-clamp-2 mb-4">
                       {item.description}
                     </p>
                   </div>
@@ -161,7 +161,7 @@ export const HomeEntryPoints: React.FC<HomeEntryPointsProps> = ({
                     <Button 
                       variant="secondary" 
                       fullWidth
-                      className="group-hover:bg-[var(--twb-color-plum)] group-hover:text-white transition-colors"
+                      className="group-hover:bg-[var(--twb-color-plum)] group-hover:text-[var(--twb-color-text-on-dark)] transition-colors"
                     >
                       Explore {item.title.split(' ')[0]}
                     </Button>

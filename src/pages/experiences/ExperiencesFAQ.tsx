@@ -47,9 +47,9 @@ export const ExperiencesFAQ: React.FC = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="bg-[#2C1810] text-white py-12 md:py-16">
+      <div className="bg-[var(--twb-color-ink)] text-[var(--twb-color-text-on-dark)] py-12 md:py-16">
         <Container variant="content" className="text-center">
-          <Typography variant="h1" className="mb-6 text-white" color="white">
+          <Typography variant="h1" className="mb-6 text-[var(--twb-color-text-on-dark)]" color="white">
             Experiences FAQ
           </Typography>
           <Typography variant="bodyLarge" className="max-w-2xl mx-auto text-white/80" color="white">

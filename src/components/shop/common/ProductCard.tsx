@@ -67,7 +67,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </span>
           ))}
           {product.salePrice && (
-            <span className="relative bg-[var(--twb-color-plum)] text-white text-xs font-bold px-3 py-1.5 uppercase tracking-wider rounded-[4px_8px_6px_9px] shadow-sm">
+            <span className="relative bg-[var(--twb-color-plum)] text-[var(--twb-color-text-on-dark)] text-xs font-bold px-3 py-1.5 uppercase tracking-wider rounded-[4px_8px_6px_9px] shadow-sm">
               Sale
             </span>
           )}
@@ -117,7 +117,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         
         {/* Mobile Add Button */}
         <button 
-          className="lg:hidden mt-[var(--twb-spacing-4)] w-full flex items-center justify-center gap-2 bg-[var(--twb-color-bg-secondary)] py-3 text-sm font-medium text-[var(--twb-color-text-primary)] hover:bg-[var(--twb-color-bg-muted)] active:bg-[var(--twb-color-plum)] active:text-white rounded-[var(--twb-radius-sm)] transition-colors disabled:opacity-50"
+          className="lg:hidden mt-[var(--twb-spacing-4)] w-full flex items-center justify-center gap-2 bg-[var(--twb-color-bg-secondary)] py-3 text-sm font-medium text-[var(--twb-color-text-primary)] hover:bg-[var(--twb-color-bg-muted)] active:bg-[var(--twb-color-plum)] active:text-[var(--twb-color-text-on-dark)] rounded-[var(--twb-radius-sm)] transition-colors disabled:opacity-50"
           disabled={!product.inStock}
         >
           <ShoppingCart size={16} />

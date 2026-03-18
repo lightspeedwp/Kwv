@@ -84,9 +84,9 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
   return (
     <Layout variant="experiences">
       {/* Hero Section */}
-      <div className="relative w-full bg-black text-white">
+      <div className="relative w-full bg-[var(--twb-color-bg-inverse)] text-[var(--twb-color-text-on-dark)]">
         {/* Hero Background - Solid Black as per request */}
-        <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[60vh] w-full flex items-center justify-center bg-black">
+        <div className="relative min-h-[max(400px,calc(100dvh-90px))] md:min-h-[60vh] w-full flex items-center justify-center bg-[var(--twb-color-bg-inverse)]">
             
             {/* Hero Content Overlay */}
             <div className="flex flex-col items-center justify-center text-center p-6 pb-32 max-w-4xl mx-auto z-10 w-full">
@@ -101,11 +101,11 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                   </div>
                 )}
 
-                <Typography variant="h1" className="text-[#DAA520] font-light text-xs md:text-sm tracking-[0.2em] mb-2 uppercase">
+                <Typography variant="h1" className="text-[var(--twb-color-accent-gold)] font-light text-xs md:text-sm tracking-[0.2em] mb-2 uppercase">
                     EXPERIENCE
                 </Typography>
                 
-                <Typography variant="h2" className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider text-white">
+                <Typography variant="h2" className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 uppercase tracking-wider text-[var(--twb-color-text-on-dark)]">
                     {subtitle}
                 </Typography>
 
@@ -117,14 +117,14 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                     <Button 
                         onClick={() => navigate(ctaLink)}
                         variant="heroGold"
-                        className="hover:!bg-[#b08d4a] text-white border-none w-full sm:w-auto"
+                        className="hover:!bg-[var(--twb-color-state-hover)] text-[var(--twb-color-text-on-dark)] border-none w-full sm:w-auto"
                     >
                         {ctaText}
                     </Button>
                 )}
             </div>
             
-            <ScrollDownArrow className="z-30 text-white" />
+            <ScrollDownArrow className="z-30 text-[var(--twb-color-text-on-dark)]" />
         </div>
       </div>
 
@@ -148,20 +148,20 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
 
       {/* Pricing / Menu Sections */}
       {(pricingSections || tastingOptions || pairings || pairingOptions) && (
-          <section className="py-12 bg-[#FFFCF5] text-center">
+          <section className="py-12 bg-[var(--twb-color-bg-secondary)] text-center">
               <Container variant="content">
                   
                   {/* Tasting Options (simplified list) */}
                   {tastingOptions && tastingOptions.length > 0 && (
                       <div className="mb-12">
-                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                          <Typography variant="h3" className="text-[var(--twb-color-accent-plum)] text-3xl font-serif font-bold uppercase mb-8">
                               TASTINGS
                           </Typography>
                           
                           <div className="space-y-8">
                               {tastingOptions.map((item, itemIdx) => (
                                   <div key={itemIdx} className="flex flex-col items-center">
-                                      <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                      <h4 className="text-[var(--twb-color-accent-gold)] font-bold uppercase tracking-widest text-lg mb-2">
                                           {item.name} {item.price && `- ${item.price}`}
                                       </h4>
                                       {item.description && (
@@ -183,14 +183,14 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                   {/* Pairing Options (simplified list) */}
                   {pairingOptions && pairingOptions.length > 0 && (
                       <div className="mb-12">
-                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                          <Typography variant="h3" className="text-[var(--twb-color-accent-plum)] text-3xl font-serif font-bold uppercase mb-8">
                               PAIRINGS
                           </Typography>
                           
                           <div className="space-y-8">
                               {pairingOptions.map((item, itemIdx) => (
                                   <div key={itemIdx} className="flex flex-col items-center">
-                                      <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                      <h4 className="text-[var(--twb-color-accent-gold)] font-bold uppercase tracking-widest text-lg mb-2">
                                           {item.name} {item.price && `- ${item.price}`}
                                       </h4>
                                       {item.description && (
@@ -205,14 +205,14 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                   {/* Standard Pricing */}
                   {pricingSections?.map((section, idx) => (
                       <div key={idx} className="mb-12">
-                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                          <Typography variant="h3" className="text-[var(--twb-color-accent-plum)] text-3xl font-serif font-bold uppercase mb-8">
                               {section.title}
                           </Typography>
                           
                           <div className="space-y-8">
                               {section.items.map((item, itemIdx) => (
                                   <div key={itemIdx} className="flex flex-col items-center">
-                                      <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                      <h4 className="text-[var(--twb-color-accent-gold)] font-bold uppercase tracking-widest text-lg mb-2">
                                           {item.name} {item.price && `- ${item.price}`}
                                       </h4>
                                       {item.description && (
@@ -234,14 +234,14 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                   {/* Pairings */}
                   {pairings && pairings.length > 0 && (
                       <div className="mt-16">
-                          <Typography variant="h3" className="text-[#2C1810] text-3xl font-serif font-bold uppercase mb-8">
+                          <Typography variant="h3" className="text-[var(--twb-color-accent-plum)] text-3xl font-serif font-bold uppercase mb-8">
                               PAIRINGS
                           </Typography>
                           {pairings.map((section, idx) => (
                                <div key={idx} className="space-y-8 mb-12">
                                   {section.items.map((item, itemIdx) => (
                                       <div key={itemIdx} className="flex flex-col items-center">
-                                          <h4 className="text-[#DAA520] font-bold uppercase tracking-widest text-lg mb-2">
+                                          <h4 className="text-[var(--twb-color-accent-gold)] font-bold uppercase tracking-widest text-lg mb-2">
                                               {item.name} {item.price && `- ${item.price}`}
                                           </h4>
                                           {item.description && (
@@ -264,7 +264,7 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
                   {/* Info Section */}
                   {infoSection && (
                       <div className="mt-16 pt-12 border-t border-gray-200">
-                           <Typography variant="h4" className="text-[#2C1810] font-bold uppercase tracking-widest text-xl mb-6">
+                           <Typography variant="h4" className="text-[var(--twb-color-ink)] font-bold uppercase tracking-widest text-xl mb-6">
                                TASTINGS ARE AVAILABLE FROM:
                            </Typography>
                            
@@ -296,13 +296,13 @@ export const ExperiencePageLayout: React.FC<ExperiencePageProps> = ({
 
                   {/* Social Share */}
                   <div className="mt-20 flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full border-2 border-[#C5A059] flex items-center justify-center text-[#C5A059] mb-4">
+                      <div className="w-12 h-12 rounded-full border-2 border-[var(--twb-color-gold)] flex items-center justify-center text-[var(--twb-color-gold)] mb-4">
                           <Instagram size={24} />
                       </div>
-                      <Typography variant="h5" className="text-[#2C1810] font-bold uppercase tracking-widest text-sm">
+                      <Typography variant="h5" className="text-[var(--twb-color-ink)] font-bold uppercase tracking-widest text-sm">
                           SHARE YOUR EXPERIENCES AND ADVENTURES WITH {title}
                       </Typography>
-                      <p className="text-[#DAA520] text-xs font-bold uppercase tracking-widest mt-2">
+                      <p className="text-[var(--twb-color-gold)] text-xs font-bold uppercase tracking-widest mt-2">
                           {SITE_CONTENT.social.hashtagsExperiences} #{title.replace(/\s+/g, '')}
                       </p>
                   </div>

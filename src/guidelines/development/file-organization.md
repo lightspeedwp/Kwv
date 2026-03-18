@@ -180,7 +180,7 @@ This guideline defines where and how to create files in The Wire Brand project. 
 └── 03-{sub-prompt}-report.md   # Report from sub-prompt 3
 ```
 
-**Example:**
+**Example 1: Multi-phase redesign**
 ```
 /prompts/redesign/
 ├── 00-ORCHESTRATOR.md
@@ -192,6 +192,33 @@ This guideline defines where and how to create files in The Wire Brand project. 
 ├── 01-visual-design-report.md
 ├── 02-content-strategy-report.md
 └── 03-component-architecture-report.md
+```
+
+**Example 2: Wave-based implementation**
+```
+/prompts/audit-tokens/
+├── 00-ORCHESTRATOR.md         # Main audit controller
+├── 01-wave-1-checkout.md      # Checkout flow components
+├── 02-wave-2-shop.md          # Shop components
+└── 03-wave-3-experience.md    # Experience components
+
+/reports/audit-tokens/
+├── audit-2026-03-17.md        # Initial audit report
+├── wave-1-2026-03-17.md       # Wave 1 completion report
+├── wave-2-2026-03-17.md       # Wave 2 completion report
+└── completion-2026-03-17.md   # Final completion report
+```
+
+**Example 3: Light mode implementation (6 waves)**
+```
+/reports/light-mode/
+├── audit-2026-03-17.md        # Initial audit (Health: 12/100)
+├── wave-1-2026-03-17.md       # CSS Foundation (Health: 30/100)
+├── wave-2-2026-03-17.md       # Headers/Footers (Health: 50/100)
+├── wave-3-2026-03-17.md       # Shop Components (Health: 65/100)
+├── wave-4-2026-03-17.md       # Experience Pages (Health: 80/100)
+├── wave-5-2026-03-17.md       # Edge Cases (Health: 95/100)
+└── completion-2026-03-17.md   # Final completion (Health: 100/100)
 ```
 
 ---

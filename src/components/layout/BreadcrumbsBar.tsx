@@ -128,9 +128,9 @@ export const BreadcrumbsBar: React.FC = () => {
     }>
       <Container variant="site">
         <nav aria-label="Breadcrumb" className="pointer-events-auto">
-          <ol className={`flex items-center text-xs md:text-sm flex-wrap ${hasHero ? 'text-white/90 drop-shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
+          <ol className={`flex items-center text-xs md:text-sm flex-wrap ${hasHero ? 'text-[var(--twb-color-text-on-dark)]/90 drop-shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>
             <li className="flex items-center">
-              <Link to="/" className={`${hasHero ? 'hover:text-white' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`} aria-label="Home">
+              <Link to="/" className={`${hasHero ? 'hover:text-[var(--twb-color-text-on-dark)]' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`} aria-label="Home">
                 <Home size={14} className="mr-1" />
                 <span className="sr-only">Home</span>
               </Link>
@@ -154,19 +154,19 @@ export const BreadcrumbsBar: React.FC = () => {
 
               return (
                 <li key={to} className="flex items-center">
-                  <ChevronRight size={14} className={`mx-2 ${hasHero ? 'text-white/60' : 'text-gray-400'}`} />
+                  <ChevronRight size={14} className={`mx-2 ${hasHero ? 'text-[var(--twb-color-text-on-dark)]/60' : 'text-gray-400'}`} />
                   {isLast ? (
-                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-white drop-shadow-md' : 'text-[var(--twb-color-text-primary)] dark:text-[var(--twb-color-text-on-dark)]'}`} aria-current="page">
+                    <span className={`font-semibold truncate max-w-[200px] ${hasHero ? 'text-[var(--twb-color-text-on-dark)] drop-shadow-md' : 'text-[var(--twb-color-text-primary)] dark:text-[var(--twb-color-text-on-dark)]'}`} aria-current="page">
                       {name}
                     </span>
                   ) : isNonClickable ? (
-                    <span className={hasHero ? 'text-white/60' : 'text-gray-500 dark:text-gray-400'}>
+                    <span className={hasHero ? 'text-[var(--twb-color-text-on-dark)]/60' : 'text-gray-500 dark:text-gray-400'}>
                       {name}
                     </span>
                   ) : (
                     <Link 
                       to={to} 
-                      className={`${hasHero ? 'hover:text-white' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`}
+                      className={`${hasHero ? 'hover:text-[var(--twb-color-text-on-dark)]' : 'hover:text-[var(--twb-color-accent-primary)]'} transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)] rounded-sm p-0.5`}
                     >
                       {name}
                     </Link>

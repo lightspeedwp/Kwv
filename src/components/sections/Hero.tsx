@@ -77,7 +77,7 @@ export const Hero: React.FC<HeroProps> = ({
             className="w-full h-full object-cover"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-[var(--twb-color-ink)]/40" />
         </div>
       )}
 
@@ -122,7 +122,7 @@ export const Hero: React.FC<HeroProps> = ({
               <Button 
                 variant="outline" 
                 size="lg"
-                className="w-full sm:w-auto sm:min-w-[200px] uppercase tracking-wider font-[number:var(--twb-font-weight-bold)] shadow-[var(--twb-shadow-lg)] text-[var(--twb-color-paper)] border-[var(--twb-color-paper)] hover:bg-[var(--twb-color-paper)] hover:text-[var(--twb-color-ink)] bg-[var(--twb-color-ink)]/40 transition-colors"
+                className="w-full sm:w-auto sm:min-w-[200px] uppercase tracking-wider font-[number:var(--twb-font-weight-bold)] shadow-[var(--twb-shadow-lg)] text-[var(--twb-color-paper)] border-2 border-[var(--twb-color-paper)] hover:bg-[var(--twb-color-paper)] hover:text-[var(--twb-color-ink)] bg-[var(--twb-color-ink)]/80 backdrop-blur-md transition-all drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
                 onClick={secondaryAction.onClick}
               >
                 {secondaryAction.label}

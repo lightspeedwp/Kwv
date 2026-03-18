@@ -1,258 +1,176 @@
-# Audit Design Tokens Prompt
+# Audit Tokens — Design Token Compliance Audit
 
-**Trigger:** `audit tokens`  
-**Version:** 1.0.0  
-**Last Updated:** 2024-03-15  
-**Purpose:** Audit design token implementation and identify hardcoded values
-
----
-
-## Mission
-
-Scan the entire codebase for hardcoded design values (colors, spacing, typography, etc.) that should use design tokens instead. Generate a comprehensive report with violation locations, severity ratings, and token replacement recommendations.
+**Type:** Audit  
+**Created:** 2026-03-18  
+**Status:** Active  
+**Trigger Word:** `audit tokens`  
+**Project:** Handcrafted Wines
 
 ---
 
-## Prerequisites
+## Prompt Purpose
 
-- `/guidelines/design-tokens/*.md` - All design token guidelines must be current
-- `/guidelines/development/wordpress-css-variables.md` - CSS variable standards
+**Objective:** Verify that ALL UI uses CSS variables from `/styles/` for colors, spacing, typography, borders, radius. Identify and fix hardcoded values.
 
----
+**When to Use:** After building new components/pages, or periodically to verify compliance.
 
-## Workflow
-
-### Step 1: Load Guidelines
-
-Load all design token guidelines:
+**Reference Guidelines:**
+- `/guidelines/development/wordpress-css-variables.md` ⚠️ **MANDATORY**
 - `/guidelines/design-tokens/colors.md`
 - `/guidelines/design-tokens/typography.md`
 - `/guidelines/design-tokens/spacing.md`
-- `/guidelines/design-tokens/shadows.md`
-- `/guidelines/design-tokens/radii.md`
-- `/guidelines/design-tokens/borders.md`
-- `/guidelines/design-tokens/animations.md`
 
 ---
 
-### Step 2: Scan Codebase
+## Workflow Steps
 
-**Scan these file types:**
-- `.tsx` files in `/components/`, `/pages/`
-- `.css` files in `/styles/`
-- `.ts` files with style objects
+### Step 1: Read Token Definitions
 
-**Look for:**
+1. Read `/styles/themes-variables.css` for core tokens (spacing, typography)
+2. Read `/styles/themes-light.css` for light mode colors
+3. Read `/styles/themes-dark.css` for dark mode colors
+4. Note all available `--twb-*` tokens
 
-#### Colors
-```tsx
-// ❌ Hardcoded hex colors
-<div className="bg-[#f5efe4]">
-<div style={{ backgroundColor: '#1e1a17' }}>
+**Handcrafted Wines Token Namespaces:**
+- Colors: `--twb-color-*` (bg, text, border, plum, clay, vine, gold, paper, ink)
+- Spacing: `--twb-spacing-*` (0-24 scale)
+- Typography: `--twb-font-*`, `--twb-font-size-*`
+- Borders: `--twb-border-*`, `--twb-color-border-*`
+- Radius: `--twb-radius-*` (card, organic-1/2/3)
+- Shadows: `--twb-shadow-*` (sm, md, lg, paper)
 
-// ✅ Should use
-<div className="bg-[var(--twb-color-bg-primary)]">
+### Step 2: Scan for Violations
+
+Search all `.tsx` files in `/components/`, `/pages/` for:
+
+1. **Hardcoded colors:** 
+   - Hex values (`#f5efe4`, `#1e1a17`, `#5a2d3b`)
+   - `rgb()`, `rgba()`, `hsl()`, `hsla()`
+   - Tailwind color classes (`bg-[#hex]`, `text-[#hex]`, `border-[#hex]`)
+2. **Hardcoded spacing:** 
+   - Raw `px` or `rem` in padding, margin, gap
+   - Should use `var(--twb-spacing-*)` or `clamp()`
+3. **Hardcoded fonts:** 
+   - Font family names (`'Playfair Display'`, `'Inter'`, `sans-serif`)
+   - Should use `var(--twb-font-primary)` or `var(--twb-font-secondary)`
+4. **Hardcoded font sizes:** 
+   - Raw pixel/rem sizes
+   - Should use `clamp()` or `var(--twb-font-size-*)`
+5. **Hardcoded radius:** 
+   - Raw pixel values
+   - Should use `var(--twb-radius-*)`
+
+### Step 3: Fix Violations
+
+For each violation:
+
+1. Identify nearest matching CSS variable
+2. Replace hardcoded value with variable reference
+3. If no matching variable exists, flag for review (do not create new tokens without approval)
+
+**Replacement Map:**
+```
+bg-[#f5efe4] → bg-[var(--twb-color-bg-primary)]
+text-[#1e1a17] → text-[var(--twb-color-text-primary)]
+text-white → text-[var(--twb-color-text-on-dark)]
+bg-[#5a2d3b] → bg-[var(--twb-color-plum)]
+padding: 16px → className="twb-card" (with CSS)
+font-family: 'Playfair' → font-family: var(--twb-font-primary)
+border-radius: 12px → border-radius: var(--twb-radius-card)
 ```
 
-#### Spacing
-```tsx
-// ❌ Hardcoded pixel values
-<div className="p-[16px]">
-<div style={{ margin: '24px' }}>
+### Step 4: Report
 
-// ✅ Should use
-<div className="p-[var(--twb-spacing-4)]">
-```
-
-#### Typography
-```tsx
-// ❌ Hardcoded font sizes
-<h1 style={{ fontSize: '48px' }}>
-
-// ✅ Should use
-<h1 className="text-[length:var(--twb-font-size-h1)]">
-```
-
-#### Shadows
-```tsx
-// ❌ Hardcoded shadows
-<div style={{ boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
-
-// ✅ Should use
-<div className="shadow-[var(--twb-shadow-md)]">
-```
-
-#### Border Radius
-```tsx
-// ❌ Hardcoded radius
-<div className="rounded-[12px]">
-
-// ✅ Should use
-<div className="rounded-[var(--twb-radius-card)]">
-```
-
----
-
-### Step 3: Categorize Violations
-
-**Severity Levels:**
-
-- **Critical:** User-facing components with hardcoded colors (contrast issues)
-- **High:** Repeated hardcoded values (10+ occurrences)
-- **Medium:** Isolated hardcoded values in components
-- **Low:** Hardcoded values in temporary/prototype code
-
----
-
-### Step 4: Calculate Metrics
-
-**Token Coverage:**
-```
-Token Coverage = (Files using tokens / Total style files) * 100%
-```
-
-**Violation Breakdown:**
-- Total violations found
-- By file type (.tsx, .css)
-- By token category (color, spacing, typography)
-- By severity (Critical, High, Medium, Low)
-
----
-
-### Step 5: Generate Recommendations
-
-For each violation, provide:
-- **File path and line number**
-- **Current code** (hardcoded value)
-- **Recommended replacement** (token usage)
-- **Token reference** (guideline link)
-
-**Example:**
-```
-File: /components/common/Button.tsx:45
-Severity: High
-Current: <button className="bg-[#5a2d3b]">
-Recommended: <button className="bg-[var(--twb-color-accent-plum)]">
-Reference: /guidelines/design-tokens/colors.md#accent-colors
-```
-
----
-
-### Step 6: Create Migration Tasks
-
-Generate actionable tasks:
-1. Replace critical violations first
-2. Batch similar violations by component
-3. Define testing checkpoints
-
----
-
-## Report Structure
-
-**File:** `/reports/token-audit-report.md`
+Save to `/reports/tokens/token-compliance-audit-YYYY-MM-DD.md` with:
 
 ```markdown
-# Design Token Audit Report
+# Token Compliance Audit - Handcrafted Wines
 
-**Date:** YYYY-MM-DD
-**Auditor:** AI Assistant
-**Scope:** All .tsx, .css files
+**Date:** YYYY-MM-DD  
+**Scope:** All components and pages  
+**Status:** [Complete/In Progress]
 
----
+## Summary
+- **Total files scanned:** [count]
+- **Violations found:** [count]
+- **Violations fixed:** [count]
+- **Health score:** [0-100]
 
-## Executive Summary
+## Violations by Category
+| Category | Count | Fixed |
+|---|---|---|
+| Hardcoded colors | X | X |
+| Hardcoded spacing | X | X |
+| Hardcoded fonts | X | X |
+| Hardcoded font sizes | X | X |
+| Hardcoded radius | X | X |
 
-- **Token Coverage:** XX%
-- **Total Violations:** XXX
-- **Critical Violations:** XX
-- **Files Scanned:** XXX
+## Files Modified
+[List of files where tokens were applied]
 
----
+## Remaining Issues
+[List unfixable issues or missing tokens]
 
-## Findings by Category
-
-### Colors (XX violations)
-[List violations with file locations]
-
-### Spacing (XX violations)
-[List violations with file locations]
-
-### Typography (XX violations)
-[List violations with file locations]
-
----
-
-## Recommendations
-
-### Priority 1: Critical (Do Immediately)
-- [ ] Fix color contrast violations in Button component
-- [ ] Replace hardcoded spacing in Hero section
-
-### Priority 2: High (This Sprint)
-- [ ] Batch replace repeated hardcoded values
-
-### Priority 3: Medium (Next Sprint)
-- [ ] Migrate isolated violations
-
----
-
-## Migration Plan
-
-**Phase 1:** Critical violations (1 day)
-**Phase 2:** High-priority violations (2 days)
-**Phase 3:** Medium-priority violations (3 days)
-
----
-
-## Success Metrics
-
-- [ ] Token coverage > 95%
-- [ ] Zero critical violations
-- [ ] All user-facing components use tokens
+## Token Gap Analysis
+[Any needed tokens not currently defined]
 ```
 
 ---
 
 ## Success Criteria
 
-- [ ] All .tsx and .css files scanned
-- [ ] Violations categorized by severity
-- [ ] Token coverage percentage calculated
-- [ ] Replacement recommendations provided for each violation
-- [ ] Report generated at `/reports/token-audit-report.md`
-- [ ] Migration tasks added to `/tasks/token-migration.md` (if violations > 10)
+- [ ] Zero hardcoded hex/rgb/hsl color values
+- [ ] Zero hardcoded px/rem spacing values
+- [ ] Zero hardcoded font family names
+- [ ] Zero hardcoded font sizes (use clamp or tokens)
+- [ ] Zero hardcoded border-radius values
+- [ ] 100% CSS variable usage for all styling
+- [ ] Report saved to `/reports/tokens/`
 
 ---
 
-## Outputs
+## Common Violations (Handcrafted Wines)
 
-- **Primary:** `/reports/token-audit-report.md`
-- **Secondary (if needed):** `/tasks/token-migration.md`
+### ❌ Bad
+
+```tsx
+// Hardcoded colors
+<div className="bg-[#f5efe4] text-[#1e1a17]">
+
+// Hardcoded spacing
+<div style={{ padding: '16px', margin: '24px' }}>
+
+// Hardcoded fonts
+<h1 style={{ fontFamily: 'Playfair Display' }}>
+
+// Hardcoded sizes
+<p style={{ fontSize: '1.125rem' }}>
+
+// Hardcoded radius
+<div style={{ borderRadius: '12px' }}>
+```
+
+### ✅ Good
+
+```tsx
+// CSS variables
+<div className="bg-[var(--twb-color-bg-primary)] text-[var(--twb-color-text-primary)]">
+
+// BEM classes (with CSS variables)
+<div className="twb-card">
+
+// Typography component
+<Typography variant="h1">
+
+// Fluid scaling
+<h1 className="text-[clamp(2.4rem,5vw+1rem,4.5rem)]">
+
+// Token radius
+<div className="rounded-[var(--twb-radius-card)]">
+```
 
 ---
 
-## Follow-Up Actions
-
-After generating report:
-1. Review critical violations immediately
-2. Create task list for migration if violations > 10
-3. Run `update guidelines` to ensure token guidelines are current
-4. Schedule follow-up audit after migration
-
----
-
-## Related Prompts
-
-- `audit css` - Audit CSS architecture
-- `audit styles` - Audit hardcoded styles vs. tokens (broader scope)
-- `update guidelines` - Update design token guidelines
-
----
-
-## Changelog
-
-### Version 1.0.0 (2024-03-15)
-- Initial audit tokens prompt
-- Defined token categories (colors, spacing, typography, shadows, radii)
-- Established severity levels
-- Created report structure
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Updated:** 2026-03-18  
+**Related Prompts:** `audit css`, `audit styles`, `apply bem`

@@ -20,13 +20,13 @@ export const CheckoutHeader: React.FC = () => {
             <Link to="/shop">
               <Logo className="h-10 w-auto" />
             </Link>
-            <div className="hidden md:flex items-center gap-[var(--twb-spacing-2)] text-white/60 dark:text-[var(--twb-color-text-secondary)] border-l border-white/20 dark:border-[var(--twb-border-primary)] pl-[var(--twb-spacing-6)] py-1">
+            <div className="hidden md:flex items-center gap-[var(--twb-spacing-2)] text-[var(--twb-color-text-on-dark)]/60 dark:text-[var(--twb-color-text-secondary)] border-l border-white/20 dark:border-[var(--twb-border-primary)] pl-[var(--twb-spacing-6)] py-1">
               <Lock size={16} />
               <span className="text-sm font-[number:var(--twb-font-weight-medium)] uppercase tracking-wider">Secure Checkout</span>
             </div>
           </div>
 
-          <Link to="/cart" className="flex items-center gap-[var(--twb-spacing-2)] text-sm font-[number:var(--twb-font-weight-medium)] text-white/70 dark:text-[var(--twb-color-text-secondary)] hover:text-white dark:hover:text-white transition-colors">
+          <Link to="/cart" className="flex items-center gap-[var(--twb-spacing-2)] text-sm font-[number:var(--twb-font-weight-medium)] text-[var(--twb-color-text-on-dark)]/70 dark:text-[var(--twb-color-text-secondary)] hover:text-[var(--twb-color-text-on-dark)] dark:hover:text-white transition-colors">
             <ArrowLeft size={16} />
             <span className="hidden sm:inline">Back to Cart</span>
           </Link>

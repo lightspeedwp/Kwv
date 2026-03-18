@@ -2,10 +2,11 @@
 
 **Category:** Guidelines  
 **Domain:** Automation & Workflow  
-**Version:** 3.0.0  
-**Last Updated:** 2026-03-15  
+**Version:** 6.0.0  
+**Last Updated:** 2026-03-18  
 **Status:** Active  
-**Purpose:** Central registry of all trigger words that activate automated prompts
+**Purpose:** Central registry of all trigger words that activate automated prompts  
+**Project:** Handcrafted Wines
 
 ---
 
@@ -23,16 +24,23 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 
 ---
 
-## Trigger Registry (27 Total)
+## Trigger Registry (51 Total)
 
 ### 🎯 Master Orchestration Triggers (2)
 
 | Trigger | Prompt File | Purpose | Outputs |
 |---------|-------------|---------|---------|
-| `audit` | `/prompts/audit.md` | **MASTER AUDIT** - Run all audit triggers | All audit reports (9 files) |
+| `audit` | `/prompts/audit.md` | **MASTER AUDIT** - Run all 9 audit triggers in sequence | All audit reports (9 files) |
 | `audit && process reports` | `/prompts/audit-and-process-reports.md` | Run all audits, then convert to task lists | All reports + all task lists |
 
-**New in v3.0:** Master audit orchestrator runs all 9 individual audits in sequence.
+**New in v3.0:** Master audit orchestrator runs all 9 individual audits in sequence, providing comprehensive project health overview.
+
+**Usage Example:**
+```
+User: audit
+AI: Runs all 9 audits (routes, sitemap, tokens, css, a11y, data, responsive, styles, guidelines)
+Result: 9 comprehensive reports showing 98/100 health score
+```
 
 ---
 
@@ -50,23 +58,40 @@ The Handcrafted Wines project uses a **trigger word system** to activate special
 
 ---
 
-### Audit Triggers (9)
+### Audit Triggers (24)
 
 | Trigger | Prompt File | Purpose | Outputs |
-|---------|-------------|---------|------------|
+|---------|-------------|---------|---------|
 | `audit routes` | `/prompts/audit-routes.md` | Audit routes, navigation, and internal links | Route audit report |
 | `audit sitemap` | `/prompts/audit-sitemap.md` | Audit sitemap completeness and accuracy | Sitemap audit report |
 | `audit tokens` | `/prompts/audit-tokens.md` | Audit design token implementation | Token audit report |
 | `audit css` | `/prompts/audit-css.md` | Audit CSS architecture and variables | CSS audit report |
-| `audit a11y` | `/prompts/audit-a11y.md` | WCAG 2.1 AA accessibility audit | A11y audit report |
+| `audit a11y` | `/prompts/audit-a11y.md` | WCAG 2.1 AA quick accessibility audit | A11y audit report |
+| `audit accessibility` | `/prompts/audit-accessibility.md` | Comprehensive WCAG 2.1 AA audit (deep-dive) | Full accessibility report |
 | `audit data` | `/prompts/audit-data.md` | Audit data file sizes and structure | Data audit report |
-| `audit responsive` | `/prompts/audit-responsive.md` | Audit responsive design patterns | Responsive audit report |
+| `audit responsive` | `/prompts/audit-responsive.md` | **NEW** - Audit responsive design patterns | Responsive audit report |
 | `audit styles` | `/prompts/audit-styles.md` | Audit for hardcoded styles vs. tokens | Styles audit report |
 | `audit guidelines` | `/prompts/audit-guidelines.md` | Verify guideline YAML frontmatter | Guidelines audit report |
+| `audit light mode` | `/prompts/audit-light-mode.md` | Identify missing light mode implementation | Light mode audit report |
+| `audit images` | `/prompts/audit-images.md` | Broken images, alt text, accessibility | Images audit report |
+| `audit layout` | `/prompts/audit-layout.md` | Visual integrity, containers, responsive | Layout audit report |
+| `audit functionality` | `/prompts/audit-functionality.md` | UI state, interactions, dead UI | Functionality audit report |
+| `audit theme` | `/prompts/audit-theme.md` | Light/dark mode compliance, tokens | Theme audit report |
+| `audit style` | `/prompts/audit-style.md` | **NEW** - Hand-drawn design language compliance | Hand-drawn style audit report |
+| `audit routing` | `/prompts/audit-routing.md` | **NEW** - Route integrity, navigation compliance | Routing audit report |
+| `audit webgl` | `/prompts/audit-webgl.md` | **NEW** - Canvas/WebGL usage inventory | WebGL audit report |
+| `audit performance` | `/prompts/audit-performance.md` | **NEW** - Render performance, asset optimization | Performance audit report |
+| `audit phosphor` | `/prompts/audit-phosphor.md` | **NEW** - Icon library migration & compliance (Lucide → Phosphor) | Phosphor migration audit report |
+| `audit header` | `/prompts/audit-header.md` | **NEW** - Header template part & pattern compliance | Header audit report |
+| `audit footer` | `/prompts/audit-footer.md` | **NEW** - Footer template part & pattern compliance | Footer audit report |
+| `audit hero` | `/prompts/audit-hero.md` | **NEW** - Hero template part & pattern compliance | Hero audit report |
+| `apply bem` | `/prompts/apply-bem.md` | BEM class compliance audit + auto-fix | BEM report + fixes |
 
-**Aliases:**
-- `routes` → `audit routes` (backward compatible)
-- `sitemap` → `audit sitemap` (backward compatible)
+**New in v6.0 (2026-03-18):**
+- Expanded to 24 audit triggers (from 20)
+- Added: `audit phosphor` (icon library migration), `audit header`, `audit footer`, `audit hero` (template part audits)
+- All new prompts support Phosphor icon migration and template part architecture
+- Updated `continue` and `cleanup` prompts with Phosphor context
 
 ---
 
@@ -463,7 +488,7 @@ AI: Uses report to clean up
 
 ### audit a11y
 
-**Purpose:** WCAG 2.1 AA accessibility audit
+**Purpose:** WCAG 2.1 AA quick accessibility audit
 
 **Workflow:**
 1. Load `/guidelines/accessibility/wcag-compliance.md`
@@ -477,6 +502,34 @@ AI: Uses report to clean up
 
 **Outputs:**
 - `/reports/a11y-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit accessibility
+
+**Purpose:** Comprehensive WCAG 2.1 AA audit (deep-dive)
+
+**Workflow:**
+1. Load `/guidelines/accessibility/wcag-compliance.md`
+2. Check:
+   - Color contrast ratios
+   - Keyboard navigation
+   - Screen reader labels
+   - Focus indicators
+   - Touch target sizes
+   - ARIA roles and properties
+   - Form labels and instructions
+   - Image alt text
+   - Link text
+   - Table headers
+   - Video captions
+   - Audio descriptions
+3. Generate comprehensive report
+
+**Outputs:**
+- `/reports/accessibility-audit-report.md`
 
 **When to use:** Before production releases
 
@@ -564,142 +617,242 @@ AI: Uses report to clean up
 
 ---
 
-### new template
+### audit light mode
 
-**Purpose:** Create new documentation template
+**Purpose:** Identify missing light mode implementation
 
 **Workflow:**
-1. Ask user for template purpose
-2. Determine template type (component, guideline, etc.)
-3. Generate template structure
-4. Add YAML front matter
-5. Save to `/guidelines/_templates/`
+1. Load `/guidelines/accessibility/light-mode.md`
+2. Scan all `.tsx` files for:
+   - Missing light mode styles
+   - Inconsistent color usage
+   - Missing light mode classes
+3. Generate report
 
 **Outputs:**
-- `/guidelines/_templates/{name}-template.md`
+- `/reports/light-mode-audit-report.md`
 
-**When to use:** When creating new documentation patterns
+**When to use:** Before production releases
 
 ---
 
-### new pattern
+### audit images
 
-**Purpose:** Create new design pattern guideline
+**Purpose:** Broken images, alt text, accessibility
 
 **Workflow:**
-1. Ask user for pattern name
-2. Load `/guidelines/_templates/guideline-template.md`
-3. Generate pattern guideline
-4. Add examples and anti-patterns
-5. Save to `/guidelines/patterns/`
+1. Load `/guidelines/accessibility/image-accessibility.md`
+2. Scan all `.tsx` files for:
+   - Missing alt text
+   - Broken image links
+   - Inconsistent image sizes
+3. Generate report
 
 **Outputs:**
-- `/guidelines/patterns/{pattern-name}.md`
+- `/reports/images-audit-report.md`
 
-**When to use:** When establishing new design patterns
+**When to use:** Before production releases
 
 ---
 
-### new block
+### audit layout
 
-**Purpose:** Create new atomic block component
+**Purpose:** Visual integrity, containers, responsive
 
 **Workflow:**
-1. Ask user for block component name (e.g., "PriceTag")
-2. Load `/guidelines/_templates/component-guideline-template.md`
-3. Generate component files:
-   - Component: `/components/common/{ComponentName}.tsx`
-   - Guideline: `/guidelines/components/{ComponentName}.md`
-   - Tests (if applicable)
-4. Add JSDoc header
-5. Use CSS variables (no hardcoded values)
-6. Update component index
+1. Load `/guidelines/design/layout.md`
+2. Scan all `.tsx` files for:
+   - Visual integrity issues
+   - Container misuse
+   - Responsive design flaws
+3. Generate report
 
 **Outputs:**
-- `/components/common/{ComponentName}.tsx`
-- `/guidelines/components/{ComponentName}.md`
+- `/reports/layout-audit-report.md`
 
-**When to use:** When creating new atomic UI elements
+**When to use:** Before production releases
 
 ---
 
-### update guidelines
+### audit functionality
 
-**Purpose:** Update guideline content, frontmatter, and compliance
+**Purpose:** UI state, interactions, dead UI
 
 **Workflow:**
-1. Scan all guideline files
-2. Update YAML frontmatter:
-   - Increment version if content changed
-   - Update `last_updated` to current date
-   - Verify all required fields present
-3. Check template compliance
-4. Fix heading hierarchy
-5. Update internal links
-6. Generate update report
+1. Load `/guidelines/design/interactions.md`
+2. Scan all `.tsx` files for:
+   - UI state issues
+   - Interaction bugs
+   - Dead UI elements
+3. Generate report
 
 **Outputs:**
-- Updated guideline files
-- `/reports/guidelines-update-report.md`
+- `/reports/functionality-audit-report.md`
 
-**When to use:** After guideline content changes
+**When to use:** Before production releases
 
 ---
 
-### cleanup guidelines
+### audit theme
 
-**Purpose:** Audit duplicates, deprecate outdated, restructure
+**Purpose:** Light/dark mode compliance, tokens
 
 **Workflow:**
-1. Scan `/guidelines/` for:
-   - Duplicate content
-   - Deprecated files
-   - Oversized files (>500 lines)
-   - Inconsistent naming
-2. Recommend:
-   - Files to merge
-   - Files to deprecate
-   - Files to split
-   - Restructuring strategy
-3. Use templates to rewrite non-standard files
-4. Generate cleanup report
+1. Load `/guidelines/design/theme.md`
+2. Scan all `.tsx` files for:
+   - Light/dark mode compliance
+   - Token usage
+3. Generate report
 
 **Outputs:**
-- Updated/restructured guidelines
-- `/reports/guidelines-cleanup-report.md`
+- `/reports/theme-audit-report.md`
 
-**When to use:** Quarterly maintenance, before major updates
+**When to use:** Before production releases
 
 ---
 
-### release
+### audit style
 
-**Purpose:** Automate version bump and changelog release
+**Purpose:** Hand-drawn design language compliance
 
 **Workflow:**
-1. Read `/CHANGELOG.md` `[Unreleased]` section
-2. Prompt user for version bump:
-   - MAJOR (breaking changes)
-   - MINOR (new features)
-   - PATCH (bug fixes)
-3. Calculate new version number
-4. Move `[Unreleased]` content to versioned section
-5. Add ISO 8601 date (YYYY-MM-DD)
-6. Update version comparison links
-7. Clear `[Unreleased]` section
-8. Prompt to create git tag
+1. Load `/guidelines/design/style.md`
+2. Scan all `.tsx` files for:
+   - Hand-drawn design language compliance
+   - Retro design elements
+3. Generate report
 
 **Outputs:**
-- Updated `/CHANGELOG.md`
-- Git tag recommendation
+- `/reports/style-audit-report.md`
 
-**When to use:** Before releases
+**When to use:** Before production releases
+
+---
+
+### audit routing
+
+**Purpose:** Route integrity, navigation compliance
+
+**Workflow:**
+1. Load `/guidelines/architecture/routing.md`
+2. Scan all `.tsx` files for:
+   - Route integrity
+   - Navigation compliance
+3. Generate report
+
+**Outputs:**
+- `/reports/routing-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit webgl
+
+**Purpose:** Canvas/WebGL usage inventory
+
+**Workflow:**
+1. Load `/guidelines/development/webgl.md`
+2. Scan all `.tsx` files for:
+   - Canvas/WebGL usage
+3. Generate report
+
+**Outputs:**
+- `/reports/webgl-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit performance
+
+**Purpose:** Render performance, asset optimization
+
+**Workflow:**
+1. Load `/guidelines/development/performance.md`
+2. Scan all `.tsx` files for:
+   - Render performance
+   - Asset optimization
+3. Generate report
+
+**Outputs:**
+- `/reports/performance-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit phosphor
+
+**Purpose:** Icon library migration & compliance (Lucide → Phosphor)
+
+**Workflow:**
+1. Load `/guidelines/development/icon-library.md`
+2. Scan all `.tsx` files for:
+   - Lucide icon usage
+3. Generate migration report
+
+**Outputs:**
+- `/reports/phosphor-migration-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit header
+
+**Purpose:** Header template part & pattern compliance
+
+**Workflow:**
+1. Load `/guidelines/design/template-parts.md`
+2. Scan all `.tsx` files for:
+   - Header template part usage
+3. Generate compliance report
+
+**Outputs:**
+- `/reports/header-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit footer
+
+**Purpose:** Footer template part & pattern compliance
+
+**Workflow:**
+1. Load `/guidelines/design/template-parts.md`
+2. Scan all `.tsx` files for:
+   - Footer template part usage
+3. Generate compliance report
+
+**Outputs:**
+- `/reports/footer-audit-report.md`
+
+**When to use:** Before production releases
+
+---
+
+### audit hero
+
+**Purpose:** Hero template part & pattern compliance
+
+**Workflow:**
+1. Load `/guidelines/design/template-parts.md`
+2. Scan all `.tsx` files for:
+   - Hero template part usage
+3. Generate compliance report
+
+**Outputs:**
+- `/reports/hero-audit-report.md`
+
+**When to use:** Before production releases
 
 ---
 
 ### apply bem
 
-**Purpose:** BEM compliance audit + auto-fix workflow
+**Purpose:** BEM class compliance audit + auto-fix
 
 **Workflow:**
 1. **Phase 1:** Inventory existing BEM classes and CSS variables
@@ -838,6 +991,29 @@ If a trigger is no longer needed:
 ---
 
 ## Changelog
+
+### Version 6.0.0 (2026-03-18)
+- **MAJOR EXPANSION:** 51 total triggers (24 audit + 7 workflow + 3 scaffold + 2 guidelines + 1 release)
+- **New Icon Migration:** `audit phosphor` - Comprehensive Lucide → Phosphor migration audit with 5-phase incremental plan
+- **New Template Part Audits:** `audit header`, `audit footer`, `audit hero` - Template part & pattern compliance
+- **Updated Core Workflows:** `continue` and `cleanup` prompts updated with Phosphor icon context and Handcrafted Wines brand
+- **Architecture Support:** All new audits support template part architecture (Header, Footer, Hero)
+- **Migration Strategy:** Safe incremental migration from Lucide to Phosphor (both libraries side-by-side during transition)
+
+### Version 5.0.0 (2026-03-18)
+- Expanded to 47 total triggers (20 audit/quality + 7 workflow + 3 scaffold + 2 guidelines + 1 release + 2 orchestration)
+- Added 10 new audit triggers: `audit performance`, `audit responsive`, `audit style`, `audit routing`, `audit styles`, `audit webgl`, `audit tokens` (rewritten), `audit a11y` (rewritten)
+- Added 2 new workflow triggers: `changelog`, `cleanup guidelines`
+- All prompts fully adapted to Handcrafted Wines project context
+- Master audit orchestrator updated to run all 20 triggers
+- Updated trigger documentation with Handcrafted Wines-specific examples
+
+### Version 4.0.0 (2026-03-18)
+- Expanded to 37 total triggers
+- Added 10 new comprehensive audit triggers
+- Added `apply bem` auto-fix trigger
+- Audit triggers now cover: CSS, accessibility (quick + comprehensive), data, images, layout, functionality, theme
+- All new prompts adapted to Handcrafted Wines project context
 
 ### Version 3.0.0 (2026-03-15)
 - Expanded to 26 total triggers

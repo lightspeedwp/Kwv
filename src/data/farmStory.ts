@@ -132,7 +132,7 @@ This isn't just our farm—it's our home. And when you visit, we want you to fee
     {
       title: "Sustainable by Nature",
       description: "We farm organically because it's the right thing to do. Our vines, goats, and the mountain itself all thrive together.",
-      icon: "leaf"
+      icon: "sprout"
     },
     {
       title: "Quality Over Quantity",

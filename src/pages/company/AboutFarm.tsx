@@ -20,7 +20,7 @@ import { Layout } from '../../components/layout/Layout';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
-import { Mountain, Grape, FlaskConical, Heart, Trees, Droplet, Sun, MapPin } from 'lucide-react';
+import { Mountain, Grape, FlaskConical, Heart, Trees, Droplet, Sun, MapPin, Sprout } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { Link } from 'react-router';
 import { farmStory } from '../../data/farmStory';
@@ -261,7 +261,7 @@ export const AboutFarm = () => {
               {farmStory.sustainability.practices.map((practice) => (
                 <div key={practice} className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--twb-color-vine)]/10 flex items-center justify-center">
-                    <Leaf size={32} className="text-[var(--twb-color-vine)]" />
+                    <Sprout size={32} className="text-[var(--twb-color-vine)]" />
                   </div>
                   <p className="text-[var(--twb-color-text-primary)]">{practice}</p>
                 </div>

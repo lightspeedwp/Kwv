@@ -77,7 +77,9 @@ export const UnifiedFooter: React.FC = () => {
       { label: 'My Account', href: '/account' },
       { label: 'Shipping & Delivery', href: '/shipping' },
       { label: 'Returns & Refunds', href: '/returns' },
-      { label: 'Privacy & Terms', href: '/privacy' }
+      { label: 'Privacy & Terms', href: '/privacy' },
+      { label: 'Sitemap', href: '/sitemap' },
+      { label: 'Dev Tools', href: '/dev-tools' }
     ]
   };
 
@@ -85,7 +87,7 @@ export const UnifiedFooter: React.FC = () => {
   const yearsInBusiness = currentYear - farmStory.established;
 
   return (
-    <footer className="bg-[var(--twb-color-ink)] text-white border-t border-white/10 relative">
+    <footer className="bg-[var(--twb-color-ink)] text-[var(--twb-color-text-on-dark)] border-t border-white/10 relative">
       {/* Paper texture overlay */}
       <PaperTexture intensity="subtle" opacity={0.04} />
       
@@ -96,7 +98,7 @@ export const UnifiedFooter: React.FC = () => {
             <h3 className="font-serif text-3xl md:text-4xl mb-3 text-[var(--twb-color-gold)]">
               Join the Family
             </h3>
-            <p className="text-white/80 mb-6">
+            <p className="text-[var(--twb-color-text-on-dark)]/80 mb-6">
               Get harvest updates, new releases, tasting event invites, and a special welcome gift.
             </p>
             
@@ -106,7 +108,7 @@ export const UnifiedFooter: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)]"
+                className="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 text-[var(--twb-color-text-on-dark)] placeholder:text-[var(--twb-color-text-on-dark)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--twb-color-gold)]"
                 required
               />
               <button
@@ -117,7 +119,7 @@ export const UnifiedFooter: React.FC = () => {
               </button>
             </form>
 
-            <p className="text-xs text-white/50 mt-4">
+            <p className="text-xs text-[var(--twb-color-text-on-dark)]/50 mt-4">
               We respect your privacy. Unsubscribe anytime.
             </p>
           </div>
@@ -136,7 +138,7 @@ export const UnifiedFooter: React.FC = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-white/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
+                    className="block text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -152,7 +154,7 @@ export const UnifiedFooter: React.FC = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-white/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
+                    className="block text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -168,7 +170,7 @@ export const UnifiedFooter: React.FC = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-white/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
+                    className="block text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -184,7 +186,7 @@ export const UnifiedFooter: React.FC = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-white/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
+                    className="block text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -198,7 +200,7 @@ export const UnifiedFooter: React.FC = () => {
               <div className="space-y-3 text-sm">
                 <a
                   href={`mailto:${farmStory.contact.general}`}
-                  className="flex items-start gap-2 text-white/70 hover:text-[var(--twb-color-gold)] transition-colors"
+                  className="flex items-start gap-2 text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors"
                 >
                   <Mail size={16} className="mt-0.5 flex-shrink-0" />
                   <span>{farmStory.contact.general}</span>
@@ -206,13 +208,13 @@ export const UnifiedFooter: React.FC = () => {
 
                 <a
                   href={`tel:${farmStory.contact.phone}`}
-                  className="flex items-start gap-2 text-white/70 hover:text-[var(--twb-color-gold)] transition-colors"
+                  className="flex items-start gap-2 text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors"
                 >
                   <Phone size={16} className="mt-0.5 flex-shrink-0" />
                   <span>{farmStory.contact.phone}</span>
                 </a>
 
-                <div className="flex items-start gap-2 text-white/70">
+                <div className="flex items-start gap-2 text-[var(--twb-color-text-on-dark)]/70">
                   <MapPin size={16} className="mt-0.5 flex-shrink-0" />
                   <span>
                     {farmStory.location.address.street}<br />
@@ -226,7 +228,7 @@ export const UnifiedFooter: React.FC = () => {
                     href={`https://facebook.com${farmStory.social.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/70 hover:text-[var(--twb-color-gold)] transition-colors"
+                    className="text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors"
                     aria-label="Facebook"
                   >
                     <Facebook size={20} />
@@ -235,7 +237,7 @@ export const UnifiedFooter: React.FC = () => {
                     href={`https://instagram.com/${farmStory.social.instagram.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/70 hover:text-[var(--twb-color-gold)] transition-colors"
+                    className="text-[var(--twb-color-text-on-dark)]/70 hover:text-[var(--twb-color-gold)] transition-colors"
                     aria-label="Instagram"
                   >
                     <Instagram size={20} />
@@ -250,7 +252,7 @@ export const UnifiedFooter: React.FC = () => {
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6">
         <Container>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[var(--twb-color-text-on-dark)]/60">
             {/* Left: Copyright */}
             <div className="flex items-center gap-2">
               <span>© {currentYear} Handcrafted Wines</span>
@@ -282,7 +284,7 @@ export const UnifiedFooter: React.FC = () => {
           </div>
 
           {/* Responsible Drinking */}
-          <div className="text-center mt-4 text-xs text-white/40">
+          <div className="text-center mt-4 text-xs text-[var(--twb-color-text-on-dark)]/40">
             Drink responsibly. Not for sale to persons under the age of 18.
           </div>
         </Container>

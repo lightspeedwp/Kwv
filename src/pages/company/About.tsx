@@ -22,7 +22,7 @@ import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
 import { Hero } from '../../components/sections/Hero';
 import { FullWidthSection } from '../../components/sections/FullWidthSection';
-import { Heart, Users, Mountain, Award, Leaf, ArrowRight } from 'lucide-react';
+import { Heart, Users, Mountain, Award, Sprout, ArrowRight } from 'lucide-react';
 import { Button } from '../../components/common/Button';
 import { Link } from 'react-router';
 import { farmStory } from '../../data/farmStory';
@@ -155,7 +155,7 @@ export const About: React.FC = () => {
               to="/about/sustainability"
               className="group bg-white/10 hover:bg-white/20 p-8 rounded-lg border border-white/20 hover:border-[var(--twb-color-gold)] transition-all"
             >
-              <Leaf size={40} className="text-[var(--twb-color-gold)] mb-4" />
+              <Sprout size={40} className="text-[var(--twb-color-gold)] mb-4" />
               <h3 className="font-serif text-2xl mb-3 text-white">
                 Sustainability
               </h3>

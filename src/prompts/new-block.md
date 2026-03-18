@@ -1,357 +1,152 @@
-# New Block Component Prompt
+# New Block — Scaffold an Atomic Component
 
-**Trigger:** `new block`  
-**Version:** 1.0.0  
-**Last Updated:** 2024-03-15  
-**Purpose:** Create a new atomic block component with proper structure, documentation, and CSS variable usage
-
----
-
-## Mission
-
-Generate a new atomic block component (Button, Badge, PriceTag, etc.) with complete TypeScript typing, JSDoc documentation, CSS variable usage (no hardcoded values), and corresponding guideline documentation.
+**Type:** Implementation  
+**Created:** 2026-03-18  
+**Status:** Active  
+**Trigger Word:** `new block`  
+**Project:** Handcrafted Wines
 
 ---
 
-## Prerequisites
+## Prompt Purpose
 
-- `/guidelines/_templates/component-guideline-template.md` - Component documentation template
-- `/guidelines/design-tokens/*.md` - All design tokens must be available
-- `/guidelines/development/wordpress-css-variables.md` - CSS variable standards
+**Objective:** Scaffold new atomic component for Handcrafted Wines. Atomic components are smallest reusable UI elements (buttons, cards, badges, inputs) — used INSIDE sections.
 
----
+**When to Use:** When new atomic-level UI component needed.
 
-## Workflow
-
-### Step 1: Gather Requirements
-
-**Ask user:**
-```
-What block component would you like to create?
-Examples: PriceTag, Badge, Chip, Tag, Label, StatusIndicator
-
-Component name: _______
-Purpose: _______
-Primary use case: _______
-```
-
-**Validate:**
-- Name is PascalCase
-- Component doesn't already exist in `/components/common/`
-- Purpose is clear (atomic, reusable UI element)
+**Note:** Handcrafted Wines doesn't strictly follow WordPress block architecture. Use this for small, reusable components.
 
 ---
 
-### Step 2: Determine Component Category
+## Input Required
 
-**Atomic Block Components go in:**
-```
-/components/common/{ComponentName}.tsx
-```
-
-**Examples:**
-- Button, Badge, Tag, Chip → `/components/common/`
-- ProductCard, Hero → `/components/sections/` (NOT atomic blocks)
-
-**Confirm category is "common" before proceeding.**
+User must provide:
+1. **Component name** — e.g., "PriceTag", "RatingStars", "ProductBadge", "WineTypeIcon"
+2. **Component category** — common, shop, decorative
+3. **Variants** — size/style variants needed (primary, outline, small, large)
 
 ---
 
-### Step 3: Define Component Interface
+## Workflow Steps
 
-**Ask user:**
-```
-What props does this component need?
+### Step 1: Determine Component vs Section
 
-Common patterns:
-- Variant: 'primary' | 'secondary' | 'success' | 'warning' | 'error'
-- Size: 'sm' | 'md' | 'lg'
-- Children: React.ReactNode
-- ClassName: string (for extension)
-- Any specific props?
-```
+**Component (atomic):**
+- Single UI element (button, card, badge, input, icon)
+- Used INSIDE sections — never standalone on page
+- Small, focused responsibility
 
-**Generate TypeScript interface:**
-```typescript
-export interface {ComponentName}Props {
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
-  size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  className?: string;
+**Section (composite):**
+- Composed of multiple components
+- Used directly in page templates
+- Larger, section-level scope
+
+If request is actually section, redirect to `new pattern`.
+
+### Step 2: Create Component File
+
+1. Create `/components/{category}/{ComponentName}.tsx`
+   - common: shared across site
+   - shop: e-commerce specific
+   - decorative: hand-drawn elements
+2. Define TypeScript interface with JSDoc
+3. Use semantic HTML (`<button>`, `<a>`, `<span>`)
+4. Support all variants via `variant` prop
+5. Keep under 200 lines — components should be simple
+
+**Categories:**
+- `/components/common/` - Button, Typography, Logo, ScrollDownArrow
+- `/components/shop/` - ProductCard, AddToCartButton, QuantityControl
+- `/components/decorative/` - HandDrawnUnderline, WaxSealStamp, OrganicBorder
+
+### Step 3: Design System Compliance
+
+All generated code must:
+- Use `var(--twb-font-primary)` for typography
+- Use `var(--twb-spacing-*)` for padding/margin
+- Use `var(--twb-color-*)` for theming
+- Use `var(--twb-radius-*)` for border radius
+- Support keyboard navigation and focus states
+- Include `aria-label` for icon-only variants
+- Meet 44x44px minimum touch target for interactive elements
+- Use hand-drawn aesthetic (organic borders, warm colors)
+
+### Step 4: Variants
+
+Common variant patterns:
+```tsx
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
+  size?: 'small' | 'medium' | 'large'
+  // ... other props
 }
 ```
 
----
+**Handcrafted Wines Variants:**
+- Buttons: primary (plum), secondary (clay), outline, ghost
+- Cards: standard, featured, compact
+- Badges: new, sale, limited-edition, award
 
-### Step 4: Generate Component File
+### Step 5: Create Styles (If Needed)
 
-**File:** `/components/common/{ComponentName}.tsx`
+If complex styling beyond Tailwind:
+1. Add `.twb-{component-name}` classes to `/styles/utilities.css`
+2. Use CSS variables exclusively
+3. Include hover, focus, active, disabled states
+4. Include responsive variants if needed
 
-**Template:**
-```typescript
-/**
- * {ComponentName}
- * 
- * {Brief description of what the component does}
- * 
- * Features:
- * - {Feature 1}
- * - {Feature 2}
- * - Uses CSS variables (no hardcoded values)
- * - WCAG AA accessible
- * 
- * @param {ComponentName}Props props - Component props
- * @returns React component
- */
+### Step 6: Register and Document
 
-import React from 'react';
-
-export interface {ComponentName}Props {
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  className?: string;
-}
-
-export const {ComponentName}: React.FC<{ComponentName}Props> = ({
-  variant = 'primary',
-  size = 'md',
-  children,
-  className = '',
-}) => {
-  // Base classes using CSS variables
-  const baseClasses = 'inline-flex items-center justify-center font-medium transition-colors';
-  
-  // Variant classes (use CSS variables ONLY)
-  const variantClasses = {
-    primary: 'bg-[var(--twb-color-accent-plum)] text-[var(--twb-color-text-on-dark)]',
-    secondary: 'bg-[var(--twb-color-bg-secondary)] text-[var(--twb-color-text-primary)]',
-  };
-  
-  // Size classes (use CSS variables ONLY)
-  const sizeClasses = {
-    sm: 'px-[var(--twb-spacing-2)] py-[var(--twb-spacing-1)] text-[length:var(--twb-font-size-caption)]',
-    md: 'px-[var(--twb-spacing-3)] py-[var(--twb-spacing-2)] text-[length:var(--twb-font-size-body)]',
-    lg: 'px-[var(--twb-spacing-4)] py-[var(--twb-spacing-3)] text-[length:var(--twb-font-size-body-large)]',
-  };
-  
-  return (
-    <span 
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
-      role="status" // or appropriate ARIA role
-    >
-      {children}
-    </span>
-  );
-};
-```
-
-**Requirements:**
-- ✅ JSDoc header with description and features
-- ✅ TypeScript interface exported
-- ✅ Default props defined
-- ✅ CSS variables ONLY (no hardcoded colors, spacing, fonts)
-- ✅ ARIA role if needed
-- ✅ ClassName extension support
-
----
-
-### Step 5: Generate Component Guideline
-
-**File:** `/guidelines/components/{ComponentName}.md`
-
-**Load template:** `/guidelines/_templates/component-guideline-template.md`
-
-**Populate sections:**
-```markdown
-# {ComponentName} Component Guidelines
-
-**Component:** {ComponentName}  
-**File:** `/components/common/{ComponentName}.tsx`  
-**Version:** 1.0.0  
-**Last Updated:** YYYY-MM-DD  
-**Status:** Active
-
----
-
-## Overview
-
-{Description of component and when to use it}
-
-**Component Type:** Atom  
-**Category:** Common
-
----
-
-## Props API
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary'` | `'primary'` | Visual style variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
-| `children` | `React.ReactNode` | - | Content to display |
-| `className` | `string` | `''` | Additional classes |
-
----
-
-## Usage Examples
-
-### Basic Usage
-\`\`\`tsx
-<{ComponentName}>Default</{ComponentName}>
-\`\`\`
-
-### With Variant
-\`\`\`tsx
-<{ComponentName} variant="secondary">Secondary Style</{ComponentName}>
-\`\`\`
-
-### With Size
-\`\`\`tsx
-<{ComponentName} size="sm">Small</{ComponentName}>
-<{ComponentName} size="lg">Large</{ComponentName}>
-\`\`\`
-
----
-
-## Accessibility
-
-- Uses semantic HTML
-- Includes ARIA role: `status` (or appropriate)
-- Keyboard accessible (if interactive)
-- WCAG AA contrast ratios verified
-
----
-
-## Design Tokens Used
-
-- Colors: `--twb-color-accent-plum`, `--twb-color-text-on-dark`
-- Spacing: `--twb-spacing-2`, `--twb-spacing-3`, `--twb-spacing-4`
-- Typography: `--twb-font-size-caption`, `--twb-font-size-body`
-
----
-
-## Related Components
-
-- [Button](/guidelines/components/Button.md)
-- [Badge](/guidelines/components/Badge.md)
-```
-
----
-
-### Step 6: Update Component Index
-
-**File:** `/components/common/index.ts` (if it exists)
-
-Add export:
-```typescript
-export { {ComponentName} } from './{ComponentName}';
-export type { {ComponentName}Props } from './{ComponentName}';
-```
-
----
-
-### Step 7: Add to Guidelines Index
-
-**File:** `/guidelines/INDEX.md`
-
-Add to components section:
-```markdown
-- [{ComponentName}](/guidelines/components/{ComponentName}.md)
-```
-
----
-
-## Validation Checklist
-
-Before completing, verify:
-
-- [ ] Component uses ONLY CSS variables (no hardcoded values)
-- [ ] JSDoc header is complete
-- [ ] TypeScript interface is exported
-- [ ] Props have sensible defaults
-- [ ] Component guideline generated
-- [ ] Examples are complete and runnable
-- [ ] ARIA roles added if needed
-- [ ] Component index updated
-- [ ] Guidelines index updated
+1. Export from component index if exists
+2. Add CHANGELOG entry under `[Unreleased]` → Added
 
 ---
 
 ## Success Criteria
 
-- [ ] Component file created at `/components/common/{ComponentName}.tsx`
-- [ ] Component guideline created at `/guidelines/components/{ComponentName}.md`
-- [ ] Component uses CSS variables exclusively
+- [ ] Component created with TypeScript interface
+- [ ] All variants implemented
 - [ ] JSDoc documentation complete
-- [ ] TypeScript interface exported
-- [ ] Props validated and documented
-- [ ] Usage examples provided
-- [ ] Component index updated
-- [ ] Guidelines index updated
+- [ ] 100% CSS variable compliance
+- [ ] Keyboard accessible with visible focus states
+- [ ] Touch target meets 44x44px for interactive elements
+- [ ] Hand-drawn aesthetic applied (if visual component)
+- [ ] Under 200 lines
+- [ ] CHANGELOG updated
 
 ---
 
-## Outputs
+## Handcrafted Wines Existing Components
 
-- **Primary:** `/components/common/{ComponentName}.tsx`
-- **Secondary:** `/guidelines/components/{ComponentName}.md`
-- **Updated:** `/components/common/index.ts` (if exists)
-- **Updated:** `/guidelines/INDEX.md`
+**Common:**
+- Button (primary, secondary, outline variants)
+- Typography (h1-h6, body, caption)
+- Logo (wordmark + icon)
+- ScrollDownArrow (hero scroll indicator)
 
----
+**Shop:**
+- ProductCard (grid display)
+- AddToCartButton (with loading state)
+- QuantityControl (+/- buttons)
+- PriceDisplay (formatted currency)
 
-## Follow-Up Actions
+**Decorative:**
+- HandDrawnUnderline
+- BrushStrokeBorder
+- BrushStrokeDivider
+- OrganicBorder
+- WaxSealStamp
+- WineLabelStamp
+- PaperTexture
 
-After creating component:
-1. Test component in isolation
-2. Verify CSS variables render correctly
-3. Test all variant and size combinations
-4. Run `audit tokens` to verify no hardcoded values
-5. Add to Storybook/demo page (if available)
-
----
-
-## Related Prompts
-
-- `audit tokens` - Verify component uses tokens correctly
-- `new pattern` - Create design pattern using this component
-- `update guidelines` - Update component guideline if changes made
-
----
-
-## Examples
-
-### Creating a PriceTag Component
-
-**User input:**
-```
-Component name: PriceTag
-Purpose: Display product prices with currency formatting
-Primary use case: E-commerce product cards
-```
-
-**Generated files:**
-- `/components/common/PriceTag.tsx`
-- `/guidelines/components/PriceTag.md`
-
-**PriceTag interface:**
-```typescript
-export interface PriceTagProps {
-  amount: number;
-  currency?: string;
-  size?: 'sm' | 'md' | 'lg';
-  discount?: boolean;
-  className?: string;
-}
-```
+**Form:**
+- CheckoutInput (form inputs with validation)
+- Select (dropdown)
+- Checkbox
+- Radio
 
 ---
 
-## Changelog
-
-### Version 1.0.0 (2024-03-15)
-- Initial new block component prompt
-- Enforces CSS variable usage
-- Generates component and guideline documentation
-- Updates component and guidelines indexes
+**Maintained by:** Handcrafted Wines Development Team  
+**Last Updated:** 2026-03-18  
+**Related Prompts:** `new pattern`, `new template`

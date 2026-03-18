@@ -18,11 +18,11 @@ import { SITE_CONTENT } from '../../../data/site-content';
 export const ShopInfoFooter: React.FC = () => {
   return (
     <div className="w-full">
-       <div className="flex flex-col md:flex-row min-h-[400px]">
+       <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
           {/* Column 1: Contact & Social (Black/Dark) */}
-          <div className="bg-[#111] text-white p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
+          <div className="bg-[var(--twb-color-bg-inverse)] text-[var(--twb-color-text-on-dark)] p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
               <div className="mb-12">
-                 <Typography variant="h4" className="text-[#C19B76] uppercase tracking-widest text-sm font-bold mb-6">
+                 <Typography variant="h4" className="text-[var(--twb-color-gold)] uppercase tracking-widest text-sm font-bold mb-6">
                     Contact Us
                  </Typography>
                  <p className="text-sm text-gray-400 leading-relaxed">
@@ -33,20 +33,20 @@ export const ShopInfoFooter: React.FC = () => {
               </div>
               
               <div>
-                 <Typography variant="h4" className="text-[#C19B76] uppercase tracking-widest text-sm font-bold mb-6">
+                 <Typography variant="h4" className="text-[var(--twb-color-gold)] uppercase tracking-widest text-sm font-bold mb-6">
                     Follow Us
                  </Typography>
                  <div className="flex gap-6 justify-center">
-                    <Facebook className="text-white hover:text-[#C19B76] cursor-pointer" size={20} />
-                    <Instagram className="text-white hover:text-[#C19B76] cursor-pointer" size={20} />
-                    <Twitter className="text-white hover:text-[#C19B76] cursor-pointer" size={20} />
+                    <Facebook className="text-[var(--twb-color-text-on-dark)] hover:text-[var(--twb-color-gold)] cursor-pointer" size={20} />
+                    <Instagram className="text-[var(--twb-color-text-on-dark)] hover:text-[var(--twb-color-gold)] cursor-pointer" size={20} />
+                    <Twitter className="text-[var(--twb-color-text-on-dark)] hover:text-[var(--twb-color-gold)] cursor-pointer" size={20} />
                  </div>
               </div>
           </div>
 
           {/* Column 2: Service Info (Gold/Brown) */}
-          <div className="bg-[#C19B76] text-[#2C1810] p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
-             <Typography variant="h4" className="text-white uppercase tracking-widest text-sm font-bold mb-8">
+          <div className="bg-[var(--twb-color-gold)] text-[var(--twb-color-plum)] p-12 md:w-1/3 flex flex-col justify-center items-center text-center">
+             <Typography variant="h4" className="text-[var(--twb-color-text-on-dark)] uppercase tracking-widest text-sm font-bold mb-8">
                 Our Excellent Service Includes
              </Typography>
              <ul className="text-sm font-bold uppercase tracking-wider space-y-4 leading-relaxed">

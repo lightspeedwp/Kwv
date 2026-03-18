@@ -30,10 +30,10 @@ export const ShopBrands: React.FC = () => {
           alt={brand.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-        <div className="absolute bottom-0 left-0 w-full p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+        <div className="absolute inset-0 bg-[var(--twb-color-bg-inverse)]/20 group-hover:bg-[var(--twb-color-bg-inverse)]/40 transition-colors duration-500" />
+        <div className="absolute bottom-0 left-0 w-full p-6 text-[var(--twb-color-text-on-dark)] translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
            <Typography variant="h3" className="font-serif text-2xl mb-1">{brand.name}</Typography>
-           <Typography variant="caption" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 uppercase tracking-wider text-xs font-bold text-[#DAA520]">
+           <Typography variant="caption" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 uppercase tracking-wider text-xs font-bold text-[var(--twb-color-gold)]">
               View Brand Story &rarr;
            </Typography>
         </div>

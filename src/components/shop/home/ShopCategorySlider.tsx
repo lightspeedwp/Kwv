@@ -16,12 +16,12 @@ const CATEGORIES = [
 
 const CustomArrow = ({ className, style, onClick, direction }: any) => (
   <button
-    className={`${className} z-10 !flex items-center justify-center !w-10 !h-10 bg-white/80 hover:bg-[#DAA520] shadow-md rounded-full transition-colors before:!content-none after:!content-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2`}
+    className={`${className} z-10 !flex items-center justify-center !w-10 !h-10 bg-white/80 hover:bg-[var(--twb-color-gold)] shadow-md rounded-full transition-colors before:!content-none after:!content-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--twb-color-focus-ring)] focus-visible:ring-offset-2`}
     style={{ ...style, [direction === 'left' ? 'left' : 'right']: '-20px' }}
     onClick={onClick}
-    aria-label={direction === 'left' ? "Previous slide" : "Next slide"}
+    aria-label={direction === 'left' ? 'Previous slide' : 'Next slide'}
   >
-    {direction === 'left' ? <ChevronLeft className="text-[#2C1810]" size={24} /> : <ChevronRight className="text-[#2C1810]" size={24} />}
+    {direction === 'left' ? <ChevronLeft className="text-[var(--twb-color-plum)]" size={24} /> : <ChevronRight className="text-[var(--twb-color-plum)]" size={24} />}
   </button>
 );
 
@@ -61,16 +61,16 @@ export const ShopCategorySlider: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#F5F5DC] py-16">
+    <div className="bg-[var(--twb-color-bg-secondary)] py-16">
       <style>{`
         .slick-dots li button:before {
           font-size: 10px;
-          color: #2C1810;
+          color: var(--twb-color-plum);
           opacity: 0.25;
           transition: all 0.3s ease;
         }
         .slick-dots li.slick-active button:before {
-          color: #DAA520;
+          color: var(--twb-color-gold);
           opacity: 1;
           font-size: 12px;
         }
@@ -83,10 +83,10 @@ export const ShopCategorySlider: React.FC = () => {
       `}</style>
       <Container variant="site">
         <div className="text-center mb-12">
-          <Typography variant="h2" className="text-[#2C1810] uppercase font-serif tracking-wide text-2xl md:text-3xl mb-2">
+          <Typography variant="h2" className="text-[var(--twb-color-plum)] uppercase font-serif tracking-wide text-2xl md:text-3xl mb-2">
             Shop Our Awarded Wines, Brandies and Spirits
           </Typography>
-          <div className="h-1 w-20 bg-[#DAA520] mx-auto mt-4"></div>
+          <div className="h-1 w-20 bg-[var(--twb-color-gold)] mx-auto mt-4"></div>
         </div>
 
         <div className="px-8">
@@ -101,7 +101,7 @@ export const ShopCategorySlider: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                     />
                   </div>
-                  <Typography variant="h4" className="text-[#2C1810] uppercase tracking-widest text-sm font-bold group-hover:text-[#8B0000] transition-colors">
+                  <Typography variant="h4" className="text-[var(--twb-color-plum)] uppercase tracking-widest text-sm font-bold group-hover:text-[var(--twb-color-plum)] transition-colors">
                     {cat.name}
                   </Typography>
                 </Link>

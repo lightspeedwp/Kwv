@@ -1,4 +1,5 @@
 import React from 'react';
+import { Layout } from '../../components/layout/Layout';
 import { Hero } from '../../components/sections/Hero';
 import { Container } from '../../components/common/Container';
 import { Typography } from '../../components/common/Typography';
@@ -118,7 +119,7 @@ export const WineClub: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Layout>
       {/* Hero Section */}
       <Hero
         title="The Wine Box"
@@ -544,6 +545,6 @@ export const WineClub: React.FC = () => {
           </div>
         </Container>
       </section>
-    </>
+    </Layout>
   );
 };
